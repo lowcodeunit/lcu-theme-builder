@@ -1,0 +1,18 @@
+
+<div fxLayout="column">
+    <!--Main Color-->
+    <lcu-color-picker class="main" [control]="Main"></lcu-color-picker>
+  
+    <div fxLayout="row">
+      <!--Light and dark colors for additional hues-->
+      <lcu-color-picker class="lighter" [disabled]="!Unlocked.value" 
+        [control]="Lighter" [presets]="Presets"></lcu-color-picker>
+  
+      <lcu-color-picker class="darker" [disabled]="!Unlocked.value" 
+        [control]="Darker" [presets]="Presets"></lcu-color-picker>
+    </div>
+  
+    <!--Allow editing of light and dark colors-->
+    <mat-slide-toggle class="toggle" [formControl]="Unlocked"> Independent? </mat-slide-toggle>
+  </div>
+  

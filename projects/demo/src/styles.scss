@@ -50,7 +50,7 @@
 }
 
 .fathym-contrast-theme {
-  $theme: fathym-contrast-theme(true);
+  $theme: fathym-contrast-theme(false);
   @include theme-setup($theme);
   @include primary-logo(thinky-full-logo, $theme, 1);
 }
