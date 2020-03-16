@@ -1,43 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap");
 
-<<<<<<< HEAD
 /**
   Sub-component stylesheet
 */
 @import "./app/app.component.scss";
-=======
-@mixin component-themes($theme) {
-  @include theme-builder-component-theme($theme);
-}
-
-@mixin primary-logo($logo, $theme, $opacity) {
-  .primary-logo {
-    background-image: fathym-logo(
-      $logo,
-      mat-color(map-get($theme, accent)),
-      $opacity
-    );
-  }
-}
-
-.fathym-arctic-theme {
-  $theme: fathym-arctic-theme(true);
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, $theme, 1);
-}
-
-.fathym-contrast-theme {
-  $theme: fathym-contrast-theme(false);
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, $theme, 1);
-}
-
-.fathym-cool-candy-theme {
-  $theme: fathym-cool-candy-theme(true);
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, $theme, 1);
-}
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
 
 /**
   Main theming happens here

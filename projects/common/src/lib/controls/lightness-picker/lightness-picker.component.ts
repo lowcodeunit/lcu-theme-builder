@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
-<<<<<<< HEAD
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 /**
  * String literal data type
  */
 type ModeType = 'dark' | 'light';
-=======
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
 
 @Component({
   selector: 'lcu-lightness-picker',
@@ -18,10 +15,7 @@ type ModeType = 'dark' | 'light';
 export class LightnessPickerComponent implements OnInit {
 
   lightness = new FormControl(false);
-<<<<<<< HEAD
   toggle = new FormControl(false);
-=======
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
 
   constructor(private themeBuilderService: ThemeBuilderService) { }
 
@@ -36,7 +30,6 @@ export class LightnessPickerComponent implements OnInit {
 
     this.lightness.updateValueAndValidity();
     }
-<<<<<<< HEAD
 
     OnToggleChange(evt: MatSlideToggleChange) {
       this.setMode(evt.checked);
@@ -51,6 +44,4 @@ export class LightnessPickerComponent implements OnInit {
         }
       }
     }
-=======
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
   }

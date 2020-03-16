@@ -1,4 +1,4 @@
-import { ThemeBuilderService } from '@lowcodeunit/theme-builder-common';
+
 import { PalettePickerService } from './../../services/palette-picker.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import { PaletteModel } from '../../models/palette.model';
 import { PaletteColorMapModel } from '../../models/palette-color-map.model';
 import { MaterialPaletteModel } from '../../models/material-palette.model';
 import { Constants } from '../../utils/constants.utils';
+import { ThemeBuilderService } from '../../services/theme-builder.service';
 
 const tinyColor = tinycolor;
 // const styleVariables = require('./assets/styles/dynamic-theme.scss');

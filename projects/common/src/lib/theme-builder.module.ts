@@ -13,10 +13,7 @@ import { FontPickerComponent } from './controls/font-picker/font-picker.componen
 import { PalettePickerComponent } from './controls/palette-picker/palette-picker.component';
 import { SubPalettePickerComponent } from './controls/sub-palette-picker/sub-palette-picker.component';
 import { LightnessPickerComponent } from './controls/lightness-picker/lightness-picker.component';
-<<<<<<< HEAD
 import { DynamicThemeColorsComponent } from './controls/dynamic-theme-colors/dynamic-theme-colors.component';
-=======
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
 
 @NgModule({
   declarations: [
@@ -26,12 +23,8 @@ import { DynamicThemeColorsComponent } from './controls/dynamic-theme-colors/dyn
     FontPickerComponent,
     PalettePickerComponent,
     SubPalettePickerComponent,
-<<<<<<< HEAD
     LightnessPickerComponent,
     DynamicThemeColorsComponent],
-=======
-    LightnessPickerComponent],
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
   imports: [
     FathymSharedModule,
     FormsModule,

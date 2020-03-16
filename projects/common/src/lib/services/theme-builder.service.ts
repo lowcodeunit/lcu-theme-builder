@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import { PalettePickerService } from './palette-picker.service';
-=======
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
 import { ColorMapModel } from './../models/color-map.model';
 import { LocalStorageService } from './local-storage.service';
 import { SubPaletteModel } from './../models/sub-palette.model';
