@@ -1,0 +1,83 @@
+@function clr($base, $shade: base) {
+    $color: map-get(map-get($colors, $base), $shade);
+    @return $color;
+}
+
+// $colors: (
+//   primary: (
+//     base: $primary-color,
+//     light: lighten($primary-color, $lighten),
+//     dark: darken($primary-color, $darken),
+//   ),
+//   yt: (
+//     base: $youtube,
+//     light: lighten($youtube, $lighten),
+//     dark: darken($youtube, $darken),
+//   ),
+//   articles: (
+//     base: $articles,
+//     light: lighten($articles, $lighten),
+//     dark: darken($articles, $darken),
+//   ),
+//   com: (
+//     base: $community,
+//     light: lighten($community, $lighten),
+//     dark: darken($community, $darken),
+//   ),
+//   course: (
+//     base: $courses,
+//     light: lighten($courses, $lighten),
+//     dark: darken($courses, $darken),
+//   ),
+//   neutral: ( 
+//     base: #69777F,
+//     light: #B2CAD8,
+//     dark: $black,
+//   ),
+// );
+
+// h1 {
+//     color: clr(course, light);
+//   }
+
+
+
+
+
+
+
+/*
+    Read sass variables in component
+**/
+
+// $white-color: #fcf5ed;
+// $dark-color: #402f2b;
+// $light-color: #e6d5c3;
+// $medium-color: #977978;
+// $alert-color: #cb492a;
+// $light-black-color: #706e72;
+// $black-color: #414042;
+
+// the :export directive is the magic sauce for webpack
+// :export {
+//   whitecolor: $white-color;
+//   darkcolor: $dark-color;
+//   lightcolor: $light-color;
+//   mediumcolor: $medium-color;
+//   alertcolor: $alert-color;
+//   lightblackcolor: $light-black-color;
+//   blackcolor: $black-color;
+// }
+
+/*
+React example
+**/
+// import variables from 'variables.scss';
+
+// const CSS = {
+//   backgroundColor: variables.blackcolor
+// }
+
+// export default ({}) => {
+//   return <div style={CSS}>Content</div>
+// }

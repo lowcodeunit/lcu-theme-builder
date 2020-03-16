@@ -1,0 +1,19 @@
+:host {
+  font-size: .8rem;
+  display: block;
+  line-height: .8rem;
+}
+
+:host mat-button-toggle ::ng-deep .mat-button-toggle-label-content {
+  line-height: 2em;
+}
+
+:host mat-button-toggle:first-child {
+  background-color: white;
+  color: #111;
+}
+
+:host mat-button-toggle.mat-button-toggle-checked {
+  border-bottom: 2px solid hotpink;
+}
+/*# sourceMappingURL=lightness-picker.component.css.map */

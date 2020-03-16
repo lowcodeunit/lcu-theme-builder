@@ -1,0 +1,45 @@
+// :host {
+//     display: grid;
+//     grid-template-columns: 1fr 1fr;
+//     grid-template-rows: 90px 60px 0fr;
+//     grid-template-areas: 
+//       "main main"
+//       "lighter darker"
+//       "toggle toggle";
+//   }
+  
+.lighter, .darker, .main {
+    border: .5px solid #ddd;
+  }
+  
+  .lighter {
+<<<<<<< HEAD
+    height: 40px;
+=======
+    height: 60px;
+>>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
+    // grid-area: lighter;
+  }
+
+  .darker {
+<<<<<<< HEAD
+    height: 40px;
+=======
+    height: 60px;
+>>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
+    // grid-area: darker;
+  }
+
+  .main {
+<<<<<<< HEAD
+    height: 60px;
+=======
+    height: 100px;
+>>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
+    // grid-area: main;
+  }
+
+  .toggle {
+    // align-self: end;
+    // grid-area: toggle;
+  }

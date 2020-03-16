@@ -1,0 +1,55 @@
+<form
+    fxLayout="column"
+    fxLayoutGap="10px"
+    [formGroup]="Form"
+    novalidate>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <div fxFlex="33" fxLayout="column">
+            <div fxLayout="row" fxLayoutGap="10px" 
+            fxLayoutAlign="space-between center"
+            class="padding-left-2 padding-right-2" 
+            *ngFor="let color of PrimaryColorPalette" 
+            [style.background-color]="color.hex" 
+            [style.color]="color.darkContrast ? 'black' : 'white'">
+            <div>
+                {{color.name}}
+            </div>
+            <div>
+                {{color.hex}}
+            </div>
+        </div>
+        </div>
+        <div fxFlex="33" fxLayout="column">
+            <div fxLayout="row" fxLayoutGap="10px" 
+                fxLayoutAlign="space-between center"
+                class="padding-left-2 padding-right-2"
+                *ngFor="let color of SecondaryColorPalette" 
+                [style.background-color]="color.hex" 
+                [style.color]="color.darkContrast ? 'black' : 'white'">
+                <div>
+                    {{color.name}}
+                </div>
+                <div>
+                    {{color.hex}}
+                </div>
+            </div>
+        </div>
+        <div fxFlex="33" fxLayout="column">
+            <div fxLayout="row" fxLayoutGap="10px" 
+            fxLayoutAlign="space-between center"
+            class="padding-left-2 padding-right-2"
+            *ngFor="let color of WarnColorPalette" 
+                [style.background-color]="color.hex" 
+                [style.color]="color.darkContrast ? 'black' : 'white'">
+                <div>
+                    {{color.name}}
+                </div>
+                <div>
+                    {{color.hex}}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
