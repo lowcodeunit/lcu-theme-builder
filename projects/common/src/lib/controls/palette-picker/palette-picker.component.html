@@ -1,0 +1,34 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <div 
+    fxLayout.lg="row" 
+    fxLayout.md="row" 
+    fxLayout.sm="column" 
+    fxLayout.xs="column"
+    fxLayoutGap="10px">
+    <div class="primary">
+      <!-- <h4>
+        Primary
+      </h4> -->
+      <lcu-sub-palette-picker [form]="Primary"></lcu-sub-palette-picker>
+    </div>
+    <div class="accent">
+      <!-- <h4>
+        Accent
+      </h4> -->
+      <lcu-sub-palette-picker [form]="Accent"></lcu-sub-palette-picker>
+    </div>
+    <div class="warn">
+      <!-- <h4>
+        Warning
+      </h4> -->
+      <lcu-sub-palette-picker [form]="Warn"></lcu-sub-palette-picker>
+    </div>
+  </div>
+  <!-- <lcu-dynamic-theme-colors 
+    [accent-color]="Accent.value.main"
+    [primary-color]="Primary.value.main" 
+    [warn-color]="Warn.value.main">
+  </lcu-dynamic-theme-colors> -->
+  <lcu-dynamic-theme-colors>
+</lcu-dynamic-theme-colors>
+</div>

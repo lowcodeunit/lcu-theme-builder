@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAUA,AAAA,QAAQ,EAAE,OAAO,EAAE,KAAK,CAAC;EACrB,MAAM,EAAE,eAAe;CACxB;;AAED,AAAA,QAAQ,CAAC;EACP,MAAM,EAAE,IAAI;CAEb;;AAED,AAAA,OAAO,CAAC;EACN,MAAM,EAAE,IAAI;CAEb;;AAED,AAAA,KAAK,CAAC;EACJ,MAAM,EAAE,IAAI;CAEb",
+    "sources": [
+        "sub-palette-picker.component.scss"
+    ],
+    "names": [],
+    "file": "sub-palette-picker.component.css"
+}

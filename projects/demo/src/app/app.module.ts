@@ -9,12 +9,14 @@ import { HomeComponent } from './controls/home/home.component';
 import { DocumentationComponent } from './controls/documentation/documentation.component';
 import { LcuDocumentationModule } from '@lowcodeunit/lcu-documentation-common';
 import { ThemeBuilderModule } from '@lowcodeunit/theme-builder-common';
+import { BuilderComponent } from './controls/builder/builder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DocumentationComponent
+    DocumentationComponent,
+    BuilderComponent
   ],
   imports: [
     AppRoutingModule,

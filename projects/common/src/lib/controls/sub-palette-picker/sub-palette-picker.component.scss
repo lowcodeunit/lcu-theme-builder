@@ -1,0 +1,33 @@
+// :host {
+//     display: grid;
+//     grid-template-columns: 1fr 1fr;
+//     grid-template-rows: 90px 60px 0fr;
+//     grid-template-areas: 
+//       "main main"
+//       "lighter darker"
+//       "toggle toggle";
+//   }
+  
+.lighter, .darker, .main {
+    border: .5px solid #ddd;
+  }
+  
+  .lighter {
+    height: 40px;
+    // grid-area: lighter;
+  }
+
+  .darker {
+    height: 40px;
+    // grid-area: darker;
+  }
+
+  .main {
+    height: 60px;
+    // grid-area: main;
+  }
+
+  .toggle {
+    // align-self: end;
+    // grid-area: toggle;
+  }

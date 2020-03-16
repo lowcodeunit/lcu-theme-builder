@@ -23,7 +23,7 @@ export class ThemeBuilderManagerContext extends StateManagerContext<ThemeBuilder
             Type: 'get-theme-builder-by-id'
         });
     }
-    
+
     protected async loadStateKey() {
         return 'main';
     }

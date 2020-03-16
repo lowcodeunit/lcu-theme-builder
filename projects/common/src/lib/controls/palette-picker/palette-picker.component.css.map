@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "palette-picker.component.scss"
+    ],
+    "names": [],
+    "file": "palette-picker.component.css"
+}

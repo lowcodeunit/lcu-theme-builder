@@ -1,6 +1,7 @@
 @import '~@angular/material/theming';
 
 @mixin theme-builder-component-theme($theme) {
+ 
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
@@ -60,6 +61,10 @@
         color: map-get($accent, 200);
       }
     }
+  }
+
+  .color-swatch-dynamic {
+    color: var(--theme-primary-500) !important;
   }
 
   .color-swatch-arctic {
