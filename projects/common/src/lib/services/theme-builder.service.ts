@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import { PalettePickerService } from './palette-picker.service';
+=======
+>>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
 import { ColorMapModel } from './../models/color-map.model';
 import { LocalStorageService } from './local-storage.service';
 import { SubPaletteModel } from './../models/sub-palette.model';
@@ -225,7 +228,6 @@ export class ThemeBuilderService {
     * @param color color
     */
    public GetPalette(color: string): MaterialPaletteModel {
-
     const baseLight = tinyColor('#ffffff');
     const baseDark = this.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
     const [, , , baseTriad] = tinyColor(color).tetrad();
@@ -233,7 +235,6 @@ export class ThemeBuilderService {
     const primary = Object.keys(Constants.MIX_AMOUNTS_PRIMARY)
       .map(k => {
         const [light, amount] = Constants.MIX_AMOUNTS_PRIMARY[k];
-
         return [k, tinyColor.mix(light ? baseLight : baseDark,
           tinyColor(color), amount)] as [string, tinycolor.Instance];
       });
@@ -241,7 +242,6 @@ export class ThemeBuilderService {
     const accent = Object.keys(Constants.MIX_AMOUNTS_SECONDARY)
       .map(k => {
         const [amount, sat, light] = Constants.MIX_AMOUNTS_SECONDARY[k];
-
         return [k, tinyColor.mix(baseDark, baseTriad, amount)
           .saturate(sat).lighten(light)] as [string, tinycolor.Instance];
       });
