@@ -190,7 +190,7 @@ protected paletteChangedSubscription: Subscription;
       this.getColorObject(tinyColor(color).lighten(5).saturate(5), 'A700')
     ];
   }
-
+// force change
   protected getColorObject(value: tinycolor.Instance, name: string): Color {
 
     // console.log('instance ', value);
