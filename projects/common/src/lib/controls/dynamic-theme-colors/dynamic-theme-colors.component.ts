@@ -166,36 +166,45 @@ protected paletteChangedSubscription: Subscription;
 
   protected computeColors(color: string): Array<Color> {
 
-    // for (let i = 0; i < 101; i++) {
-    //   console.log(color + ' light ' + i,
-    //     this.getColorObject(tinyColor(color).lighten(i), String(i)).hex, color + ' dark ' + i,
-    //     this.getColorObject(tinyColor(color).darken(i), String(i)).hex
-    //     );
-    // }
-
+    const baseLightColor = tinyColor('#FFFFFF');
+    const baseDarkColor = this.themeBuilderService.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
+    const [, , , baseTetrad] = tinyColor(color).tetrad();
+// force change
     return [
-      this.getColorObject(tinyColor(color).lighten(45), '50'),
-      this.getColorObject(tinyColor(color).lighten(37), '100'),
-      this.getColorObject(tinyColor(color).lighten(26), '200'),
-      this.getColorObject(tinyColor(color).lighten(12), '300'),
-      this.getColorObject(tinyColor(color).lighten(6), '400'),
+      this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 12), '50'),
+      this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 30), '100'),
+      this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 50), '200'),
+      this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 70), '300'),
+      this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 85), '400'),
       this.getColorObject(tinyColor(color), '500'),
-      this.getColorObject(tinyColor(color).darken(6), '600'),
-      this.getColorObject(tinyColor(color).darken(12), '700'),
-      this.getColorObject(tinyColor(color).darken(18), '800'),
-      this.getColorObject(tinyColor(color).darken(24), '900'),
-      this.getColorObject(tinyColor(color).lighten(50).saturate(30), 'A100'),
-      this.getColorObject(tinyColor(color).lighten(30).saturate(30), 'A200'),
-      this.getColorObject(tinyColor(color).lighten(10).saturate(15), 'A400'),
-      this.getColorObject(tinyColor(color).lighten(5).saturate(5), 'A700')
+      this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 87), '600'),
+      this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 70), '700'),
+      this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 54), '800'),
+      this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 25), '900'),
+      this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(65), 'A100'),
+      this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(55), 'A200'),
+      this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(45), 'A400'),
+      this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(40), 'A700')
+
+      // this.getColorObject(tinyColor(color).lighten(45), '50'),
+      // this.getColorObject(tinyColor(color).lighten(37), '100'),
+      // this.getColorObject(tinyColor(color).lighten(26), '200'),
+      // this.getColorObject(tinyColor(color).lighten(12), '300'),
+      // this.getColorObject(tinyColor(color).lighten(6), '400'),
+      // this.getColorObject(tinyColor(color), '500'),
+      // this.getColorObject(tinyColor(color).darken(6), '600'),
+      // this.getColorObject(tinyColor(color).darken(12), '700'),
+      // this.getColorObject(tinyColor(color).darken(18), '800'),
+      // this.getColorObject(tinyColor(color).darken(24), '900'),
+      // this.getColorObject(tinyColor(color).lighten(50).saturate(30), 'A100'),
+      // this.getColorObject(tinyColor(color).lighten(30).saturate(30), 'A200'),
+      // this.getColorObject(tinyColor(color).lighten(10).saturate(15), 'A400'),
+      // this.getColorObject(tinyColor(color).lighten(5).saturate(5), 'A700')
     ];
   }
 // force change
   protected getColorObject(value: tinycolor.Instance, name: string): Color {
 
-    // console.log('instance ', value);
-    // console.log(tinyColor(value));
-    
     const c = tinyColor(value);
     return {
       name,
