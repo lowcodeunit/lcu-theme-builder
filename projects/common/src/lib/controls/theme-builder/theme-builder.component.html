@@ -1,10 +1,18 @@
 
 <div fxLayout="column" fxLayoutGap="10px">
   <lcu-lightness-picker></lcu-lightness-picker>
+
+
+  <!-- <div id="preview">
+    <iframe src="/preview" (load)="onReady()" [hidden]="showingSource" title="Material Preview"></iframe>
+  </div> -->
+
+<button mat-raised-button color="primary" (click)="onReady()">Ready for some SCSS</button>
   <div #preview id="preview" fxLayout="row" fxLayoutGap="10px">
-      <mat-toolbar color="primary">Theme Primary</mat-toolbar>
-      <mat-toolbar color="accent">Theme Accent</mat-toolbar>
-      <mat-toolbar color="warn">Theme Warn</mat-toolbar>
+      <!-- <mat-toolbar color="primary">Primary Colors</mat-toolbar> -->
+      <mat-toolbar class="primary-class">Primary Colors</mat-toolbar>
+      <mat-toolbar color="accent">Accent Colors</mat-toolbar>
+      <mat-toolbar color="warn">Warn Colors</mat-toolbar>
       <!-- <pre [style.display]="showingSource ? 'block': 'none'" class="hljs"><code class="scss" [innerHTML]="sourcePretty"></code></pre> -->
   </div>
   <lcu-palette-picker></lcu-palette-picker>

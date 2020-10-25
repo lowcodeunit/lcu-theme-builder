@@ -16,8 +16,8 @@
 */
 @mixin theme-sub-components() {
 
-  // get-theme() returns the current theme
- @include theme-builder-component-theme(get-theme());
+  // get-dynamic-theme() returns the current theme
+ @include theme-builder-component-theme(get-dynamic-theme());
 }
 
 @include theme-sub-components();

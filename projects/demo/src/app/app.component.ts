@@ -27,17 +27,23 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.Title = ThemeBuilderUtils.upperThemeBuilder(this.Title);
-    this.resetTheme();
     this.setThemes();
+    this.resetTheme();
   }
 
   protected resetTheme(): void {
     this.ThemeClass = this.themeService.GetColorClass();
+    // use replace right now, but should update ThemeService in ref arch to hold color value - shannon
+    const color: string = this.ThemeClass.value.replace(/fathym-|-theme/gi, '');
+    this.setPaletteColors(color);
   }
 
   public PickTheme(color: string): void {
     this.themeService.SetColorClass(`fathym-${color}-theme`);
+    this.setPaletteColors(color);
+  }
 
+  protected setPaletteColors(color: string): void {
     this.Themes.forEach((itm) => {
       if (itm.Color === color) {
         const palette = new PaletteModel();
@@ -47,7 +53,6 @@ export class AppComponent implements OnInit {
 
         palette.accent = new SubPaletteModel();
         palette.accent.main = itm.Palette.Accent;
-
 
         palette.warn = new SubPaletteModel();
         palette.warn.main = itm.Palette.Warn;
@@ -72,7 +77,7 @@ export class AppComponent implements OnInit {
     // ];
 
     this.Themes = [
-      { ColorSwatch: 'color-swatch-dynamic', Icon: 'brightness_1', Label: 'Dynamic Theme', Value: 'dynamic-theme', Color: 'dynamic' },
+      // { ColorSwatch: 'color-swatch-dynamic', Icon: 'brightness_1', Label: 'Dynamic Theme', Value: 'dynamic-theme', Color: 'dynamic' },
 
       { ColorSwatch: 'color-swatch-arctic', Icon: 'brightness_1', Label: 'Arctic Theme', Value: 'arctic-theme', Color: 'arctic',
         Palette: { Name: '$fathym-arctic', Accent: '#dbfdf2', Primary: '#67c7c5', Warn: '#c43843' } 

@@ -66,6 +66,7 @@ export class ThemeBuilderService {
     this.$lightness = new Subject<boolean>();
     this.$palette = new Subject<Partial<PaletteModel>>();
     this.$themeScss = this.loadThemingScss();
+
     this.PaletteList = [];
    }
 
@@ -85,7 +86,7 @@ export class ThemeBuilderService {
 
       this._palette = palette;
       this.palettePickerService.NewPalette(palette);
-      // this.emit();
+      this.emit();
     }
 
     public get Palette() {
@@ -94,7 +95,7 @@ export class ThemeBuilderService {
 
     set fonts(fonts: FontSelectionModel[]) {
       this._fonts = fonts;
-      // this.emit();
+      this.emit();
     }
 
     get fonts() {
@@ -103,7 +104,7 @@ export class ThemeBuilderService {
 
     set lightness(light: boolean) {
       this._lightness = light;
-     // this.emit();
+     this.emit();
     }
 
     get lightness() {
@@ -115,6 +116,7 @@ export class ThemeBuilderService {
     */
    protected loadThemingScss(): Promise<void> {
      // this is generated in angular.json, pulls from node_modules/@angular/material
+    debugger;
     return this.http.get('/assets/_theming.scss', { responseType: 'text' })
       .pipe(
         map((x: string) => {
@@ -161,6 +163,7 @@ export class ThemeBuilderService {
     const colorMap: ColorMapModel = new ColorMapModel(
       this.paletteTemplateService.GenerateColorMap(theme), name);
 
+      debugger;
     Sass.writeFile('shannon.scss', '.shannon { width: 123px; }');
     Sass.writeFile('colormap.scss', colorMap.Map);
 
@@ -178,8 +181,10 @@ export class ThemeBuilderService {
   }
 
    public async CompileScssTheme(theme: string) {
+    debugger;
     await this.$themeScss;
-    return new Promise<string>((res, rej) =>
+    return new Promise<string>((res, rej) => {
+      debugger;
       Sass.compile(theme.replace('@include angular-material-theme($altTheme);', ''), (v: any) => {
         // debugger;
         if (v.status === 0) {
@@ -187,21 +192,22 @@ export class ThemeBuilderService {
         } else {
           rej(v);
         }
-      })
+      });
+    }
     );
    }
 
-   public FromExternal(val: string): void {
-     try {
-       const json = JSON.parse(val);
+  //  public FromExternal(val: string): void {
+  //    try {
+  //      const json = JSON.parse(val);
 
-       this.$lightness.next(json.lightness);
-       this.$palette.next(json.palette);
+  //      this.$lightness.next(json.lightness);
+  //      this.$palette.next(json.palette);
 
-     } catch (e) {
-      console.error('Unable to read', val, e);
-     }
-   }
+  //    } catch (e) {
+  //     console.error('Unable to read', val, e);
+  //    }
+  //  }
 
   //  public ToExternal(): string {
   //   const data = {
@@ -252,9 +258,9 @@ export class ThemeBuilderService {
    /**
     * emit event with theme
     */
-  //  protected emit(): void {
-  //    this.$theme.next(this.getTheme());
-  //  }
+   protected emit(): void {
+     this.$theme.next(this.getTheme());
+   }
 
    /**
     * Return a new theme model

@@ -52,20 +52,21 @@ export class PalettePickerComponent implements OnInit {
      * Subscribe to color(palette) picker changes
      */
     this.palettePickerChangedSubscription = this.palettePickerService.ColorPickerChanged.subscribe((palette: PaletteModel) => {
+    
       this.patchValue(palette);
     });
 
-    const initialValues: object = {
-      primary: { main: '#cf3a5a' },
-      accent: { main: '#855F68' },
-      warn: { main: '#FF94AB' },
-      lightText: '#222222',
-      lightBackground: '#fafafa',
-      darkText: '#ffffff',
-      darkBackground: '#2c2c2c'
-    };
+    // const initialValues: object = {
+    //   primary: { main: '#cf3a5a' },
+    //   accent: { main: '#855F68' },
+    //   warn: { main: '#FF94AB' },
+    //   lightText: '#222222',
+    //   lightBackground: '#fafafa',
+    //   darkText: '#ffffff',
+    //   darkBackground: '#2c2c2c'
+    // };
 
-    this.patchValue(initialValues);
+    // this.patchValue(initialValues);
 
     this.Form.valueChanges
     .subscribe((palette: PaletteModel) => {

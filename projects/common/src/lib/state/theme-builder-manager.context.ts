@@ -20,7 +20,7 @@ export class ThemeBuilderManagerContext extends StateManagerContext<ThemeBuilder
             Arguments: {
                 ThemeBuilderId: id
             },
-            Type: 'get-theme-builder-by-id'
+            Type: 'get-dynamic-theme-builder-by-id'
         });
     }
 

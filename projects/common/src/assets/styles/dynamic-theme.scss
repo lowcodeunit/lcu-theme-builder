@@ -46,7 +46,7 @@
 /**
 *   Return the current theme
 */
-@function get-theme($isDark: false) {
+@function get-dynamic-theme($isDark: false) {
     $primary: mat-palette($dynamic-theme-primary);
     $accent: mat-palette($dynamic-theme-secondary);
     $warn: mat-palette($dynamic-theme-warn);
@@ -55,8 +55,8 @@
 }
 
 :export {
-    primarySucka: mat-color(map-get(get-theme(), primary));
-    accentSucka: mat-color(map-get(get-theme(), accent));
+    primarySucka: mat-color(map-get(get-dynamic-theme(), primary));
+    accentSucka: mat-color(map-get(get-dynamic-theme(), accent));
   }
 
 @mixin primary-logo($logo, $theme, $opacity) {
@@ -69,53 +69,61 @@
     }
   }
 
-.fathym-arctic-theme {
-    $theme: fathym-arctic-theme(true);
-    @include theme-setup($theme);
-    @include primary-logo(thinky-full-logo, $theme, 1);
-}
+// .fathym-arctic-theme {
+//     $theme: fathym-arctic-theme(true);
+//     @include theme-setup($theme);
+//     @include primary-logo(thinky-full-logo, $theme, 1);
+// }
   
-.fathym-contrast-theme {
-    $theme: fathym-contrast-theme(false);
-    @include theme-setup($theme);
-    @include primary-logo(thinky-full-logo, $theme, 1);
-}
+// .fathym-contrast-theme {
+//     $theme: fathym-contrast-theme(false);
+//     @include theme-setup($theme);
+//     @include primary-logo(thinky-full-logo, $theme, 1);
+// }
 
-.fathym-cool-candy-theme {
-    $theme: fathym-cool-candy-theme(true);
-    @include theme-setup($theme);
-    @include primary-logo(thinky-full-logo, $theme, 1);
-}
+// .fathym-cool-candy-theme {
+//     $theme: fathym-cool-candy-theme(true);
+//     @include theme-setup($theme);
+//     @include primary-logo(thinky-full-logo, $theme, 1);
+// }
 
-.fathym-flipper-theme {
-    $theme: fathym-flipper-theme(true);
-    @include theme-setup($theme);
-    @include primary-logo(thinky-full-logo, $theme, 1);
-}
+// .fathym-flipper-theme {
+//     $theme: fathym-flipper-theme(true);
+//     @include theme-setup($theme);
+//     @include primary-logo(thinky-full-logo, $theme, 1);
+// }
 
-.fathym-ice-theme {
-    $theme: fathym-ice-theme();
-    @include theme-setup($theme);
-    @include primary-logo(thinky-full-logo, $theme, 1);
-}
+// .fathym-ice-theme {
+//     $theme: fathym-ice-theme();
+//     @include theme-setup($theme);
+//     @include primary-logo(thinky-full-logo, $theme, 1);
+// }
 
-.fathym-sea-green-theme {
-    $theme: fathym-sea-green-theme(true);
-    @include theme-setup($theme);
-    @include primary-logo(thinky-full-logo, $theme, 1);
-}
+// .fathym-sea-green-theme {
+//     $theme: fathym-sea-green-theme(true);
+//     @include theme-setup($theme);
+//     @include primary-logo(thinky-full-logo, $theme, 1);
+// }
 
-.fathym-white-mint-theme {
-    $theme: fathym-white-mint-theme();
-    @include theme-setup($theme);
-    @include primary-logo(thinky-full-logo, $theme, 1);
-}
+// .fathym-white-mint-theme {
+//     $theme: fathym-white-mint-theme();
+//     @include theme-setup($theme);
+//     @include primary-logo(thinky-full-logo, $theme, 1);
+// }
 
-.fathym-ivy-theme {
-    $theme: fathym-ivy-theme();
-    @include theme-setup($theme);
-    @include primary-logo(thinky-full-logo, $theme, 1);
-}
+// .fathym-ivy-theme {
+//     $theme: fathym-ivy-theme();
+//     @include theme-setup($theme);
+//     @include primary-logo(thinky-full-logo, $theme, 1);
+// }
+
+// @function dynamic-theme($isDark: false) {
+//     $primary: mat-palette($dynamic-theme-primary);
+//     $accent: mat-palette($dynamic-theme-secondary);
+//     $warn: mat-palette($dynamic-theme-warn, 500);
+
+//     @return fathym-theme($primary, $accent, $warn, $isDark);
+// }
 
 /**
 *   Create theme palette

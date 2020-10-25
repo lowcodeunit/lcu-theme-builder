@@ -57,12 +57,12 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
   ) {
     this.themeWrapper = document.querySelector('head');
 
-    if (window.location.search) {
-      setTimeout(() => {
-        const theme = atob(decodeURIComponent(window.location.search.replace(/^[?]c=/, '')));
-        this.themeBuilderService.FromExternal(theme);
-      }, 100);
-    }
+    // if (window.location.search) {
+    //   setTimeout(() => {
+    //     const theme = atob(decodeURIComponent(window.location.search.replace(/^[?]c=/, '')));
+    //     this.themeBuilderService.FromExternal(theme);
+    //   }, 100);
+    // }
   }
 
   onReady() {
@@ -152,7 +152,7 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
         setTimeout(() => this.isReady = true, 1000);
       });
 
-    this.onReady();
+    // setTimeout(() => this.onReady(), 1000);
 
     window.addEventListener('message', (ev) => {
       if (ev.data && ev.data.iconsDone) {
@@ -162,11 +162,10 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
   }
 
   public ngAfterViewInit(): void {
-    console.log(this.Preview);
+    console.log('this.Preview', this.Preview);
   }
 
   protected updateTheme(theme: ThemeModel): void {
-
     if (!theme.palette) {
       return;
     }
@@ -181,32 +180,35 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
 
     this.zone.runOutsideAngular(() => {
      // window.postMessage({ icons: theme.icons }, window.location.toString());
-      this.themeBuilderService.CompileScssTheme(this.source).then( (text: string) => {
+     // tslint:disable-next-line:no-debugger
+     console.log('COMPILE SASS');
+     debugger;
+     this.themeBuilderService.CompileScssTheme(this.source).then( (text: string) => {
         this.css = text;
 
-        // document.getElementById('preview').innerHTML = text;
-        // const preview: HTMLElement = document.getElementById('preview');
-        // const style = document.createElement('style');
-        // preview.appendChild(style);
-        // style.type = 'text/css';
-        // style.appendChild(document.createTextNode(this.so));
-        // preview[0].innerHTML = text;
+        document.getElementById('preview').innerHTML = text;
+        const preview: HTMLElement = document.getElementById('preview');
+        const style = document.createElement('style');
+        preview.appendChild(style);
+        style.type = 'text/css';
+        style.appendChild(document.createTextNode(this.source));
+        preview[0].innerHTML = text;
         // this works, but overrides all styles
-        // document.getElementsByTagName('style')[0].innerHTML = text;
+        document.getElementsByTagName('style')[0].innerHTML = text;
 
-        // Sass.readFile('~@angular/material/theming', (s: any) => {
-        //   // debugger;
-        // });
+        Sass.readFile('~@angular/material/theming', (s: any) => {
+          // debugger;
+        });
 
-        // Sass.listFiles((list: Array<any>) => {
-        //   list.forEach((cur, i, arr) => {
-        //   // debugger;
-        // });
+        Sass.listFiles((list: Array<any>) => {
+          list.forEach((cur, i, arr) => {
+          // debugger;
+        });
 
-          // Sass.writeFile('./assets/dynamic-themes' + (list.length + 1), text, (success: boolean) => {
-          //   console.log('write file', success);
-          // });
-        // });
+          Sass.writeFile('./assets/dynamic-themes' + (list.length + 1), text, (success: boolean) => {
+            console.log('write file', success);
+          });
+        });
       }).catch((err: Error) => {
         console.error(err);
       });

@@ -78,6 +78,7 @@ export class PaletteTemplateService {
    * @param theme current theme
    */
     public GetTemplate(theme: ThemeModel): string {
+      debugger;
       // tslint:disable:no-trailing-whitespace
       // tslint:disable:max-line-length
       const tpl = `
@@ -93,10 +94,12 @@ export class PaletteTemplateService {
     ${(theme.fonts || []).map(x => `${x.target}: ${this.fontRule(x)}`).join(',\n  ')}
   );
   
+    $global-theme-test: ${theme.palette};
+
   // Foreground Elements
   
   // Light Theme Text
-  $dark-text: ${theme.palette.lightText};
+  $dark-text: ${(theme.palette.lightText || `#333`)};
   $dark-primary-text: rgba($dark-text, 0.87);
   $dark-accent-text: rgba($dark-primary-text, 0.54);
   $dark-disabled-text: rgba($dark-primary-text, 0.38);
@@ -123,7 +126,7 @@ export class PaletteTemplateService {
   );
   
   // Dark Theme text
-  $light-text: ${theme.palette.darkText};
+  $light-text: ${(theme.palette.darkText || `#fff`)};
   $light-primary-text: $light-text;
   $light-accent-text: rgba($light-primary-text, 0.7);
   $light-disabled-text: rgba($light-primary-text, 0.5);
@@ -151,14 +154,14 @@ export class PaletteTemplateService {
   
   // Background config
   // Light bg
-  $light-background:    ${theme.palette.lightBackground};
+  $light-background:    ${(theme.palette.lightBackground || `#f1f1f1`)};
   $light-bg-darker-5:   darken($light-background, 5%);
   $light-bg-darker-10:  darken($light-background, 10%);
   $light-bg-darker-20:  darken($light-background, 20%);
   $light-bg-darker-30:  darken($light-background, 30%);
   $light-bg-lighter-5:  lighten($light-background, 5%);
-  $dark-bg-alpha-4:     rgba(${theme.palette.darkBackground}, 0.04);
-  $dark-bg-alpha-12:    rgba(${theme.palette.darkBackground}, 0.12);
+  $dark-bg-alpha-4:     rgba(${(theme.palette.darkBackground || `#333`)}, 0.04);
+  $dark-bg-alpha-12:    rgba(${(theme.palette.darkBackground || `#333`)}, 0.12);
   
   $mat-light-theme-background: (
     background:               $light-background,
@@ -178,13 +181,13 @@ export class PaletteTemplateService {
   );
   
   // Dark bg
-  $dark-background:     ${theme.palette.darkBackground};
+  $dark-background:     ${(theme.palette.darkBackground || `#f1f1f1`)};
   $dark-bg-lighter-5:   lighten($dark-background, 5%);
   $dark-bg-lighter-10:  lighten($dark-background, 10%);
   $dark-bg-lighter-20:  lighten($dark-background, 20%);
   $dark-bg-lighter-30:  lighten($dark-background, 30%);
-  $light-bg-alpha-4:    rgba(${theme.palette.lightBackground}, 0.04);
-  $light-bg-alpha-12:   rgba(${theme.palette.lightBackground}, 0.12);
+  $light-bg-alpha-4:    rgba(${(theme.palette.lightBackground || `#f1f1f1`)}, 0.04);
+  $light-bg-alpha-12:   rgba(${(theme.palette.lightBackground || `#f1f1f1`)}, 0.12);
   
   // Background palette for dark themes.
   $mat-dark-theme-background: (
