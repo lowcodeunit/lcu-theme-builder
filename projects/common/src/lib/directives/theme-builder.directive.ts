@@ -27,7 +27,7 @@ export class ThemeBuilderDirective implements OnInit {
   }
 
   private getThemeColor(): string {
-    debugger;
+    // debugger;
     const theme = this.themeService.GetColorClass().value;
     return 'color-swatch-' + theme.substring(theme.indexOf('-') + 1, theme.lastIndexOf('-'));
   }

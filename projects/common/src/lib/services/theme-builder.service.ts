@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 import { FontSelectionModel } from '../models/font-selection.model';
 import { PaletteListModel } from '../models/palette-list.model';
 import { PaletteTemplateService } from './palette-template.service';
+import { $ } from 'protractor';
 
 const tinyColor = tinycolor;
 
@@ -116,7 +117,6 @@ export class ThemeBuilderService {
     */
    protected loadThemingScss(): Promise<void> {
      // this is generated in angular.json, pulls from node_modules/@angular/material
-    debugger;
     return this.http.get('/assets/_theming.scss', { responseType: 'text' })
       .pipe(
         map((x: string) => {
@@ -138,7 +138,7 @@ export class ThemeBuilderService {
         map((txt: string) => // writFile allows this file to be access from styles.scss
           Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
             console.log('Sass.writeFile', result);
-            // debugger;
+            //// debugger;
           }))
       ).toPromise();
    }
@@ -160,33 +160,67 @@ export class ThemeBuilderService {
   public SaveColorPalette(theme: ThemeModel): void {
     const name: string = '$color-map' + String(Math.floor(Math.random() * 100));
 
+    // debugger;
     const colorMap: ColorMapModel = new ColorMapModel(
       this.paletteTemplateService.GenerateColorMap(theme), name);
 
-      debugger;
-    Sass.writeFile('shannon.scss', '.shannon { width: 123px; }');
-    Sass.writeFile('colormap.scss', colorMap.Map);
+    // tslint:disable-next-line:no-inferrable-types
+    const shannonSassTest: string = `
+    // :root {
+    //   --css-variable-test-text: #997788;
+    // }
+    //   $width: 300px;
+    //   $height: 300px;
+    //   $background-color: #ffcc11;
+
+    //   $font-color: (var(--theme-primary-A100), 1);
+
+    //   h1 {color: $font-color}
+
+      // .shannon-string-sass-test {
+      //   width: $width;
+      //   height: $height;
+      //   background-color: $background-color;
+      //   background-color: var(--css-variable-test-text);
+      // }
+    `;
+
+    // Sass.writeFile('shannon-sass.scss', shannonSassTest, (err: any) => {
+    //   if (err) {
+    //     console.error('WRITE SHANNON-SASS ', err);
+    //   } else {
+    //     console.log('SHANNON-SASS SUCCESSFUL');
+    //   }
+    // });
+
+    // Sass.writeFile('colormap.scss', colorMap.Map, (err: any) => {
+    //   if (err) {
+    //     console.error('WRITE COLORMAP ', err);
+    //   } else {
+    //     console.log('COLORMAP SUCCESSFUL');
+    //   }
+    // });
 
     this.localStorageService.SetColorMapStorage(colorMap);
 
-    Sass.compile('@import "shannon";', (result: any) => {
-      // debugger;
-      console.log(result.text);
-    });
+    // Sass.compile('@import "shannon-sass";', (result: any) => {
+    //   // debugger;
+    //   // $('#shannondiv').html(result.text);
+    //   console.log(result.text);
+    // });
 
-    Sass.compile('@import "colormap";', (result: any) => {
-      // debugger;
-      console.log(result.text);
-    });
+    // Sass.compile('@import "colormap";', (result: any) => {
+    //   //// debugger;
+    //   console.log(result.text);
+    // });
   }
 
    public async CompileScssTheme(theme: string) {
-    debugger;
     await this.$themeScss;
     return new Promise<string>((res, rej) => {
       debugger;
       Sass.compile(theme.replace('@include angular-material-theme($altTheme);', ''), (v: any) => {
-        // debugger;
+        debugger;
         if (v.status === 0) {
           res(v.text);
         } else {

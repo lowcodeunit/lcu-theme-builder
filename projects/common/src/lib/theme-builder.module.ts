@@ -37,7 +37,7 @@ import { DynamicThemeColorsComponent } from './controls/dynamic-theme-colors/dyn
   entryComponents: []
 })
 export class ThemeBuilderModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<ThemeBuilderModule> {
     return {
       ngModule: ThemeBuilderModule,
       providers: [ThemeBuilderService]

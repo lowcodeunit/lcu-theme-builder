@@ -64,7 +64,7 @@ export class SubPalettePickerComponent implements OnInit {
 
   public ngOnInit(): void {
     this.Main.valueChanges.subscribe((color: string) => {
-      debugger;
+      // debugger;
       if (color) {
         this.onMainChange(color);
       }

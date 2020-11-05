@@ -10,7 +10,7 @@
 <button mat-raised-button color="primary" (click)="onReady()">Ready for some SCSS</button>
   <div #preview id="preview" fxLayout="row" fxLayoutGap="10px">
       <!-- <mat-toolbar color="primary">Primary Colors</mat-toolbar> -->
-      <mat-toolbar class="primary-class">Primary Colors</mat-toolbar>
+      <mat-toolbar class="primary">Primary Colors</mat-toolbar>
       <mat-toolbar color="accent">Accent Colors</mat-toolbar>
       <mat-toolbar color="warn">Warn Colors</mat-toolbar>
       <!-- <pre [style.display]="showingSource ? 'block': 'none'" class="hljs"><code class="scss" [innerHTML]="sourcePretty"></code></pre> -->
@@ -28,4 +28,20 @@
     <button mat-raised-button color="primary" (click)="DownloadPalette('css')">Download CSS</button>
     <button mat-raised-button color="warn" (click)="ClearColorMapStorage()">Clear local storage</button>
   </div>
+
+  <div 
+    fxFlex fxLayout="row" fxLayoutGap="10px">
+    <div 
+      fxFlex="40" class="sass-css-var-test">
+      <h1>@dynamic palette</h1>
+      <h2 class="sass-css-var-test-h2">Shannon</h2>
+    </div>
+    <div 
+      fxFlex="40"
+      style="border: 1px solid red"
+      class="sass-css-var-test-h2">
+      <h1>string test</h1>
+    </div>
+  </div>
+ 
 </div>

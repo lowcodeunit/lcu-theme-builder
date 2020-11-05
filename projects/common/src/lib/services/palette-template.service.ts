@@ -48,8 +48,8 @@ export class PaletteTemplateService {
   }
 
   protected contrastColorMap(theme: ThemeModel): string {
-    const darkPrimaryText: string = theme.palette.lightText;
-    const lightPrimaryText: string = theme.palette.darkText;
+    const darkPrimaryText: string = theme.palette.lightText || '#333';
+    const lightPrimaryText: string = theme.palette.darkText || '#fff';
 
     const colorMap: string =
     `
@@ -78,7 +78,7 @@ export class PaletteTemplateService {
    * @param theme current theme
    */
     public GetTemplate(theme: ThemeModel): string {
-      debugger;
+      // debugger;
       // tslint:disable:no-trailing-whitespace
       // tslint:disable:max-line-length
       const tpl = `

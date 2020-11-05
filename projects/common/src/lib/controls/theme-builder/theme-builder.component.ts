@@ -148,6 +148,7 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
         debounceTime(100)
       )
       .subscribe(x => {
+        // debugger;
         this.updateTheme(x);
         setTimeout(() => this.isReady = true, 1000);
       });
@@ -166,12 +167,14 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
   }
 
   protected updateTheme(theme: ThemeModel): void {
-    if (!theme.palette) {
-      return;
-    }
+
+    // if (!theme.palette) {
+    //   return;
+    // }
 
     this.source = this.themeBuilderService.GetTemplate(theme);
     this.themeBuilderService.SaveColorPalette(theme);
+
     console.log('local storage', this.localStorageService.GetColorMapStorage('ColorMaps'));
 
     const body = this.themeWrapper;
@@ -182,10 +185,10 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
      // window.postMessage({ icons: theme.icons }, window.location.toString());
      // tslint:disable-next-line:no-debugger
      console.log('COMPILE SASS');
-     debugger;
+
      this.themeBuilderService.CompileScssTheme(this.source).then( (text: string) => {
         this.css = text;
-
+        debugger;
         document.getElementById('preview').innerHTML = text;
         const preview: HTMLElement = document.getElementById('preview');
         const style = document.createElement('style');
@@ -197,14 +200,15 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
         document.getElementsByTagName('style')[0].innerHTML = text;
 
         Sass.readFile('~@angular/material/theming', (s: any) => {
-          // debugger;
+          //// debugger;
         });
 
         Sass.listFiles((list: Array<any>) => {
           list.forEach((cur, i, arr) => {
-          // debugger;
+          //// debugger;
         });
 
+        // debugger;
           Sass.writeFile('./assets/dynamic-themes' + (list.length + 1), text, (success: boolean) => {
             console.log('write file', success);
           });

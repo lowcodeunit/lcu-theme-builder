@@ -29,19 +29,41 @@ export class LightnessPickerComponent implements OnInit {
       });
 
     this.lightness.updateValueAndValidity();
+
+    this.OnToggleChange(false); // need a better way to do this - shannon
     }
 
-    OnToggleChange(evt: MatSlideToggleChange) {
-      this.setMode(evt.checked);
+    OnToggleChange(evt: MatSlideToggleChange | boolean): void {
+
+      if (typeof evt === 'boolean') {
+        this.setMode(evt);
+      } else {
+        this.setMode(evt.checked);
+      }
     }
 
     protected setMode(val: boolean): void {
       if (document.documentElement.hasAttribute('theme-mode')) {
         document.documentElement.removeAttribute('theme-mode');
+      }
+      // } else {
+      if (val) {
+        document.documentElement.setAttribute('theme-mode', 'dark');
       } else {
-        if (val) {
-          document.documentElement.setAttribute('theme-mode', 'dark');
-        }
+        document.documentElement.setAttribute('theme-mode', 'light');
+      }
+      // }
+    }
+
+    /**
+     * Store theme in local storage, so it can be used across components
+     */
+    protected persistThemeMode(): void {
+      const storedTheme: any = localStorage.getItem('theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+      if (storedTheme) {
+          document.documentElement.setAttribute('dark-theme', storedTheme);
       }
     }
   }

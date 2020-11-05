@@ -110,7 +110,7 @@ export class FontPickerComponent implements OnInit {
     this.themeBuilderService.$fonts.subscribe((x: any) => {
       const families = Array.from(new Set(x.map((f: FontSelectionModel) => f.family)));
       for (const f of families) {
-        // debugger;
+        //// debugger;
         // this.fontService.loadFont(f);
       }
       this.items.setValue(x.map((f: any) => Object.assign({}, Constants.DEFAULT_FONTS[f.target], f)));

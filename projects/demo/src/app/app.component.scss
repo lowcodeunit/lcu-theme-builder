@@ -1,10 +1,12 @@
-@import '~@angular/material/theming';
+// @import '~@angular/material/theming';
 
-@mixin theme-builder-component-theme($theme) {
+// @mixin theme-builder-component-theme($theme) {
  
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
+  // $primary: map-get($theme, primary);
+  // $accent: map-get($theme, accent);
+  // $warn: map-get($theme, warn);
+
+@import '../../../common/src/assets/styles/common';
 
   $header-height: 64px;
 
@@ -96,7 +98,7 @@
   }
 
   .color-swatch-ivy {
-    color: mat-color($fathym-ivy-primary, 500) !important;
+    color: mat-color($fathym-primary, 500) !important;
   }
 
-}
+// }

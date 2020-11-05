@@ -1,3 +1,5 @@
+@import '../../../../../common/src/assets/styles/common';
+
 .theme-builder-card {
   cursor: pointer;
   display: inline-block;
@@ -17,3 +19,27 @@
     line-height: 20px;
   }
 }
+
+.sass-css-var-test {
+  // background-color: var(--css-variable-test);
+  // background-color: var(--theme-primary-contrast-100);
+  background-color: map-get($primary, 500);
+  color: var(--css-variable-test-text);
+}
+
+@function test-var($map, $keys...) {
+  @return $map;
+}
+
+@function v($var) {
+  @return var(--#{$var});
+}
+
+.sass-css-var-test-h2 {
+  // color: map-get(v(global-theme), 500); // doesn't work
+  // color: var(--css-variable-test-text); // works
+ 
+  color: var(--css-warn); // will work, but this returns a map, need to figure out how
+                          // to use map.get(--css-variable)
+}
+

@@ -34,6 +34,7 @@ export class LocalStorageService {
         }
 
         // update storage array
+        // debugger;
         this.storageArray.push(colorMap);
         this.updateColorMapStorage();
     }

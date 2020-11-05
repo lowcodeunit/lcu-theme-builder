@@ -1,11 +1,12 @@
 import { Injectable, Injector } from '@angular/core';
-import { StateManagerContext } from '@lcu/common';
+import { StateContext } from '@lcu/common';
 import { ThemeBuilderModel } from '../models/theme-builder.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ThemeBuilderManagerContext extends StateManagerContext<ThemeBuilderModel> {
+export class ThemeBuilderManagerContext extends StateContext
+<ThemeBuilderModel> {
 
     protected State: ThemeBuilderModel;
 
