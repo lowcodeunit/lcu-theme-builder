@@ -1,13 +1,13 @@
-
+<button mat-raised-button color="primary">Primary</button>
 <div fxLayout="column" fxLayoutGap="10px">
-  <lcu-lightness-picker></lcu-lightness-picker>
+  <!-- <lcu-lightness-picker></lcu-lightness-picker> -->
 
 
   <!-- <div id="preview">
     <iframe src="/preview" (load)="onReady()" [hidden]="showingSource" title="Material Preview"></iframe>
   </div> -->
 
-<button mat-raised-button color="primary" (click)="onReady()">Ready for some SCSS</button>
+<!-- <button mat-raised-button color="primary" (click)="onReady()">Ready for some SCSS</button> -->
   <div #preview id="preview" fxLayout="row" fxLayoutGap="10px">
       <!-- <mat-toolbar color="primary">Primary Colors</mat-toolbar> -->
       <mat-toolbar class="primary">Primary Colors</mat-toolbar>
@@ -16,9 +16,9 @@
       <!-- <pre [style.display]="showingSource ? 'block': 'none'" class="hljs"><code class="scss" [innerHTML]="sourcePretty"></code></pre> -->
   </div>
   <lcu-palette-picker></lcu-palette-picker>
-  <lcu-font-picker></lcu-font-picker>
+  <!-- <lcu-font-picker></lcu-font-picker> -->
 
-  <div fxLayout.lg="row" 
+  <!-- <div fxLayout.lg="row" 
       fxLayout.md="row" 
       fxLayout.sm="column" 
       fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-between center">
@@ -27,7 +27,7 @@
     <button mat-raised-button color="primary" (click)="DownloadPalette('scss')">Download SCSS</button>
     <button mat-raised-button color="primary" (click)="DownloadPalette('css')">Download CSS</button>
     <button mat-raised-button color="warn" (click)="ClearColorMapStorage()">Clear local storage</button>
-  </div>
+  </div> -->
 
   <div 
     fxFlex fxLayout="row" fxLayoutGap="10px">
@@ -41,6 +41,7 @@
       style="border: 1px solid red"
       class="sass-css-var-test-h2">
       <h1>string test</h1>
+      <button mat-raised-button color="primary">Primary</button>
     </div>
   </div>
  

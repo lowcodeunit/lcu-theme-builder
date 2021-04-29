@@ -56,89 +56,16 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
               @Inject(DOCUMENT) protected document: any
   ) {
     this.themeWrapper = document.querySelector('head');
-
-    // if (window.location.search) {
-    //   setTimeout(() => {
-    //     const theme = atob(decodeURIComponent(window.location.search.replace(/^[?]c=/, '')));
-    //     this.themeBuilderService.FromExternal(theme);
-    //   }, 100);
-    // }
+    window.onload = () => {
+      this.onReady();
+    }
   }
 
   onReady() {
     this.ready.next(true);
   }
 
-  showSource(yes: boolean) {
-    this.showingSource = yes;
-  }
 
-  showCredits() {
-    // this.dialog.open(CreditsComponent, {
-    //   width: '500px',
-    // });
-  }
-
-  /**
-   * Copy SCSS or CSS to clipboard
-   *
-   * @param title name
-   *
-   * @param val either scss or css
-   */
-  protected copy(title: string, val: string): void {
-    const el = document.createElement('textarea');
-    el.value = val;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    this.snackbar.open(`Successfully copied ${title} to clipboard!`, 'dismiss', {
-      duration: 3000
-    });
-  }
-
-  /**
-   * Export CSS to clipboard
-   */
-  public ExportCSS(): void {
-    this.copy('css', this.css);
-  }
-
-  /**
-   * Export SCSS to clipboard
-   */
-  public ExportSCSS(): void {
-    this.copy('Angular scss', this.source);
-  }
-
-  /**
-   * Clear local storage
-   */
-  public ClearColorMapStorage(): void {
-    this.localStorageService.ClearColorMapStorage();
-  }
-
-  /**
-   * Download palette
-   *
-   * @param val custom string literal type
-   */
-  public DownloadPalette(val: SaveType): void {
-    const isScss: boolean = val.toUpperCase() === 'SCSS';
-    const name: string = String(Math.floor(Math.random() * 100));
-    const el: HTMLAnchorElement = document.createElement('a');
-    const file: Blob = new Blob([isScss ? this.source : this.css], {type: 'text/x-scss'});
-    el.href = URL.createObjectURL(file);
-    el.download = isScss ? name + '.scss' : name + '.css';
-    el.click();
-  }
-
-  makeLink() {
-    // let link = window.location.toString().replace(/[#?].*$/g, '');
-    // link = `${link}?c=${btoa(this.themeBuilderService.ToExternal())}`;
-    // this.copy('link', link);
-  }
 
   public ngOnInit(): void {
     this.ready
@@ -153,66 +80,38 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
         setTimeout(() => this.isReady = true, 1000);
       });
 
-    // setTimeout(() => this.onReady(), 1000);
-
-    window.addEventListener('message', (ev) => {
-      if (ev.data && ev.data.iconsDone) {
-        console.log('Got It!', ev);
-      }
-    });
   }
 
   public ngAfterViewInit(): void {
-    console.log('this.Preview', this.Preview);
+   
   }
 
   protected updateTheme(theme: ThemeModel): void {
-
-    // if (!theme.palette) {
-    //   return;
-    // }
-
+// debugger;
     this.source = this.themeBuilderService.GetTemplate(theme);
-    this.themeBuilderService.SaveColorPalette(theme);
+   // this.themeBuilderService.SaveColorPalette(theme);
 
-    console.log('local storage', this.localStorageService.GetColorMapStorage('ColorMaps'));
-
-    const body = this.themeWrapper;
-
+    const preview: HTMLElement = document.getElementById('preview') as HTMLElement;
     this.sourcePretty = this.sanitizer.bypassSecurityTrustHtml(highlight(this.source));
 
     this.zone.runOutsideAngular(() => {
-     // window.postMessage({ icons: theme.icons }, window.location.toString());
-     // tslint:disable-next-line:no-debugger
-     console.log('COMPILE SASS');
 
      this.themeBuilderService.CompileScssTheme(this.source).then( (text: string) => {
         this.css = text;
-        debugger;
-        document.getElementById('preview').innerHTML = text;
-        const preview: HTMLElement = document.getElementById('preview');
-        const style = document.createElement('style');
-        preview.appendChild(style);
-        style.type = 'text/css';
-        style.appendChild(document.createTextNode(this.source));
-        preview[0].innerHTML = text;
-        // this works, but overrides all styles
-        document.getElementsByTagName('style')[0].innerHTML = text;
 
-        Sass.readFile('~@angular/material/theming', (s: any) => {
-          //// debugger;
-        });
+        const stylesheets: any = document.styleSheets;
 
-        Sass.listFiles((list: Array<any>) => {
-          list.forEach((cur, i, arr) => {
-          //// debugger;
-        });
-
-        // debugger;
-          Sass.writeFile('./assets/dynamic-themes' + (list.length + 1), text, (success: boolean) => {
-            console.log('write file', success);
+        stylesheets.forEach((element: object) => {
+            console.log(element);
           });
-        });
+
+
+        const style = document.createElement('style');
+        style.id = 'dynamicstyle'
+        style.appendChild(document.createTextNode(this.css));
+
+        document.getElementsByTagName('head')[0].appendChild(style);
+
       }).catch((err: Error) => {
         console.error(err);
       });

@@ -478,19 +478,19 @@ $primary: map-get($global-theme, primary);
 $accent: map-get($global-theme, accent);
 
 // https://itnext.io/advanced-use-of-sass-maps-bd5a47ca0d1a
-@mixin debug-map($map) {
-    @at-root {
-        @debug-map {
-            __toString__: inspect($map);
-            __length__: length($map);
-            __keys__: map-keys($map);
-            __properties__ {
-                @each $key, $value in $map {
-                    #{$key}: inspect($value);
-                }
-            }
-        }
-    }
-}
+// @mixin debug-map($map) {
+//     @at-root {
+//         @debug-map {
+//             __toString__: inspect($map);
+//             __length__: length($map);
+//             __keys__: map-keys($map);
+//             __properties__ {
+//                 @each $key, $value in $map {
+//                     #{$key}: inspect($value);
+//                 }
+//             }
+//         }
+//     }
+// }
 @include debug-map($primary);
 

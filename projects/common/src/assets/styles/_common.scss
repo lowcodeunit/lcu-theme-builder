@@ -6,6 +6,10 @@ $primary: map-get($global-theme, primary);
 $accent: map-get($global-theme, accent);
 $warn: map-get($global-theme, warn);
 
+// Create the theme object (a Sass map containing all of the palettes).
+$theme: mat-light-theme($primary, $accent, $warn);
+$altTheme: mat-dark-theme($primary, $accent, $warn);
+
 /**
 *   Create theme palette
 */
@@ -34,7 +38,8 @@ $warn: map-get($global-theme, warn);
     --css-primary: #{$primary};
     --css-accent: #{$accent};
     --css-warn: #{$warn};
-    // --css-variable-test-text: #11ffc4;
+    --primarytest: #{map-get(map-get($global-theme, primary), 500)};
+    --css-variable-test-text: var(--theme-primary-500);
 
     --ttest: (
         50: #ffcc11,
@@ -50,7 +55,7 @@ $warn: map-get($global-theme, warn);
 :root[theme-mode='dark'] {
     $color: #ffcc11;
     --css-variable-test: #{$color};
-    --css-variable-test-text: #{$color};
+    // --css-variable-test-text: #{$color};
     @include light-dark-mode(true);
 }
 
@@ -60,6 +65,6 @@ $warn: map-get($global-theme, warn);
 :root[theme-mode='light'] {
     $color: purple;
     --css-variable-test: #{$color};
-    --css-variable-test-text: #{$color};
+    // --css-variable-test-text: #{$color};
     @include light-dark-mode(false);
 }

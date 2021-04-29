@@ -52,7 +52,6 @@ export class PalettePickerComponent implements OnInit {
      * Subscribe to color(palette) picker changes
      */
     this.palettePickerChangedSubscription = this.palettePickerService.ColorPickerChanged.subscribe((palette: PaletteModel) => {
-    
       this.patchValue(palette);
     });
 
@@ -70,6 +69,7 @@ export class PalettePickerComponent implements OnInit {
 
     this.Form.valueChanges
     .subscribe((palette: PaletteModel) => {
+      // debugger;
       this.themeBuilderService.Palette = palette;
     });
 

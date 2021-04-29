@@ -48,7 +48,7 @@ export class PalettPickerComponent implements OnInit {
     });
 
     this.Form.valueChanges.subscribe(x => {
-      this.service.palette = x;
+      this.service.Palette = x;
     });
 
     this.service.$palette

@@ -1,7 +1,7 @@
-@function clr($base, $shade: base) {
-    $color: map-get(map-get($colors, $base), $shade);
-    @return $color;
-}
+// @function clr($base, $shade: base) {
+//     $color: map-get(map-get($colors, $base), $shade);
+//     @return $color;
+// }
 
 // $colors: (
 //   primary: (

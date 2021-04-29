@@ -120,6 +120,7 @@ export class ThemeBuilderService {
     return this.http.get('/assets/_theming.scss', { responseType: 'text' })
       .pipe(
         map((x: string) => {
+          // ;
           return x
             .replace(/\n/gm, '??')
             .replace(/\$mat-([^:?]+)\s*:\s*\([? ]*50:[^()]*contrast\s*:\s*\([^)]+\)[ ?]*\);\s*?/g,
@@ -218,12 +219,12 @@ export class ThemeBuilderService {
    public async CompileScssTheme(theme: string) {
     await this.$themeScss;
     return new Promise<string>((res, rej) => {
-      debugger;
       Sass.compile(theme.replace('@include angular-material-theme($altTheme);', ''), (v: any) => {
-        debugger;
         if (v.status === 0) {
+          // debugger;
           res(v.text);
         } else {
+          // debugger;
           rej(v);
         }
       });

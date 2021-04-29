@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
     this.ThemeClass = this.themeService.GetColorClass();
     // use replace right now, but should update ThemeService in ref arch to hold color value - shannon
     const color: string = this.ThemeClass.value.replace(/fathym-|-theme/gi, '');
+    // debugger;
     this.setPaletteColors(color);
   }
 
