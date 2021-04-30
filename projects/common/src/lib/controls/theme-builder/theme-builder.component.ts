@@ -1,26 +1,11 @@
 import { LocalStorageService } from './../../services/local-storage.service';
-import { Component, OnInit, ElementRef, NgZone, Inject, ViewChild, AfterViewInit, Renderer2 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { Component, OnInit, NgZone } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Subject } from 'rxjs/internal/Subject';
 import { take, switchMap, debounceTime } from 'rxjs/operators';
 
-import { ThemeBuilderModel } from '../../models/theme-builder.model';
 import { ThemeModel } from '../../models/theme.model';
-import { highlight } from '../../utils/highlights.utils';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
-import { DOCUMENT } from '@angular/common';
-import { readFile } from 'fs';
-import { ColorMapModel } from '../../models/color-map.model';
-
-declare var Sass: any;
-
-/**
- * String literal data type
- */
-type SaveType = 'scss' | 'css';
 
 @Component({
   selector: 'lcu-theme-builder',
@@ -28,46 +13,27 @@ type SaveType = 'scss' | 'css';
   styleUrls: ['./theme-builder.component.scss']
 })
 
-export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
+export class ThemeBuilderComponent implements OnInit  {
 
-  @ViewChild('preview')
-  public Preview: ElementRef;
+  protected compiledDynamicCSS: string;
+  protected ready: Subject<boolean>;
+  protected source: string;
 
-  protected renderer2: Renderer2;
-
-  protected themeWrapper: Document;
-
-  form: FormGroup;
-
-  refresh: Subject<number> = new Subject();
-  ready: Subject<boolean> = new Subject();
-  isReady: boolean;
-  showingSource = false;
-  source = '';
-  css = '';
-  sourcePretty: SafeHtml = '';
-  first = true;
-
-  constructor(private el: ElementRef, private zone: NgZone,
-              private snackbar: MatSnackBar,
-              private sanitizer: DomSanitizer,
+  constructor(protected zone: NgZone,
+              protected sanitizer: DomSanitizer,
               protected themeBuilderService: ThemeBuilderService,
-              protected localStorageService: LocalStorageService,
-              @Inject(DOCUMENT) protected document: any
-  ) {
-    this.themeWrapper = document.querySelector('head');
+              protected localStorageService: LocalStorageService)
+  {
+
+    this.ready = new Subject();
+
     window.onload = () => {
-      this.onReady();
+      this.ready.next(true);
     }
   }
 
-  onReady() {
-    this.ready.next(true);
-  }
-
-
-
   public ngOnInit(): void {
+
     this.ready
       .pipe(
         take(1),
@@ -75,40 +41,37 @@ export class ThemeBuilderComponent implements OnInit, AfterViewInit  {
         debounceTime(100)
       )
       .subscribe(x => {
-        // debugger;
         this.updateTheme(x);
-        setTimeout(() => this.isReady = true, 1000);
+        // setTimeout(() => this.isReady = true, 1000);
       });
 
   }
 
-  public ngAfterViewInit(): void {
-   
-  }
-
   protected updateTheme(theme: ThemeModel): void {
-// debugger;
+
+    // SASS stylesheet
     this.source = this.themeBuilderService.GetTemplate(theme);
-   // this.themeBuilderService.SaveColorPalette(theme);
 
-    const preview: HTMLElement = document.getElementById('preview') as HTMLElement;
-    this.sourcePretty = this.sanitizer.bypassSecurityTrustHtml(highlight(this.source));
-
+    // Running functions outside of Angular's zone and do work that
+    // doesn't trigger Angular change-detection.
     this.zone.runOutsideAngular(() => {
 
      this.themeBuilderService.CompileScssTheme(this.source).then( (text: string) => {
-        this.css = text;
 
-        const stylesheets: any = document.styleSheets;
+        // SASS compiled to CSS
+        this.compiledDynamicCSS = text;
 
-        stylesheets.forEach((element: object) => {
-            console.log(element);
-          });
+        const dynamicStyleSheet: HTMLElement = document.getElementById('dynamic-style-sheet');
 
+        // check if dynamic stylesheet exists, then remove it
+        if (dynamicStyleSheet) {
+          document.getElementsByTagName('head')[0].removeChild(dynamicStyleSheet);
+        }
 
+        // add dynamic stylesheet
         const style = document.createElement('style');
-        style.id = 'dynamicstyle'
-        style.appendChild(document.createTextNode(this.css));
+              style.id = 'dynamic-style-sheet';
+              style.appendChild(document.createTextNode(this.compiledDynamicCSS));
 
         document.getElementsByTagName('head')[0].appendChild(style);
 

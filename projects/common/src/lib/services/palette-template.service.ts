@@ -13,64 +13,50 @@ type RGBA = tinycolor.ColorFormats.RGBA;
 
 export class PaletteTemplateService {
 
-  // public GenerateColorMap(theme: ThemeModel): string {
-  // ${JSON.stringify(value, null, ' ').replace(/[{}"]/g, '')},
-  //   let colorMap: string;
-  //   colorMap = `
-  //     $fathym-primary (
-  //       ${JSON.stringify(theme.palette.PrimaryColorPalette, null, ' ').replace(/[{}"]/g, '')}
-  //       $fathym-accent (
-  //         ${JSON.stringify(theme.palette.AccentColorPalette, null, ' ').replace(/[{}"]/g, '')}
-  //       )
-  //     )
-  //   `;
-  //   return colorMap;
-  // }
-
   /**
    * Generate a color map from the selecte theme
    *
    * @param theme current theme
    */
-  public GenerateColorMap(theme: ThemeModel): string {
-    let colorMap: string = '';
+  // public GenerateColorMap(theme: ThemeModel): string {
+  //   let colorMap: string = '';
 
-    for (const [key, value] of theme.palette.ColorMap) {
-      const name: string = '$fathym-' + key;
-      colorMap += `${name}: (
-          ${JSON.stringify(theme.palette.PrimaryColorPalette, null, ' ').replace(/[{}"]/g, '')},
-          contrast: (
-            ${this.contrastColorMap(theme)}
-          )
-        );`;
-    }
-    return colorMap.replace(/\s+/g, '');
-  }
+  //   for (const [key, value] of theme.palette.ColorMap) {
+  //     const name: string = '$fathym-' + key;
+  //     colorMap += `${name}: (
+  //         ${JSON.stringify(theme.palette.PrimaryColorPalette, null, ' ').replace(/[{}"]/g, '')},
+  //         contrast: (
+  //           ${this.contrastColorMap(theme)}
+  //         )
+  //       );`;
+  //   }
+  //   return colorMap.replace(/\s+/g, '');
+  // }
 
-  protected contrastColorMap(theme: ThemeModel): string {
-    const darkPrimaryText: string = theme.palette.lightText || '#333';
-    const lightPrimaryText: string = theme.palette.darkText || '#fff';
+  // protected contrastColorMap(theme: ThemeModel): string {
+  //   const darkPrimaryText: string = theme.palette.lightText || '#333';
+  //   const lightPrimaryText: string = theme.palette.darkText || '#fff';
 
-    const colorMap: string =
-    `
-      50: ${darkPrimaryText},
-      100: ${darkPrimaryText},
-      200: ${darkPrimaryText},
-      300: ${lightPrimaryText},
-      400: ${lightPrimaryText},
-      500: ${lightPrimaryText},
-      600: ${lightPrimaryText},
-      700: ${lightPrimaryText},
-      800: ${lightPrimaryText},
-      900: ${lightPrimaryText},
-      A100: ${darkPrimaryText},
-      A200: ${lightPrimaryText},
-      A400: ${lightPrimaryText},
-      A700: ${lightPrimaryText}
-    `;
+  //   const colorMap: string =
+  //   `
+  //     50: ${darkPrimaryText},
+  //     100: ${darkPrimaryText},
+  //     200: ${darkPrimaryText},
+  //     300: ${lightPrimaryText},
+  //     400: ${lightPrimaryText},
+  //     500: ${lightPrimaryText},
+  //     600: ${lightPrimaryText},
+  //     700: ${lightPrimaryText},
+  //     800: ${lightPrimaryText},
+  //     900: ${lightPrimaryText},
+  //     A100: ${darkPrimaryText},
+  //     A200: ${lightPrimaryText},
+  //     A400: ${lightPrimaryText},
+  //     A700: ${lightPrimaryText}
+  //   `;
 
-    return colorMap;
-  }
+  //   return colorMap;
+  // }
 
   /**
    * Return template for scss
@@ -78,16 +64,14 @@ export class PaletteTemplateService {
    * @param theme current theme
    */
     public GetTemplate(theme: ThemeModel): string {
-      // debugger;
-      
-  // Fonts
-//   ${Array.from(new Set((theme.fonts || []).map(x => x.family.replace(/ /g, '+'))))
-//   .map(x => `@import url('https://fonts.googleapis.com/css?family=${x}:300,400,500');`).join('\n')}
+      debugger;
 
-// $fontConfig: (
-// ${(theme.fonts || []).map(x => `${x.target}: ${this.fontRule(x)}`).join(',\n  ')}
-// );
+      // ${Array.from(new Set((theme.fonts || []).map(x => x.family.replace(/ /g, '+'))))
+      // .map(x => `@import url('https://fonts.googleapis.com/css?family=${x}:300,400,500');`).join('\n')}
 
+      // $fontConfig: (
+      // ${(theme.fonts || []).map(x => `${x.target}: ${this.fontRule(x)}`).join(',\n  ')}
+      // );
 
       const tpl = `/**
       * Generated theme by Material Theme Generator
@@ -99,8 +83,6 @@ export class PaletteTemplateService {
       // have to load a single css file for Angular Material in your app.
 
     $global-theme-test: ${theme};
-
-    
 
       // Fonts	
       @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');	
@@ -119,12 +101,12 @@ export class PaletteTemplateService {
         button: mat-typography-level(14px, 14px, 500, 'Roboto', 0.0893em),	
         caption: mat-typography-level(12px, 20px, 400, 'Roboto', 0.0333em),	
         input: mat-typography-level(inherit, 1.125, 400, 'Roboto', 1.5px)	
-            );
+        );
 
       // Foreground Elements
 
       // Light Theme Text
-      $dark-text: ${theme.palette.lightText || '#fff'};
+      $dark-text: ${theme.palette.lightText};
       $dark-primary-text: rgba($dark-text, 0.87);
       $dark-accent-text: rgba($dark-primary-text, 0.54);
       $dark-disabled-text: rgba($dark-primary-text, 0.38);
@@ -151,7 +133,7 @@ export class PaletteTemplateService {
       );
 
       // Dark Theme text
-      $light-text: ${theme.palette.darkText || '#000'};
+      $light-text: ${theme.palette.darkText};
       $light-primary-text: $light-text;
       $light-accent-text: rgba($light-primary-text, 0.7);
       $light-disabled-text: rgba($light-primary-text, 0.5);
@@ -179,14 +161,14 @@ export class PaletteTemplateService {
 
       // Background config
       // Light bg
-      $light-background:    ${theme.palette.lightBackground || '#000'};
+      $light-background:    ${theme.palette.lightBackground};
       $light-bg-darker-5:   darken($light-background, 5%);
       $light-bg-darker-10:  darken($light-background, 10%);
       $light-bg-darker-20:  darken($light-background, 20%);
       $light-bg-darker-30:  darken($light-background, 30%);
       $light-bg-lighter-5:  lighten($light-background, 5%);
-      $dark-bg-alpha-4:     rgba(${theme.palette.darkBackground || '#2c2c2c'}, 0.04);
-      $dark-bg-alpha-12:    rgba(${theme.palette.darkBackground || '#2c2c2c'}, 0.12);
+      $dark-bg-alpha-4:     rgba(${theme.palette.darkBackground}, 0.04);
+      $dark-bg-alpha-12:    rgba(${theme.palette.darkBackground}, 0.12);
 
       $mat-light-theme-background: (
         background:               $light-background,
@@ -206,13 +188,13 @@ export class PaletteTemplateService {
       );
 
       // Dark bg
-      $dark-background:     ${theme.palette.darkBackground || '#2c2c2c'};
+      $dark-background:     ${theme.palette.darkBackground};
       $dark-bg-lighter-5:   lighten($dark-background, 5%);
       $dark-bg-lighter-10:  lighten($dark-background, 10%);
       $dark-bg-lighter-20:  lighten($dark-background, 20%);
       $dark-bg-lighter-30:  lighten($dark-background, 30%);
-      $light-bg-alpha-4:    rgba(${theme.palette.lightBackground || '#000'}, 0.04);
-      $light-bg-alpha-12:   rgba(${theme.palette.lightBackground || '#000'}, 0.12);
+      $light-bg-alpha-4:    rgba(${theme.palette.lightBackground}, 0.04);
+      $light-bg-alpha-12:   rgba(${theme.palette.lightBackground}, 0.12);
 
       // Background palette for dark themes.
       $mat-dark-theme-background: (
@@ -256,7 +238,6 @@ export class PaletteTemplateService {
         padding: 0 1.15em;
         margin: 0 .65em;
         min-width: 3em;
-        
       }
 
       .mat-standard-chip {
@@ -264,8 +245,7 @@ export class PaletteTemplateService {
         min-height: 2.5em;
       }
       `;
-    // tslint:enable:no-trailing-whitespace
-    // tslint:enable:max-line-length
+
     return tpl;
     }
 

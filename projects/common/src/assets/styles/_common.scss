@@ -1,14 +1,14 @@
 @import "../../../../../node_modules/@lcu/common/assets/styles/fathym-global.styles";
 @import '../../../../../node_modules/@lcu/common/assets/theming/common-theme';
-@import './sass-tester.scss';
+// @import './sass-tester.scss';
 
 $primary: map-get($global-theme, primary);
 $accent: map-get($global-theme, accent);
 $warn: map-get($global-theme, warn);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$theme: mat-light-theme($primary, $accent, $warn);
-$altTheme: mat-dark-theme($primary, $accent, $warn);
+// $theme: mat-light-theme($primary, $accent, $warn);
+// $altTheme: mat-dark-theme($primary, $accent, $warn);
 
 /**
 *   Create theme palette
@@ -17,7 +17,6 @@ $altTheme: mat-dark-theme($primary, $accent, $warn);
     @if $isDark == false {
         $light-theme: mat-light-theme(
             mat-palette($primary), 
-
             mat-palette($accent), 
             mat-palette($warn)
         );
@@ -33,38 +32,17 @@ $altTheme: mat-dark-theme($primary, $accent, $warn);
     }
 }
 
-:root {
-    --global-theme: #{$global-theme};
-    --css-primary: #{$primary};
-    --css-accent: #{$accent};
-    --css-warn: #{$warn};
-    --primarytest: #{map-get(map-get($global-theme, primary), 500)};
-    --css-variable-test-text: var(--theme-primary-500);
-
-    --ttest: (
-        50: #ffcc11,
-        100: #ff0000
-    );
-}
-
-// $k: map-get($map: --ttest, $key: 50);
 
 /** 
 *   Set to the dark theme
 */
 :root[theme-mode='dark'] {
-    $color: #ffcc11;
-    --css-variable-test: #{$color};
-    // --css-variable-test-text: #{$color};
-    @include light-dark-mode(true);
+    // @include light-dark-mode(true);
 }
 
 /** 
 *   Set to the light theme
 */
 :root[theme-mode='light'] {
-    $color: purple;
-    --css-variable-test: #{$color};
-    // --css-variable-test-text: #{$color};
-    @include light-dark-mode(false);
+    // @include light-dark-mode(false);
 }

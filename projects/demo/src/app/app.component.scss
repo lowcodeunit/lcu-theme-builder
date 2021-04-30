@@ -30,7 +30,7 @@
       }
 
       .title-text {
-        color: mat-color($primary, default-contrast);
+        // color: mat-color($primary, default-contrast);
         text-decoration: none;
 
         &:hover {
@@ -57,10 +57,10 @@
     padding: 10px;
 
     a:not(.mat-button) {
-      color: map-get($primary, 500);
+      // color: map-get($primary, 500);
 
       &:hover {
-        color: map-get($accent, 200);
+        // color: map-get($accent, 200);
       }
     }
   }

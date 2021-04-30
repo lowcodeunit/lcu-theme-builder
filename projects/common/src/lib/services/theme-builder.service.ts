@@ -1,20 +1,18 @@
 import { PalettePickerService } from './palette-picker.service';
 import { ColorMapModel } from './../models/color-map.model';
 import { LocalStorageService } from './local-storage.service';
-import { SubPaletteModel } from './../models/sub-palette.model';
 import { Constants } from './../utils/constants.utils';
 import { MaterialPaletteModel } from './../models/material-palette.model';
 import { Injectable } from '@angular/core';
 import * as tinycolor from 'tinycolor2';
 import { PaletteModel } from '../models/palette.model';
 import { ReplaySubject, Subject } from 'rxjs';
-import { map, skipLast } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ThemeModel } from '../models/theme.model';
 import { HttpClient } from '@angular/common/http';
 import { FontSelectionModel } from '../models/font-selection.model';
 import { PaletteListModel } from '../models/palette-list.model';
 import { PaletteTemplateService } from './palette-template.service';
-import { $ } from 'protractor';
 
 const tinyColor = tinycolor;
 
@@ -78,7 +76,6 @@ export class ThemeBuilderService {
       palette.AccentColorPalette = this.GetPalette(palette.accent.main);
       palette.PrimaryColorPalette = this.GetPalette(palette.primary.main);
       palette.WarnColorPalette = this.GetPalette(palette.warn.main);
-      // console.log('main palette', palette);
 
       palette.ColorMap = new Map();
       palette.ColorMap.set('accent-palette', palette.AccentColorPalette);
@@ -116,11 +113,11 @@ export class ThemeBuilderService {
     * load intial theme
     */
    protected loadThemingScss(): Promise<void> {
+
      // this is generated in angular.json, pulls from node_modules/@angular/material
     return this.http.get('/assets/_theming.scss', { responseType: 'text' })
       .pipe(
         map((x: string) => {
-          // ;
           return x
             .replace(/\n/gm, '??')
             .replace(/\$mat-([^:?]+)\s*:\s*\([? ]*50:[^()]*contrast\s*:\s*\([^)]+\)[ ?]*\);\s*?/g,
@@ -136,10 +133,10 @@ export class ThemeBuilderService {
             .filter((l: string) => !!l)
             .join('\n');
         }),
-        map((txt: string) => // writFile allows this file to be access from styles.scss
+        map((txt: string) =>
+          // writeFile allows this file to be accessed from styles.scss
           Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
-            console.log('Sass.writeFile', result);
-            //// debugger;
+           // console.log('Sass.writeFile', result);
           }))
       ).toPromise();
    }
@@ -158,107 +155,33 @@ export class ThemeBuilderService {
    *
    * @param theme Current selected theme
    */
-  public SaveColorPalette(theme: ThemeModel): void {
-    const name: string = '$color-map' + String(Math.floor(Math.random() * 100));
+  // public SaveColorPalette(theme: ThemeModel): void {
+  //   const name: string = '$color-map' + String(Math.floor(Math.random() * 100));
 
-    // debugger;
-    const colorMap: ColorMapModel = new ColorMapModel(
-      this.paletteTemplateService.GenerateColorMap(theme), name);
+  //   const colorMap: ColorMapModel = new ColorMapModel(
+  //     this.paletteTemplateService.GenerateColorMap(theme), name);
+  //     this.localStorageService.SetColorMapStorage(colorMap);
+  // }
 
-    // tslint:disable-next-line:no-inferrable-types
-    const shannonSassTest: string = `
-    // :root {
-    //   --css-variable-test-text: #997788;
-    // }
-    //   $width: 300px;
-    //   $height: 300px;
-    //   $background-color: #ffcc11;
-
-    //   $font-color: (var(--theme-primary-A100), 1);
-
-    //   h1 {color: $font-color}
-
-      // .shannon-string-sass-test {
-      //   width: $width;
-      //   height: $height;
-      //   background-color: $background-color;
-      //   background-color: var(--css-variable-test-text);
-      // }
-    `;
-
-    // Sass.writeFile('shannon-sass.scss', shannonSassTest, (err: any) => {
-    //   if (err) {
-    //     console.error('WRITE SHANNON-SASS ', err);
-    //   } else {
-    //     console.log('SHANNON-SASS SUCCESSFUL');
-    //   }
-    // });
-
-    // Sass.writeFile('colormap.scss', colorMap.Map, (err: any) => {
-    //   if (err) {
-    //     console.error('WRITE COLORMAP ', err);
-    //   } else {
-    //     console.log('COLORMAP SUCCESSFUL');
-    //   }
-    // });
-
-    this.localStorageService.SetColorMapStorage(colorMap);
-
-    // Sass.compile('@import "shannon-sass";', (result: any) => {
-    //   // debugger;
-    //   // $('#shannondiv').html(result.text);
-    //   console.log(result.text);
-    // });
-
-    // Sass.compile('@import "colormap";', (result: any) => {
-    //   //// debugger;
-    //   console.log(result.text);
-    // });
-  }
-
+  /**
+   * Compile SASS to CSS
+   *
+   * @param theme SASS stylesheet
+   * @returns compiled CSS
+   */
    public async CompileScssTheme(theme: string) {
     await this.$themeScss;
     return new Promise<string>((res, rej) => {
       Sass.compile(theme.replace('@include angular-material-theme($altTheme);', ''), (v: any) => {
         if (v.status === 0) {
-          // debugger;
           res(v.text);
         } else {
-          // debugger;
           rej(v);
         }
       });
     }
     );
    }
-
-  //  public FromExternal(val: string): void {
-  //    try {
-  //      const json = JSON.parse(val);
-
-  //      this.$lightness.next(json.lightness);
-  //      this.$palette.next(json.palette);
-
-  //    } catch (e) {
-  //     console.error('Unable to read', val, e);
-  //    }
-  //  }
-
-  //  public ToExternal(): string {
-  //   const data = {
-  //     palette: this.Palette,
-  //     fonts: this.fonts.map(x => {
-  //       const keys = Object.keys(x).filter(k => k === 'target' || x[k] !== Constants.DEFAULT_FONTS[x.target][k]);
-  //       return keys.reduce((acc, v) => {
-  //         acc[v] = x[v];
-  //         return acc;
-  //       }, {});
-  //     }),
-  //     // icons: this.icons,
-  //     lightness: this.lightness
-  //   };
-  //   return JSON.stringify(data);
-  // }
 
    /**
     * Return primary and accent colors for each color map, from colors 50 - A700
