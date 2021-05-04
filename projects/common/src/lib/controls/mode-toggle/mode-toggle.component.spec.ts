@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LightnessPickerComponent } from './lightness-picker.component';
+import { LightnessPickerComponent } from './mode-toggle.component';
 
 describe('LightnessPickerComponent', () => {
   let component: LightnessPickerComponent;

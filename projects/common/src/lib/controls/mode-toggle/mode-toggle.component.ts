@@ -8,9 +8,9 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 type ModeType = 'dark' | 'light';
 
 @Component({
-  selector: 'lcu-lightness-picker',
-  templateUrl: './lightness-picker.component.html',
-  styleUrls: ['./lightness-picker.component.scss']
+  selector: 'lcu-mode-toggle',
+  templateUrl: './mode-toggle.component.html',
+  styleUrls: ['./mode-toggle.component.scss']
 })
 export class LightnessPickerComponent implements OnInit {
 

@@ -12,7 +12,7 @@ import { ColorPickerComponent } from './controls/color-picker/color-picker.compo
 import { FontPickerComponent } from './controls/font-picker/font-picker.component';
 import { PalettePickerComponent } from './controls/palette-picker/palette-picker.component';
 import { SubPalettePickerComponent } from './controls/sub-palette-picker/sub-palette-picker.component';
-import { LightnessPickerComponent } from './controls/lightness-picker/lightness-picker.component';
+import { LightnessPickerComponent } from './controls/mode-toggle/mode-toggle.component';
 import { DynamicThemeColorsComponent } from './controls/dynamic-theme-colors/dynamic-theme-colors.component';
 
 @NgModule({

@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "dynamic-theme-colors.component.scss"
-    ],
-    "names": [],
-    "file": "dynamic-theme-colors.component.css"
-}
