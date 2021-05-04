@@ -20,9 +20,7 @@ export class ThemeBuilderComponent implements OnInit  {
   protected source: string;
 
   constructor(protected zone: NgZone,
-              protected sanitizer: DomSanitizer,
-              protected themeBuilderService: ThemeBuilderService,
-              protected localStorageService: LocalStorageService)
+              protected themeBuilderService: ThemeBuilderService)
   {
 
     this.ready = new Subject();
@@ -33,18 +31,18 @@ export class ThemeBuilderComponent implements OnInit  {
   }
 
   public ngOnInit(): void {
-
     this.ready
       .pipe(
         take(1),
-        switchMap(x => this.themeBuilderService.$theme),
+        switchMap((val: boolean) => {
+          return this.themeBuilderService.$theme
+        }),
         debounceTime(100)
       )
-      .subscribe(x => {
-        this.updateTheme(x);
+      .subscribe((theme: ThemeModel) => {
+        this.updateTheme(theme);
         // setTimeout(() => this.isReady = true, 1000);
       });
-
   }
 
   protected updateTheme(theme: ThemeModel): void {

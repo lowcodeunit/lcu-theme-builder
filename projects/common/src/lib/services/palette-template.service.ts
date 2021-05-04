@@ -14,57 +14,12 @@ type RGBA = tinycolor.ColorFormats.RGBA;
 export class PaletteTemplateService {
 
   /**
-   * Generate a color map from the selecte theme
-   *
-   * @param theme current theme
-   */
-  // public GenerateColorMap(theme: ThemeModel): string {
-  //   let colorMap: string = '';
-
-  //   for (const [key, value] of theme.palette.ColorMap) {
-  //     const name: string = '$fathym-' + key;
-  //     colorMap += `${name}: (
-  //         ${JSON.stringify(theme.palette.PrimaryColorPalette, null, ' ').replace(/[{}"]/g, '')},
-  //         contrast: (
-  //           ${this.contrastColorMap(theme)}
-  //         )
-  //       );`;
-  //   }
-  //   return colorMap.replace(/\s+/g, '');
-  // }
-
-  // protected contrastColorMap(theme: ThemeModel): string {
-  //   const darkPrimaryText: string = theme.palette.lightText || '#333';
-  //   const lightPrimaryText: string = theme.palette.darkText || '#fff';
-
-  //   const colorMap: string =
-  //   `
-  //     50: ${darkPrimaryText},
-  //     100: ${darkPrimaryText},
-  //     200: ${darkPrimaryText},
-  //     300: ${lightPrimaryText},
-  //     400: ${lightPrimaryText},
-  //     500: ${lightPrimaryText},
-  //     600: ${lightPrimaryText},
-  //     700: ${lightPrimaryText},
-  //     800: ${lightPrimaryText},
-  //     900: ${lightPrimaryText},
-  //     A100: ${darkPrimaryText},
-  //     A200: ${lightPrimaryText},
-  //     A400: ${lightPrimaryText},
-  //     A700: ${lightPrimaryText}
-  //   `;
-
-  //   return colorMap;
-  // }
-
-  /**
    * Return template for scss
    *
    * @param theme current theme
    */
     public GetTemplate(theme: ThemeModel): string {
-      debugger;
+      //debugger;
 
       // ${Array.from(new Set((theme.fonts || []).map(x => x.family.replace(/ /g, '+'))))
       // .map(x => `@import url('https://fonts.googleapis.com/css?family=${x}:300,400,500');`).join('\n')}
@@ -73,21 +28,16 @@ export class PaletteTemplateService {
       // ${(theme.fonts || []).map(x => `${x.target}: ${this.fontRule(x)}`).join(',\n  ')}
       // );
 
-      const tpl = `/**
-      * Generated theme by Material Theme Generator
-      * https://materialtheme.arcsine.dev
-      */
+      const template = `
 
       @import '~@angular/material/theming';
       // Include the common styles for Angular Material. We include this here so that you only
       // have to load a single css file for Angular Material in your app.
 
-    $global-theme-test: ${theme};
-
       // Fonts	
       @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');	
-          	
-      $fontConfig: (	
+
+      $fontConfig: (
         display-4: mat-typography-level(112px, 112px, 300, 'Roboto', -0.0134em),	
         display-3: mat-typography-level(56px, 56px, 400, 'Roboto', -0.0089em),	
         display-2: mat-typography-level(45px, 48px, 400, 'Roboto', 0.0000em),	
@@ -230,6 +180,8 @@ export class PaletteTemplateService {
         @include angular-material-theme($altTheme);
       }
 
+      
+
 
       // Specific component overrides, pieces that are not in line with the general theming
 
@@ -246,7 +198,7 @@ export class PaletteTemplateService {
       }
       `;
 
-    return tpl;
+    return template;
     }
 
     /**

@@ -20,40 +20,36 @@ export class LightnessPickerComponent implements OnInit {
   constructor(private themeBuilderService: ThemeBuilderService) { }
 
   ngOnInit(): void {
-    this.lightness.valueChanges
-    .subscribe(x => this.themeBuilderService.lightness = x);
 
-    this.themeBuilderService.$lightness.subscribe(x => {
-        this.lightness.setValue(x);
-        this.lightness.updateValueAndValidity();
-      });
+    this.toggle.valueChanges
+    .subscribe((val: boolean) => {
+      this.themeBuilderService.lightness = !val;
+    });
 
     this.lightness.updateValueAndValidity();
 
-    this.OnToggleChange(false); // need a better way to do this - shannon
     }
 
     OnToggleChange(evt: MatSlideToggleChange | boolean): void {
 
-      if (typeof evt === 'boolean') {
-        this.setMode(evt);
-      } else {
-        this.setMode(evt.checked);
-      }
-    }
-
-    protected setMode(val: boolean): void {
-      if (document.documentElement.hasAttribute('theme-mode')) {
-        document.documentElement.removeAttribute('theme-mode');
-      }
+      // if (typeof evt === 'boolean') {
+      //   this.setMode(evt);
       // } else {
-      if (val) {
-        document.documentElement.setAttribute('theme-mode', 'dark');
-      } else {
-        document.documentElement.setAttribute('theme-mode', 'light');
-      }
+      //   this.setMode(evt.checked);
       // }
     }
+
+    // protected setMode(val: boolean): void {
+    //   if (document.documentElement.hasAttribute('theme-mode')) {
+    //     document.documentElement.removeAttribute('theme-mode');
+    //   }
+
+    //   if (val) {
+    //     document.documentElement.setAttribute('theme-mode', 'dark');
+    //   } else {
+    //     document.documentElement.setAttribute('theme-mode', 'light');
+    //   }
+    // }
 
     /**
      * Store theme in local storage, so it can be used across components

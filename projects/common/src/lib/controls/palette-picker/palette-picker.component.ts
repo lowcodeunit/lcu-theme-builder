@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup, FormControl } from '@angular/forms';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 import * as tinycolor from 'tinycolor2';
@@ -40,6 +40,7 @@ export class PalettePickerComponent implements OnInit {
 
   constructor(protected themeBuilderService: ThemeBuilderService,
               protected palettePickerService: PalettePickerService) {
+
     this.setupForm();
   }
 
@@ -48,18 +49,22 @@ export class PalettePickerComponent implements OnInit {
     /**
      * Subscribe to color(palette) picker changes
      */
-    this.palettePickerChangedSubscription = this.palettePickerService.ColorPickerChanged.subscribe((palette: PaletteModel) => {
-      this.patchValue(palette);
+    this.palettePickerChangedSubscription =
+      this.palettePickerService.ColorPickerChanged
+      .subscribe((palette: PaletteModel) => {
+        this.patchValue(palette);
     });
 
+    const bodyStyles = window.getComputedStyle(document.documentElement);
+
     const initialValues: object = {
-      primary: { main: '#cf3a5a' },
-      accent: { main: '#855F68' },
-      warn: { main: '#FF94AB' },
-      lightText: '#222222',
-      lightBackground: '#fafafa',
-      darkText: '#ffffff',
-      darkBackground: '#2c2c2c'
+      primary: { main: bodyStyles.getPropertyValue('--initial-primary') },
+      accent: { main: bodyStyles.getPropertyValue('--initial-accent') },
+      warn: { main: bodyStyles.getPropertyValue('--initial-warn') },
+      lightText: bodyStyles.getPropertyValue('--initial-light-text'),
+      lightBackground: bodyStyles.getPropertyValue('--initial-light-background'),
+      darkText: bodyStyles.getPropertyValue('--initial-dark-text'),
+      darkBackground: bodyStyles.getPropertyValue('--initial-dark-background')
     };
 
     this.patchValue(initialValues);
