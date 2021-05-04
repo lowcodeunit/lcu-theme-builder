@@ -1,3 +1,5 @@
+import { Constants } from './../../utils/constants.utils';
+import { ThemeModel } from './../../models/theme.model';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup, FormControl } from '@angular/forms';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
@@ -55,19 +57,8 @@ export class PalettePickerComponent implements OnInit {
         this.patchValue(palette);
     });
 
-    const bodyStyles = window.getComputedStyle(document.documentElement);
-
-    const initialValues: object = {
-      primary: { main: bodyStyles.getPropertyValue('--initial-primary') },
-      accent: { main: bodyStyles.getPropertyValue('--initial-accent') },
-      warn: { main: bodyStyles.getPropertyValue('--initial-warn') },
-      lightText: bodyStyles.getPropertyValue('--initial-light-text'),
-      lightBackground: bodyStyles.getPropertyValue('--initial-light-background'),
-      darkText: bodyStyles.getPropertyValue('--initial-dark-text'),
-      darkBackground: bodyStyles.getPropertyValue('--initial-dark-background')
-    };
-
-    this.patchValue(initialValues);
+    this.patchValue(Constants.InitialValues); // setting initial values,
+                                             // this isn't the right way to do this, but for the moment - shannon
 
     this.Form.valueChanges
     .subscribe((palette: PaletteModel) => {

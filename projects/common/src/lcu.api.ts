@@ -6,3 +6,4 @@ export * from './lib/services/theme-builder.service';
 export * from './lib/services/palette-picker.service';
 export * from './lib/models/palette.model';
 export * from './lib/models/sub-palette.model';
+export * from './lib/models/theme.model';

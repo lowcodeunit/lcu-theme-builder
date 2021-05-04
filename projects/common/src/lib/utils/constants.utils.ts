@@ -1,7 +1,8 @@
+import { PaletteModel } from '../models/palette.model';
 import { FontSelectionModel } from './../models/font-selection.model';
 // @dynamic
 /**
- * @dynamic need this because there are static memebers
+ * @dynamic need this because there are static members
  */
 
 export class Constants {
@@ -143,6 +144,18 @@ export class Constants {
           spacing: 1.25,
           capitalized: true
         }
+      };
+
+      protected static bodyStyles = window.getComputedStyle(document.documentElement);
+
+      public static InitialValues: PaletteModel = {
+        primary: { main: Constants.bodyStyles.getPropertyValue('--initial-primary') },
+        accent: { main: Constants.bodyStyles.getPropertyValue('--initial-accent') },
+        warn: { main: Constants.bodyStyles.getPropertyValue('--initial-warn') },
+        lightText: Constants.bodyStyles.getPropertyValue('--initial-light-text'),
+        lightBackground: Constants.bodyStyles.getPropertyValue('--initial-light-background'),
+        darkText: Constants.bodyStyles.getPropertyValue('--initial-dark-text'),
+        darkBackground: Constants.bodyStyles.getPropertyValue('--initial-dark-background')
       };
 
   }

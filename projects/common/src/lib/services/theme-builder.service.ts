@@ -3,7 +3,7 @@ import { ColorMapModel } from './../models/color-map.model';
 import { LocalStorageService } from './local-storage.service';
 import { Constants } from './../utils/constants.utils';
 import { MaterialPaletteModel } from './../models/material-palette.model';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import * as tinycolor from 'tinycolor2';
 import { PaletteModel } from '../models/palette.model';
 import { ReplaySubject, Subject } from 'rxjs';
@@ -45,7 +45,6 @@ export class ThemeBuilderService {
 
   public $fonts = new Subject<FontSelectionModel[]>();
   public Theme: ReplaySubject<ThemeModel>;
-  // public $lightness: Subject<boolean>;
   public PaletteColors: Subject<Partial<PaletteModel>>;
   public ThemeScss: Promise<void>;
   public PaletteList: Array<PaletteListModel>;
@@ -59,10 +58,10 @@ export class ThemeBuilderService {
     protected http: HttpClient, 
     protected paletteTemplateService: PaletteTemplateService,
     protected localStorageService: LocalStorageService,
-    protected palettePickerService: PalettePickerService) {
+    protected palettePickerService: PalettePickerService,
+    protected zone: NgZone,) {
     this._themeMode = true;
     this.Theme = new ReplaySubject<ThemeModel>();
-    // this.$lightness = new Subject<boolean>();
     this.PaletteColors = new Subject<Partial<PaletteModel>>();
     this.ThemeScss = this.loadThemingScss();
 
@@ -151,19 +150,6 @@ export class ThemeBuilderService {
   }
 
   /**
-   * Save the selected color map
-   *
-   * @param theme Current selected theme
-   */
-  // public SaveColorPalette(theme: ThemeModel): void {
-  //   const name: string = '$color-map' + String(Math.floor(Math.random() * 100));
-
-  //   const colorMap: ColorMapModel = new ColorMapModel(
-  //     this.paletteTemplateService.GenerateColorMap(theme), name);
-  //     this.localStorageService.SetColorMapStorage(colorMap);
-  // }
-
-  /**
    * Compile SASS to CSS
    *
    * @param theme SASS stylesheet
@@ -223,7 +209,8 @@ export class ThemeBuilderService {
    /**
     * Return a new theme model
     */
-   protected getTheme(): ThemeModel {
+   public getTheme(): ThemeModel {
+
     return {
       palette: this.Palette,
       lightness: this.ThemeMode,
@@ -238,4 +225,38 @@ export class ThemeBuilderService {
 
     return tinyColor('rgb ' + rgb1.r + ' ' + rgb1.g + ' ' + rgb1.b);
    }
+
+   public UpdateTheme(theme: ThemeModel): void {
+
+    // SASS stylesheet
+    const source: string = this.GetTemplate(theme);
+
+    // Running functions outside of Angular's zone and do work that
+    // doesn't trigger Angular change-detection.
+    this.zone.runOutsideAngular(() => {
+
+     this.CompileScssTheme(source).then( (text: string) => {
+
+        // SASS compiled to CSS
+        const compiledDynamicCSS: string = text;
+
+        const dynamicStyleSheet: HTMLElement = document.getElementById('dynamic-style-sheet');
+
+        // check if dynamic stylesheet exists, then remove it
+        if (dynamicStyleSheet) {
+          document.getElementsByTagName('head')[0].removeChild(dynamicStyleSheet);
+        }
+
+        // add dynamic stylesheet
+        const style = document.createElement('style');
+              style.id = 'dynamic-style-sheet';
+              style.appendChild(document.createTextNode(compiledDynamicCSS));
+
+        document.getElementsByTagName('head')[0].appendChild(style);
+
+      }).catch((err: Error) => {
+        console.error(err);
+      });
+    });
+  }
 }
