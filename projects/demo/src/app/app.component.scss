@@ -1,10 +1,22 @@
 @import '../../../common/src/assets/styles/common';
 
-.background {
-  background: var(--background);
-}
-
   $header-height: 64px;
+
+  .title-text {
+    color: var(--theme-primary-A700);
+  }
+
+  /**
+  * Test button colors
+  */
+  .pink {
+    background-color: var(--pink-accent);
+    color: var(--initial-dark-text);
+  }
+
+  .yellow {
+    background-color: var(--yellow-accent);
+  }
 
   .theme-builder-content {
     box-sizing: border-box;
@@ -14,6 +26,9 @@
     padding: 10px;
   }
 
+  /**
+  * Div background colors
+  */
   .primary-color {
     background-color: var(--theme-primary-400);
   }

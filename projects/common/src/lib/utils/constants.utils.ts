@@ -146,16 +146,16 @@ export class Constants {
         }
       };
 
-      protected static bodyStyles = window.getComputedStyle(document.documentElement);
+      protected static document = window.getComputedStyle(document.documentElement);
 
       public static InitialValues: PaletteModel = {
-        primary: { main: Constants.bodyStyles.getPropertyValue('--initial-primary') },
-        accent: { main: Constants.bodyStyles.getPropertyValue('--initial-accent') },
-        warn: { main: Constants.bodyStyles.getPropertyValue('--initial-warn') },
-        lightText: Constants.bodyStyles.getPropertyValue('--initial-light-text'),
-        lightBackground: Constants.bodyStyles.getPropertyValue('--initial-light-background'),
-        darkText: Constants.bodyStyles.getPropertyValue('--initial-dark-text'),
-        darkBackground: Constants.bodyStyles.getPropertyValue('--initial-dark-background')
+        primary: { main: Constants.document.getPropertyValue('--initial-primary'), lighter: null, darker: null },
+        accent: { main: Constants.document.getPropertyValue('--initial-accent'), lighter: null, darker: null },
+        warn: { main: Constants.document.getPropertyValue('--initial-warn'), lighter: null, darker: null },
+        lightText: Constants.document.getPropertyValue('--initial-light-text'),
+        lightBackground: Constants.document.getPropertyValue('--initial-light-background'),
+        darkText: Constants.document.getPropertyValue('--initial-dark-text'),
+        darkBackground: Constants.document.getPropertyValue('--initial-dark-background')
       };
 
   }

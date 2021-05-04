@@ -5,6 +5,9 @@ import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { Constants } from '../../utils/constants.utils';
 import { filter } from 'rxjs/operators';
 import { MaterialPaletteModel } from '../../models/material-palette.model';
+import { Subscription } from 'rxjs';
+import { PalettePickerService } from '../../services/palette-picker.service';
+import { PaletteModel } from '../../models/palette.model';
 
 @Component({
   selector: 'lcu-sub-palette-picker',
@@ -51,12 +54,15 @@ export class SubPalettePickerComponent implements OnInit {
             this.materialKeys.map(x => this.themeBuilderService.MaterialPaletteColors[x]);
   }
 
+  protected palettePickerChangedSubscription: Subscription;
+
   /**
    * Keys for palette colors, 50 - A700
    */
   protected materialKeys: Array<string>;
 
-  constructor(protected themeBuilderService: ThemeBuilderService) {
+  constructor(protected themeBuilderService: ThemeBuilderService,
+    protected palettePickerService: PalettePickerService) {
     this.Unlocked = new FormControl(false);
     this.materialKeys = [...Object.keys(Constants.MIX_AMOUNTS_PRIMARY),
                          ...Object.keys(Constants.MIX_AMOUNTS_SECONDARY)];
@@ -66,18 +72,25 @@ export class SubPalettePickerComponent implements OnInit {
     this.Main.valueChanges.subscribe((color: string) => {
       // debugger;
       if (color) {
-        this.onMainChange(color);
+        this.onMainChange();
       }
     });
 
     if (this.Main.value) {
-      this.onMainChange(this.Main.value);
+
+      this.palettePickerChangedSubscription =
+      this.palettePickerService.ColorPickerChanged
+      .subscribe((palette: PaletteModel) => {
+        this.onMainChange();
+    });
+
+      this.onMainChange();
     }
 
     this.Unlocked.valueChanges.pipe(
       filter((locked: boolean) => !locked)
     ).subscribe((locked: boolean) => {
-      this.onMainChange(this.Main.value);
+      this.onMainChange();
     });
   }
 
@@ -86,8 +99,8 @@ export class SubPalettePickerComponent implements OnInit {
    *
    * @param color selected base color, chosen from color pickers
    */
-  protected onMainChange(color: string): void {
-    this.themeBuilderService.MaterialPaletteColors = this.themeBuilderService.GetPalette(color);
+  protected onMainChange(): void {
+    this.themeBuilderService.MaterialPaletteColors = this.themeBuilderService.GetPalette(this.Main.value);
 
     // set lightest and darkest hue colors in color picker
     if (!this.Unlocked.value) {

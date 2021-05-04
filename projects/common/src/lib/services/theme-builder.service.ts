@@ -135,7 +135,7 @@ export class ThemeBuilderService {
         map((txt: string) =>
           // writeFile allows this file to be accessed from styles.scss
           Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
-           // console.log('Sass.writeFile', result);
+           console.log('Sass.writeFile', result);
           }))
       ).toPromise();
    }
@@ -233,14 +233,14 @@ export class ThemeBuilderService {
 
     // Running functions outside of Angular's zone and do work that
     // doesn't trigger Angular change-detection.
-    this.zone.runOutsideAngular(() => {
+    // this.zone.runOutsideAngular(() => {
 
      this.CompileScssTheme(source).then( (text: string) => {
 
         // SASS compiled to CSS
         const compiledDynamicCSS: string = text;
 
-        const dynamicStyleSheet: HTMLElement = document.getElementById('dynamic-style-sheet');
+        const dynamicStyleSheet: HTMLElement = document.getElementById('theme-builder-stylesheet');
 
         // check if dynamic stylesheet exists, then remove it
         if (dynamicStyleSheet) {
@@ -249,7 +249,7 @@ export class ThemeBuilderService {
 
         // add dynamic stylesheet
         const style = document.createElement('style');
-              style.id = 'dynamic-style-sheet';
+              style.id = 'theme-builder-stylesheet';
               style.appendChild(document.createTextNode(compiledDynamicCSS));
 
         document.getElementsByTagName('head')[0].appendChild(style);
@@ -257,6 +257,6 @@ export class ThemeBuilderService {
       }).catch((err: Error) => {
         console.error(err);
       });
-    });
+    // });
   }
 }

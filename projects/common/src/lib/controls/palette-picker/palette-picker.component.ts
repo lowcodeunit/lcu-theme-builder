@@ -54,11 +54,12 @@ export class PalettePickerComponent implements OnInit {
     this.palettePickerChangedSubscription =
       this.palettePickerService.ColorPickerChanged
       .subscribe((palette: PaletteModel) => {
-        this.patchValue(palette);
+        this.patchValue(palette, true);
     });
 
-    this.patchValue(Constants.InitialValues); // setting initial values,
-                                             // this isn't the right way to do this, but for the moment - shannon
+    // setting initial values,
+   // this isn't the right way to do this, but for the moment - shannon
+    this.patchValue(Constants.InitialValues, true);
 
     this.Form.valueChanges
     .subscribe((palette: PaletteModel) => {
@@ -66,8 +67,8 @@ export class PalettePickerComponent implements OnInit {
     });
   }
 
-  protected patchValue(val: PaletteModel | any): void {
-    this.Form.patchValue(val);
+  protected patchValue(val: PaletteModel | any, emitValue: boolean): void {
+    this.Form.patchValue(val, {emitEvent: emitValue});
   }
 
   /**

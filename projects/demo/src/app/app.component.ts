@@ -4,7 +4,7 @@ import { Constants } from './../../../common/src/lib/utils/constants.utils';
 // import { PalettePickerService } from './../../../common/src/lib/services/palette-picker.service';
 
 import { Component, OnInit } from '@angular/core';
-import { ThemeBuilderService, PaletteModel, ThemeModel } from '@lowcodeunit/theme-builder-common';
+import { ThemeBuilderService, PaletteModel, ThemeModel, PalettePickerService } from '@lowcodeunit/theme-builder-common';
 
 import { NgZone } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -20,33 +20,18 @@ import { take, switchMap, debounceTime } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
 
-  protected compiledDynamicCSS: string;
-  protected ready: Subject<boolean>;
-  protected source: string;
+  public Title: string;
 
   constructor(protected themeBuilderService: ThemeBuilderService,
-              protected zone: NgZone) {
+    protected palettePickerService: PalettePickerService) {
 
-      this.ready = new Subject();
-
-      // hate this approach, but no other lifehooks are working - shannon
-      window.onload = () => {
-        this.ready.next(true);
-      }
-   }
+    this.Title = 'Theme Builder';
+  }
 
   public ngOnInit(): void {
-    this.initialTheme();
 
-    this.ready
-    .pipe(
-      take(1),
-      switchMap((val: boolean) => {
-        return this.themeBuilderService.Theme
-      }),
-      debounceTime(100)
-    )
-    .subscribe((theme: ThemeModel) => {
+    this.initialTheme();
+    this.themeBuilderService.Theme.subscribe((theme: ThemeModel) => {
       this.themeBuilderService.UpdateTheme(theme);
     });
   }
@@ -62,5 +47,30 @@ export class AppComponent implements OnInit {
 
     this.themeBuilderService.Palette = palette;
 
+  }
+
+  public ChangeThemeColors(type: string): void {
+
+    let palette: PaletteModel = new PaletteModel();
+    palette = { ...Constants.InitialValues, ...palette };
+
+    if (type === 'yellow') {
+      palette.primary.main = '#ffcc11';
+      palette.accent.main = '#990066';
+      palette.warn.darker = '#990000';
+
+    } else {
+      palette.primary.main = '#a83271';
+      palette.accent.main = '#3298a8';
+      palette.warn.darker = '#b9f013';
+    }
+       
+        this.palettePickerService.PalettePickerChange(palette);
+    // this.palettePickerService.NewPalette(palette);
+    // this.themeBuilderService.Palette = palette;
+    // document.documentElement.style.setProperty('--initial-primary', '#ffcc11');
+    // document.documentElement.style.setProperty('--initial-accent', '#990066');
+
+    // this.initialTheme();
   }
 }
