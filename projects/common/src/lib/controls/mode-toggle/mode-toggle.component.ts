@@ -19,7 +19,7 @@ export class LightnessPickerComponent implements OnInit {
 
   constructor(private themeBuilderService: ThemeBuilderService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
 
     this.toggle.valueChanges
     .subscribe((val: boolean) => {

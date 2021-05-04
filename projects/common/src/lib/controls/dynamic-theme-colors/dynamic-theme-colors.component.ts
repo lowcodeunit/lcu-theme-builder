@@ -102,7 +102,7 @@ protected paletteChangedSubscription: Subscription;
     this.WarnColorPalette = [];
   }
 
-  ngOnInit(): void {
+ public ngOnInit(): void {
     this.setupForm();
 
     this.paletteChangedSubscription = this.palettePickerService.PaletteChanged.subscribe((palette: PaletteModel) => {

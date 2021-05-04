@@ -91,21 +91,21 @@ export class ThemeBuilderService {
       return this._palette;
     }
 
-    set fonts(fonts: FontSelectionModel[]) {
+    public set fonts(fonts: FontSelectionModel[]) {
       this._fonts = fonts;
       this.emit();
     }
 
-    get fonts() {
+    public get fonts() {
       return this._fonts;
     }
 
-    set ThemeMode(light: boolean) {
+    public set ThemeMode(light: boolean) {
       this._themeMode = light;
      this.emit();
     }
 
-    get ThemeMode() {
+    public get ThemeMode() {
       return this._themeMode;
     }
 

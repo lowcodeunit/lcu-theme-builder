@@ -44,7 +44,7 @@ export class ColorPickerComponent implements OnInit {
   /**
    * Set the selected color
    */
-  set Color(col: string) {
+  public set Color(col: string) {
     this.Control.setValue(col);
   }
 
@@ -52,7 +52,7 @@ export class ColorPickerComponent implements OnInit {
    * Get the selected color
    *
    */
-  get Color() {
+  public get Color() {
     return this.Control.value;
   }
 
