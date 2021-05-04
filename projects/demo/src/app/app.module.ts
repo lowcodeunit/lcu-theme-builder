@@ -6,7 +6,6 @@ import { FathymSharedModule, MaterialModule } from '@lcu/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './controls/home/home.component';
-import { DocumentationComponent } from './controls/documentation/documentation.component';
 import { LcuDocumentationModule } from '@lowcodeunit/lcu-documentation-common';
 import { ThemeBuilderModule } from '@lowcodeunit/theme-builder-common';
 import { BuilderComponent } from './controls/builder/builder.component';
@@ -15,7 +14,6 @@ import { BuilderComponent } from './controls/builder/builder.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    DocumentationComponent,
     BuilderComponent
   ],
   imports: [
