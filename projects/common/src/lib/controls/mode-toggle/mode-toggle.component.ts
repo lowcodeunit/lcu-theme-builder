@@ -23,7 +23,7 @@ export class LightnessPickerComponent implements OnInit {
 
     this.toggle.valueChanges
     .subscribe((val: boolean) => {
-      this.themeBuilderService.lightness = !val;
+      this.themeBuilderService.ThemeMode = !val;
     });
 
     this.lightness.updateValueAndValidity();

@@ -35,7 +35,7 @@ export class ThemeBuilderComponent implements OnInit  {
       .pipe(
         take(1),
         switchMap((val: boolean) => {
-          return this.themeBuilderService.$theme
+          return this.themeBuilderService.Theme
         }),
         debounceTime(100)
       )

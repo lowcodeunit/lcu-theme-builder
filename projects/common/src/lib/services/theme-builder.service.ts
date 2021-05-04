@@ -36,7 +36,7 @@ export class ThemeBuilderService {
   /**
    * Is it lightness
    */
-  protected _lightness: boolean;
+  protected _themeMode: boolean;
 
   /**
    * Theme Palette
@@ -44,10 +44,10 @@ export class ThemeBuilderService {
   protected _palette: PaletteModel;
 
   public $fonts = new Subject<FontSelectionModel[]>();
-  public $theme: ReplaySubject<ThemeModel>;
-  public $lightness: Subject<boolean>;
-  public $palette: Subject<Partial<PaletteModel>>;
-  public $themeScss: Promise<void>;
+  public Theme: ReplaySubject<ThemeModel>;
+  // public $lightness: Subject<boolean>;
+  public PaletteColors: Subject<Partial<PaletteModel>>;
+  public ThemeScss: Promise<void>;
   public PaletteList: Array<PaletteListModel>;
 
   /**
@@ -60,11 +60,11 @@ export class ThemeBuilderService {
     protected paletteTemplateService: PaletteTemplateService,
     protected localStorageService: LocalStorageService,
     protected palettePickerService: PalettePickerService) {
-    this._lightness = true;
-    this.$theme = new ReplaySubject<ThemeModel>();
-    this.$lightness = new Subject<boolean>();
-    this.$palette = new Subject<Partial<PaletteModel>>();
-    this.$themeScss = this.loadThemingScss();
+    this._themeMode = true;
+    this.Theme = new ReplaySubject<ThemeModel>();
+    // this.$lightness = new Subject<boolean>();
+    this.PaletteColors = new Subject<Partial<PaletteModel>>();
+    this.ThemeScss = this.loadThemingScss();
 
     this.PaletteList = [];
    }
@@ -100,13 +100,13 @@ export class ThemeBuilderService {
       return this._fonts;
     }
 
-    set lightness(light: boolean) {
-      this._lightness = light;
+    set ThemeMode(light: boolean) {
+      this._themeMode = light;
      this.emit();
     }
 
-    get lightness() {
-      return this._lightness;
+    get ThemeMode() {
+      return this._themeMode;
     }
 
    /**
@@ -170,7 +170,7 @@ export class ThemeBuilderService {
    * @returns compiled CSS
    */
    public async CompileScssTheme(theme: string) {
-    await this.$themeScss;
+    await this.ThemeScss;
     return new Promise<string>((res, rej) => {
       Sass.compile(theme.replace('@include angular-material-theme($altTheme);', ''), (v: any) => {
         if (v.status === 0) {
@@ -217,7 +217,7 @@ export class ThemeBuilderService {
     * emit event with theme
     */
    protected emit(): void {
-     this.$theme.next(this.getTheme());
+     this.Theme.next(this.getTheme());
    }
 
    /**
@@ -226,7 +226,7 @@ export class ThemeBuilderService {
    protected getTheme(): ThemeModel {
     return {
       palette: this.Palette,
-      lightness: this.lightness,
+      lightness: this.ThemeMode,
       fonts: this.fonts
     };
    }
