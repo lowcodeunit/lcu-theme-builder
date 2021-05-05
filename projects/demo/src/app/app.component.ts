@@ -8,7 +8,7 @@ import { ThemeBuilderService, PaletteModel, ThemeModel, PalettePickerService } f
 
 import { NgZone } from '@angular/core';
 import { Subject } from 'rxjs';
-import { take, switchMap, debounceTime } from 'rxjs/operators';
+import { take, switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
 // const styleVariables = require('../assets/styles/variables.scss');
@@ -31,9 +31,6 @@ export class AppComponent implements OnInit {
   public ngOnInit(): void {
 
     this.initialTheme();
-    this.themeBuilderService.Theme.subscribe((theme: ThemeModel) => {
-      this.themeBuilderService.UpdateTheme(theme);
-    });
   }
 
   /**
@@ -49,6 +46,11 @@ export class AppComponent implements OnInit {
 
   }
 
+  /**
+   * Change palette
+   * 
+   * @param type primary color
+   */
   public ChangeThemeColors(type: string): void {
 
     let palette: PaletteModel = new PaletteModel();
@@ -64,7 +66,7 @@ export class AppComponent implements OnInit {
       palette.accent.main = '#3298a8';
       palette.warn.darker = '#b9f013';
     }
-       
+
         this.palettePickerService.PalettePickerChange(palette);
     // this.palettePickerService.NewPalette(palette);
     // this.themeBuilderService.Palette = palette;

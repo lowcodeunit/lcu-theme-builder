@@ -10,7 +10,6 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ThemeModel } from '../models/theme.model';
 import { HttpClient } from '@angular/common/http';
-import { FontSelectionModel } from '../models/font-selection.model';
 import { PaletteListModel } from '../models/palette-list.model';
 import { PaletteTemplateService } from './palette-template.service';
 
@@ -29,11 +28,6 @@ declare var Sass: any;
 export class ThemeBuilderService {
 
   /**
-   * Array of font selections
-   */
-  protected _fonts: Array<FontSelectionModel>;
-
-  /**
    * Is it lightness
    */
   protected _themeMode: boolean;
@@ -43,8 +37,8 @@ export class ThemeBuilderService {
    */
   protected _palette: PaletteModel;
 
-  public $fonts = new Subject<FontSelectionModel[]>();
-  public Theme: ReplaySubject<ThemeModel>;
+  // public $fonts = new Subject<FontSelectionModel[]>();
+  public Theme: Subject<ThemeModel>;
   public PaletteColors: Subject<Partial<PaletteModel>>;
   public ThemeScss: Promise<void>;
   public PaletteList: Array<PaletteListModel>;
@@ -60,8 +54,9 @@ export class ThemeBuilderService {
     protected localStorageService: LocalStorageService,
     protected palettePickerService: PalettePickerService,
     protected zone: NgZone,) {
+
     this._themeMode = true;
-    this.Theme = new ReplaySubject<ThemeModel>();
+    this.Theme = new Subject<ThemeModel>();
     this.PaletteColors = new Subject<Partial<PaletteModel>>();
     this.ThemeScss = this.loadThemingScss();
 
@@ -76,32 +71,23 @@ export class ThemeBuilderService {
       palette.PrimaryColorPalette = this.GetPalette(palette.primary.main);
       palette.WarnColorPalette = this.GetPalette(palette.warn.main);
 
-      palette.ColorMap = new Map();
-      palette.ColorMap.set('accent-palette', palette.AccentColorPalette);
-      palette.ColorMap.set('primary-palette', palette.PrimaryColorPalette);
-      palette.ColorMap.set('warn-palette', palette.WarnColorPalette);
+      // palette.ColorMap = new Map();
+      // palette.ColorMap.set('accent-palette', palette.AccentColorPalette);
+      // palette.ColorMap.set('primary-palette', palette.PrimaryColorPalette);
+      // palette.ColorMap.set('warn-palette', palette.WarnColorPalette);
 
       this._palette = palette;
       this.palettePickerService.NewPalette(palette);
-      this.emit();
+      this.UpdateTheme(this.getTheme());
     }
 
     public get Palette() {
       return this._palette;
     }
 
-    public set fonts(fonts: FontSelectionModel[]) {
-      this._fonts = fonts;
-      this.emit();
-    }
-
-    public get fonts() {
-      return this._fonts;
-    }
-
     public set ThemeMode(light: boolean) {
       this._themeMode = light;
-     this.emit();
+      this.UpdateTheme(this.getTheme());
     }
 
     public get ThemeMode() {
@@ -135,7 +121,7 @@ export class ThemeBuilderService {
         map((txt: string) =>
           // writeFile allows this file to be accessed from styles.scss
           Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
-           console.log('Sass.writeFile', result);
+           // console.log('Sass.writeFile', result);
           }))
       ).toPromise();
    }
@@ -214,7 +200,6 @@ export class ThemeBuilderService {
     return {
       palette: this.Palette,
       lightness: this.ThemeMode,
-      fonts: this.fonts
     };
    }
 
@@ -233,7 +218,7 @@ export class ThemeBuilderService {
 
     // Running functions outside of Angular's zone and do work that
     // doesn't trigger Angular change-detection.
-    // this.zone.runOutsideAngular(() => {
+    this.zone.runOutsideAngular(() => {
 
      this.CompileScssTheme(source).then( (text: string) => {
 
@@ -257,6 +242,6 @@ export class ThemeBuilderService {
       }).catch((err: Error) => {
         console.error(err);
       });
-    // });
+    });
   }
 }

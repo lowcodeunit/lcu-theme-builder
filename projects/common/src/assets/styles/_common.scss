@@ -35,7 +35,7 @@ $success:  map-get($mat-green, A700);
     --background: #{invert(map-get($background, background))};
 
     /**
-    * Brand accent colors
+    * Brand accent colors - pulled from current theme, but can be whomever
     */
     --orange-accent: #{map-get($mat-orange, 500)};
     --green-accent: #{map-get($mat-green, A400)};

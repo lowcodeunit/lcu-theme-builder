@@ -9,7 +9,6 @@ import { ThemeBuilderService } from './services/theme-builder.service';
 import { ThemeBuilderComponent } from './controls/theme-builder/theme-builder.component';
 import { ThemeBuilderDirective } from './directives/theme-builder.directive';
 import { ColorPickerComponent } from './controls/color-picker/color-picker.component';
-import { FontPickerComponent } from './controls/font-picker/font-picker.component';
 import { PalettePickerComponent } from './controls/palette-picker/palette-picker.component';
 import { SubPalettePickerComponent } from './controls/sub-palette-picker/sub-palette-picker.component';
 import { LightnessPickerComponent } from './controls/mode-toggle/mode-toggle.component';
@@ -20,7 +19,6 @@ import { DynamicThemeColorsComponent } from './controls/dynamic-theme-colors/dyn
     ThemeBuilderComponent,
     ThemeBuilderDirective,
     ColorPickerComponent,
-    FontPickerComponent,
     PalettePickerComponent,
     SubPalettePickerComponent,
     LightnessPickerComponent,

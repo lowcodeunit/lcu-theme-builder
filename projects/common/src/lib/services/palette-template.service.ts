@@ -2,7 +2,6 @@ import { ThemeModel } from './../models/theme.model';
 import { SubPaletteModel } from './../models/sub-palette.model';
 import { Injectable } from '@angular/core';
 import * as tinycolor from 'tinycolor2';
-import { FontSelectionModel } from '../models/font-selection.model';
 
 const tinyColor = tinycolor;
 type RGBA = tinycolor.ColorFormats.RGBA;
@@ -19,39 +18,12 @@ export class PaletteTemplateService {
    * @param theme current theme
    */
     public GetTemplate(theme: ThemeModel): string {
-      //debugger;
-
-      // ${Array.from(new Set((theme.fonts || []).map(x => x.family.replace(/ /g, '+'))))
-      // .map(x => `@import url('https://fonts.googleapis.com/css?family=${x}:300,400,500');`).join('\n')}
-
-      // $fontConfig: (
-      // ${(theme.fonts || []).map(x => `${x.target}: ${this.fontRule(x)}`).join(',\n  ')}
-      // );
 
       const template = `
 
       @import '~@angular/material/theming';
       // Include the common styles for Angular Material. We include this here so that you only
       // have to load a single css file for Angular Material in your app.
-
-      // Fonts	
-      @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');	
-
-      $fontConfig: (
-        display-4: mat-typography-level(112px, 112px, 300, 'Roboto', -0.0134em),	
-        display-3: mat-typography-level(56px, 56px, 400, 'Roboto', -0.0089em),	
-        display-2: mat-typography-level(45px, 48px, 400, 'Roboto', 0.0000em),	
-        display-1: mat-typography-level(34px, 40px, 400, 'Roboto', 0.0074em),	
-        headline: mat-typography-level(24px, 32px, 400, 'Roboto', 0.0000em),	
-        title: mat-typography-level(20px, 32px, 500, 'Roboto', 0.0075em),	
-        subheading-2: mat-typography-level(16px, 28px, 400, 'Roboto', 0.0094em),	
-        subheading-1: mat-typography-level(15px, 24px, 500, 'Roboto', 0.0067em),	
-        body-2: mat-typography-level(14px, 24px, 500, 'Roboto', 0.0179em),	
-        body-1: mat-typography-level(14px, 20px, 400, 'Roboto', 0.0179em),	
-        button: mat-typography-level(14px, 14px, 500, 'Roboto', 0.0893em),	
-        caption: mat-typography-level(12px, 20px, 400, 'Roboto', 0.0333em),	
-        input: mat-typography-level(inherit, 1.125, 400, 'Roboto', 1.5px)	
-        );
 
       // Foreground Elements
 
@@ -164,9 +136,6 @@ export class PaletteTemplateService {
         disabled-list-option:     $dark-bg-lighter-10,
       );
 
-      // Compute font config
-      @include mat-core($fontConfig);
-
       // Theme Config
       ${['primary', 'accent', 'warn'].map(x => this.getScssPalette(x, theme.palette[x])).join('\n')};
 
@@ -241,12 +210,4 @@ export class PaletteTemplateService {
     protected getTextColor(col: string): string {
       return `$${tinyColor(col).isLight() ? 'dark' : 'light'}-primary-text`;
     }
-
-    protected fontRule(x: FontSelectionModel): string {
-        const weight = x.variant === 'light' ? '300' : (x.variant === 'medium' ? '500' : '400');
-
-        return !!x.size ?
-          `mat-typography-level(${x.size}px, ${x.lineHeight}px, ${weight}, '${x.family}', ${(x.spacing / x.size).toFixed(4)}em)` :
-          `mat-typography-level(inherit, ${x.lineHeight}, ${weight}, '${x.family}', 1.5px)`;
-      }
 }
