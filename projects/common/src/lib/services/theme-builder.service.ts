@@ -30,12 +30,12 @@ export class ThemeBuilderService {
   /**
    * Is it lightness
    */
-  protected _themeMode: boolean;
+  protected themeMode: boolean;
 
   /**
    * Theme Palette
    */
-  protected _palette: PaletteModel;
+  protected palette: PaletteModel;
 
   // public $fonts = new Subject<FontSelectionModel[]>();
   public Theme: Subject<ThemeModel>;
@@ -55,7 +55,7 @@ export class ThemeBuilderService {
     protected palettePickerService: PalettePickerService,
     protected zone: NgZone,) {
 
-    this._themeMode = true;
+    this.themeMode = true;
     this.Theme = new Subject<ThemeModel>();
     this.PaletteColors = new Subject<Partial<PaletteModel>>();
     this.ThemeScss = this.loadThemingScss();
@@ -67,31 +67,32 @@ export class ThemeBuilderService {
     * Set Palette colors
     */
     public set Palette(palette: PaletteModel) {
-      palette.AccentColorPalette = this.GetPalette(palette.accent.main);
-      palette.PrimaryColorPalette = this.GetPalette(palette.primary.main);
-      palette.WarnColorPalette = this.GetPalette(palette.warn.main);
+      // palette.AccentColorPalette = this.GetPalette(palette.accent.main);
+      // palette.PrimaryColorPalette = this.GetPalette(palette.primary.main);
+      // palette.WarnColorPalette = this.GetPalette(palette.warn.main);
 
       // palette.ColorMap = new Map();
       // palette.ColorMap.set('accent-palette', palette.AccentColorPalette);
       // palette.ColorMap.set('primary-palette', palette.PrimaryColorPalette);
       // palette.ColorMap.set('warn-palette', palette.WarnColorPalette);
-
-      this._palette = palette;
-      this.palettePickerService.NewPalette(palette);
+debugger
+      this.palette = palette;
+      this.palettePickerService.PalettePickerChange(palette);
+      console.log('PALETTE');
       this.UpdateTheme(this.getTheme());
     }
 
     public get Palette() {
-      return this._palette;
+      return this.palette;
     }
 
     public set ThemeMode(light: boolean) {
-      this._themeMode = light;
+      this.themeMode = !light;
       this.UpdateTheme(this.getTheme());
     }
 
     public get ThemeMode() {
-      return this._themeMode;
+      return this.themeMode;
     }
 
    /**
@@ -218,7 +219,7 @@ export class ThemeBuilderService {
 
     // Running functions outside of Angular's zone and do work that
     // doesn't trigger Angular change-detection.
-    this.zone.runOutsideAngular(() => {
+   this.zone.runOutsideAngular(() => {
 
      this.CompileScssTheme(source).then( (text: string) => {
 
@@ -229,7 +230,7 @@ export class ThemeBuilderService {
 
         // check if dynamic stylesheet exists, then remove it
         if (dynamicStyleSheet) {
-          document.getElementsByTagName('head')[0].removeChild(dynamicStyleSheet);
+          document.getElementsByTagName('body')[0].removeChild(dynamicStyleSheet);
         }
 
         // add dynamic stylesheet
@@ -237,11 +238,11 @@ export class ThemeBuilderService {
               style.id = 'theme-builder-stylesheet';
               style.appendChild(document.createTextNode(compiledDynamicCSS));
 
-        document.getElementsByTagName('head')[0].appendChild(style);
+        document.getElementsByTagName('body')[0].appendChild(style);
 
       }).catch((err: Error) => {
         console.error(err);
       });
-    });
+   });
   }
 }

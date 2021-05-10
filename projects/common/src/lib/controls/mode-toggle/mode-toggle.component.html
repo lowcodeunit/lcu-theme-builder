@@ -1,9 +1,10 @@
-<mat-slide-toggle 
-    [formControl]="toggle"
-    labelPosition="before" 
-    color="primary">
-    Light / Dark
-</mat-slide-toggle>
-
+<form [formGroup]="ToggleForm">
+    <mat-slide-toggle 
+        formControlName="toggle"
+        labelPosition="before" 
+        color="primary">
+        Light / Dark
+    </mat-slide-toggle>
+</form>
 
 

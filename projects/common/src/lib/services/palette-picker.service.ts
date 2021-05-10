@@ -9,24 +9,42 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 export class PalettePickerService {
 
-    public PaletteChanged: BehaviorSubject<PaletteModel>;
-    public ColorPickerChanged: BehaviorSubject<PaletteModel>;
-
-    constructor() {
-        this.PaletteChanged = new BehaviorSubject<PaletteModel>(new PaletteModel());
-        this.ColorPickerChanged = new BehaviorSubject<PaletteModel>(new PaletteModel());
-    }
+    /**
+     * 
+     */
+    public ColorPickerChanged: Subject<PaletteModel>;
 
     /**
-     * When a palette changes, pass the colors
-     *
-     * @param params Palette Colors
+     * Event after color picker has closed
      */
-    public NewPalette(params: PaletteModel): void {
-        this.PaletteChanged.next( {...params} );
+    public ColorPickerClosed: Subject<any>;
+
+    /**
+     * Current color palette
+     */
+    public CurrentPalette: PaletteModel;
+
+    constructor() {
+        this.ColorPickerChanged = new BehaviorSubject<PaletteModel>(new PaletteModel());
+        this.ColorPickerClosed = new Subject<any>();
     }
 
     public PalettePickerChange(params: PaletteModel): void {
-        this.ColorPickerChanged.next( {...params} );
+
+        this.CurrentPalette = { ...params };
+        this.ColorPickerChanged.next( this.CurrentPalette );
+    }
+
+    /**
+     * Event when color picker is closed, use this to kick off
+     * the process of building color variants and everything else
+     * Doing this prevents multiple processes that occur during
+     * Form Control changes
+     * 
+     * @param params Selected color from color picker
+     */
+    public CloseColorPicker(params: string): void {
+
+        this.ColorPickerClosed.next( params );
     }
 }

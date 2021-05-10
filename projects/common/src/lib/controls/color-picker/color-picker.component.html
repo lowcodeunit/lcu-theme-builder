@@ -7,11 +7,12 @@
   (colorPickerOpen)="SetBackdrop(true)"
   [cpPresetColors]="Presets" 
   [cpPosition]="'bottom-left'"
-  (colorPickerClose)="SetBackdrop(false)" 
+  (colorPickerClose)="SetBackdrop(false); ColorPickerClosed($event)" 
   [cpOutputFormat]="'hex'"
   [cpAlphaChannel]="'disabled'" 
-  (colorPickerChange)="Color = $event" 
+  (colorPickerChange)="ColorPickerChange($event)" 
   [value]="Color"
   [style.background]="Color" 
   [style.color]="GetTextColor(Color)"
   >
+  <!-- (colorPickerChange)="Color = $event"  -->

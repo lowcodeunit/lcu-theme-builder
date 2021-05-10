@@ -1,6 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import * as tinycolor from 'tinycolor2';
 import { FormControl } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
+import { PalettePickerService } from '../../services/palette-picker.service';
+// import * as EventEmitter from 'events';
 
 const tinyColor = tinycolor;
 
@@ -10,6 +13,10 @@ const tinyColor = tinycolor;
   styleUrls: ['./color-picker.component.scss']
 })
 export class ColorPickerComponent implements OnInit {
+
+  // tslint:disable-next-line:no-output-rename
+  @Output('color-picker-changed')
+  public ColorPickerChanged: EventEmitter<string>;
 
   /**
    * Toggle backdrop when color picker is open
@@ -37,8 +44,9 @@ export class ColorPickerComponent implements OnInit {
   @Input('presets')
   public Presets?: string[];
 
-  constructor() {
+  constructor(protected palettePickerService: PalettePickerService) {
     this.ShowBackdrop = false;
+    this.ColorPickerChanged = new EventEmitter<string>();
   }
 
   /**
@@ -65,6 +73,7 @@ export class ColorPickerComponent implements OnInit {
    * @param on toggle
    */
   public SetBackdrop(on: boolean): void {
+    console.log('closed');
     this.ShowBackdrop = on;
   }
 
@@ -74,7 +83,19 @@ export class ColorPickerComponent implements OnInit {
    * @param col color
    */
   public GetTextColor(col: string): any {
+
     return tinyColor(col).isLight() ? '#000' : '#fff';
+  }
+
+  public ColorPickerClosed(evt: string): void {
+
+    this.palettePickerService.CloseColorPicker(evt);
+    // this.ColorPickerChanged.emit(this.Color);
+  }
+
+  public ColorPickerChange(evt: string): void {
+
+    this.Color = evt;
   }
 
 }

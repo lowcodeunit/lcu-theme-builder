@@ -105,7 +105,7 @@ protected paletteChangedSubscription: Subscription;
  public ngOnInit(): void {
     this.setupForm();
 
-    this.paletteChangedSubscription = this.palettePickerService.PaletteChanged.subscribe((palette: PaletteModel) => {
+    this.paletteChangedSubscription = this.palettePickerService.ColorPickerChanged.subscribe((palette: PaletteModel) => {
       if (!palette || !palette.primary) {
         return;
       }

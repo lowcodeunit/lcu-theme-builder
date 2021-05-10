@@ -1,14 +1,7 @@
 import { Constants } from './../../../common/src/lib/utils/constants.utils';
-
-// import { ThemeBuilderService } from './../../../common/src/lib/services/theme-builder.service';
-// import { PalettePickerService } from './../../../common/src/lib/services/palette-picker.service';
-
 import { Component, OnInit } from '@angular/core';
 import { ThemeBuilderService, PaletteModel, ThemeModel, PalettePickerService } from '@lowcodeunit/theme-builder-common';
 
-import { NgZone } from '@angular/core';
-import { Subject } from 'rxjs';
-import { take, switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
 // const styleVariables = require('../assets/styles/variables.scss');
@@ -59,15 +52,15 @@ export class AppComponent implements OnInit {
     if (type === 'yellow') {
       palette.primary.main = '#ffcc11';
       palette.accent.main = '#990066';
-      palette.warn.darker = '#990000';
+      palette.warn.main = '#990000';
 
     } else {
       palette.primary.main = '#a83271';
       palette.accent.main = '#3298a8';
-      palette.warn.darker = '#b9f013';
+      palette.warn.main = '#b9f013';
     }
 
-        this.palettePickerService.PalettePickerChange(palette);
+    this.palettePickerService.PalettePickerChange(palette);
     // this.palettePickerService.NewPalette(palette);
     // this.themeBuilderService.Palette = palette;
     // document.documentElement.style.setProperty('--initial-primary', '#ffcc11');

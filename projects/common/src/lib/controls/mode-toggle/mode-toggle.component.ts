@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 /**
@@ -14,31 +14,35 @@ type ModeType = 'dark' | 'light';
 })
 export class LightnessPickerComponent implements OnInit {
 
-  lightness = new FormControl(false);
-  toggle = new FormControl(false);
+  /**
+   * Access Toggle field within the form group
+   */
+   public get Toggle(): AbstractControl {
+    return this.ToggleForm.get('toggle');
+  }
+
+  public ToggleForm: FormGroup;
 
   constructor(protected themeBuilderService: ThemeBuilderService) { }
 
   public ngOnInit(): void {
 
-    this.toggle.valueChanges
-    .subscribe((val: boolean) => {
-      this.themeBuilderService.ThemeMode = !val;
-    });
+    this.formSetup();
+  }
 
-    this.lightness.updateValueAndValidity();
+    protected formSetup(): void {
 
+      this.ToggleForm = new FormGroup({
+        toggle: new FormControl(false)
+      })
+
+      this.onChanges();
     }
 
-    /**
-     * Store theme in local storage, so it can be used across components
-     */
-    protected persistThemeMode(): void {
-      const storedTheme: any = localStorage.getItem('theme') ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-      if (storedTheme) {
-          document.documentElement.setAttribute('dark-theme', storedTheme);
-      }
+    protected onChanges(): void {
+      this.Toggle.valueChanges
+      .subscribe((val: boolean) => {
+        this.themeBuilderService.ThemeMode = val;
+      });
     }
   }
