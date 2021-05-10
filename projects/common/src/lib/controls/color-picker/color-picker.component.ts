@@ -37,8 +37,8 @@ export class ColorPickerComponent implements OnInit {
    * Array of preset colors, shown in color picker
    */
   // tslint:disable-next-line:no-input-rename
-  @Input('presets')
-  public Presets?: string[];
+  @Input('variants')
+  public Variants?: string[];
 
   constructor(protected palettePickerService: PalettePickerService) {
 

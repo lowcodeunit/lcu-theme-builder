@@ -10,15 +10,10 @@ import { PaletteColorMapModel } from '../../models/palette-color-map.model';
 import { MaterialPaletteModel } from '../../models/material-palette.model';
 import { Constants } from '../../utils/constants.utils';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
+import { ColorModel } from '../../models/color.model';
 
 const tinyColor = tinycolor;
 // const styleVariables = require('./assets/styles/dynamic-theme.scss');
-
-export interface Color {
-  name: string;
-  hex: string;
-  darkContrast: boolean;
-}
 
 /**
  * String literal data type
@@ -41,7 +36,7 @@ export class VariantColorsComponent implements OnInit, OnDestroy {
 @Input('accent-color')
 set AccentColor(val: string) {
   this._accentColor = val;
-  this.UpdateAccentColor(val);
+  this.updateAccentColor(val);
 }
 
 get AccentColor(): string {
@@ -52,7 +47,7 @@ get AccentColor(): string {
 @Input('primary-color')
 set PrimaryColor(val: string) {
   this._primaryColor = val;
-  this.UpdatePrimaryColor(val);
+  this.updatePrimaryColor(val);
 }
 
 get PrimaryColor(): string {
@@ -63,7 +58,7 @@ get PrimaryColor(): string {
 @Input('warn-color')
 set WarnColor(val: string) {
   this._warnColor = val;
-  this.UpdateWarnColor(val);
+  this.updateWarnColor(val);
 }
 
 get WarnColor(): string {
@@ -78,43 +73,40 @@ public get PrimaryColorControl(): AbstractControl {
 }
 
 /**
- * Access secondary color field
+ * Access accent color field
  */
-public get SecondaryColorControl(): AbstractControl {
-  return this.Form.get('secondaryColorControl');
+public get AccentColorControl(): AbstractControl {
+  return this.Form.get('accentColorControl');
 }
 
 /**
  * property for reactive form
  */
 public Form: FormGroup;
-public PrimaryColorPalette: Array<Color>;
-public SecondaryColorPalette: Array<Color>;
-public WarnColorPalette: Array<Color>;
 
 protected paletteChangedSubscription: Subscription;
 
   constructor(
-    protected palettePickerService: PalettePickerService,
+    public PalettePickerService: PalettePickerService,
     protected themeBuilderService: ThemeBuilderService) {
-    this.PrimaryColorPalette = [];
-    this.SecondaryColorPalette = [];
-    this.WarnColorPalette = [];
+    this.PalettePickerService.PrimaryColorPalette = [];
+    this.PalettePickerService.AccentColorPalette = [];
+    this.PalettePickerService.WarnColorPalette = [];
   }
 
  public ngOnInit(): void {
     this.setupForm();
 
-    this.paletteChangedSubscription = this.palettePickerService.ColorPickerChanged
+    this.paletteChangedSubscription = this.PalettePickerService.ColorPickerChanged
     .subscribe((palette: PaletteModel) => {
 
       if (!palette || !palette.primary) {
         return;
       }
 
-      this.UpdateAccentColor(palette.accent.main);
-      this.UpdatePrimaryColor(palette.primary.main);
-      this.UpdateWarnColor(palette.warn.main);
+      this.updateAccentColor(palette.accent.main);
+      this.updatePrimaryColor(palette.primary.main);
+      this.updateWarnColor(palette.warn.main);
     });
   }
 
@@ -122,10 +114,10 @@ protected paletteChangedSubscription: Subscription;
     this.paletteChangedSubscription.unsubscribe();
   }
 
-  public UpdatePrimaryColor(color: string): void {
-    this.PrimaryColorPalette = this.computeColors(color ? color : this.PrimaryColorControl.value);
+  protected updatePrimaryColor(color: string): void {
+    this.PalettePickerService.PrimaryColorPalette = this.computeColors(color ? color : this.PrimaryColorControl.value);
 
-    for (const c of this.PrimaryColorPalette) {
+    for (const c of this.PalettePickerService.PrimaryColorPalette) {
       const key = `--theme-primary-${c.name}`;
       const value = c.hex;
       const key2 = `--theme-primary-contrast-${c.name}`;
@@ -137,10 +129,10 @@ protected paletteChangedSubscription: Subscription;
     }
   }
 
-  public UpdateAccentColor(color: string): void {
-    this.SecondaryColorPalette = this.computeColors(color ? color : this.SecondaryColorControl.value);
+  protected updateAccentColor(color: string): void {
+    this.PalettePickerService.AccentColorPalette = this.computeColors(color ? color : this.AccentColorControl.value);
 
-    for (const c of this.SecondaryColorPalette) {
+    for (const c of this.PalettePickerService.AccentColorPalette) {
       const key = `--theme-secondary-${c.name}`;
       const value = c.hex;
       const key2 = `--theme-primary-contrast-${c.name}`;
@@ -150,10 +142,10 @@ protected paletteChangedSubscription: Subscription;
     }
   }
 
-  public UpdateWarnColor(color: string): void {
-    this.WarnColorPalette = this.computeColors(color);
+  protected updateWarnColor(color: string): void {
+    this.PalettePickerService.WarnColorPalette = this.computeColors(color);
 
-    for (const c of this.WarnColorPalette) {
+    for (const c of this.PalettePickerService.WarnColorPalette) {
       const key = `--theme-warn-${c.name}`;
       const value = c.hex;
       const key2 = `--theme-primary-contrast-${c.name}`;
@@ -170,7 +162,7 @@ protected paletteChangedSubscription: Subscription;
     });
   }
 
-  protected computeColors(color: string): Array<Color> {
+  protected computeColors(color: string): Array<ColorModel> {
 
     const baseLightColor = tinyColor('#ffffff');
     const baseDarkColor = this.themeBuilderService.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
@@ -194,7 +186,7 @@ protected paletteChangedSubscription: Subscription;
     ];
   }
 // force change
-  protected getColorObject(value: tinycolor.Instance, name: string): Color {
+  protected getColorObject(value: tinycolor.Instance, name: string): ColorModel {
     const c = tinyColor(value);
     return {
       name,

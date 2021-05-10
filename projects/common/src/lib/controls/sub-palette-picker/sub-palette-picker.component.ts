@@ -20,8 +20,8 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
   @Input('form')
   public Form: FormGroup;
 
-  @Input('set-color')
-  public set SetColor(val: string) {
+  @Input('color-picker-color')
+  public set ColorPickerColor(val: string) {
     this.Main.setValue(val);
   }
 
@@ -56,9 +56,13 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
   /**
    * Set preset color palette
    */
-  public get Presets(): Array<{ key: string; hex: string; isLight: boolean; }> {
+  public get Variants(): Array<{ key: string; hex: string; isLight: boolean; }> {
+
     return !this.themeBuilderService.MaterialPaletteColors ? undefined :
-            this.materialKeys.map(x => this.themeBuilderService.MaterialPaletteColors[x]);
+            this.materialKeys.map((x: string) =>
+            {
+              return this.themeBuilderService.MaterialPaletteColors[x]
+            });
   }
 
   protected palettePickerChangedSubscription: Subscription;
@@ -89,7 +93,7 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
     this.palettePickerService.ColorPickerChanged
     .subscribe((val: PaletteModel) => {
       // this.Main.setValue(val.primary.main);
-      this.onMainChange();
+      // this.onMainChange();
     })
   }
 

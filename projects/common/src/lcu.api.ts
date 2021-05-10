@@ -7,3 +7,4 @@ export * from './lib/services/palette-picker.service';
 export * from './lib/models/palette.model';
 export * from './lib/models/sub-palette.model';
 export * from './lib/models/theme.model';
+export * from './lib/models/color.model';

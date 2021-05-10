@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/internal/Subject';
 import { PaletteModel } from '../models/palette.model';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { ColorModel } from '../models/color.model';
 
 @Injectable({
     providedIn: 'root'
 })
+
 
 export class PalettePickerService {
 
@@ -23,6 +25,21 @@ export class PalettePickerService {
      * Current color palette
      */
     public CurrentPalette: PaletteModel;
+
+    /**
+     * Array of primary colors
+     */
+    public PrimaryColorPalette: Array<ColorModel>;
+
+    /**
+     * Array of accent colors
+     */
+    public AccentColorPalette: Array<ColorModel>;
+
+    /**
+     * Array of warn colors
+     */
+    public WarnColorPalette: Array<ColorModel>;
 
     constructor() {
         this.ColorPickerChanged = new BehaviorSubject<PaletteModel>(new PaletteModel());

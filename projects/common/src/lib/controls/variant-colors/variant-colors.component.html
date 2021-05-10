@@ -8,7 +8,7 @@
             <div fxLayout="row" fxLayoutGap="10px" 
             fxLayoutAlign="space-between center"
             class="padding-left-2 padding-right-2" 
-            *ngFor="let color of PrimaryColorPalette" 
+            *ngFor="let color of PalettePickerService.PrimaryColorPalette" 
             [style.background-color]="color.hex" 
             [style.color]="color.darkContrast ? 'black' : 'white'">
             <div>
@@ -23,7 +23,7 @@
             <div fxLayout="row" fxLayoutGap="10px" 
                 fxLayoutAlign="space-between center"
                 class="padding-left-2 padding-right-2"
-                *ngFor="let color of SecondaryColorPalette" 
+                *ngFor="let color of PalettePickerService.AccentColorPalette" 
                 [style.background-color]="color.hex" 
                 [style.color]="color.darkContrast ? 'black' : 'white'">
                 <div>
@@ -38,7 +38,7 @@
             <div fxLayout="row" fxLayoutGap="10px" 
             fxLayoutAlign="space-between center"
             class="padding-left-2 padding-right-2"
-            *ngFor="let color of WarnColorPalette" 
+            *ngFor="let color of PalettePickerService.WarnColorPalette" 
                 [style.background-color]="color.hex" 
                 [style.color]="color.darkContrast ? 'black' : 'white'">
                 <div>
