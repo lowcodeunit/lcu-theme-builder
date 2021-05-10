@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
   public ChangeThemeColors(type: string): void {
 
     let palette: PaletteModel = new PaletteModel();
-    palette = { ...Constants.InitialValues, ...palette };
+      palette = { ...this.palettePickerService.CurrentPalette, ...palette };
 
     if (type === 'yellow') {
       palette.primary.main = '#ffcc11';
@@ -60,12 +60,8 @@ export class AppComponent implements OnInit {
       palette.warn.main = '#b9f013';
     }
 
-    this.palettePickerService.PalettePickerChange(palette);
-    // this.palettePickerService.NewPalette(palette);
-    // this.themeBuilderService.Palette = palette;
-    // document.documentElement.style.setProperty('--initial-primary', '#ffcc11');
-    // document.documentElement.style.setProperty('--initial-accent', '#990066');
+    // this.palettePickerService.PalettePickerChange(palette);
 
-    // this.initialTheme();
+    this.themeBuilderService.Palette = palette;
   }
 }

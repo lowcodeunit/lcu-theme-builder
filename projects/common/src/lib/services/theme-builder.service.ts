@@ -67,18 +67,10 @@ export class ThemeBuilderService {
     * Set Palette colors
     */
     public set Palette(palette: PaletteModel) {
-      // palette.AccentColorPalette = this.GetPalette(palette.accent.main);
-      // palette.PrimaryColorPalette = this.GetPalette(palette.primary.main);
-      // palette.WarnColorPalette = this.GetPalette(palette.warn.main);
 
-      // palette.ColorMap = new Map();
-      // palette.ColorMap.set('accent-palette', palette.AccentColorPalette);
-      // palette.ColorMap.set('primary-palette', palette.PrimaryColorPalette);
-      // palette.ColorMap.set('warn-palette', palette.WarnColorPalette);
-debugger
       this.palette = palette;
       this.palettePickerService.PalettePickerChange(palette);
-      console.log('PALETTE');
+
       this.UpdateTheme(this.getTheme());
     }
 

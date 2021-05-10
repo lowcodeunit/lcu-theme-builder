@@ -20,6 +20,11 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
   @Input('form')
   public Form: FormGroup;
 
+  @Input('set-color')
+  public set SetColor(val: string) {
+    this.Main.setValue(val);
+  }
+
   /**
    * Access Main color form control
    */
@@ -72,34 +77,20 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
 
-    this.Main.valueChanges.subscribe((color: string) => {
-      // debugger;
-      if (color) {
-       // this.onMainChange();
-      }
-    });
-
     if (this.Main.value) {
-
-      this.palettePickerChangedSubscription =
-      this.palettePickerService.ColorPickerChanged
-      .subscribe((palette: PaletteModel) => {
-       // this.onMainChange();
-    });
-
      this.onMainChange();
     }
 
-    this.Unlocked.valueChanges.pipe(
-      filter((locked: boolean) => !locked)
-    ).subscribe((locked: boolean) => {
-     // this.onMainChange();
-    });
-
     this.colorPickerClosedSubscription = this.palettePickerService.ColorPickerClosed
-    .subscribe((val: any) => {
+    .subscribe((val: string) => {
       this.onMainChange();
     });
+
+    this.palettePickerService.ColorPickerChanged
+    .subscribe((val: PaletteModel) => {
+      // this.Main.setValue(val.primary.main);
+      this.onMainChange();
+    })
   }
 
   public ngOnDestroy(): void {
@@ -115,7 +106,7 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
    */
   protected onMainChange(): void {
 
-    this.themeBuilderService.MaterialPaletteColors = this.themeBuilderService.GetPalette(this.Main.value);
+    this.themeBuilderService.MaterialPaletteColors = this.themeBuilderService.GetPalette(this.Form.value.main);
 
     // set lightest and darkest hue colors in color picker
     if (!this.Unlocked.value) {

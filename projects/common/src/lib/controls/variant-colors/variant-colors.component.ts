@@ -1,5 +1,5 @@
 
-import { PalettePickerService } from './../../services/palette-picker.service';
+import { PalettePickerService } from '../../services/palette-picker.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl, Validators } from '@angular/forms';
 import * as tinycolor from 'tinycolor2';
@@ -26,12 +26,12 @@ export interface Color {
 type ModeType = 'dark' | 'light';
 
 @Component({
-  selector: 'lcu-dynamic-theme-colors',
-  templateUrl: './dynamic-theme-colors.component.html',
-  styleUrls: ['./dynamic-theme-colors.component.scss']
+  selector: 'lcu-variant-colors',
+  templateUrl: './variant-colors.component.html',
+  styleUrls: ['./variant-colors.component.scss']
 })
 
-export class DynamicThemeColorsComponent implements OnInit, OnDestroy {
+export class VariantColorsComponent implements OnInit, OnDestroy {
 
   private _accentColor: string;
   private _primaryColor: string;
@@ -105,10 +105,13 @@ protected paletteChangedSubscription: Subscription;
  public ngOnInit(): void {
     this.setupForm();
 
-    this.paletteChangedSubscription = this.palettePickerService.ColorPickerChanged.subscribe((palette: PaletteModel) => {
+    this.paletteChangedSubscription = this.palettePickerService.ColorPickerChanged
+    .subscribe((palette: PaletteModel) => {
+
       if (!palette || !palette.primary) {
         return;
       }
+
       this.UpdateAccentColor(palette.accent.main);
       this.UpdatePrimaryColor(palette.primary.main);
       this.UpdateWarnColor(palette.warn.main);

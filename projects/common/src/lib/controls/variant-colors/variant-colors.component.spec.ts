@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DynamicThemeColorsComponent } from './dynamic-theme-colors.component';
+import { VariantColorsComponent } from './variant-colors.component';
 
 describe('DynamicThemeColorsComponent', () => {
-  let component: DynamicThemeColorsComponent;
-  let fixture: ComponentFixture<DynamicThemeColorsComponent>;
+  let component: VariantColorsComponent;
+  let fixture: ComponentFixture<VariantColorsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DynamicThemeColorsComponent ]
+      declarations: [ VariantColorsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DynamicThemeColorsComponent);
+    fixture = TestBed.createComponent(VariantColorsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

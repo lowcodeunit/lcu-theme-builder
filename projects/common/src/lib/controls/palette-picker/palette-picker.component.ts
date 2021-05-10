@@ -14,12 +14,15 @@ import { distinctUntilChanged } from 'rxjs/operators';
 })
 export class PalettePickerComponent implements OnInit, OnDestroy {
 
-
   public Form: FormGroup;
 
   protected colorPickerClosedSubscription: Subscription;
 
   protected formSubscription: Subscription;
+
+  public PrimaryColor: string;
+  public AccentColor: string;
+  public WarnColor: string;
 
   /**
    * Access Primary form group
@@ -50,28 +53,30 @@ export class PalettePickerComponent implements OnInit, OnDestroy {
     this.setupForm();
 
     this.colorPickerClosedSubscription = this.palettePickerService.ColorPickerClosed
-    .subscribe((val: any) => {
+    .subscribe((val: string) => {
+      this.updatePalette();
+    });
 
-      let palette: PaletteModel = new PaletteModel();
-      palette = { ...this.palettePickerService.CurrentPalette, ...palette };
-      palette.primary.main = this.Primary.value.main;
-      palette.accent.main = this.Accent.value.main;
-      palette.warn.main = this.Warn.value.main;
-
-      this.themeBuilderService.Palette = palette;
+    this.palettePickerService.ColorPickerChanged
+    .subscribe((val: PaletteModel) => {
+      // this.PrimaryColor = val.primary.main;
+      // this.AccentColor = val.accent.main;
+      // this.WarnColor = val.warn.main;
     });
   }
 
-  public ngOnInit(): void {
+  protected updatePalette(): void {
 
-    /**
-     * Subscribe to color(palette) picker changes
-     */
-    // this.palettePickerChangedSubscription =
-    //   this.palettePickerService.ColorPickerChanged
-    //   .subscribe((palette: PaletteModel) => {
-    //     this.patchValue(palette, true);
-    // });
+    let palette: PaletteModel = new PaletteModel();
+    palette = { ...this.palettePickerService.CurrentPalette, ...palette };
+    palette.primary.main = this.Primary.value.main;
+    palette.accent.main = this.Accent.value.main;
+    palette.warn.main = this.Warn.value.main;
+
+    this.themeBuilderService.Palette = palette;
+  }
+
+  public ngOnInit(): void {
 
     // setting initial values,
    // this isn't the right way to do this, but for the moment - shannon

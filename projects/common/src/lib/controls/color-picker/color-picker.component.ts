@@ -14,10 +14,6 @@ const tinyColor = tinycolor;
 })
 export class ColorPickerComponent implements OnInit {
 
-  // tslint:disable-next-line:no-output-rename
-  @Output('color-picker-changed')
-  public ColorPickerChanged: EventEmitter<string>;
-
   /**
    * Toggle backdrop when color picker is open
    */
@@ -45,14 +41,16 @@ export class ColorPickerComponent implements OnInit {
   public Presets?: string[];
 
   constructor(protected palettePickerService: PalettePickerService) {
+
     this.ShowBackdrop = false;
-    this.ColorPickerChanged = new EventEmitter<string>();
   }
 
   /**
    * Set the selected color
    */
+  @Input('color')
   public set Color(col: string) {
+
     this.Control.setValue(col);
   }
 
@@ -73,7 +71,7 @@ export class ColorPickerComponent implements OnInit {
    * @param on toggle
    */
   public SetBackdrop(on: boolean): void {
-    console.log('closed');
+
     this.ShowBackdrop = on;
   }
 
@@ -90,7 +88,6 @@ export class ColorPickerComponent implements OnInit {
   public ColorPickerClosed(evt: string): void {
 
     this.palettePickerService.CloseColorPicker(evt);
-    // this.ColorPickerChanged.emit(this.Color);
   }
 
   public ColorPickerChange(evt: string): void {
