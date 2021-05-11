@@ -3,8 +3,6 @@ import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
 
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { Constants } from '../../utils/constants.utils';
-import { filter } from 'rxjs/operators';
-import { MaterialPaletteModel } from '../../models/material-palette.model';
 import { Subscription } from 'rxjs';
 import { PalettePickerService } from '../../services/palette-picker.service';
 import { PaletteModel } from '../../models/palette.model';
@@ -23,6 +21,7 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
   @Input('color-picker-color')
   public set ColorPickerColor(val: string) {
     this.Main.setValue(val);
+    this.onMainChange();
   }
 
   /**
@@ -89,12 +88,6 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
     .subscribe((val: string) => {
       this.onMainChange();
     });
-
-    this.palettePickerService.ColorPickerChanged
-    .subscribe((val: PaletteModel) => {
-      // this.Main.setValue(val.primary.main);
-      // this.onMainChange();
-    })
   }
 
   public ngOnDestroy(): void {
@@ -109,7 +102,7 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
    * @param color selected base color, chosen from color pickers
    */
   protected onMainChange(): void {
-
+debugger;
     this.themeBuilderService.MaterialPaletteColors = this.themeBuilderService.GetPalette(this.Form.value.main);
 
     // set lightest and darkest hue colors in color picker

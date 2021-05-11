@@ -57,11 +57,18 @@ export class PalettePickerComponent implements OnInit, OnDestroy {
       this.updatePalette();
     });
 
+    // Update base colors of the color picker on change
+    // when manually setting colors, not using
+    // the color picker itself
     this.palettePickerService.ColorPickerChanged
     .subscribe((val: PaletteModel) => {
+
       this.PrimaryColor = val.primary.main;
       this.AccentColor = val.accent.main;
       this.WarnColor = val.warn.main;
+      // this.Primary.setValue(val.primary.main);
+      // this.Accent.setValue(val.accent.main);
+      // this.Warn.setValue(val.warn.main);
     });
   }
 

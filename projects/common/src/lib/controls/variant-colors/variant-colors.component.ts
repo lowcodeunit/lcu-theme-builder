@@ -133,7 +133,7 @@ protected paletteChangedSubscription: Subscription;
     this.PalettePickerService.AccentColorPalette = this.computeColors(color ? color : this.AccentColorControl.value);
 
     for (const c of this.PalettePickerService.AccentColorPalette) {
-      const key = `--theme-secondary-${c.name}`;
+      const key = `--theme-accent-${c.name}`;
       const value = c.hex;
       const key2 = `--theme-primary-contrast-${c.name}`;
       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
@@ -158,7 +158,7 @@ protected paletteChangedSubscription: Subscription;
   protected setupForm(): void {
     this.Form = new FormGroup({
       primaryColorControl: new FormControl('#ffcc11'),
-      secondaryColorControl: new FormControl('#0000aa')
+      accentColorControl: new FormControl('#0000aa')
     });
   }
 
