@@ -13,6 +13,7 @@ import { PalettePickerComponent } from './controls/palette-picker/palette-picker
 import { SubPalettePickerComponent } from './controls/sub-palette-picker/sub-palette-picker.component';
 import { LightnessPickerComponent } from './controls/mode-toggle/mode-toggle.component';
 import { VariantColorsComponent } from './controls/variant-colors/variant-colors.component';
+import { ThemePickerComponent } from './controls/theme-picker/theme-picker.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { VariantColorsComponent } from './controls/variant-colors/variant-colors
     PalettePickerComponent,
     SubPalettePickerComponent,
     LightnessPickerComponent,
-    VariantColorsComponent],
+    VariantColorsComponent,
+    ThemePickerComponent],
   imports: [
     FathymSharedModule,
     FormsModule,
@@ -31,8 +33,10 @@ import { VariantColorsComponent } from './controls/variant-colors/variant-colors
     MaterialModule,
     ColorPickerModule
   ],
-  exports: [ThemeBuilderComponent, ThemeBuilderDirective],
-  entryComponents: []
+  exports: [ThemeBuilderComponent, ThemeBuilderDirective, ThemePickerComponent],
+  entryComponents: [
+    ThemePickerComponent
+  ]
 })
 export class ThemeBuilderModule {
   static forRoot(): ModuleWithProviders<ThemeBuilderModule> {

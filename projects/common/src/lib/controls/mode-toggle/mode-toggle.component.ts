@@ -23,7 +23,11 @@ export class LightnessPickerComponent implements OnInit {
 
   public ToggleForm: FormGroup;
 
-  constructor(protected themeBuilderService: ThemeBuilderService) { }
+  public ToggleMode: string;
+
+  constructor(protected themeBuilderService: ThemeBuilderService) { 
+    this.ToggleMode = 'Dark Mode';
+  }
 
   public ngOnInit(): void {
 
@@ -42,6 +46,7 @@ export class LightnessPickerComponent implements OnInit {
     protected onChanges(): void {
       this.Toggle.valueChanges
       .subscribe((val: boolean) => {
+        this.ToggleMode = val ? 'Light Mode' : 'Dark Mode';
         this.themeBuilderService.ThemeMode = val;
       });
     }

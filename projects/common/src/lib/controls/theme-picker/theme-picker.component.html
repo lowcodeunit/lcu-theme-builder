@@ -1,0 +1,23 @@
+<button mat-icon-button id="theme-selector" [mat-menu-trigger-for]="themeMenu"
+    tabindex="-1">
+    <mat-icon class="auto-flip">format_color_fill</mat-icon>
+</button>
+
+<mat-menu #themeMenu="matMenu">
+    <!-- <mat-checkbox [checked]="isThemeDark" (click)="$event.stopPropagation()" (change)="ToggleDarkness()"
+        class="mat-menu-item theme-selector-is-dark">Dark
+    </mat-checkbox> -->
+    <lcu-mode-toggle></lcu-mode-toggle>
+    <mat-grid-list cols="2" class="theme-selectors-container">
+        <mat-grid-tile *ngFor="let theme of Themes">
+
+            <button mat-button class="theme-selector" (click)="$event.stopPropagation(); SetActiveTheme(theme)">
+                <div class="theme-primary" [ngStyle]="{'background-color':theme.Primary}">
+                    <div class="theme-accent" [ngStyle]="{'background-color':theme.Accent}"></div>
+                    <div class="theme-warn" [ngStyle]="{'background-color':theme.Warn}"></div>
+                    <!-- <mat-icon *ngIf="activeTheme===theme" class="center theme-check">check</mat-icon> -->
+                </div>
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-menu>
