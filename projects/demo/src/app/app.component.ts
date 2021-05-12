@@ -36,32 +36,5 @@ export class AppComponent implements OnInit {
     palette = { ...Constants.InitialValues, ...palette };
 
     this.themeBuilderService.Palette = palette;
-
-  }
-
-  /**
-   * Change palette
-   * 
-   * @param type primary color
-   */
-  public ChangeThemeColors(type: string): void {
-
-    let palette: PaletteModel = new PaletteModel();
-      palette = { ...this.palettePickerService.CurrentPalette, ...palette };
-
-    if (type === 'yellow') {
-      palette.primary.main = '#ffcc11';
-      palette.accent.main = '#990066';
-      palette.warn.main = '#990000';
-
-    } else {
-      palette.primary.main = '#a83271';
-      palette.accent.main = '#3298a8';
-      palette.warn.main = '#b9f013';
-    }
-
-    // this.palettePickerService.PalettePickerChange(palette);
-
-    this.themeBuilderService.Palette = palette;
   }
 }

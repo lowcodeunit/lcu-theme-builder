@@ -102,7 +102,7 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
    * @param color selected base color, chosen from color pickers
    */
   protected onMainChange(): void {
-debugger;
+
     this.themeBuilderService.MaterialPaletteColors = this.themeBuilderService.GetPalette(this.Form.value.main);
 
     // set lightest and darkest hue colors in color picker

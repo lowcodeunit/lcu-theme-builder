@@ -26,7 +26,7 @@ export class Constants {
         A700: [15, 100, 40]
     };
 
-      protected static document = window.getComputedStyle(document.documentElement);
+      public static document = window.getComputedStyle(document.documentElement);
 
       public static InitialValues: PaletteModel = {
         primary: { main: Constants.document.getPropertyValue('--initial-primary'), lighter: null, darker: null },
