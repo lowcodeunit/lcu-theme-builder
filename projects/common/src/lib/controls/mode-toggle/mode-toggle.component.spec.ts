@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThemeBuilderComponent } from './theme-builder.component';
+import { LightnessPickerComponent } from './mode-toggle.component';
 
-describe('ThemeBuilderComponent', () => {
-  let component: ThemeBuilderComponent;
-  let fixture: ComponentFixture<ThemeBuilderComponent>;
+describe('LightnessPickerComponent', () => {
+  let component: LightnessPickerComponent;
+  let fixture: ComponentFixture<LightnessPickerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThemeBuilderComponent ]
+      declarations: [ LightnessPickerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThemeBuilderComponent);
+    fixture = TestBed.createComponent(LightnessPickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

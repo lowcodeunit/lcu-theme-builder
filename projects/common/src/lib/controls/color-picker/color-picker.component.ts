@@ -1,6 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import * as tinycolor from 'tinycolor2';
 import { FormControl } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
+import { PalettePickerService } from '../../services/palette-picker.service';
+// import * as EventEmitter from 'events';
 
 const tinyColor = tinycolor;
 
@@ -34,17 +37,20 @@ export class ColorPickerComponent implements OnInit {
    * Array of preset colors, shown in color picker
    */
   // tslint:disable-next-line:no-input-rename
-  @Input('presets')
-  public Presets?: string[];
+  @Input('variants')
+  public Variants?: string[];
 
-  constructor() {
+  constructor(protected palettePickerService: PalettePickerService) {
+
     this.ShowBackdrop = false;
   }
 
   /**
    * Set the selected color
    */
-  set Color(col: string) {
+  @Input('color')
+  public set Color(col: string) {
+
     this.Control.setValue(col);
   }
 
@@ -52,7 +58,7 @@ export class ColorPickerComponent implements OnInit {
    * Get the selected color
    *
    */
-  get Color() {
+  public get Color() {
     return this.Control.value;
   }
 
@@ -65,6 +71,7 @@ export class ColorPickerComponent implements OnInit {
    * @param on toggle
    */
   public SetBackdrop(on: boolean): void {
+
     this.ShowBackdrop = on;
   }
 
@@ -74,7 +81,18 @@ export class ColorPickerComponent implements OnInit {
    * @param col color
    */
   public GetTextColor(col: string): any {
+
     return tinyColor(col).isLight() ? '#000' : '#fff';
+  }
+
+  public ColorPickerClosed(evt: string): void {
+
+    this.palettePickerService.CloseColorPicker(evt);
+  }
+
+  public ColorPickerChange(evt: string): void {
+
+    this.Color = evt;
   }
 
 }

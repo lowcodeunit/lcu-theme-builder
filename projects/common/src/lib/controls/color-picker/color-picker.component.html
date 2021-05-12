@@ -5,13 +5,13 @@
   [disabled]="Disabled" 
   [colorPicker]="Color" 
   (colorPickerOpen)="SetBackdrop(true)"
-  [cpPresetColors]="Presets" 
-  [cpPosition]="'top-left'"
-  (colorPickerClose)="SetBackdrop(false)" 
+  [cpPresetColors]="Variants" 
+  [cpPosition]="'bottom-left'"
+  (colorPickerClose)="SetBackdrop(false); ColorPickerClosed($event)" 
   [cpOutputFormat]="'hex'"
   [cpAlphaChannel]="'disabled'" 
-  (colorPickerChange)="Color = $event" 
+  (colorPickerChange)="ColorPickerChange($event)" 
   [value]="Color"
   [style.background]="Color" 
   [style.color]="GetTextColor(Color)"
-  >
+>

@@ -1,63 +1,15 @@
-<<<<<<< HEAD
-<div fxLayout="column" fxLayoutGap="10px">
+<div 
+  fxLayout="column" 
+  fxLayoutGap="10px">
   <div 
     fxLayout.lg="row" 
     fxLayout.md="row" 
     fxLayout.sm="column" 
     fxLayout.xs="column"
     fxLayoutGap="10px">
-    <div class="primary">
-      <!-- <h4>
-        Primary
-      </h4> -->
-      <lcu-sub-palette-picker [form]="Primary"></lcu-sub-palette-picker>
-    </div>
-    <div class="accent">
-      <!-- <h4>
-        Accent
-      </h4> -->
-      <lcu-sub-palette-picker [form]="Accent"></lcu-sub-palette-picker>
-    </div>
-    <div class="warn">
-      <!-- <h4>
-        Warning
-      </h4> -->
-      <lcu-sub-palette-picker [form]="Warn"></lcu-sub-palette-picker>
-    </div>
+    <lcu-sub-palette-picker [color-picker-color]="PrimaryColor" [form]="Primary"></lcu-sub-palette-picker>
+    <lcu-sub-palette-picker [color-picker-color]="AccentColor" [form]="Accent"></lcu-sub-palette-picker>
+    <lcu-sub-palette-picker [color-picker-color]="WarnColor" [form]="Warn"></lcu-sub-palette-picker>
   </div>
-  <!-- <lcu-dynamic-theme-colors 
-    [accent-color]="Accent.value.main"
-    [primary-color]="Primary.value.main" 
-    [warn-color]="Warn.value.main">
-  </lcu-dynamic-theme-colors> -->
-  <lcu-dynamic-theme-colors>
-</lcu-dynamic-theme-colors>
+  <lcu-variant-colors></lcu-variant-colors>
 </div>
-=======
-<div 
-  fxLayout.lg="row" 
-  fxLayout.md="row" 
-  fxLayout.sm="column" 
-  fxLayout.xs="column"
-  fxLayoutGap="10px">
-  <div class="primary">
-    <h4>
-      Primary
-    </h4>
-    <lcu-sub-palette-picker [form]="Primary"></lcu-sub-palette-picker>
-  </div>
-  <div class="accent">
-    <h4>
-      Accent
-    </h4>
-    <lcu-sub-palette-picker [form]="Accent"></lcu-sub-palette-picker>
-  </div>
-  <div class="warn">
-    <h4>
-      Warning
-    </h4>
-    <lcu-sub-palette-picker [form]="Warn"></lcu-sub-palette-picker>
-  </div>
-</div>
-
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8

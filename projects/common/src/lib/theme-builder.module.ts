@@ -9,29 +9,22 @@ import { ThemeBuilderService } from './services/theme-builder.service';
 import { ThemeBuilderComponent } from './controls/theme-builder/theme-builder.component';
 import { ThemeBuilderDirective } from './directives/theme-builder.directive';
 import { ColorPickerComponent } from './controls/color-picker/color-picker.component';
-import { FontPickerComponent } from './controls/font-picker/font-picker.component';
 import { PalettePickerComponent } from './controls/palette-picker/palette-picker.component';
 import { SubPalettePickerComponent } from './controls/sub-palette-picker/sub-palette-picker.component';
-import { LightnessPickerComponent } from './controls/lightness-picker/lightness-picker.component';
-<<<<<<< HEAD
-import { DynamicThemeColorsComponent } from './controls/dynamic-theme-colors/dynamic-theme-colors.component';
-=======
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
+import { LightnessPickerComponent } from './controls/mode-toggle/mode-toggle.component';
+import { VariantColorsComponent } from './controls/variant-colors/variant-colors.component';
+import { ThemePickerComponent } from './controls/theme-picker/theme-picker.component';
 
 @NgModule({
   declarations: [
     ThemeBuilderComponent,
     ThemeBuilderDirective,
     ColorPickerComponent,
-    FontPickerComponent,
     PalettePickerComponent,
     SubPalettePickerComponent,
-<<<<<<< HEAD
     LightnessPickerComponent,
-    DynamicThemeColorsComponent],
-=======
-    LightnessPickerComponent],
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
+    VariantColorsComponent,
+    ThemePickerComponent],
   imports: [
     FathymSharedModule,
     FormsModule,
@@ -40,11 +33,13 @@ import { DynamicThemeColorsComponent } from './controls/dynamic-theme-colors/dyn
     MaterialModule,
     ColorPickerModule
   ],
-  exports: [ThemeBuilderComponent, ThemeBuilderDirective],
-  entryComponents: []
+  exports: [ThemeBuilderComponent, ThemeBuilderDirective, ThemePickerComponent],
+  entryComponents: [
+    ThemePickerComponent
+  ]
 })
 export class ThemeBuilderModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<ThemeBuilderModule> {
     return {
       ngModule: ThemeBuilderModule,
       providers: [ThemeBuilderService]

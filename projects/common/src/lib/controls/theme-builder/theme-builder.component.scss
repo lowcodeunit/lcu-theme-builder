@@ -1,19 +1,11 @@
-.theme-builder-card {
-  cursor: pointer;
-  display: inline-block;
-  margin: 5px;
-  min-height: 250px;
+.primary-color {
+    color: var(--theme-primary-A700);
+}
 
-  .theme-builder-card-avatar {
+.accent-color {
+    color: var(--theme-accent-A700);
+}
 
-    .mat-icon {
-      font-size: 40px;
-    }
-  }
-
-  .theme-builder-card-content {
-    text-align: justify;
-    padding: 5px;
-    line-height: 20px;
-  }
+.warn-color {
+    color: var(--theme-warn-A700);
 }

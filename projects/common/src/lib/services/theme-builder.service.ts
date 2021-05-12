@@ -1,20 +1,15 @@
-<<<<<<< HEAD
 import { PalettePickerService } from './palette-picker.service';
-=======
->>>>>>> c0df40ed12c6d0967061024dfce48ca50b1fe8e8
 import { ColorMapModel } from './../models/color-map.model';
 import { LocalStorageService } from './local-storage.service';
-import { SubPaletteModel } from './../models/sub-palette.model';
 import { Constants } from './../utils/constants.utils';
 import { MaterialPaletteModel } from './../models/material-palette.model';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import * as tinycolor from 'tinycolor2';
 import { PaletteModel } from '../models/palette.model';
 import { ReplaySubject, Subject } from 'rxjs';
-import { map, skipLast } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ThemeModel } from '../models/theme.model';
 import { HttpClient } from '@angular/common/http';
-import { FontSelectionModel } from '../models/font-selection.model';
 import { PaletteListModel } from '../models/palette-list.model';
 import { PaletteTemplateService } from './palette-template.service';
 
@@ -33,25 +28,19 @@ declare var Sass: any;
 export class ThemeBuilderService {
 
   /**
-   * Array of font selections
-   */
-  protected _fonts: Array<FontSelectionModel>;
-
-  /**
    * Is it lightness
    */
-  protected _lightness: boolean;
+  protected themeMode: boolean;
 
   /**
    * Theme Palette
    */
-  protected _palette: PaletteModel;
+  protected palette: PaletteModel;
 
-  public $fonts = new Subject<FontSelectionModel[]>();
-  public $theme: ReplaySubject<ThemeModel>;
-  public $lightness: Subject<boolean>;
-  public $palette: Subject<Partial<PaletteModel>>;
-  public $themeScss: Promise<void>;
+  // public $fonts = new Subject<FontSelectionModel[]>();
+  public Theme: Subject<ThemeModel>;
+  public PaletteColors: Subject<Partial<PaletteModel>>;
+  public ThemeScss: Promise<void>;
   public PaletteList: Array<PaletteListModel>;
 
   /**
@@ -63,12 +52,14 @@ export class ThemeBuilderService {
     protected http: HttpClient, 
     protected paletteTemplateService: PaletteTemplateService,
     protected localStorageService: LocalStorageService,
-    protected palettePickerService: PalettePickerService) {
-    this._lightness = true;
-    this.$theme = new ReplaySubject<ThemeModel>();
-    this.$lightness = new Subject<boolean>();
-    this.$palette = new Subject<Partial<PaletteModel>>();
-    this.$themeScss = this.loadThemingScss();
+    protected palettePickerService: PalettePickerService,
+    protected zone: NgZone,) {
+
+    this.themeMode = true;
+    this.Theme = new Subject<ThemeModel>();
+    this.PaletteColors = new Subject<Partial<PaletteModel>>();
+    this.ThemeScss = this.loadThemingScss();
+
     this.PaletteList = [];
    }
 
@@ -76,47 +67,31 @@ export class ThemeBuilderService {
     * Set Palette colors
     */
     public set Palette(palette: PaletteModel) {
-      palette.AccentColorPalette = this.GetPalette(palette.accent.main);
-      palette.PrimaryColorPalette = this.GetPalette(palette.primary.main);
-      palette.WarnColorPalette = this.GetPalette(palette.warn.main);
-      // console.log('main palette', palette);
 
-      palette.ColorMap = new Map();
-      palette.ColorMap.set('accent-palette', palette.AccentColorPalette);
-      palette.ColorMap.set('primary-palette', palette.PrimaryColorPalette);
-      palette.ColorMap.set('warn-palette', palette.WarnColorPalette);
+      this.palette = palette;
+      this.palettePickerService.PalettePickerChange(palette);
 
-      this._palette = palette;
-      this.palettePickerService.NewPalette(palette);
-      // this.emit();
+      this.UpdateTheme(this.getTheme());
     }
 
     public get Palette() {
-      return this._palette;
+      return this.palette;
     }
 
-    set fonts(fonts: FontSelectionModel[]) {
-      this._fonts = fonts;
-      // this.emit();
+    public set ThemeMode(light: boolean) {
+      this.themeMode = !light;
+      this.UpdateTheme(this.getTheme());
     }
 
-    get fonts() {
-      return this._fonts;
-    }
-
-    set lightness(light: boolean) {
-      this._lightness = light;
-     // this.emit();
-    }
-
-    get lightness() {
-      return this._lightness;
+    public get ThemeMode() {
+      return this.themeMode;
     }
 
    /**
     * load intial theme
     */
    protected loadThemingScss(): Promise<void> {
+
      // this is generated in angular.json, pulls from node_modules/@angular/material
     return this.http.get('/assets/_theming.scss', { responseType: 'text' })
       .pipe(
@@ -136,10 +111,10 @@ export class ThemeBuilderService {
             .filter((l: string) => !!l)
             .join('\n');
         }),
-        map((txt: string) => // writFile allows this file to be access from styles.scss
+        map((txt: string) =>
+          // writeFile allows this file to be accessed from styles.scss
           Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
-            console.log('Sass.writeFile', result);
-            // debugger;
+           // console.log('Sass.writeFile', result);
           }))
       ).toPromise();
    }
@@ -154,73 +129,24 @@ export class ThemeBuilderService {
   }
 
   /**
-   * Save the selected color map
+   * Compile SASS to CSS
    *
-   * @param theme Current selected theme
+   * @param theme SASS stylesheet
+   * @returns compiled CSS
    */
-  public SaveColorPalette(theme: ThemeModel): void {
-    const name: string = '$color-map' + String(Math.floor(Math.random() * 100));
-
-    const colorMap: ColorMapModel = new ColorMapModel(
-      this.paletteTemplateService.GenerateColorMap(theme), name);
-
-    Sass.writeFile('shannon.scss', '.shannon { width: 123px; }');
-    Sass.writeFile('colormap.scss', colorMap.Map);
-
-    this.localStorageService.SetColorMapStorage(colorMap);
-
-    Sass.compile('@import "shannon";', (result: any) => {
-      // debugger;
-      console.log(result.text);
-    });
-
-    Sass.compile('@import "colormap";', (result: any) => {
-      // debugger;
-      console.log(result.text);
-    });
-  }
-
    public async CompileScssTheme(theme: string) {
-    await this.$themeScss;
-    return new Promise<string>((res, rej) =>
+    await this.ThemeScss;
+    return new Promise<string>((res, rej) => {
       Sass.compile(theme.replace('@include angular-material-theme($altTheme);', ''), (v: any) => {
-        // debugger;
         if (v.status === 0) {
           res(v.text);
         } else {
           rej(v);
         }
-      })
+      });
+    }
     );
    }
-
-   public FromExternal(val: string): void {
-     try {
-       const json = JSON.parse(val);
-
-       this.$lightness.next(json.lightness);
-       this.$palette.next(json.palette);
-
-     } catch (e) {
-      console.error('Unable to read', val, e);
-     }
-   }
-
-  //  public ToExternal(): string {
-  //   const data = {
-  //     palette: this.Palette,
-  //     fonts: this.fonts.map(x => {
-  //       const keys = Object.keys(x).filter(k => k === 'target' || x[k] !== Constants.DEFAULT_FONTS[x.target][k]);
-  //       return keys.reduce((acc, v) => {
-  //         acc[v] = x[v];
-  //         return acc;
-  //       }, {});
-  //     }),
-  //     // icons: this.icons,
-  //     lightness: this.lightness
-  //   };
-  //   return JSON.stringify(data);
-  // }
 
    /**
     * Return primary and accent colors for each color map, from colors 50 - A700
@@ -255,18 +181,18 @@ export class ThemeBuilderService {
    /**
     * emit event with theme
     */
-  //  protected emit(): void {
-  //    this.$theme.next(this.getTheme());
-  //  }
+   protected emit(): void {
+     this.Theme.next(this.getTheme());
+   }
 
    /**
     * Return a new theme model
     */
-   protected getTheme(): ThemeModel {
+   public getTheme(): ThemeModel {
+
     return {
       palette: this.Palette,
-      lightness: this.lightness,
-      fonts: this.fonts
+      lightness: this.ThemeMode,
     };
    }
 
@@ -277,4 +203,38 @@ export class ThemeBuilderService {
 
     return tinyColor('rgb ' + rgb1.r + ' ' + rgb1.g + ' ' + rgb1.b);
    }
+
+   public UpdateTheme(theme: ThemeModel): void {
+
+    // SASS stylesheet
+    const source: string = this.GetTemplate(theme);
+
+    // Running functions outside of Angular's zone and do work that
+    // doesn't trigger Angular change-detection.
+   this.zone.runOutsideAngular(() => {
+
+     this.CompileScssTheme(source).then( (text: string) => {
+
+        // SASS compiled to CSS
+        const compiledDynamicCSS: string = text;
+
+        const dynamicStyleSheet: HTMLElement = document.getElementById('theme-builder-stylesheet');
+
+        // check if dynamic stylesheet exists, then remove it
+        if (dynamicStyleSheet) {
+          document.getElementsByTagName('body')[0].removeChild(dynamicStyleSheet);
+        }
+
+        // add dynamic stylesheet
+        const style = document.createElement('style');
+              style.id = 'theme-builder-stylesheet';
+              style.appendChild(document.createTextNode(compiledDynamicCSS));
+
+        document.getElementsByTagName('body')[0].appendChild(style);
+
+      }).catch((err: Error) => {
+        console.error(err);
+      });
+   });
+  }
 }
