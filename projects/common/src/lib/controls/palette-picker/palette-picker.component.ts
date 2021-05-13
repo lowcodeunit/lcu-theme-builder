@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractControl, FormGroup, FormControl } from '@angular/forms';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { PaletteModel } from '../../models/palette.model';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subscription } from 'rxjs';
 import { PalettePickerService } from '../../services/palette-picker.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 
