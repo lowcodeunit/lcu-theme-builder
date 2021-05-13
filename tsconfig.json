@@ -19,7 +19,7 @@
 			"dom"
 		],
 		"paths": {
-			"@lowcodeunit/theme-builder-common": [
+			"@lowcodeunit/lcu-theme-builder-common": [
 				"dist/common/common",
 				"dist/common"
 			]

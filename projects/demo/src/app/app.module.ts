@@ -6,7 +6,7 @@ import { FathymSharedModule, MaterialModule } from '@lcu/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './controls/home/home.component';
-import { ThemeBuilderModule } from '@lowcodeunit/theme-builder-common';
+import { ThemeBuilderModule } from '@lowcodeunit/lcu-theme-builder-common';
 import { BuilderComponent } from './controls/builder/builder.component';
 
 @NgModule({
