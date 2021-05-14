@@ -9,3 +9,4 @@ export * from './lib/models/sub-palette.model';
 export * from './lib/models/theme.model';
 export * from './lib/models/color.model';
 export * from './lib/models/theme-picker.model';
+export * from './lib/utils/theme-builder-constants.utils';

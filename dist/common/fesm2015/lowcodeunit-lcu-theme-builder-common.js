@@ -82,9 +82,9 @@ LocalStorageService.ctorParameters = () => [];
 /**
  * @dynamic need this because there are static members
  */
-class Constants {
+class ThemeBuilderConstants {
 }
-Constants.MIX_AMOUNTS_PRIMARY = {
+ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY = {
     50: [true, 12],
     100: [true, 30],
     200: [true, 50],
@@ -96,21 +96,21 @@ Constants.MIX_AMOUNTS_PRIMARY = {
     800: [false, 54],
     900: [false, 25]
 };
-Constants.MIX_AMOUNTS_SECONDARY = {
+ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY = {
     A100: [15, 80, 65],
     A200: [15, 80, 55],
     A400: [15, 100, 45],
     A700: [15, 100, 40]
 };
-Constants.document = window.getComputedStyle(document.documentElement);
-Constants.InitialValues = {
-    primary: { main: Constants.document.getPropertyValue('--initial-primary'), lighter: null, darker: null },
-    accent: { main: Constants.document.getPropertyValue('--initial-accent'), lighter: null, darker: null },
-    warn: { main: Constants.document.getPropertyValue('--initial-warn'), lighter: null, darker: null },
-    lightText: Constants.document.getPropertyValue('--initial-light-text'),
-    lightBackground: Constants.document.getPropertyValue('--initial-light-background'),
-    darkText: Constants.document.getPropertyValue('--initial-dark-text'),
-    darkBackground: Constants.document.getPropertyValue('--initial-dark-background')
+ThemeBuilderConstants.document = window.getComputedStyle(document.documentElement);
+ThemeBuilderConstants.InitialValues = {
+    primary: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), lighter: null, darker: null },
+    accent: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), lighter: null, darker: null },
+    warn: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), lighter: null, darker: null },
+    lightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
+    lightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
+    darkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),
+    darkBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-background')
 };
 
 const tinyColor$3 = tinycolor;
@@ -412,14 +412,14 @@ class ThemeBuilderService {
         const baseLight = tinyColor$2('#ffffff');
         const baseDark = this.multiply(tinyColor$2(color).toRgb(), tinyColor$2(color).toRgb());
         const [, , , baseTriad] = tinyColor$2(color).tetrad();
-        const primary = Object.keys(Constants.MIX_AMOUNTS_PRIMARY)
+        const primary = Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY)
             .map(k => {
-            const [light, amount] = Constants.MIX_AMOUNTS_PRIMARY[k];
+            const [light, amount] = ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY[k];
             return [k, tinyColor$2.mix(light ? baseLight : baseDark, tinyColor$2(color), amount)];
         });
-        const accent = Object.keys(Constants.MIX_AMOUNTS_SECONDARY)
+        const accent = Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY)
             .map(k => {
-            const [amount, sat, light] = Constants.MIX_AMOUNTS_SECONDARY[k];
+            const [amount, sat, light] = ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY[k];
             return [k, tinyColor$2.mix(baseDark, baseTriad, amount)
                     .saturate(sat).lighten(light)];
         });
@@ -665,7 +665,7 @@ class PalettePickerComponent {
     ngOnInit() {
         // setting initial values,
         // this isn't the right way to do this, but for the moment - shannon
-        this.patchValue(Constants.InitialValues, true);
+        this.patchValue(ThemeBuilderConstants.InitialValues, true);
         this.Form.valueChanges
             .pipe(distinctUntilChanged((a, b) => {
             //  console.log('A', a);
@@ -728,8 +728,8 @@ class SubPalettePickerComponent {
         this.themeBuilderService = themeBuilderService;
         this.palettePickerService = palettePickerService;
         this.Unlocked = new FormControl(false);
-        this.materialKeys = [...Object.keys(Constants.MIX_AMOUNTS_PRIMARY),
-            ...Object.keys(Constants.MIX_AMOUNTS_SECONDARY)];
+        this.materialKeys = [...Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY),
+            ...Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY)];
     }
     set ColorPickerColor(val) {
         this.Main.setValue(val);
@@ -1069,9 +1069,9 @@ class ThemePickerComponent {
         this.Themes = [
             new ThemePickerModel({
                 ID: 'Fathym Brand',
-                Primary: Constants.document.getPropertyValue('--initial-primary'),
-                Accent: Constants.document.getPropertyValue('--initial-accent'),
-                Warn: Constants.document.getPropertyValue('--initial-warn')
+                Primary: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'),
+                Accent: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'),
+                Warn: ThemeBuilderConstants.document.getPropertyValue('--initial-warn')
             }),
             new ThemePickerModel({
                 ID: 'Yellow',
@@ -1151,5 +1151,5 @@ class ColorModel {
  * Generated bundle index. Do not edit.
  */
 
-export { ColorModel, PaletteModel, PalettePickerService, SubPaletteModel, ThemeBuilderComponent, ThemeBuilderDirective, ThemeBuilderModel, ThemeBuilderModule, ThemeBuilderService, ThemeModel, ThemePickerModel, ColorPickerComponent as ɵa, PalettePickerComponent as ɵb, PaletteTemplateService as ɵc, LocalStorageService as ɵd, SubPalettePickerComponent as ɵe, LightnessPickerComponent as ɵf, VariantColorsComponent as ɵg, ThemePickerComponent as ɵh };
+export { ColorModel, PaletteModel, PalettePickerService, SubPaletteModel, ThemeBuilderComponent, ThemeBuilderConstants, ThemeBuilderDirective, ThemeBuilderModel, ThemeBuilderModule, ThemeBuilderService, ThemeModel, ThemePickerModel, ColorPickerComponent as ɵa, PalettePickerComponent as ɵb, PaletteTemplateService as ɵc, LocalStorageService as ɵd, SubPalettePickerComponent as ɵe, LightnessPickerComponent as ɵf, VariantColorsComponent as ɵg, ThemePickerComponent as ɵh };
 //# sourceMappingURL=lowcodeunit-lcu-theme-builder-common.js.map

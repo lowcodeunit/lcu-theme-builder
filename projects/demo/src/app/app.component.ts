@@ -1,4 +1,4 @@
-import { ThemeBuilderService, PalettePickerService, PaletteModel, Constants } from '@lowcodeunit/lcu-theme-builder-common';
+import { ThemeBuilderService, PalettePickerService, PaletteModel, ThemeBuilderConstants } from '@lowcodeunit/lcu-theme-builder-common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
    */
   protected initialTheme(): void {
     let palette: PaletteModel = new PaletteModel();
-    palette = { ...Constants.InitialValues, ...palette };
+    palette = { ...ThemeBuilderConstants.InitialValues, ...palette };
 
     this.themeBuilderService.Palette = palette;
   }

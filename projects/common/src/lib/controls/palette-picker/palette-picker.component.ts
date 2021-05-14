@@ -1,4 +1,4 @@
-import { Constants } from './../../utils/constants.utils';
+import { ThemeBuilderConstants } from '../../utils/theme-builder-constants.utils';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractControl, FormGroup, FormControl } from '@angular/forms';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
@@ -87,7 +87,7 @@ export class PalettePickerComponent implements OnInit, OnDestroy {
 
     // setting initial values,
    // this isn't the right way to do this, but for the moment - shannon
-    this.patchValue(Constants.InitialValues, true);
+    this.patchValue(ThemeBuilderConstants.InitialValues, true);
 
    this.Form.valueChanges
    .pipe(distinctUntilChanged((a: PaletteModel, b: PaletteModel) => {
