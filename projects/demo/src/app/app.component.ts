@@ -1,10 +1,5 @@
-import { Constants } from './../../../common/src/lib/utils/constants.utils';
+import { ThemeBuilderService, PalettePickerService, PaletteModel, Constants } from '@lowcodeunit/lcu-theme-builder-common';
 import { Component, OnInit } from '@angular/core';
-
-
-
-
-// const styleVariables = require('../assets/styles/variables.scss');
 
 @Component({
   selector: 'lcu-root',
