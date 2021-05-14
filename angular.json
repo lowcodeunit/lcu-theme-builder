@@ -55,7 +55,7 @@
 			"prefix": "lcu",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
+					"builder": "ngx-build-plus:browser",
 					"options": {
 						"outputPath": "dist/lcu",
 						"index": "projects/lcu/src/index.html",
@@ -94,7 +94,6 @@
 							"optimization": true,
 							"outputHashing": "all",
 							"sourceMap": false,
-							"extractCss": true,
 							"namedChunks": false,
 							"extractLicenses": true,
 							"vendorChunk": false,
@@ -103,7 +102,7 @@
 					}
 				},
 				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
+					"builder": "ngx-build-plus:dev-server",
 					"options": {
 						"browserTarget": "lcu:build"
 					},
@@ -120,7 +119,7 @@
 					}
 				},
 				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
+					"builder": "ngx-build-plus:karma",
 					"options": {
 						"main": "projects/lcu/src/test.ts",
 						"polyfills": "projects/lcu/src/polyfills.ts",
@@ -182,7 +181,7 @@
 						"main": "projects/demo/src/main.ts",
 						"polyfills": "projects/demo/src/polyfills.ts",
 						"tsConfig": "projects/demo/tsconfig.app.json",
-						"aot": false,
+						"aot": true,
 						"assets": [
 							"projects/demo/src/favicon.ico",
 							"projects/demo/src/assets",
@@ -225,7 +224,6 @@
 							"optimization": true,
 							"outputHashing": "all",
 							"sourceMap": false,
-							"extractCss": true,
 							"namedChunks": false,
 							"extractLicenses": true,
 							"vendorChunk": false,

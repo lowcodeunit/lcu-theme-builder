@@ -2,10 +2,10 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
 
 import { ThemeBuilderService } from '../../services/theme-builder.service';
-import { Constants } from '../../utils/constants.utils';
 import { Subscription } from 'rxjs';
 import { PalettePickerService } from '../../services/palette-picker.service';
 import { PaletteModel } from '../../models/palette.model';
+import { ThemeBuilderConstants } from '../../utils/theme-builder-constants.utils';
 
 @Component({
   selector: 'lcu-sub-palette-picker',
@@ -74,8 +74,8 @@ export class SubPalettePickerComponent implements OnInit, OnDestroy {
   constructor(protected themeBuilderService: ThemeBuilderService,
     protected palettePickerService: PalettePickerService) {
     this.Unlocked = new FormControl(false);
-    this.materialKeys = [...Object.keys(Constants.MIX_AMOUNTS_PRIMARY),
-                         ...Object.keys(Constants.MIX_AMOUNTS_SECONDARY)];
+    this.materialKeys = [...Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY),
+                         ...Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY)];
   }
 
   public ngOnInit(): void {

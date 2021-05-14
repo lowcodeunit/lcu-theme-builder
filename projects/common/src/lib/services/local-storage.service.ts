@@ -1,6 +1,6 @@
 import { ColorMapModel } from './../models/color-map.model';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'

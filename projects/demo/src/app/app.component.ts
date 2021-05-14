@@ -1,10 +1,5 @@
-import { Constants } from './../../../common/src/lib/utils/constants.utils';
+import { ThemeBuilderService, PalettePickerService, PaletteModel, ThemeBuilderConstants } from '@lowcodeunit/lcu-theme-builder-common';
 import { Component, OnInit } from '@angular/core';
-import { ThemeBuilderService, PaletteModel, ThemeModel, PalettePickerService } from '@lowcodeunit/theme-builder-common';
-
-
-
-// const styleVariables = require('../assets/styles/variables.scss');
 
 @Component({
   selector: 'lcu-root',
@@ -33,7 +28,7 @@ export class AppComponent implements OnInit {
    */
   protected initialTheme(): void {
     let palette: PaletteModel = new PaletteModel();
-    palette = { ...Constants.InitialValues, ...palette };
+    palette = { ...ThemeBuilderConstants.InitialValues, ...palette };
 
     this.themeBuilderService.Palette = palette;
   }
