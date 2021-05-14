@@ -1,9 +1,9 @@
+import { ThemeBuilderConstants } from './../../utils/theme-builder-constants.utils';
 import { PalettePickerService } from './../../services/palette-picker.service';
 import { ThemePickerModel } from './../../models/theme-picker.model';
 import { Component, OnInit } from '@angular/core';
 import { PaletteModel } from '../../models/palette.model';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
-import { Constants } from '../../utils/constants.utils';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -115,9 +115,9 @@ public get ManualWarn(): AbstractControl {
       new ThemePickerModel(
         {
           ID: 'Fathym Brand',
-          Primary: Constants.document.getPropertyValue('--initial-primary'),
-          Accent: Constants.document.getPropertyValue('--initial-accent'),
-          Warn: Constants.document.getPropertyValue('--initial-warn')
+          Primary: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'),
+          Accent: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'),
+          Warn: ThemeBuilderConstants.document.getPropertyValue('--initial-warn')
         }
       ),
       new ThemePickerModel(

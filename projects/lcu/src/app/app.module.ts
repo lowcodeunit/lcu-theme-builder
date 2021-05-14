@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FathymSharedModule, LCUServiceSettings } from '@lcu/common';
 import { environment } from '../environments/environment';
-import { ThemeBuilderModule } from '@lowcodeunit/theme-builder-common';
+import { ThemeBuilderModule } from '@lowcodeunit/lcu-theme-builder-common';
 
 @NgModule({
   declarations: [],

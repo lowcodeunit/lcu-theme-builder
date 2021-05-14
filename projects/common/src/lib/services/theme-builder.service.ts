@@ -1,7 +1,7 @@
 import { PalettePickerService } from './palette-picker.service';
 import { ColorMapModel } from './../models/color-map.model';
 import { LocalStorageService } from './local-storage.service';
-import { Constants } from './../utils/constants.utils';
+import { ThemeBuilderConstants } from '../utils/theme-builder-constants.utils';
 import { MaterialPaletteModel } from './../models/material-palette.model';
 import { Injectable, NgZone } from '@angular/core';
 import * as tinycolor from 'tinycolor2';
@@ -158,16 +158,16 @@ export class ThemeBuilderService {
     const baseDark = this.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
     const [, , , baseTriad] = tinyColor(color).tetrad();
 
-    const primary = Object.keys(Constants.MIX_AMOUNTS_PRIMARY)
+    const primary = Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY)
       .map(k => {
-        const [light, amount] = Constants.MIX_AMOUNTS_PRIMARY[k];
+        const [light, amount] = ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY[k];
         return [k, tinyColor.mix(light ? baseLight : baseDark,
           tinyColor(color), amount)] as [string, tinycolor.Instance];
       });
 
-    const accent = Object.keys(Constants.MIX_AMOUNTS_SECONDARY)
+    const accent = Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY)
       .map(k => {
-        const [amount, sat, light] = Constants.MIX_AMOUNTS_SECONDARY[k];
+        const [amount, sat, light] = ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY[k];
         return [k, tinyColor.mix(baseDark, baseTriad, amount)
           .saturate(sat).lighten(light)] as [string, tinycolor.Instance];
       });

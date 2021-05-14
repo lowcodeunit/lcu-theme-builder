@@ -8,11 +8,11 @@ import { Subscription } from 'rxjs';
 import { PaletteModel } from '../../models/palette.model';
 import { PaletteColorMapModel } from '../../models/palette-color-map.model';
 import { MaterialPaletteModel } from '../../models/material-palette.model';
-import { Constants } from '../../utils/constants.utils';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { ColorModel } from '../../models/color.model';
 
 const tinyColor = tinycolor;
+
 // const styleVariables = require('./assets/styles/dynamic-theme.scss');
 
 /**
