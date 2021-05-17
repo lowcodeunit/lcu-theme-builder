@@ -473,6 +473,15 @@ class ThemeBuilderService {
             });
         });
     }
+    SetThemes(themes) {
+        this.Themes = themes;
+        let initial = new PaletteModel();
+        initial = Object.assign(Object.assign({}, ThemeBuilderConstants.InitialValues), initial);
+        initial.primary.main = this.Themes[0].Primary;
+        initial.accent.main = this.Themes[0].Accent;
+        initial.warn.main = this.Themes[0].Warn;
+        this.Palette = initial;
+    }
 }
 ThemeBuilderService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ThemeBuilderService_Factory() { return new ThemeBuilderService(i0.ɵɵinject(i1.HttpClient), i0.ɵɵinject(PaletteTemplateService), i0.ɵɵinject(LocalStorageService), i0.ɵɵinject(PalettePickerService), i0.ɵɵinject(i0.NgZone)); }, token: ThemeBuilderService, providedIn: "root" });
 ThemeBuilderService.decorators = [
@@ -1003,7 +1012,6 @@ class ThemePickerComponent {
         this.palettePickerService = palettePickerService;
         this.themeBuilderService = themeBuilderService;
         this.setupForm();
-        this.themes();
     }
     /**
      * Access manual accent color field
@@ -1030,6 +1038,7 @@ class ThemePickerComponent {
         return this.ManualForm.get('manualWarn');
     }
     ngOnInit() {
+        this.themes();
     }
     SetActiveTheme(theme) {
         let palette = new PaletteModel();
@@ -1039,6 +1048,7 @@ class ThemePickerComponent {
         palette.warn.main = theme.Warn;
         // this.palettePickerService.PalettePickerChange(palette);
         this.themeBuilderService.Palette = palette;
+        this.themes();
     }
     /**
      * Manually create theme, by using inputs
@@ -1051,7 +1061,7 @@ class ThemePickerComponent {
             Accent: this.ManualAccent.value,
             Warn: this.ManualWarn.value
         });
-        this.Themes.unshift(manualPalette);
+        this.themeBuilderService.Themes.unshift(manualPalette);
         this.SetActiveTheme(manualPalette);
     }
     setupForm() {
@@ -1066,26 +1076,7 @@ class ThemePickerComponent {
      * Create themes for theme picker
      */
     themes() {
-        this.Themes = [
-            new ThemePickerModel({
-                ID: 'Fathym Brand',
-                Primary: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'),
-                Accent: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'),
-                Warn: ThemeBuilderConstants.document.getPropertyValue('--initial-warn')
-            }),
-            new ThemePickerModel({
-                ID: 'Yellow',
-                Primary: '#ffcc11',
-                Accent: '#06a5ff',
-                Warn: '#990000'
-            }),
-            new ThemePickerModel({
-                ID: 'Pink',
-                Primary: '#a83271',
-                Accent: '#6103ff',
-                Warn: '#b9f013'
-            })
-        ];
+        this.Themes = this.themeBuilderService.Themes;
     }
 }
 ThemePickerComponent.decorators = [
