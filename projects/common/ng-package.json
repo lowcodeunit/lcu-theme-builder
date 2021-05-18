@@ -5,9 +5,7 @@
     "entryFile": "src/lcu.api.ts"
   },
   "whitelistedNonPeerDependencies": [
-    "tinycolor2",
-    "sass.js",
-    "ngx-color-picker"
+    
   ],
   "assets": [
     "assets"
