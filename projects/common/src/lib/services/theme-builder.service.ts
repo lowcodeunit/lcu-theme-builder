@@ -96,6 +96,7 @@ export class ThemeBuilderService {
    protected loadThemingScss(): Promise<void> {
 
      // this is generated in angular.json, pulls from node_modules/@angular/material
+    // return this.http.get('/assets/_theming.scss', { responseType: 'text' })
     return this.http.get('/assets/_theming.scss', { responseType: 'text' })
       .pipe(
         map((x: string) => {

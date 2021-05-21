@@ -961,20 +961,32 @@
         _createClass(AppComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.initialTheme();
+            this.setupThemes();
           }
           /**
-           * Setup the initial theme based on initial values
-           *
-           * This will also setup the initial CSS variables
+           * Setup array of themes
            */
 
         }, {
-          key: "initialTheme",
-          value: function initialTheme() {
-            var palette = new _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["PaletteModel"]();
-            palette = Object.assign(Object.assign({}, _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemeBuilderConstants"].InitialValues), palette);
-            this.themeBuilderService.Palette = palette;
+          key: "setupThemes",
+          value: function setupThemes() {
+            var themes = [new _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemePickerModel"]({
+              ID: 'Fathym Brand',
+              Primary: _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemeBuilderConstants"].document.getPropertyValue('--initial-primary'),
+              Accent: _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemeBuilderConstants"].document.getPropertyValue('--initial-accent'),
+              Warn: _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemeBuilderConstants"].document.getPropertyValue('--initial-warn')
+            }), new _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemePickerModel"]({
+              ID: 'Yellow',
+              Primary: '#ffcc11',
+              Accent: '#06a5ff',
+              Warn: '#990000'
+            }), new _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemePickerModel"]({
+              ID: 'Pink',
+              Primary: '#a83271',
+              Accent: '#6103ff',
+              Warn: '#b9f013'
+            })];
+            this.themeBuilderService.SetThemes(themes);
           }
         }]);
 
@@ -1489,7 +1501,7 @@
           function GetTemplate(theme) {
             var _this = this;
 
-            var template = "\n\n      @import '~@angular/material/theming';\n      // Include the common styles for Angular Material. We include this here so that you only\n      // have to load a single css file for Angular Material in your app.\n\n      // Foreground Elements\n\n      // Light Theme Text\n      $dark-text: ".concat(theme.palette.lightText, ";\n      $dark-primary-text: rgba($dark-text, 0.87);\n      $dark-accent-text: rgba($dark-primary-text, 0.54);\n      $dark-disabled-text: rgba($dark-primary-text, 0.38);\n      $dark-dividers: rgba($dark-primary-text, 0.12);\n      $dark-focused: rgba($dark-primary-text, 0.12);\n\n      $mat-light-theme-foreground: (\n        base:              black,\n        divider:           $dark-dividers,\n        dividers:          $dark-dividers,\n        disabled:          $dark-disabled-text,\n        disabled-button:   rgba($dark-text, 0.26),\n        disabled-text:     $dark-disabled-text,\n        elevation:         black,\n        secondary-text:    $dark-accent-text,\n        hint-text:         $dark-disabled-text,\n        accent-text:       $dark-accent-text,\n        icon:              $dark-accent-text,\n        icons:             $dark-accent-text,\n        text:              $dark-primary-text,\n        slider-min:        $dark-primary-text,\n        slider-off:        rgba($dark-text, 0.26),\n        slider-off-active: $dark-disabled-text,\n      );\n\n      // Dark Theme text\n      $light-text: ").concat(theme.palette.darkText, ";\n      $light-primary-text: $light-text;\n      $light-accent-text: rgba($light-primary-text, 0.7);\n      $light-disabled-text: rgba($light-primary-text, 0.5);\n      $light-dividers: rgba($light-primary-text, 0.12);\n      $light-focused: rgba($light-primary-text, 0.12);\n\n      $mat-dark-theme-foreground: (\n        base:              $light-text,\n        divider:           $light-dividers,\n        dividers:          $light-dividers,\n        disabled:          $light-disabled-text,\n        disabled-button:   rgba($light-text, 0.3),\n        disabled-text:     $light-disabled-text,\n        elevation:         black,\n        hint-text:         $light-disabled-text,\n        secondary-text:    $light-accent-text,\n        accent-text:       $light-accent-text,\n        icon:              $light-text,\n        icons:             $light-text,\n        text:              $light-text,\n        slider-min:        $light-text,\n        slider-off:        rgba($light-text, 0.3),\n        slider-off-active: rgba($light-text, 0.3),\n      );\n\n      // Background config\n      // Light bg\n      $light-background:    ").concat(theme.palette.lightBackground, ";\n      $light-bg-darker-5:   darken($light-background, 5%);\n      $light-bg-darker-10:  darken($light-background, 10%);\n      $light-bg-darker-20:  darken($light-background, 20%);\n      $light-bg-darker-30:  darken($light-background, 30%);\n      $light-bg-lighter-5:  lighten($light-background, 5%);\n      $dark-bg-alpha-4:     rgba(").concat(theme.palette.darkBackground, ", 0.04);\n      $dark-bg-alpha-12:    rgba(").concat(theme.palette.darkBackground, ", 0.12);\n\n      $mat-light-theme-background: (\n        background:               $light-background,\n        status-bar:               $light-bg-darker-20,\n        app-bar:                  $light-bg-darker-5,\n        hover:                    $dark-bg-alpha-4,\n        card:                     $light-bg-lighter-5,\n        dialog:                   $light-bg-lighter-5,\n        disabled-button:          $dark-bg-alpha-12,\n        raised-button:            $light-bg-lighter-5,\n        focused-button:           $dark-focused,\n        selected-button:          $light-bg-darker-20,\n        selected-disabled-button: $light-bg-darker-30,\n        disabled-button-toggle:   $light-bg-darker-10,\n        unselected-chip:          $light-bg-darker-10,\n        disabled-list-option:     $light-bg-darker-10,\n      );\n\n      // Dark bg\n      $dark-background:     ").concat(theme.palette.darkBackground, ";\n      $dark-bg-lighter-5:   lighten($dark-background, 5%);\n      $dark-bg-lighter-10:  lighten($dark-background, 10%);\n      $dark-bg-lighter-20:  lighten($dark-background, 20%);\n      $dark-bg-lighter-30:  lighten($dark-background, 30%);\n      $light-bg-alpha-4:    rgba(").concat(theme.palette.lightBackground, ", 0.04);\n      $light-bg-alpha-12:   rgba(").concat(theme.palette.lightBackground, ", 0.12);\n\n      // Background palette for dark themes.\n      $mat-dark-theme-background: (\n        background:               $dark-background,\n        status-bar:               $dark-bg-lighter-20,\n        app-bar:                  $dark-bg-lighter-5,\n        hover:                    $light-bg-alpha-4,\n        card:                     $dark-bg-lighter-5,\n        dialog:                   $dark-bg-lighter-5,\n        disabled-button:          $light-bg-alpha-12,\n        raised-button:            $dark-bg-lighter-5,\n        focused-button:           $light-focused,\n        selected-button:          $dark-bg-lighter-20,\n        selected-disabled-button: $dark-bg-lighter-30,\n        disabled-button-toggle:   $dark-bg-lighter-10,\n        unselected-chip:          $dark-bg-lighter-20,\n        disabled-list-option:     $dark-bg-lighter-10,\n      );\n\n      // Theme Config\n      ").concat(['primary', 'accent', 'warn'].map(function (x) {
+            var template = "\n      @import '~@angular/material/theming';\n      // Include the common styles for Angular Material. We include this here so that you only\n      // have to load a single css file for Angular Material in your app.\n\n      // Foreground Elements\n\n      // Light Theme Text\n      $dark-text: ".concat(theme.palette.lightText, ";\n      $dark-primary-text: rgba($dark-text, 0.87);\n      $dark-accent-text: rgba($dark-primary-text, 0.54);\n      $dark-disabled-text: rgba($dark-primary-text, 0.38);\n      $dark-dividers: rgba($dark-primary-text, 0.12);\n      $dark-focused: rgba($dark-primary-text, 0.12);\n\n      $mat-light-theme-foreground: (\n        base:              black,\n        divider:           $dark-dividers,\n        dividers:          $dark-dividers,\n        disabled:          $dark-disabled-text,\n        disabled-button:   rgba($dark-text, 0.26),\n        disabled-text:     $dark-disabled-text,\n        elevation:         black,\n        secondary-text:    $dark-accent-text,\n        hint-text:         $dark-disabled-text,\n        accent-text:       $dark-accent-text,\n        icon:              $dark-accent-text,\n        icons:             $dark-accent-text,\n        text:              $dark-primary-text,\n        slider-min:        $dark-primary-text,\n        slider-off:        rgba($dark-text, 0.26),\n        slider-off-active: $dark-disabled-text,\n      );\n\n      // Dark Theme text\n      $light-text: ").concat(theme.palette.darkText, ";\n      $light-primary-text: $light-text;\n      $light-accent-text: rgba($light-primary-text, 0.7);\n      $light-disabled-text: rgba($light-primary-text, 0.5);\n      $light-dividers: rgba($light-primary-text, 0.12);\n      $light-focused: rgba($light-primary-text, 0.12);\n\n      $mat-dark-theme-foreground: (\n        base:              $light-text,\n        divider:           $light-dividers,\n        dividers:          $light-dividers,\n        disabled:          $light-disabled-text,\n        disabled-button:   rgba($light-text, 0.3),\n        disabled-text:     $light-disabled-text,\n        elevation:         black,\n        hint-text:         $light-disabled-text,\n        secondary-text:    $light-accent-text,\n        accent-text:       $light-accent-text,\n        icon:              $light-text,\n        icons:             $light-text,\n        text:              $light-text,\n        slider-min:        $light-text,\n        slider-off:        rgba($light-text, 0.3),\n        slider-off-active: rgba($light-text, 0.3),\n      );\n\n      // Background config\n      // Light bg\n      $light-background:    ").concat(theme.palette.lightBackground, ";\n      $light-bg-darker-5:   darken($light-background, 5%);\n      $light-bg-darker-10:  darken($light-background, 10%);\n      $light-bg-darker-20:  darken($light-background, 20%);\n      $light-bg-darker-30:  darken($light-background, 30%);\n      $light-bg-lighter-5:  lighten($light-background, 5%);\n      $dark-bg-alpha-4:     rgba(").concat(theme.palette.darkBackground, ", 0.04);\n      $dark-bg-alpha-12:    rgba(").concat(theme.palette.darkBackground, ", 0.12);\n\n      $mat-light-theme-background: (\n        background:               $light-background,\n        status-bar:               $light-bg-darker-20,\n        app-bar:                  $light-bg-darker-5,\n        hover:                    $dark-bg-alpha-4,\n        card:                     $light-bg-lighter-5,\n        dialog:                   $light-bg-lighter-5,\n        disabled-button:          $dark-bg-alpha-12,\n        raised-button:            $light-bg-lighter-5,\n        focused-button:           $dark-focused,\n        selected-button:          $light-bg-darker-20,\n        selected-disabled-button: $light-bg-darker-30,\n        disabled-button-toggle:   $light-bg-darker-10,\n        unselected-chip:          $light-bg-darker-10,\n        disabled-list-option:     $light-bg-darker-10,\n      );\n\n      // Dark bg\n      $dark-background:     ").concat(theme.palette.darkBackground, ";\n      $dark-bg-lighter-5:   lighten($dark-background, 5%);\n      $dark-bg-lighter-10:  lighten($dark-background, 10%);\n      $dark-bg-lighter-20:  lighten($dark-background, 20%);\n      $dark-bg-lighter-30:  lighten($dark-background, 30%);\n      $light-bg-alpha-4:    rgba(").concat(theme.palette.lightBackground, ", 0.04);\n      $light-bg-alpha-12:   rgba(").concat(theme.palette.lightBackground, ", 0.12);\n\n      // Background palette for dark themes.\n      $mat-dark-theme-background: (\n        background:               $dark-background,\n        status-bar:               $dark-bg-lighter-20,\n        app-bar:                  $dark-bg-lighter-5,\n        hover:                    $light-bg-alpha-4,\n        card:                     $dark-bg-lighter-5,\n        dialog:                   $dark-bg-lighter-5,\n        disabled-button:          $light-bg-alpha-12,\n        raised-button:            $dark-bg-lighter-5,\n        focused-button:           $light-focused,\n        selected-button:          $dark-bg-lighter-20,\n        selected-disabled-button: $dark-bg-lighter-30,\n        disabled-button-toggle:   $dark-bg-lighter-10,\n        unselected-chip:          $dark-bg-lighter-20,\n        disabled-list-option:     $dark-bg-lighter-10,\n      );\n\n      // Theme Config\n      ").concat(['primary', 'accent', 'warn'].map(function (x) {
               return _this.getScssPalette(x, theme.palette[x]);
             }).join('\n'), ";\n\n      $theme: ").concat(!theme.lightness ? 'mat-dark-theme' : 'mat-light-theme', "($theme-primary, $theme-accent, $theme-warn);\n      $altTheme: ").concat(!theme.lightness ? 'mat-light-theme' : 'mat-dark-theme', "($theme-primary, $theme-accent, $theme-warn);\n\n      // Theme Init\n      @include angular-material-theme($theme);\n\n      .theme-alternate {\n        @include angular-material-theme($altTheme);\n      }\n\n      \n\n\n      // Specific component overrides, pieces that are not in line with the general theming\n\n      // Handle buttons appropriately, with respect to line-height\n      .mat-raised-button, .mat-stroked-button, .mat-flat-button {\n        padding: 0 1.15em;\n        margin: 0 .65em;\n        min-width: 3em;\n      }\n\n      .mat-standard-chip {\n        padding: .5em .85em;\n        min-height: 2.5em;\n      }\n      ");
             return template;
@@ -1747,6 +1759,17 @@
                 console.error(err);
               });
             });
+          }
+        }, {
+          key: "SetThemes",
+          value: function SetThemes(themes) {
+            this.Themes = themes;
+            var initial = new PaletteModel();
+            initial = Object.assign(Object.assign({}, ThemeBuilderConstants.InitialValues), initial);
+            initial.primary.main = this.Themes[0].Primary;
+            initial.accent.main = this.Themes[0].Accent;
+            initial.warn.main = this.Themes[0].Warn;
+            this.Palette = initial;
           }
         }]);
 
@@ -2062,7 +2085,6 @@
               //  console.log('B', b);
               return JSON.stringify(a) !== JSON.stringify(b);
             })).subscribe(function (palette) {
-              console.log('ASKASLKDALKSD', palette);
               _this4.themeBuilderService.Palette = palette;
             });
           }
@@ -2562,7 +2584,6 @@
           this.palettePickerService = palettePickerService;
           this.themeBuilderService = themeBuilderService;
           this.setupForm();
-          this.themes();
         }
         /**
          * Access manual accent color field
@@ -2603,7 +2624,9 @@
           }
         }, {
           key: "ngOnInit",
-          value: function ngOnInit() {}
+          value: function ngOnInit() {
+            this.themes();
+          }
         }, {
           key: "SetActiveTheme",
           value: function SetActiveTheme(theme) {
@@ -2614,6 +2637,7 @@
             palette.warn.main = theme.Warn; // this.palettePickerService.PalettePickerChange(palette);
 
             this.themeBuilderService.Palette = palette;
+            this.themes();
           }
           /**
            * Manually create theme, by using inputs
@@ -2629,7 +2653,7 @@
               Accent: this.ManualAccent.value,
               Warn: this.ManualWarn.value
             });
-            this.Themes.unshift(manualPalette);
+            this.themeBuilderService.Themes.unshift(manualPalette);
             this.SetActiveTheme(manualPalette);
           }
         }, {
@@ -2657,22 +2681,7 @@
         }, {
           key: "themes",
           value: function themes() {
-            this.Themes = [new ThemePickerModel({
-              ID: 'Fathym Brand',
-              Primary: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'),
-              Accent: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'),
-              Warn: ThemeBuilderConstants.document.getPropertyValue('--initial-warn')
-            }), new ThemePickerModel({
-              ID: 'Yellow',
-              Primary: '#ffcc11',
-              Accent: '#06a5ff',
-              Warn: '#990000'
-            }), new ThemePickerModel({
-              ID: 'Pink',
-              Primary: '#a83271',
-              Accent: '#6103ff',
-              Warn: '#b9f013'
-            })];
+            this.Themes = this.themeBuilderService.Themes;
           }
         }]);
 
@@ -2683,7 +2692,7 @@
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
           selector: 'lcu-theme-picker',
-          template: "<button mat-icon-button id=\"theme-selector\" [mat-menu-trigger-for]=\"themeMenu\" tabindex=\"-1\">\r\n    <mat-icon class=\"auto-flip\">format_color_fill</mat-icon>\r\n</button>\r\n\r\n<mat-menu #themeMenu=\"matMenu\">\r\n    <lcu-mode-toggle class=\"margin-2\"></lcu-mode-toggle>\r\n    <div class=\"theme-selector-container\"\r\n        tabindex=\"-1\"\r\n        (click)=\"$event.stopPropagation();\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.shift.tab)=\"$event.stopPropagation()\">\r\n        <div *ngFor=\"let theme of Themes\" fxLayout=\"column\">\r\n            <button mat-button class=\"theme-selector\" (click)=\"SetActiveTheme(theme)\">\r\n                <div \r\n                    fxLayout=\"row\"\r\n                    fxLayout=\"start center\"\r\n                    class=\"margin-1\">\r\n                    <div class=\"theme-primary\" [ngStyle]=\"{'background-color':theme.Primary}\">\r\n                        <div class=\"theme-accent\" [ngStyle]=\"{'background-color':theme.Accent}\"></div>\r\n                        <div class=\"theme-warn\" [ngStyle]=\"{'background-color':theme.Warn}\"></div>\r\n                        <!-- <mat-icon *ngIf=\"activeTheme===theme\" class=\"center theme-check\">check</mat-icon> -->\r\n                    </div>\r\n                    <span \r\n                    class=\"margin-left-2 mat-card-subtitle\">\r\n                        {{ theme.ID }}\r\n                    </span>\r\n                </div>\r\n            </button>\r\n        </div>\r\n        <div class=\"margin-2 margin-top-5\">\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <div mat-card-avatar class=\"lcu-card-avatar\">\r\n                        <mat-icon color=\"accent\">palette</mat-icon>\r\n                    </div>\r\n                    <mat-card-title>\r\n                        Manual Theme\r\n                    </mat-card-title>\r\n                </mat-card-header>\r\n                <mat-card-content>\r\n                    <form\r\n                    fxLayout=\"column\"\r\n                    fxLayoutGap=\"10px\"\r\n                    [formGroup]=\"ManualForm\"\r\n                    novalidate\r\n                    (click)=\"$event.stopPropagation()\">\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualThemeName\"\r\n                        />\r\n                        <mat-hint>Theme Name</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualPrimary\"\r\n                        />\r\n                        <mat-hint>Primary Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualAccent\"\r\n                        />\r\n                        <mat-hint>Accent Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualWarn\"\r\n                        />\r\n                        <mat-hint>Warn Color</mat-hint>\r\n                    </mat-form-field>\r\n                </form>\r\n                </mat-card-content>\r\n                <mat-card-actions>\r\n                    <button\r\n                    mat-raised-button\r\n                    color=\"primary\"\r\n                    class=\"margin-top-3\"\r\n                    [disabled]=\"!ManualForm.valid\"\r\n                    (click)=\"SetManualTheme()\"\r\n                        >\r\n                        Set Theme\r\n                    </button>\r\n                </mat-card-actions>\r\n            </mat-card>\r\n           \r\n        </div>\r\n    </div>\r\n</mat-menu>",
+          template: "<button mat-icon-button id=\"theme-selector\" [mat-menu-trigger-for]=\"themeMenu\" tabindex=\"-1\">\r\n    <mat-icon class=\"auto-flip\">format_color_fill</mat-icon>\r\n</button>\r\n\r\n\r\n<mat-menu #themeMenu=\"matMenu\">\r\n    <lcu-mode-toggle class=\"margin-2\"></lcu-mode-toggle>\r\n    <div class=\"theme-selector-container\"\r\n        tabindex=\"-1\"\r\n        (click)=\"$event.stopPropagation();\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.shift.tab)=\"$event.stopPropagation()\">\r\n        <div *ngFor=\"let theme of Themes\" fxLayout=\"column\">\r\n            <button mat-button class=\"theme-selector\" (click)=\"SetActiveTheme(theme)\">\r\n                <div \r\n                    fxLayout=\"row\"\r\n                    fxLayout=\"start center\"\r\n                    class=\"margin-1\">\r\n                    <div class=\"theme-primary\" [ngStyle]=\"{'background-color':theme.Primary}\">\r\n                        <div class=\"theme-accent\" [ngStyle]=\"{'background-color':theme.Accent}\"></div>\r\n                        <div class=\"theme-warn\" [ngStyle]=\"{'background-color':theme.Warn}\"></div>\r\n                        <!-- <mat-icon *ngIf=\"activeTheme===theme\" class=\"center theme-check\">check</mat-icon> -->\r\n                    </div>\r\n                    <span \r\n                    class=\"margin-left-2 mat-card-subtitle\">\r\n                        {{ theme.ID }}\r\n                    </span>\r\n                </div>\r\n            </button>\r\n        </div>\r\n        <div class=\"margin-2 margin-top-5\">\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <div mat-card-avatar class=\"lcu-card-avatar\">\r\n                        <mat-icon color=\"accent\">palette</mat-icon>\r\n                    </div>\r\n                    <mat-card-title>\r\n                        Manual Theme\r\n                    </mat-card-title>\r\n                </mat-card-header>\r\n                <mat-card-content>\r\n                    <form\r\n                    fxLayout=\"column\"\r\n                    fxLayoutGap=\"10px\"\r\n                    [formGroup]=\"ManualForm\"\r\n                    novalidate\r\n                    (click)=\"$event.stopPropagation()\">\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualThemeName\"\r\n                        />\r\n                        <mat-hint>Theme Name</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualPrimary\"\r\n                        />\r\n                        <mat-hint>Primary Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualAccent\"\r\n                        />\r\n                        <mat-hint>Accent Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualWarn\"\r\n                        />\r\n                        <mat-hint>Warn Color</mat-hint>\r\n                    </mat-form-field>\r\n                </form>\r\n                </mat-card-content>\r\n                <mat-card-actions>\r\n                    <button\r\n                    mat-raised-button\r\n                    color=\"primary\"\r\n                    class=\"margin-top-3\"\r\n                    [disabled]=\"!ManualForm.valid\"\r\n                    (click)=\"SetManualTheme()\"\r\n                        >\r\n                        Set Theme\r\n                    </button>\r\n                </mat-card-actions>\r\n            </mat-card>\r\n           \r\n        </div>\r\n    </div>\r\n</mat-menu>",
           styles: [".toolbar-spacer{flex:1 1 auto}.theme-selectors-container{width:390px;margin:0 8px}div.theme-primary{width:50px;height:50px}div.theme-accent{width:25px;height:25px;position:absolute;bottom:15px;left:17px}div.theme-warn{width:15px;height:15px;position:absolute;bottom:15px;left:30px}"]
         }]
       }];

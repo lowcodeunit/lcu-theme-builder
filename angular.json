@@ -210,8 +210,10 @@
 						"styles": [
 							"projects/demo/src/styles.scss"
 						],
-						"scripts": ["node_modules/sass.js/dist/sass.js",
-						"node_modules/sass.js/dist/sass.worker.js"]
+						"scripts": 
+						["./node_modules/sass.js/dist/sass.js",
+						"./node_modules/sass.js/dist/sass.worker.js"
+						]
 					},
 					"configurations": {
 						"production": {

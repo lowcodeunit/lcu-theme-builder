@@ -376,17 +376,33 @@ class AppComponent {
         this.Title = 'Theme Builder';
     }
     ngOnInit() {
-        this.initialTheme();
+        this.setupThemes();
     }
     /**
-     * Setup the initial theme based on initial values
-     *
-     * This will also setup the initial CSS variables
+     * Setup array of themes
      */
-    initialTheme() {
-        let palette = new _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["PaletteModel"]();
-        palette = Object.assign(Object.assign({}, _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemeBuilderConstants"].InitialValues), palette);
-        this.themeBuilderService.Palette = palette;
+    setupThemes() {
+        const themes = [
+            new _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemePickerModel"]({
+                ID: 'Fathym Brand',
+                Primary: _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemeBuilderConstants"].document.getPropertyValue('--initial-primary'),
+                Accent: _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemeBuilderConstants"].document.getPropertyValue('--initial-accent'),
+                Warn: _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemeBuilderConstants"].document.getPropertyValue('--initial-warn')
+            }),
+            new _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemePickerModel"]({
+                ID: 'Yellow',
+                Primary: '#ffcc11',
+                Accent: '#06a5ff',
+                Warn: '#990000'
+            }),
+            new _lowcodeunit_lcu_theme_builder_common__WEBPACK_IMPORTED_MODULE_0__["ThemePickerModel"]({
+                ID: 'Pink',
+                Primary: '#a83271',
+                Accent: '#6103ff',
+                Warn: '#b9f013'
+            })
+        ];
+        this.themeBuilderService.SetThemes(themes);
     }
 }
 
@@ -628,7 +644,6 @@ class PaletteTemplateService {
      */
     GetTemplate(theme) {
         const template = `
-
       @import '~@angular/material/theming';
       // Include the common styles for Angular Material. We include this here so that you only
       // have to load a single css file for Angular Material in your app.
@@ -979,6 +994,15 @@ class ThemeBuilderService {
             });
         });
     }
+    SetThemes(themes) {
+        this.Themes = themes;
+        let initial = new PaletteModel();
+        initial = Object.assign(Object.assign({}, ThemeBuilderConstants.InitialValues), initial);
+        initial.primary.main = this.Themes[0].Primary;
+        initial.accent.main = this.Themes[0].Accent;
+        initial.warn.main = this.Themes[0].Warn;
+        this.Palette = initial;
+    }
 }
 ThemeBuilderService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ factory: function ThemeBuilderService_Factory() { return new ThemeBuilderService(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](PaletteTemplateService), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](LocalStorageService), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](PalettePickerService), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"])); }, token: ThemeBuilderService, providedIn: "root" });
 ThemeBuilderService.decorators = [
@@ -1179,7 +1203,6 @@ class PalettePickerComponent {
             return JSON.stringify(a) !== JSON.stringify(b);
         }))
             .subscribe((palette) => {
-            console.log('ASKASLKDALKSD', palette);
             this.themeBuilderService.Palette = palette;
         });
     }
@@ -1509,7 +1532,6 @@ class ThemePickerComponent {
         this.palettePickerService = palettePickerService;
         this.themeBuilderService = themeBuilderService;
         this.setupForm();
-        this.themes();
     }
     /**
      * Access manual accent color field
@@ -1536,6 +1558,7 @@ class ThemePickerComponent {
         return this.ManualForm.get('manualWarn');
     }
     ngOnInit() {
+        this.themes();
     }
     SetActiveTheme(theme) {
         let palette = new PaletteModel();
@@ -1545,6 +1568,7 @@ class ThemePickerComponent {
         palette.warn.main = theme.Warn;
         // this.palettePickerService.PalettePickerChange(palette);
         this.themeBuilderService.Palette = palette;
+        this.themes();
     }
     /**
      * Manually create theme, by using inputs
@@ -1557,7 +1581,7 @@ class ThemePickerComponent {
             Accent: this.ManualAccent.value,
             Warn: this.ManualWarn.value
         });
-        this.Themes.unshift(manualPalette);
+        this.themeBuilderService.Themes.unshift(manualPalette);
         this.SetActiveTheme(manualPalette);
     }
     setupForm() {
@@ -1572,32 +1596,13 @@ class ThemePickerComponent {
      * Create themes for theme picker
      */
     themes() {
-        this.Themes = [
-            new ThemePickerModel({
-                ID: 'Fathym Brand',
-                Primary: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'),
-                Accent: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'),
-                Warn: ThemeBuilderConstants.document.getPropertyValue('--initial-warn')
-            }),
-            new ThemePickerModel({
-                ID: 'Yellow',
-                Primary: '#ffcc11',
-                Accent: '#06a5ff',
-                Warn: '#990000'
-            }),
-            new ThemePickerModel({
-                ID: 'Pink',
-                Primary: '#a83271',
-                Accent: '#6103ff',
-                Warn: '#b9f013'
-            })
-        ];
+        this.Themes = this.themeBuilderService.Themes;
     }
 }
 ThemePickerComponent.decorators = [
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"], args: [{
                 selector: 'lcu-theme-picker',
-                template: "<button mat-icon-button id=\"theme-selector\" [mat-menu-trigger-for]=\"themeMenu\" tabindex=\"-1\">\r\n    <mat-icon class=\"auto-flip\">format_color_fill</mat-icon>\r\n</button>\r\n\r\n<mat-menu #themeMenu=\"matMenu\">\r\n    <lcu-mode-toggle class=\"margin-2\"></lcu-mode-toggle>\r\n    <div class=\"theme-selector-container\"\r\n        tabindex=\"-1\"\r\n        (click)=\"$event.stopPropagation();\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.shift.tab)=\"$event.stopPropagation()\">\r\n        <div *ngFor=\"let theme of Themes\" fxLayout=\"column\">\r\n            <button mat-button class=\"theme-selector\" (click)=\"SetActiveTheme(theme)\">\r\n                <div \r\n                    fxLayout=\"row\"\r\n                    fxLayout=\"start center\"\r\n                    class=\"margin-1\">\r\n                    <div class=\"theme-primary\" [ngStyle]=\"{'background-color':theme.Primary}\">\r\n                        <div class=\"theme-accent\" [ngStyle]=\"{'background-color':theme.Accent}\"></div>\r\n                        <div class=\"theme-warn\" [ngStyle]=\"{'background-color':theme.Warn}\"></div>\r\n                        <!-- <mat-icon *ngIf=\"activeTheme===theme\" class=\"center theme-check\">check</mat-icon> -->\r\n                    </div>\r\n                    <span \r\n                    class=\"margin-left-2 mat-card-subtitle\">\r\n                        {{ theme.ID }}\r\n                    </span>\r\n                </div>\r\n            </button>\r\n        </div>\r\n        <div class=\"margin-2 margin-top-5\">\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <div mat-card-avatar class=\"lcu-card-avatar\">\r\n                        <mat-icon color=\"accent\">palette</mat-icon>\r\n                    </div>\r\n                    <mat-card-title>\r\n                        Manual Theme\r\n                    </mat-card-title>\r\n                </mat-card-header>\r\n                <mat-card-content>\r\n                    <form\r\n                    fxLayout=\"column\"\r\n                    fxLayoutGap=\"10px\"\r\n                    [formGroup]=\"ManualForm\"\r\n                    novalidate\r\n                    (click)=\"$event.stopPropagation()\">\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualThemeName\"\r\n                        />\r\n                        <mat-hint>Theme Name</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualPrimary\"\r\n                        />\r\n                        <mat-hint>Primary Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualAccent\"\r\n                        />\r\n                        <mat-hint>Accent Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualWarn\"\r\n                        />\r\n                        <mat-hint>Warn Color</mat-hint>\r\n                    </mat-form-field>\r\n                </form>\r\n                </mat-card-content>\r\n                <mat-card-actions>\r\n                    <button\r\n                    mat-raised-button\r\n                    color=\"primary\"\r\n                    class=\"margin-top-3\"\r\n                    [disabled]=\"!ManualForm.valid\"\r\n                    (click)=\"SetManualTheme()\"\r\n                        >\r\n                        Set Theme\r\n                    </button>\r\n                </mat-card-actions>\r\n            </mat-card>\r\n           \r\n        </div>\r\n    </div>\r\n</mat-menu>",
+                template: "<button mat-icon-button id=\"theme-selector\" [mat-menu-trigger-for]=\"themeMenu\" tabindex=\"-1\">\r\n    <mat-icon class=\"auto-flip\">format_color_fill</mat-icon>\r\n</button>\r\n\r\n\r\n<mat-menu #themeMenu=\"matMenu\">\r\n    <lcu-mode-toggle class=\"margin-2\"></lcu-mode-toggle>\r\n    <div class=\"theme-selector-container\"\r\n        tabindex=\"-1\"\r\n        (click)=\"$event.stopPropagation();\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.shift.tab)=\"$event.stopPropagation()\">\r\n        <div *ngFor=\"let theme of Themes\" fxLayout=\"column\">\r\n            <button mat-button class=\"theme-selector\" (click)=\"SetActiveTheme(theme)\">\r\n                <div \r\n                    fxLayout=\"row\"\r\n                    fxLayout=\"start center\"\r\n                    class=\"margin-1\">\r\n                    <div class=\"theme-primary\" [ngStyle]=\"{'background-color':theme.Primary}\">\r\n                        <div class=\"theme-accent\" [ngStyle]=\"{'background-color':theme.Accent}\"></div>\r\n                        <div class=\"theme-warn\" [ngStyle]=\"{'background-color':theme.Warn}\"></div>\r\n                        <!-- <mat-icon *ngIf=\"activeTheme===theme\" class=\"center theme-check\">check</mat-icon> -->\r\n                    </div>\r\n                    <span \r\n                    class=\"margin-left-2 mat-card-subtitle\">\r\n                        {{ theme.ID }}\r\n                    </span>\r\n                </div>\r\n            </button>\r\n        </div>\r\n        <div class=\"margin-2 margin-top-5\">\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <div mat-card-avatar class=\"lcu-card-avatar\">\r\n                        <mat-icon color=\"accent\">palette</mat-icon>\r\n                    </div>\r\n                    <mat-card-title>\r\n                        Manual Theme\r\n                    </mat-card-title>\r\n                </mat-card-header>\r\n                <mat-card-content>\r\n                    <form\r\n                    fxLayout=\"column\"\r\n                    fxLayoutGap=\"10px\"\r\n                    [formGroup]=\"ManualForm\"\r\n                    novalidate\r\n                    (click)=\"$event.stopPropagation()\">\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualThemeName\"\r\n                        />\r\n                        <mat-hint>Theme Name</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualPrimary\"\r\n                        />\r\n                        <mat-hint>Primary Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualAccent\"\r\n                        />\r\n                        <mat-hint>Accent Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualWarn\"\r\n                        />\r\n                        <mat-hint>Warn Color</mat-hint>\r\n                    </mat-form-field>\r\n                </form>\r\n                </mat-card-content>\r\n                <mat-card-actions>\r\n                    <button\r\n                    mat-raised-button\r\n                    color=\"primary\"\r\n                    class=\"margin-top-3\"\r\n                    [disabled]=\"!ManualForm.valid\"\r\n                    (click)=\"SetManualTheme()\"\r\n                        >\r\n                        Set Theme\r\n                    </button>\r\n                </mat-card-actions>\r\n            </mat-card>\r\n           \r\n        </div>\r\n    </div>\r\n</mat-menu>",
                 styles: [".toolbar-spacer{flex:1 1 auto}.theme-selectors-container{width:390px;margin:0 8px}div.theme-primary{width:50px;height:50px}div.theme-accent{width:25px;height:25px;position:absolute;bottom:15px;left:17px}div.theme-warn{width:15px;height:15px;position:absolute;bottom:15px;left:30px}"]
             },] }
 ];
