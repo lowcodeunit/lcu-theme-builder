@@ -55,10 +55,10 @@ public get ManualWarn(): AbstractControl {
     protected themeBuilderService: ThemeBuilderService) {
 
       this.setupForm();
-      this.themes();
   }
 
   ngOnInit(): void {
+    this.themes();
   }
 
   public SetActiveTheme(theme: ThemePickerModel): void {
@@ -72,6 +72,7 @@ public get ManualWarn(): AbstractControl {
   // this.palettePickerService.PalettePickerChange(palette);
 
   this.themeBuilderService.Palette = palette;
+  this.themes();
   }
 
   /**
@@ -87,7 +88,7 @@ public get ManualWarn(): AbstractControl {
         Warn: this.ManualWarn.value
       }
     )
-    this.Themes.unshift(manualPalette);
+    this.themeBuilderService.Themes.unshift(manualPalette);
     this.SetActiveTheme(manualPalette);
   }
 
@@ -111,32 +112,8 @@ public get ManualWarn(): AbstractControl {
    * Create themes for theme picker
    */
   protected themes(): void {
-    this.Themes = [
-      new ThemePickerModel(
-        {
-          ID: 'Fathym Brand',
-          Primary: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'),
-          Accent: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'),
-          Warn: ThemeBuilderConstants.document.getPropertyValue('--initial-warn')
-        }
-      ),
-      new ThemePickerModel(
-        {
-          ID: 'Yellow', 
-          Primary: '#ffcc11', 
-          Accent: '#06a5ff', 
-          Warn: '#990000'
-        }
-      ),
-      new ThemePickerModel(
-        {
-          ID: 'Pink', 
-          Primary: '#a83271', 
-          Accent: '#6103ff', 
-          Warn: '#b9f013'
-        }
-      )
-    ];
+
+    this.Themes = this.themeBuilderService.Themes;
   }
 
 }

@@ -12,6 +12,7 @@ import { ThemeModel } from '../models/theme.model';
 import { HttpClient } from '@angular/common/http';
 import { PaletteListModel } from '../models/palette-list.model';
 import { PaletteTemplateService } from './palette-template.service';
+import { ThemePickerModel } from '../models/theme-picker.model';
 
 const tinyColor = tinycolor;
 
@@ -87,12 +88,21 @@ export class ThemeBuilderService {
       return this.themeMode;
     }
 
+    public Themes: Array<ThemePickerModel>;
+
    /**
     * load intial theme
     */
    protected loadThemingScss(): Promise<void> {
 
      // this is generated in angular.json, pulls from node_modules/@angular/material
+    // return this.http.get('/assets/_theming.scss', { responseType: 'text' })
+    // Sass.writeFile('testfile.scss', '@import "./node_modules/@angular/material/theming";\n.testfile { content: "loaded"; }',(result: boolean) => {
+    //   debugger;
+    // })
+    // Sass.compile('@import "testfile";', ((result: any) => {
+    //   debugger;
+    // }))
     return this.http.get('/assets/_theming.scss', { responseType: 'text' })
       .pipe(
         map((x: string) => {
@@ -236,5 +246,18 @@ export class ThemeBuilderService {
         console.error(err);
       });
    });
+  }
+
+  public SetThemes(themes: Array<ThemePickerModel>): void {
+    this.Themes = themes;
+
+    let initial: PaletteModel = new PaletteModel();
+    initial = { ...ThemeBuilderConstants.InitialValues, ...initial };
+    initial.primary.main = this.Themes[0].Primary;
+    initial.accent.main = this.Themes[0].Accent;
+    initial.warn.main = this.Themes[0].Warn;
+
+    this.Palette = initial;
+   
   }
 }

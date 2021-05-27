@@ -96,7 +96,6 @@ export class PalettePickerComponent implements OnInit, OnDestroy {
      return JSON.stringify(a) !== JSON.stringify(b);
    }))
     .subscribe((palette: PaletteModel) => {
-      console.log('ASKASLKDALKSD', palette);
       this.themeBuilderService.Palette = palette;
     });
   }
