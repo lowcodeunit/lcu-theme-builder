@@ -4,9 +4,6 @@
   "lib": {
     "entryFile": "src/lcu.api.ts"
   },
-  "whitelistedNonPeerDependencies": [
-    
-  ],
   "assets": [
     "assets"
   ]
