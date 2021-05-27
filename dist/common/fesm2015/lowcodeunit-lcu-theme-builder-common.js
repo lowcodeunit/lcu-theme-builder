@@ -354,6 +354,12 @@ class ThemeBuilderService {
     loadThemingScss() {
         // this is generated in angular.json, pulls from node_modules/@angular/material
         // return this.http.get('/assets/_theming.scss', { responseType: 'text' })
+        // Sass.writeFile('testfile.scss', '@import "./node_modules/@angular/material/theming";\n.testfile { content: "loaded"; }',(result: boolean) => {
+        //   debugger;
+        // })
+        // Sass.compile('@import "testfile";', ((result: any) => {
+        //   debugger;
+        // }))
         return this.http.get('/assets/_theming.scss', { responseType: 'text' })
             .pipe(map((x) => {
             return x

@@ -32,5 +32,6 @@
 		"strictInjectionParameters": true,
 		"enableIvy": false,
 		"strictTemplates": true
-	}
+	},
+	"exclude": ["node_modules", "typings"]
 }
