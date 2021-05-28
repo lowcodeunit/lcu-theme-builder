@@ -22,7 +22,9 @@
 		"build": "npm run build:common && npm run build:lcu",
 		"test": "ng test",
 		"lint": "ng lint",
-		"e2e": "ng e2e"
+		"e2e": "ng e2e",
+		"serve-it": "npm run copy:sassjs && npm run copy:sassworker && npm run copy:assets && ng serve demo",
+		"copy:assets": "cpx \"./node_modules/@angular/material/_theming.scss\" \"./demo/assets/\""
 	},
 	"private": false,
 	"dependencies": {
@@ -50,6 +52,7 @@
 		"highlight.js": "^10.7.2",
 		"ngx-build-plus": "^12.0.1",
 		"ngx-color-picker": "^11.0.0",
+		"node-sass": "5.0.0",
 		"rxjs": "^7.0.1",
 		"sass.js": "^0.11.1",
 		"terser": "^5.7.0",
@@ -68,6 +71,7 @@
 		"@types/jasmine": "^3.7.4",
 		"@types/jasminewd2": "^2.0.9",
 		"@types/node": "^15.0.3",
+		"@types/sass": "^1.16.0",
 		"@types/tinycolor2": "^1.4.2",
 		"codelyzer": "^6.0.2",
 		"concat-glob-cli": "^0.1.0",

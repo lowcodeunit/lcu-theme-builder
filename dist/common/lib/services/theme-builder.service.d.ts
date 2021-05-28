@@ -9,6 +9,7 @@ import { ThemeModel } from '../models/theme.model';
 import { HttpClient } from '@angular/common/http';
 import { PaletteListModel } from '../models/palette-list.model';
 import { PaletteTemplateService } from './palette-template.service';
+import { ThemePickerModel } from '../models/theme-picker.model';
 declare type RGBA = tinycolor.ColorFormats.RGBA;
 export declare class ThemeBuilderService {
     protected http: HttpClient;
@@ -40,6 +41,7 @@ export declare class ThemeBuilderService {
     get Palette(): PaletteModel;
     set ThemeMode(light: boolean);
     get ThemeMode(): boolean;
+    Themes: Array<ThemePickerModel>;
     /**
      * load intial theme
      */
@@ -73,5 +75,6 @@ export declare class ThemeBuilderService {
     getTheme(): ThemeModel;
     multiply(rgb1: RGBA, rgb2: RGBA): any;
     UpdateTheme(theme: ThemeModel): void;
+    SetThemes(themes: Array<ThemePickerModel>): void;
 }
 export {};
