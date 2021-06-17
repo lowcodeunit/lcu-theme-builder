@@ -1,3 +1,4 @@
+import { VariantColorService } from './variant-color.service';
 import { PalettePickerService } from './palette-picker.service';
 import { ColorMapModel } from './../models/color-map.model';
 import { LocalStorageService } from './local-storage.service';
@@ -54,7 +55,8 @@ export class ThemeBuilderService {
     protected paletteTemplateService: PaletteTemplateService,
     protected localStorageService: LocalStorageService,
     protected palettePickerService: PalettePickerService,
-    protected zone: NgZone,) {
+    protected zone: NgZone,
+    protected variantColorService: VariantColorService) {
 
     this.themeMode = true;
     this.Theme = new Subject<ThemeModel>();
@@ -258,6 +260,10 @@ export class ThemeBuilderService {
     initial.warn.main = this.Themes[0].Warn;
 
     this.Palette = initial;
-   
+
+    this.variantColorService.UpdatePrimaryVariants(this.Themes[0].Primary);
+    this.variantColorService.UpdateAccentVariants(this.Themes[0].Accent);
+    this.variantColorService.UpdateWarnVariants(this.Themes[0].Warn);
+
   }
 }

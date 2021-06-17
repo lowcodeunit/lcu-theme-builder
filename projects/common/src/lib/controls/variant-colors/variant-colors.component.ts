@@ -1,3 +1,4 @@
+import { VariantColorService } from './../../services/variant-color.service';
 
 import { PalettePickerService } from '../../services/palette-picker.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
@@ -36,7 +37,8 @@ export class VariantColorsComponent implements OnInit, OnDestroy {
 @Input('accent-color')
 set AccentColor(val: string) {
   this._accentColor = val;
-  this.updateAccentColor(val);
+  // this.updateAccentColor(val);
+  this.variantColorService.UpdateAccentVariants(val);
 }
 
 get AccentColor(): string {
@@ -47,7 +49,8 @@ get AccentColor(): string {
 @Input('primary-color')
 set PrimaryColor(val: string) {
   this._primaryColor = val;
-  this.updatePrimaryColor(val);
+  // this.updatePrimaryColor(val);
+  this.variantColorService.UpdatePrimaryVariants(val);
 }
 
 get PrimaryColor(): string {
@@ -58,7 +61,8 @@ get PrimaryColor(): string {
 @Input('warn-color')
 set WarnColor(val: string) {
   this._warnColor = val;
-  this.updateWarnColor(val);
+  // this.updateWarnColor(val);
+  this.variantColorService.UpdateWarnVariants(val);
 }
 
 get WarnColor(): string {
@@ -88,7 +92,8 @@ protected paletteChangedSubscription: Subscription;
 
   constructor(
     public PalettePickerService: PalettePickerService,
-    protected themeBuilderService: ThemeBuilderService) {
+    protected themeBuilderService: ThemeBuilderService,
+    protected variantColorService: VariantColorService) {
     this.PalettePickerService.PrimaryColorPalette = [];
     this.PalettePickerService.AccentColorPalette = [];
     this.PalettePickerService.WarnColorPalette = [];
@@ -104,9 +109,12 @@ protected paletteChangedSubscription: Subscription;
         return;
       }
 
-      this.updateAccentColor(palette.accent.main);
-      this.updatePrimaryColor(palette.primary.main);
-      this.updateWarnColor(palette.warn.main);
+      this.variantColorService.UpdatePrimaryVariants(palette.primary.main);
+      this.variantColorService.UpdateAccentVariants(palette.accent.main);
+      this.variantColorService.UpdateWarnVariants(palette.warn.main);
+      // this.updateAccentColor(palette.accent.main);
+      // this.updatePrimaryColor(palette.primary.main);
+      // this.updateWarnColor(palette.warn.main);
     });
   }
 
@@ -114,46 +122,46 @@ protected paletteChangedSubscription: Subscription;
     this.paletteChangedSubscription.unsubscribe();
   }
 
-  protected updatePrimaryColor(color: string): void {
-    this.PalettePickerService.PrimaryColorPalette = this.computeColors(color ? color : this.PrimaryColorControl.value);
+//   protected updatePrimaryColor(color: string): void {
+//     this.PalettePickerService.PrimaryColorPalette = this.computeColors(color ? color : this.PrimaryColorControl.value);
 
-    for (const c of this.PalettePickerService.PrimaryColorPalette) {
-      const key = `--theme-primary-${c.name}`;
-      const value = c.hex;
-      const key2 = `--theme-primary-contrast-${c.name}`;
-      const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+//     for (const c of this.PalettePickerService.PrimaryColorPalette) {
+//       const key = `--theme-primary-${c.name}`;
+//       const value = c.hex;
+//       const key2 = `--theme-primary-contrast-${c.name}`;
+//       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
 
-      // set or update CSS variable values
-      document.documentElement.style.setProperty(key, value);
-      document.documentElement.style.setProperty(key2, value2);
-    }
-  }
+//       // set or update CSS variable values
+//       document.documentElement.style.setProperty(key, value);
+//       document.documentElement.style.setProperty(key2, value2);
+//     }
+//   }
 
-  protected updateAccentColor(color: string): void {
-    this.PalettePickerService.AccentColorPalette = this.computeColors(color ? color : this.AccentColorControl.value);
+//   protected updateAccentColor(color: string): void {
+//     this.PalettePickerService.AccentColorPalette = this.computeColors(color ? color : this.AccentColorControl.value);
 
-    for (const c of this.PalettePickerService.AccentColorPalette) {
-      const key = `--theme-accent-${c.name}`;
-      const value = c.hex;
-      const key2 = `--theme-primary-contrast-${c.name}`;
-      const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
-      document.documentElement.style.setProperty(key, value);
-      document.documentElement.style.setProperty(key2, value2);
-    }
-  }
+//     for (const c of this.PalettePickerService.AccentColorPalette) {
+//       const key = `--theme-accent-${c.name}`;
+//       const value = c.hex;
+//       const key2 = `--theme-primary-contrast-${c.name}`;
+//       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+//       document.documentElement.style.setProperty(key, value);
+//       document.documentElement.style.setProperty(key2, value2);
+//     }
+//   }
 
-  protected updateWarnColor(color: string): void {
-    this.PalettePickerService.WarnColorPalette = this.computeColors(color);
+//   protected updateWarnColor(color: string): void {
+//     this.PalettePickerService.WarnColorPalette = this.computeColors(color);
 
-    for (const c of this.PalettePickerService.WarnColorPalette) {
-      const key = `--theme-warn-${c.name}`;
-      const value = c.hex;
-      const key2 = `--theme-primary-contrast-${c.name}`;
-      const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
-      document.documentElement.style.setProperty(key, value);
-      document.documentElement.style.setProperty(key2, value2);
-    }
-  }
+//     for (const c of this.PalettePickerService.WarnColorPalette) {
+//       const key = `--theme-warn-${c.name}`;
+//       const value = c.hex;
+//       const key2 = `--theme-primary-contrast-${c.name}`;
+//       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+//       document.documentElement.style.setProperty(key, value);
+//       document.documentElement.style.setProperty(key2, value2);
+//     }
+//   }
 
   protected setupForm(): void {
     this.Form = new FormGroup({
@@ -162,36 +170,36 @@ protected paletteChangedSubscription: Subscription;
     });
   }
 
-  protected computeColors(color: string): Array<ColorModel> {
+//   protected computeColors(color: string): Array<ColorModel> {
 
-    const baseLightColor = tinyColor('#ffffff');
-    const baseDarkColor = this.themeBuilderService.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
-    const [, , , baseTetrad] = tinyColor(color).tetrad();
+//     const baseLightColor = tinyColor('#ffffff');
+//     const baseDarkColor = this.themeBuilderService.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
+//     const [, , , baseTetrad] = tinyColor(color).tetrad();
 
-    return [
-      this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 12), '50'),
-      this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 30), '100'),
-      this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 50), '200'),
-      this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 70), '300'),
-      this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 85), '400'),
-      this.getColorObject(tinyColor(color), '500'),
-      this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 87), '600'),
-      this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 70), '700'),
-      this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 54), '800'),
-      this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 25), '900'),
-      this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(65), 'A100'),
-      this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(55), 'A200'),
-      this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(45), 'A400'),
-      this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(40), 'A700')
-    ];
-  }
-// force change
-  protected getColorObject(value: tinycolor.Instance, name: string): ColorModel {
-    const c = tinyColor(value);
-    return {
-      name,
-      hex: c.toHexString(),
-      darkContrast: c.isLight()
-    };
-  }
+//     return [
+//       this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 12), '50'),
+//       this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 30), '100'),
+//       this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 50), '200'),
+//       this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 70), '300'),
+//       this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 85), '400'),
+//       this.getColorObject(tinyColor(color), '500'),
+//       this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 87), '600'),
+//       this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 70), '700'),
+//       this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 54), '800'),
+//       this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 25), '900'),
+//       this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(65), 'A100'),
+//       this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(55), 'A200'),
+//       this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(45), 'A400'),
+//       this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(40), 'A700')
+//     ];
+//   }
+// // force change
+//   protected getColorObject(value: tinycolor.Instance, name: string): ColorModel {
+//     const c = tinyColor(value);
+//     return {
+//       name,
+//       hex: c.toHexString(),
+//       darkContrast: c.isLight()
+//     };
+//   }
 }

@@ -1,3 +1,4 @@
+import { VariantColorService } from './../../services/variant-color.service';
 import { PalettePickerService } from './../../services/palette-picker.service';
 import { ThemePickerModel } from './../../models/theme-picker.model';
 import { OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 export declare class ThemePickerComponent implements OnInit {
     protected palettePickerService: PalettePickerService;
     protected themeBuilderService: ThemeBuilderService;
+    protected variantColorService: VariantColorService;
     /**
      * property for reactive form
      */
@@ -27,7 +29,7 @@ export declare class ThemePickerComponent implements OnInit {
      */
     get ManualWarn(): AbstractControl;
     Themes: Array<ThemePickerModel>;
-    constructor(palettePickerService: PalettePickerService, themeBuilderService: ThemeBuilderService);
+    constructor(palettePickerService: PalettePickerService, themeBuilderService: ThemeBuilderService, variantColorService: VariantColorService);
     ngOnInit(): void;
     SetActiveTheme(theme: ThemePickerModel): void;
     /**

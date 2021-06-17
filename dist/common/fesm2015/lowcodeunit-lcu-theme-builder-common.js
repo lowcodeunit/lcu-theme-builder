@@ -5,8 +5,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ThemeColorPickerService, FathymSharedModule, MaterialModule } from '@lcu/common';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { __awaiter } from 'tslib';
-import { BehaviorSubject, Subject } from 'rxjs';
 import * as tinycolor from 'tinycolor2';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 import * as i1 from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
@@ -42,6 +42,88 @@ PalettePickerService.decorators = [
             },] }
 ];
 PalettePickerService.ctorParameters = () => [];
+
+const tinyColor$4 = tinycolor;
+class VariantColorService {
+    constructor(palettePickerService, themeBuilderService) {
+        this.palettePickerService = palettePickerService;
+        this.themeBuilderService = themeBuilderService;
+    }
+    UpdatePrimaryVariants(color) {
+        this.palettePickerService.PrimaryColorPalette = this.computeColors(color);
+        for (const c of this.palettePickerService.PrimaryColorPalette) {
+            const key = `--theme-primary-${c.name}`;
+            const value = c.hex;
+            const key2 = `--theme-primary-contrast-${c.name}`;
+            const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+            // set or update CSS variable values
+            document.documentElement.style.setProperty(key, value);
+            document.documentElement.style.setProperty(key2, value2);
+        }
+    }
+    UpdateAccentVariants(color) {
+        this.palettePickerService.AccentColorPalette = this.computeColors(color);
+        for (const c of this.palettePickerService.AccentColorPalette) {
+            const key = `--theme-accent-${c.name}`;
+            const value = c.hex;
+            const key2 = `--theme-primary-contrast-${c.name}`;
+            const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+            document.documentElement.style.setProperty(key, value);
+            document.documentElement.style.setProperty(key2, value2);
+        }
+    }
+    UpdateWarnVariants(color) {
+        this.palettePickerService.WarnColorPalette = this.computeColors(color);
+        for (const c of this.palettePickerService.WarnColorPalette) {
+            const key = `--theme-warn-${c.name}`;
+            const value = c.hex;
+            const key2 = `--theme-primary-contrast-${c.name}`;
+            const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+            document.documentElement.style.setProperty(key, value);
+            document.documentElement.style.setProperty(key2, value2);
+        }
+    }
+    computeColors(color) {
+        const baseLightColor = tinyColor$4('#ffffff');
+        const baseDarkColor = this.themeBuilderService.multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
+        const [, , , baseTetrad] = tinyColor$4(color).tetrad();
+        return [
+            this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 12), '50'),
+            this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 30), '100'),
+            this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 50), '200'),
+            this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 70), '300'),
+            this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 85), '400'),
+            this.getColorObject(tinyColor$4(color), '500'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, tinyColor$4(color), 87), '600'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, tinyColor$4(color), 70), '700'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, tinyColor$4(color), 54), '800'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, tinyColor$4(color), 25), '900'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(65), 'A100'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(55), 'A200'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(45), 'A400'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(40), 'A700')
+        ];
+    }
+    // force change
+    getColorObject(value, name) {
+        const c = tinyColor$4(value);
+        return {
+            name,
+            hex: c.toHexString(),
+            darkContrast: c.isLight()
+        };
+    }
+}
+VariantColorService.ɵprov = i0.ɵɵdefineInjectable({ factory: function VariantColorService_Factory() { return new VariantColorService(i0.ɵɵinject(PalettePickerService), i0.ɵɵinject(ThemeBuilderService)); }, token: VariantColorService, providedIn: "root" });
+VariantColorService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+VariantColorService.ctorParameters = () => [
+    { type: PalettePickerService },
+    { type: ThemeBuilderService }
+];
 
 class LocalStorageService {
     constructor() { }
@@ -318,12 +400,13 @@ PaletteTemplateService.decorators = [
 
 const tinyColor$2 = tinycolor;
 class ThemeBuilderService {
-    constructor(http, paletteTemplateService, localStorageService, palettePickerService, zone) {
+    constructor(http, paletteTemplateService, localStorageService, palettePickerService, zone, variantColorService) {
         this.http = http;
         this.paletteTemplateService = paletteTemplateService;
         this.localStorageService = localStorageService;
         this.palettePickerService = palettePickerService;
         this.zone = zone;
+        this.variantColorService = variantColorService;
         this.themeMode = true;
         this.Theme = new Subject();
         this.PaletteColors = new Subject();
@@ -360,7 +443,7 @@ class ThemeBuilderService {
         // Sass.compile('@import "testfile";', ((result: any) => {
         //   debugger;
         // }))
-        return this.http.get('/assets/_theming.scss', { responseType: 'text' })
+        return this.http.get('https://www.iot-ensemble.com/assets/theming/theming.scss', { responseType: 'text' })
             .pipe(map((x) => {
             return x
                 .replace(/\n/gm, '??')
@@ -487,9 +570,12 @@ class ThemeBuilderService {
         initial.accent.main = this.Themes[0].Accent;
         initial.warn.main = this.Themes[0].Warn;
         this.Palette = initial;
+        this.variantColorService.UpdatePrimaryVariants(this.Themes[0].Primary);
+        this.variantColorService.UpdateAccentVariants(this.Themes[0].Accent);
+        this.variantColorService.UpdateWarnVariants(this.Themes[0].Warn);
     }
 }
-ThemeBuilderService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ThemeBuilderService_Factory() { return new ThemeBuilderService(i0.ɵɵinject(i1.HttpClient), i0.ɵɵinject(PaletteTemplateService), i0.ɵɵinject(LocalStorageService), i0.ɵɵinject(PalettePickerService), i0.ɵɵinject(i0.NgZone)); }, token: ThemeBuilderService, providedIn: "root" });
+ThemeBuilderService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ThemeBuilderService_Factory() { return new ThemeBuilderService(i0.ɵɵinject(i1.HttpClient), i0.ɵɵinject(PaletteTemplateService), i0.ɵɵinject(LocalStorageService), i0.ɵɵinject(PalettePickerService), i0.ɵɵinject(i0.NgZone), i0.ɵɵinject(VariantColorService)); }, token: ThemeBuilderService, providedIn: "root" });
 ThemeBuilderService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
@@ -500,7 +586,8 @@ ThemeBuilderService.ctorParameters = () => [
     { type: PaletteTemplateService },
     { type: LocalStorageService },
     { type: PalettePickerService },
-    { type: NgZone }
+    { type: NgZone },
+    { type: VariantColorService }
 ];
 
 class ThemeBuilderComponent {
@@ -512,7 +599,7 @@ class ThemeBuilderComponent {
 ThemeBuilderComponent.decorators = [
     { type: Component, args: [{
                 selector: 'lcu-theme-builder',
-                template: "\r\n<div fxLayout=\"column\" fxLayoutGap=\"10px\">\r\n  <!-- <lcu-mode-toggle></lcu-mode-toggle> -->\r\n  <div fxLayout=\"row\" fxLayoutGap=\"10px\">\r\n      <mat-toolbar color=\"primary\">\r\n        <span class=\"primary-color\">Primary Colors</span>\r\n      </mat-toolbar>\r\n      <mat-toolbar color=\"accent\">\r\n        <span class=\"accent-color\">Accent Colors</span>\r\n      </mat-toolbar>\r\n      <mat-toolbar color=\"warn\">\r\n        <span class=\"warn-color\">Warn Colors</span>\r\n      </mat-toolbar>\r\n  </div>\r\n  <lcu-palette-picker></lcu-palette-picker>\r\n</div>\r\n",
+                template: "\r\n<div fxLayout=\"column\" fxLayoutGap=\"10px\">\r\n  <!-- <lcu-mode-toggle></lcu-mode-toggle> -->\r\n  <div fxLayout=\"row\" fxLayoutGap=\"10px\">\r\n      <mat-toolbar color=\"primary\">\r\n        <span class=\"primary-color\">Primary Colors</span>\r\n      </mat-toolbar>\r\n      <mat-toolbar color=\"accent\">\r\n        <span class=\"accent-color\">Accent Colors</span>\r\n      </mat-toolbar>\r\n      <mat-toolbar color=\"warn\">\r\n        <span class=\"warn-color\">Warn Colors</span>\r\n      </mat-toolbar>\r\n  </div>\r\n  <!-- <lcu-palette-picker></lcu-palette-picker> -->\r\n</div>\r\n",
                 styles: [".primary-color{color:var(--theme-primary-A700)}.accent-color{color:var(--theme-accent-A700)}.warn-color{color:var(--theme-warn-A700)}"]
             },] }
 ];
@@ -860,9 +947,10 @@ LightnessPickerComponent.ctorParameters = () => [
 
 const tinyColor = tinycolor;
 class VariantColorsComponent {
-    constructor(PalettePickerService, themeBuilderService) {
+    constructor(PalettePickerService, themeBuilderService, variantColorService) {
         this.PalettePickerService = PalettePickerService;
         this.themeBuilderService = themeBuilderService;
+        this.variantColorService = variantColorService;
         this.PalettePickerService.PrimaryColorPalette = [];
         this.PalettePickerService.AccentColorPalette = [];
         this.PalettePickerService.WarnColorPalette = [];
@@ -870,7 +958,8 @@ class VariantColorsComponent {
     // tslint:disable-next-line:no-input-rename
     set AccentColor(val) {
         this._accentColor = val;
-        this.updateAccentColor(val);
+        // this.updateAccentColor(val);
+        this.variantColorService.UpdateAccentVariants(val);
     }
     get AccentColor() {
         return this._accentColor;
@@ -878,7 +967,8 @@ class VariantColorsComponent {
     // tslint:disable-next-line:no-input-rename
     set PrimaryColor(val) {
         this._primaryColor = val;
-        this.updatePrimaryColor(val);
+        // this.updatePrimaryColor(val);
+        this.variantColorService.UpdatePrimaryVariants(val);
     }
     get PrimaryColor() {
         return this.PrimaryColor;
@@ -886,7 +976,8 @@ class VariantColorsComponent {
     // tslint:disable-next-line:no-input-rename
     set WarnColor(val) {
         this._warnColor = val;
-        this.updateWarnColor(val);
+        // this.updateWarnColor(val);
+        this.variantColorService.UpdateWarnVariants(val);
     }
     get WarnColor() {
         return this.WarnColor;
@@ -910,83 +1001,56 @@ class VariantColorsComponent {
             if (!palette || !palette.primary) {
                 return;
             }
-            this.updateAccentColor(palette.accent.main);
-            this.updatePrimaryColor(palette.primary.main);
-            this.updateWarnColor(palette.warn.main);
+            this.variantColorService.UpdatePrimaryVariants(palette.primary.main);
+            this.variantColorService.UpdateAccentVariants(palette.accent.main);
+            this.variantColorService.UpdateWarnVariants(palette.warn.main);
+            // this.updateAccentColor(palette.accent.main);
+            // this.updatePrimaryColor(palette.primary.main);
+            // this.updateWarnColor(palette.warn.main);
         });
     }
     ngOnDestroy() {
         this.paletteChangedSubscription.unsubscribe();
     }
-    updatePrimaryColor(color) {
-        this.PalettePickerService.PrimaryColorPalette = this.computeColors(color ? color : this.PrimaryColorControl.value);
-        for (const c of this.PalettePickerService.PrimaryColorPalette) {
-            const key = `--theme-primary-${c.name}`;
-            const value = c.hex;
-            const key2 = `--theme-primary-contrast-${c.name}`;
-            const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
-            // set or update CSS variable values
-            document.documentElement.style.setProperty(key, value);
-            document.documentElement.style.setProperty(key2, value2);
-        }
-    }
-    updateAccentColor(color) {
-        this.PalettePickerService.AccentColorPalette = this.computeColors(color ? color : this.AccentColorControl.value);
-        for (const c of this.PalettePickerService.AccentColorPalette) {
-            const key = `--theme-accent-${c.name}`;
-            const value = c.hex;
-            const key2 = `--theme-primary-contrast-${c.name}`;
-            const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
-            document.documentElement.style.setProperty(key, value);
-            document.documentElement.style.setProperty(key2, value2);
-        }
-    }
-    updateWarnColor(color) {
-        this.PalettePickerService.WarnColorPalette = this.computeColors(color);
-        for (const c of this.PalettePickerService.WarnColorPalette) {
-            const key = `--theme-warn-${c.name}`;
-            const value = c.hex;
-            const key2 = `--theme-primary-contrast-${c.name}`;
-            const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
-            document.documentElement.style.setProperty(key, value);
-            document.documentElement.style.setProperty(key2, value2);
-        }
-    }
+    //   protected updatePrimaryColor(color: string): void {
+    //     this.PalettePickerService.PrimaryColorPalette = this.computeColors(color ? color : this.PrimaryColorControl.value);
+    //     for (const c of this.PalettePickerService.PrimaryColorPalette) {
+    //       const key = `--theme-primary-${c.name}`;
+    //       const value = c.hex;
+    //       const key2 = `--theme-primary-contrast-${c.name}`;
+    //       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+    //       // set or update CSS variable values
+    //       document.documentElement.style.setProperty(key, value);
+    //       document.documentElement.style.setProperty(key2, value2);
+    //     }
+    //   }
+    //   protected updateAccentColor(color: string): void {
+    //     this.PalettePickerService.AccentColorPalette = this.computeColors(color ? color : this.AccentColorControl.value);
+    //     for (const c of this.PalettePickerService.AccentColorPalette) {
+    //       const key = `--theme-accent-${c.name}`;
+    //       const value = c.hex;
+    //       const key2 = `--theme-primary-contrast-${c.name}`;
+    //       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+    //       document.documentElement.style.setProperty(key, value);
+    //       document.documentElement.style.setProperty(key2, value2);
+    //     }
+    //   }
+    //   protected updateWarnColor(color: string): void {
+    //     this.PalettePickerService.WarnColorPalette = this.computeColors(color);
+    //     for (const c of this.PalettePickerService.WarnColorPalette) {
+    //       const key = `--theme-warn-${c.name}`;
+    //       const value = c.hex;
+    //       const key2 = `--theme-primary-contrast-${c.name}`;
+    //       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+    //       document.documentElement.style.setProperty(key, value);
+    //       document.documentElement.style.setProperty(key2, value2);
+    //     }
+    //   }
     setupForm() {
         this.Form = new FormGroup({
             primaryColorControl: new FormControl('#ffcc11'),
             accentColorControl: new FormControl('#0000aa')
         });
-    }
-    computeColors(color) {
-        const baseLightColor = tinyColor('#ffffff');
-        const baseDarkColor = this.themeBuilderService.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
-        const [, , , baseTetrad] = tinyColor(color).tetrad();
-        return [
-            this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 12), '50'),
-            this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 30), '100'),
-            this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 50), '200'),
-            this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 70), '300'),
-            this.getColorObject(tinyColor.mix(baseLightColor, tinyColor(color), 85), '400'),
-            this.getColorObject(tinyColor(color), '500'),
-            this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 87), '600'),
-            this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 70), '700'),
-            this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 54), '800'),
-            this.getColorObject(tinyColor.mix(baseDarkColor, tinyColor(color), 25), '900'),
-            this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(65), 'A100'),
-            this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(55), 'A200'),
-            this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(45), 'A400'),
-            this.getColorObject(tinyColor.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(40), 'A700')
-        ];
-    }
-    // force change
-    getColorObject(value, name) {
-        const c = tinyColor(value);
-        return {
-            name,
-            hex: c.toHexString(),
-            darkContrast: c.isLight()
-        };
     }
 }
 VariantColorsComponent.decorators = [
@@ -998,7 +1062,8 @@ VariantColorsComponent.decorators = [
 ];
 VariantColorsComponent.ctorParameters = () => [
     { type: PalettePickerService },
-    { type: ThemeBuilderService }
+    { type: ThemeBuilderService },
+    { type: VariantColorService }
 ];
 VariantColorsComponent.propDecorators = {
     AccentColor: [{ type: Input, args: ['accent-color',] }],
@@ -1013,9 +1078,10 @@ class ThemePickerModel {
 }
 
 class ThemePickerComponent {
-    constructor(palettePickerService, themeBuilderService) {
+    constructor(palettePickerService, themeBuilderService, variantColorService) {
         this.palettePickerService = palettePickerService;
         this.themeBuilderService = themeBuilderService;
+        this.variantColorService = variantColorService;
         this.setupForm();
     }
     /**
@@ -1048,10 +1114,18 @@ class ThemePickerComponent {
     SetActiveTheme(theme) {
         let palette = new PaletteModel();
         palette = Object.assign(Object.assign({}, this.palettePickerService.CurrentPalette), palette);
+        const colors = [theme.Primary, theme.Accent, theme.Warn];
         palette.primary.main = theme.Primary;
         palette.accent.main = theme.Accent;
         palette.warn.main = theme.Warn;
+        this.variantColorService.UpdatePrimaryVariants(theme.Primary);
+        this.variantColorService.UpdateAccentVariants(theme.Accent);
+        this.variantColorService.UpdateWarnVariants(theme.Warn);
         // this.palettePickerService.PalettePickerChange(palette);
+        // for (const color of colors) {
+        //   debugger;
+        //   this.themeBuilderService.MaterialPaletteColors = this.themeBuilderService.GetPalette(color);
+        // }
         this.themeBuilderService.Palette = palette;
         this.themes();
     }
@@ -1093,7 +1167,8 @@ ThemePickerComponent.decorators = [
 ];
 ThemePickerComponent.ctorParameters = () => [
     { type: PalettePickerService },
-    { type: ThemeBuilderService }
+    { type: ThemeBuilderService },
+    { type: VariantColorService }
 ];
 
 class ThemeBuilderModule {
@@ -1147,5 +1222,5 @@ class ColorModel {
  * Generated bundle index. Do not edit.
  */
 
-export { ColorModel, PaletteModel, PalettePickerService, SubPaletteModel, ThemeBuilderComponent, ThemeBuilderConstants, ThemeBuilderDirective, ThemeBuilderModel, ThemeBuilderModule, ThemeBuilderService, ThemeModel, ThemePickerModel, ColorPickerComponent as ɵa, PalettePickerComponent as ɵb, PaletteTemplateService as ɵc, LocalStorageService as ɵd, SubPalettePickerComponent as ɵe, LightnessPickerComponent as ɵf, VariantColorsComponent as ɵg, ThemePickerComponent as ɵh };
+export { ColorModel, PaletteModel, PalettePickerService, SubPaletteModel, ThemeBuilderComponent, ThemeBuilderConstants, ThemeBuilderDirective, ThemeBuilderModel, ThemeBuilderModule, ThemeBuilderService, ThemeModel, ThemePickerModel, VariantColorService, ColorPickerComponent as ɵa, PalettePickerComponent as ɵb, PaletteTemplateService as ɵc, LocalStorageService as ɵd, SubPalettePickerComponent as ɵe, LightnessPickerComponent as ɵf, VariantColorsComponent as ɵg, ThemePickerComponent as ɵh };
 //# sourceMappingURL=lowcodeunit-lcu-theme-builder-common.js.map

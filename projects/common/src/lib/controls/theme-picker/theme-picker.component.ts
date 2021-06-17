@@ -1,3 +1,4 @@
+import { VariantColorService } from './../../services/variant-color.service';
 import { ThemeBuilderConstants } from './../../utils/theme-builder-constants.utils';
 import { PalettePickerService } from './../../services/palette-picker.service';
 import { ThemePickerModel } from './../../models/theme-picker.model';
@@ -52,7 +53,8 @@ public get ManualWarn(): AbstractControl {
 
   constructor(
     protected palettePickerService: PalettePickerService,
-    protected themeBuilderService: ThemeBuilderService) {
+    protected themeBuilderService: ThemeBuilderService,
+    protected variantColorService: VariantColorService) {
 
       this.setupForm();
   }
@@ -65,12 +67,22 @@ public get ManualWarn(): AbstractControl {
     let palette: PaletteModel = new PaletteModel();
     palette = { ...this.palettePickerService.CurrentPalette, ...palette };
 
+    const colors: Array<string> = [theme.Primary, theme.Accent, theme.Warn];
+
     palette.primary.main = theme.Primary;
     palette.accent.main = theme.Accent;
     palette.warn.main = theme.Warn;
 
+    this.variantColorService.UpdatePrimaryVariants(theme.Primary);
+    this.variantColorService.UpdateAccentVariants(theme.Accent);
+    this.variantColorService.UpdateWarnVariants(theme.Warn);
+
   // this.palettePickerService.PalettePickerChange(palette);
 
+  // for (const color of colors) {
+  //   debugger;
+  //   this.themeBuilderService.MaterialPaletteColors = this.themeBuilderService.GetPalette(color);
+  // }
   this.themeBuilderService.Palette = palette;
   this.themes();
   }

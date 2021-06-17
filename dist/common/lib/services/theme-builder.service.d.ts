@@ -1,3 +1,4 @@
+import { VariantColorService } from './variant-color.service';
 import { PalettePickerService } from './palette-picker.service';
 import { LocalStorageService } from './local-storage.service';
 import { MaterialPaletteModel } from './../models/material-palette.model';
@@ -17,6 +18,7 @@ export declare class ThemeBuilderService {
     protected localStorageService: LocalStorageService;
     protected palettePickerService: PalettePickerService;
     protected zone: NgZone;
+    protected variantColorService: VariantColorService;
     /**
      * Is it lightness
      */
@@ -33,7 +35,7 @@ export declare class ThemeBuilderService {
      * Palette colors, from 50 - A700
      */
     MaterialPaletteColors: MaterialPaletteModel;
-    constructor(http: HttpClient, paletteTemplateService: PaletteTemplateService, localStorageService: LocalStorageService, palettePickerService: PalettePickerService, zone: NgZone);
+    constructor(http: HttpClient, paletteTemplateService: PaletteTemplateService, localStorageService: LocalStorageService, palettePickerService: PalettePickerService, zone: NgZone, variantColorService: VariantColorService);
     /**
      * Set Palette colors
      */
