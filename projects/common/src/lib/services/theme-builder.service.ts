@@ -103,7 +103,7 @@ export class ThemeBuilderService {
     // Sass.compile('@import "testfile";', ((result: any) => {
     //   debugger;
     // }))
-    return this.http.get('/assets/_theming.scss', { responseType: 'text' })
+    return this.http.get('https://www.iot-ensemble.com/assets/theming/theming.scss', { responseType: 'text' })
       .pipe(
         map((x: string) => {
           return x
