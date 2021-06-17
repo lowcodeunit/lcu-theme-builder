@@ -68,7 +68,7 @@ export class ThemeBuilderService {
     * Set Palette colors
     */
     public set Palette(palette: PaletteModel) {
-
+      debugger;
       this.palette = palette;
       this.palettePickerService.PalettePickerChange(palette);
 
@@ -94,16 +94,7 @@ export class ThemeBuilderService {
     * load intial theme
     */
    protected loadThemingScss(): Promise<void> {
-
-     // this is generated in angular.json, pulls from node_modules/@angular/material
-    // return this.http.get('/assets/_theming.scss', { responseType: 'text' })
-    // Sass.writeFile('testfile.scss', '@import "./node_modules/@angular/material/theming";\n.testfile { content: "loaded"; }',(result: boolean) => {
-    //   debugger;
-    // })
-    // Sass.compile('@import "testfile";', ((result: any) => {
-    //   debugger;
-    // }))
-    return this.http.get('/assets/_theming.scss', { responseType: 'text' })
+    return this.http.get('https://www.iot-ensemble.com/assets/theming/theming.scss', { responseType: 'text' })
       .pipe(
         map((x: string) => {
           return x
@@ -250,7 +241,7 @@ export class ThemeBuilderService {
 
   public SetThemes(themes: Array<ThemePickerModel>): void {
     this.Themes = themes;
-
+    debugger;
     let initial: PaletteModel = new PaletteModel();
     initial = { ...ThemeBuilderConstants.InitialValues, ...initial };
     initial.primary.main = this.Themes[0].Primary;
@@ -258,6 +249,5 @@ export class ThemeBuilderService {
     initial.warn.main = this.Themes[0].Warn;
 
     this.Palette = initial;
-   
   }
 }

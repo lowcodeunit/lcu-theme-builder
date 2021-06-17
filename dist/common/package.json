@@ -1,0 +1,19 @@
+{
+  "name": "@lowcodeunit/lcu-theme-builder-common",
+  "version": "0.0.2",
+  "peerDependencies": {
+    "@angular/common": "^11.2.13",
+    "@angular/core": "^11.2.13"
+  },
+  "main": "bundles/lowcodeunit-lcu-theme-builder-common.umd.js",
+  "module": "fesm2015/lowcodeunit-lcu-theme-builder-common.js",
+  "es2015": "fesm2015/lowcodeunit-lcu-theme-builder-common.js",
+  "esm2015": "esm2015/lowcodeunit-lcu-theme-builder-common.js",
+  "fesm2015": "fesm2015/lowcodeunit-lcu-theme-builder-common.js",
+  "typings": "lowcodeunit-lcu-theme-builder-common.d.ts",
+  "metadata": "lowcodeunit-lcu-theme-builder-common.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

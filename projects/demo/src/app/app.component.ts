@@ -10,7 +10,8 @@ export class AppComponent implements OnInit {
 
   public Title: string;
 
-  constructor(protected themeBuilderService: ThemeBuilderService,
+  constructor(
+    protected themeBuilderService: ThemeBuilderService,
     protected palettePickerService: PalettePickerService) {
 
     this.Title = 'Theme Builder';

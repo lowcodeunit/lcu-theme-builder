@@ -87,6 +87,7 @@ export class PalettePickerComponent implements OnInit, OnDestroy {
 
     // setting initial values,
    // this isn't the right way to do this, but for the moment - shannon
+  
     this.patchValue(ThemeBuilderConstants.InitialValues, true);
 
    this.Form.valueChanges

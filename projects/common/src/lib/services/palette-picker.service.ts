@@ -45,7 +45,7 @@ export class PalettePickerService {
     }
 
     public PalettePickerChange(params: PaletteModel): void {
-
+        debugger;
         this.CurrentPalette = { ...params };
         this.ColorPickerChanged.next( this.CurrentPalette );
     }
