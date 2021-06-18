@@ -29,7 +29,11 @@
                 </div>
             </button>
         </div>
-        <div class="margin-2 margin-top-5">
+        <!-- Manual Form Controls -->
+        <div
+            *ngIf="ToggleManualControls" 
+            class="margin-2 
+            margin-top-5">
             <mat-card>
                 <mat-card-header>
                     <div mat-card-avatar class="lcu-card-avatar">
@@ -92,7 +96,6 @@
                     </button>
                 </mat-card-actions>
             </mat-card>
-           
         </div>
     </div>
 </mat-menu>

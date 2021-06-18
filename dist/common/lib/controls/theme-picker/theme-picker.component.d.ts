@@ -13,6 +13,18 @@ export declare class ThemePickerComponent implements OnInit {
      */
     ManualForm: FormGroup;
     /**
+     * List of themes
+     */
+    Themes: Array<ThemePickerModel>;
+    ToggleManualControls: boolean;
+    /**
+     *
+     * @param val _theming.scss from external source
+     */
+    private _materialTheming;
+    get MaterialTheming(): string;
+    set MaterialTheming(val: string);
+    /**
      * Access manual accent color field
      */
     get ManualAccent(): AbstractControl;
@@ -28,7 +40,6 @@ export declare class ThemePickerComponent implements OnInit {
      * Access manual warn color field
      */
     get ManualWarn(): AbstractControl;
-    Themes: Array<ThemePickerModel>;
     constructor(palettePickerService: PalettePickerService, themeBuilderService: ThemeBuilderService, variantColorService: VariantColorService);
     ngOnInit(): void;
     SetActiveTheme(theme: ThemePickerModel): void;
@@ -36,6 +47,9 @@ export declare class ThemePickerComponent implements OnInit {
      * Manually create theme, by using inputs
      */
     SetManualTheme(): void;
+    /**
+     * Setup form controls
+     */
     protected setupForm(): void;
     /**
      * Create themes for theme picker

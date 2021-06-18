@@ -2,7 +2,7 @@ import { VariantColorService } from './../../services/variant-color.service';
 import { ThemeBuilderConstants } from './../../utils/theme-builder-constants.utils';
 import { PalettePickerService } from './../../services/palette-picker.service';
 import { ThemePickerModel } from './../../models/theme-picker.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PaletteModel } from '../../models/palette.model';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -12,44 +12,73 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
   templateUrl: './theme-picker.component.html',
   styleUrls: ['./theme-picker.component.scss']
 })
+
 export class ThemePickerComponent implements OnInit {
 
   /**
    * property for reactive form
    */
-  public ManualForm: FormGroup;
+ public ManualForm: FormGroup;
 
-
-/**
- * Access manual accent color field
- */
-public get ManualAccent(): AbstractControl {
-  return this.ManualForm.get('manualAccent');
-}
-
-/**
- * Access manual primary color field
- */
- public get ManualPrimary(): AbstractControl {
-  return this.ManualForm.get('manualPrimary');
-}
-
-/**
- * Access manual theme name field
- */
-public get ManualThemeName(): AbstractControl {
-  return this.ManualForm.get('manualThemeName');
-}
-
-/**
- * Access manual warn color field
- */
-public get ManualWarn(): AbstractControl {
-  return this.ManualForm.get('manualWarn');
-}
-
-
+ /**
+  * List of themes
+  */
   public Themes: Array<ThemePickerModel>;
+
+
+  // tslint:disable-next-line:no-input-rename
+  @Input('toggle-manual-controls')
+  public ToggleManualControls: boolean;
+
+  /**
+   * 
+   * @param val _theming.scss from external source
+   */
+  // @Input('material-theme-stylesheet')
+  // public set MaterialThemeStylesheet(val: any) {
+  //   debugger;
+  //   this.themeBuilderService.MaterialTheme = val;
+  // }
+
+  private _materialTheming: string;
+  @Input('material-theming')
+  get MaterialTheming(): string {
+    return this._materialTheming;
+  }
+
+  set MaterialTheming(val: string) {
+
+    this._materialTheming = val;
+    // this.themeBuilderService.MaterialTheme = val;
+  }
+
+  /**
+   * Access manual accent color field
+   */
+  public get ManualAccent(): AbstractControl {
+    return this.ManualForm.get('manualAccent');
+  }
+
+  /**
+   * Access manual primary color field
+   */
+  public get ManualPrimary(): AbstractControl {
+    return this.ManualForm.get('manualPrimary');
+  }
+
+  /**
+   * Access manual theme name field
+   */
+  public get ManualThemeName(): AbstractControl {
+    return this.ManualForm.get('manualThemeName');
+  }
+
+  /**
+   * Access manual warn color field
+   */
+  public get ManualWarn(): AbstractControl {
+    return this.ManualForm.get('manualWarn');
+  }
 
   constructor(
     protected palettePickerService: PalettePickerService,
@@ -77,14 +106,8 @@ public get ManualWarn(): AbstractControl {
     this.variantColorService.UpdateAccentVariants(theme.Accent);
     this.variantColorService.UpdateWarnVariants(theme.Warn);
 
-  // this.palettePickerService.PalettePickerChange(palette);
-
-  // for (const color of colors) {
-  //   debugger;
-  //   this.themeBuilderService.MaterialPaletteColors = this.themeBuilderService.GetPalette(color);
-  // }
-  this.themeBuilderService.Palette = palette;
-  this.themes();
+    this.themeBuilderService.Palette = palette;
+    this.themes();
   }
 
   /**
@@ -104,6 +127,9 @@ public get ManualWarn(): AbstractControl {
     this.SetActiveTheme(manualPalette);
   }
 
+  /**
+   * Setup form controls
+   */
   protected setupForm(): void {
 
     this.ManualForm = new FormGroup({
@@ -129,3 +155,7 @@ public get ManualWarn(): AbstractControl {
   }
 
 }
+// function Input(arg0: string) {
+//   throw new Error('Function not implemented.');
+// }
+

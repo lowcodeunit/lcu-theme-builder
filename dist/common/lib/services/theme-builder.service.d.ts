@@ -35,7 +35,9 @@ export declare class ThemeBuilderService {
      * Palette colors, from 50 - A700
      */
     MaterialPaletteColors: MaterialPaletteModel;
-    constructor(http: HttpClient, paletteTemplateService: PaletteTemplateService, localStorageService: LocalStorageService, palettePickerService: PalettePickerService, zone: NgZone, variantColorService: VariantColorService);
+    /**
+     * _theming.scss from Angular Material
+     */
     /**
      * Set Palette colors
      */
@@ -44,8 +46,12 @@ export declare class ThemeBuilderService {
     set ThemeMode(light: boolean);
     get ThemeMode(): boolean;
     Themes: Array<ThemePickerModel>;
+    constructor(http: HttpClient, paletteTemplateService: PaletteTemplateService, localStorageService: LocalStorageService, palettePickerService: PalettePickerService, zone: NgZone, variantColorService: VariantColorService);
     /**
      * load intial theme
+     *
+     * Pulls _theming.scss from Angular Material and then overwrites it with
+     * our theme color changes
      */
     protected loadThemingScss(): Promise<void>;
     /**

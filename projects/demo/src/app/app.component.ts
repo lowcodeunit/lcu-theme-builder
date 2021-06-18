@@ -10,7 +10,10 @@ export class AppComponent implements OnInit {
 
   public Title: string;
 
-  constructor(protected themeBuilderService: ThemeBuilderService,
+  public ThemingURL: string;
+
+  constructor(
+    protected themeBuilderService: ThemeBuilderService,
     protected palettePickerService: PalettePickerService) {
 
     this.Title = 'Theme Builder';
@@ -18,7 +21,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
 
-    this.setupThemes();
+      this.setupThemes();
   }
 
   /**
@@ -36,7 +39,7 @@ export class AppComponent implements OnInit {
       ),
       new ThemePickerModel(
         {
-          ID: 'Yellow', 
+          ID: 'Yellow',
           Primary: '#ffcc11',
           Accent: '#06a5ff',
           Warn: '#990000'
@@ -52,6 +55,7 @@ export class AppComponent implements OnInit {
       )
     ]
 
+    this.ThemingURL = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
     this.themeBuilderService.SetThemes(themes);
   }
 }
