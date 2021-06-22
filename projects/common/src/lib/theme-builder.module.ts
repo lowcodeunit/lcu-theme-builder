@@ -14,6 +14,7 @@ import { SubPalettePickerComponent } from './controls/sub-palette-picker/sub-pal
 import { LightnessPickerComponent } from './controls/mode-toggle/mode-toggle.component';
 import { VariantColorsComponent } from './controls/variant-colors/variant-colors.component';
 import { ThemePickerComponent } from './controls/theme-picker/theme-picker.component';
+import { PalettePickerService } from './services/palette-picker.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ export class ThemeBuilderModule {
   static forRoot(): ModuleWithProviders<ThemeBuilderModule> {
     return {
       ngModule: ThemeBuilderModule,
-      providers: [ThemeBuilderService]
+      providers: [ThemeBuilderService, PalettePickerService]
     };
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
@@ -14,10 +14,25 @@ type ModeType = 'dark' | 'light';
 })
 export class LightnessPickerComponent implements OnInit {
 
+  private _darkMode: boolean;
+  @Input('dark-mode')
+  public set DarkMode(val: boolean) {
+    
+    if (!val ) { return; }
+
+    this._darkMode = val;
+    this.setThemeMode(val);
+  }
+
+  public get DarkMode(): boolean {
+    return this._darkMode;
+  }
+
   /**
    * Access Toggle field within the form group
    */
    public get Toggle(): AbstractControl {
+  
     return this.ToggleForm.get('toggle');
   }
 
@@ -37,17 +52,26 @@ export class LightnessPickerComponent implements OnInit {
     protected formSetup(): void {
 
       this.ToggleForm = new FormGroup({
-        toggle: new FormControl(false)
+        toggle: new FormControl(this.DarkMode)
       })
 
       this.onChanges();
     }
 
     protected onChanges(): void {
+
       this.Toggle.valueChanges
       .subscribe((val: boolean) => {
-        this.ToggleMode = val ? 'Light Mode' : 'Dark Mode';
-        this.themeBuilderService.ThemeMode = val;
+        this.setThemeMode(val);
       });
+    }
+
+    protected toggleMode(val: boolean): string {
+      return val ? 'Light Mode' : 'Dark Mode';
+    }
+
+    protected setThemeMode(val: boolean): void {
+      this.ToggleMode = this.toggleMode(val);
+      this.themeBuilderService.ThemeMode = val;
     }
   }

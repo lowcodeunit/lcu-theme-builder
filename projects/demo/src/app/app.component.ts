@@ -1,5 +1,11 @@
-import { ThemeBuilderService, PalettePickerService, PaletteModel, ThemeBuilderConstants, ThemePickerModel } from '@lowcodeunit/lcu-theme-builder-common';
+import { HttpClient } from '@angular/common/http';
+import { 
+  ThemeBuilderService, 
+  PalettePickerService, 
+  ThemeBuilderConstants, 
+  ThemePickerModel } from '@lowcodeunit/lcu-theme-builder-common';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'lcu-root',
@@ -10,15 +16,19 @@ export class AppComponent implements OnInit {
 
   public Title: string;
 
-  constructor(protected themeBuilderService: ThemeBuilderService,
-    protected palettePickerService: PalettePickerService) {
+  public ThemingURL: string;
+
+  constructor(
+    protected themeBuilderService: ThemeBuilderService,
+    protected palettePickerService: PalettePickerService,
+    protected http: HttpClient,) {
 
     this.Title = 'Theme Builder';
   }
 
   public ngOnInit(): void {
 
-    this.setupThemes();
+      this.setupThemes();
   }
 
   /**
@@ -36,7 +46,7 @@ export class AppComponent implements OnInit {
       ),
       new ThemePickerModel(
         {
-          ID: 'Yellow', 
+          ID: 'Yellow',
           Primary: '#ffcc11',
           Accent: '#06a5ff',
           Warn: '#990000'
@@ -52,6 +62,11 @@ export class AppComponent implements OnInit {
       )
     ]
 
+    // set where Angular Material _theming.scss is coming from, this is needed in setting up
+    // our own dynamic theme - essentially, our theme overwrites this one
+    this.themeBuilderService.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
+
     this.themeBuilderService.SetThemes(themes);
   }
+
 }
