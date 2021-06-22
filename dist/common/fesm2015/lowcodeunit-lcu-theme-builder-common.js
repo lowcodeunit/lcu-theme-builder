@@ -1221,7 +1221,7 @@ class ThemeBuilderModule {
     static forRoot() {
         return {
             ngModule: ThemeBuilderModule,
-            providers: [ThemeBuilderService]
+            providers: [ThemeBuilderService, PalettePickerService]
         };
     }
 }

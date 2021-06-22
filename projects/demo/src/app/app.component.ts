@@ -1,5 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { ThemeBuilderService, PalettePickerService, PaletteModel, ThemeBuilderConstants, ThemePickerModel } from '@lowcodeunit/lcu-theme-builder-common';
+import { 
+  ThemeBuilderService, 
+  PalettePickerService, 
+  ThemeBuilderConstants, 
+  ThemePickerModel } from '@lowcodeunit/lcu-theme-builder-common';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
