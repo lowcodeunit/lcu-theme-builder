@@ -14,18 +14,18 @@ type ModeType = 'dark' | 'light';
 })
 export class LightnessPickerComponent implements OnInit {
 
-  private _darkModeToggle: boolean;
-  @Input('dark-mode-toggle')
-  public set DarkModeToggle(val: boolean) {
+  private _darkMode: boolean;
+  @Input('dark-mode')
+  public set DarkMode(val: boolean) {
     
     if (!val ) { return; }
 
-    this._darkModeToggle = val;
+    this._darkMode = val;
     this.setThemeMode(val);
   }
 
-  public get DarkModeToggle(): boolean {
-    return this._darkModeToggle;
+  public get DarkMode(): boolean {
+    return this._darkMode;
   }
 
   /**
@@ -52,7 +52,7 @@ export class LightnessPickerComponent implements OnInit {
     protected formSetup(): void {
 
       this.ToggleForm = new FormGroup({
-        toggle: new FormControl(this.DarkModeToggle)
+        toggle: new FormControl(this.DarkMode)
       })
 
       this.onChanges();
