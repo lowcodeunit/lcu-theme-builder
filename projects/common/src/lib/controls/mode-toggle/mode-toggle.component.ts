@@ -59,10 +59,9 @@ export class LightnessPickerComponent implements OnInit {
     }
 
     protected onChanges(): void {
-      debugger;
+
       this.Toggle.valueChanges
       .subscribe((val: boolean) => {
-        debugger;
         this.setThemeMode(val);
       });
     }

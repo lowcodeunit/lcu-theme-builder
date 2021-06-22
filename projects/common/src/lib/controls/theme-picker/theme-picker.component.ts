@@ -29,14 +29,14 @@ public test: boolean;
   private _darkMode: boolean;
   @Input('dark-mode')
   public set DarkMode(val: boolean) {
-    
+
     if (!val) { return; }
 
     this._darkMode = val;
   }
 
   public get DarkMode(): boolean {
-    debugger;
+
     return this._darkMode;
   }
 

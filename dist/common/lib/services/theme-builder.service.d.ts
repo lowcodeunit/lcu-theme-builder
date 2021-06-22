@@ -38,6 +38,9 @@ export declare class ThemeBuilderService {
     /**
      * _theming.scss from Angular Material
      */
+    private _materialTheme;
+    set MaterialTheme(val: string);
+    get MaterialTheme(): string;
     /**
      * Set Palette colors
      */

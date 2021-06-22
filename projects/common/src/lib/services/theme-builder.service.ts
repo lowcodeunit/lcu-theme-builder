@@ -16,6 +16,7 @@ import { PaletteTemplateService } from './palette-template.service';
 import { ThemePickerModel } from '../models/theme-picker.model';
 
 const tinyColor = tinycolor;
+const fallbackURL: string = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
 
 type RGBA = tinycolor.ColorFormats.RGBA;
 
@@ -53,16 +54,16 @@ export class ThemeBuilderService {
   /**
    * _theming.scss from Angular Material
    */
-  // private _materialTheme: string;
-  // public set MaterialTheme(val: string) {
+  private _materialTheme: string;
+  public set MaterialTheme(val: string) {
 
-  //   this._materialTheme = val;
-  //     this.ThemeScss = this.loadThemingScss();
-  // }
+     this._materialTheme = val;
+      this.ThemeScss = this.loadThemingScss();
+  }
 
-  // public get MaterialTheme(): string {
-  //   return this._materialTheme;
-  // }
+  public get MaterialTheme(): string {
+    return this._materialTheme;
+  }
 
    /**
     * Set Palette colors
@@ -99,11 +100,12 @@ export class ThemeBuilderService {
       protected zone: NgZone,
       protected variantColorService: VariantColorService) {
 
+      this.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
       this.themeMode = true;
       this.Theme = new Subject<ThemeModel>();
       this.PaletteColors = new Subject<Partial<PaletteModel>>();
 
-      this.ThemeScss = this.loadThemingScss();
+      // this.ThemeScss = this.loadThemingScss();
 
       this.PaletteList = [];
      }
@@ -115,8 +117,8 @@ export class ThemeBuilderService {
     * our theme color changes
     */
    protected loadThemingScss(): Promise<void> {
-    // return this.http.get(this.MaterialTheme, { responseType: 'text' })
-    return this.http.get('https://www.iot-ensemble.com/assets/theming/theming.scss', { responseType: 'text' })
+    // return this.http.get('https://www.iot-ensemble.com/assets/theming/theming.scss', { responseType: 'text' })
+    return this.http.get(this.MaterialTheme, { responseType: 'text' })
       .pipe(
         map((x: string) => {
           return x
