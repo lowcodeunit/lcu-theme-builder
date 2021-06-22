@@ -3,6 +3,9 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 export declare class LightnessPickerComponent implements OnInit {
     protected themeBuilderService: ThemeBuilderService;
+    private _darkModeToggle;
+    set DarkModeToggle(val: boolean);
+    get DarkModeToggle(): boolean;
     /**
      * Access Toggle field within the form group
      */
@@ -13,4 +16,6 @@ export declare class LightnessPickerComponent implements OnInit {
     ngOnInit(): void;
     protected formSetup(): void;
     protected onChanges(): void;
+    protected toggleMode(val: boolean): string;
+    protected setThemeMode(val: boolean): void;
 }

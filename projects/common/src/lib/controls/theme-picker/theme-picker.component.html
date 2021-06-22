@@ -4,7 +4,7 @@
 
 
 <mat-menu #themeMenu="matMenu">
-    <lcu-mode-toggle class="margin-2"></lcu-mode-toggle>
+    <lcu-mode-toggle [dark-mode-toggle]="DarkMode" class="margin-2"></lcu-mode-toggle>
     <div class="theme-selector-container"
         tabindex="-1"
         (click)="$event.stopPropagation();"

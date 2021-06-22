@@ -56,6 +56,8 @@ export class AppComponent implements OnInit {
     ]
 
     this.ThemingURL = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
+    
     this.themeBuilderService.SetThemes(themes);
+    // this.themeBuilderService.ThemeMode = true;
   }
 }

@@ -16,6 +16,10 @@ export declare class ThemePickerComponent implements OnInit {
      * List of themes
      */
     Themes: Array<ThemePickerModel>;
+    test: boolean;
+    private _darkMode;
+    set DarkMode(val: boolean);
+    get DarkMode(): boolean;
     ToggleManualControls: boolean;
     /**
      *

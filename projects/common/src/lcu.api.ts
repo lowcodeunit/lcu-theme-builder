@@ -9,5 +9,7 @@ export * from './lib/models/sub-palette.model';
 export * from './lib/models/theme.model';
 export * from './lib/models/color.model';
 export * from './lib/models/theme-picker.model';
+export * from './lib/controls/color-picker/color-picker.component';
+export * from './lib/controls/mode-toggle/mode-toggle.component';
 export * from './lib/utils/theme-builder-constants.utils';
 export * from './lib/services/variant-color.service';
