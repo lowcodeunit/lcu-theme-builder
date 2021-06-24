@@ -1,7 +1,11 @@
 <div 
 fxLayout='column'
   style="height: 100%">
-    <mat-toolbar color="primary" class="theme-builder-toolbar" fxLayout="row" fxLayoutAlign="space-between center" >
+    <mat-toolbar 
+      color="primary" 
+      class="theme-builder-toolbar" 
+      fxLayout="row" 
+      fxLayoutAlign="space-between center" >
       <!-- <div class="toolbar-title" fxLayout="row">
         <a fxFlex class="title-text" routerLink="/home">
           <h1>{{ Title }}</h1>
@@ -9,7 +13,11 @@ fxLayout='column'
         </a>
       </div> -->
       <h1 class="title-text">{{ Title }}</h1>
-      <lcu-theme-picker></lcu-theme-picker>
+      <lcu-theme-picker
+        dark-mode="true" 
+        [toggle-manual-controls]="true"
+        [material-theming]="ThemingURL">
+        lcu-theme-picker</lcu-theme-picker>
     </mat-toolbar>
   <div class="theme-builder-content mat-drawer-container">
    

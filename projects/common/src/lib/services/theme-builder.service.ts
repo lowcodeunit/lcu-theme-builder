@@ -1,3 +1,4 @@
+import { VariantColorService } from './variant-color.service';
 import { PalettePickerService } from './palette-picker.service';
 import { ColorMapModel } from './../models/color-map.model';
 import { LocalStorageService } from './local-storage.service';
@@ -15,6 +16,7 @@ import { PaletteTemplateService } from './palette-template.service';
 import { ThemePickerModel } from '../models/theme-picker.model';
 
 const tinyColor = tinycolor;
+const fallbackURL: string = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
 
 type RGBA = tinycolor.ColorFormats.RGBA;
 
@@ -49,20 +51,19 @@ export class ThemeBuilderService {
    */
   public MaterialPaletteColors: MaterialPaletteModel;
 
-  constructor(
-    protected http: HttpClient, 
-    protected paletteTemplateService: PaletteTemplateService,
-    protected localStorageService: LocalStorageService,
-    protected palettePickerService: PalettePickerService,
-    protected zone: NgZone,) {
+  /**
+   * _theming.scss from Angular Material
+   */
+  private _materialTheme: string;
+  public set MaterialTheme(val: string) {
 
-    this.themeMode = true;
-    this.Theme = new Subject<ThemeModel>();
-    this.PaletteColors = new Subject<Partial<PaletteModel>>();
-    this.ThemeScss = this.loadThemingScss();
+     this._materialTheme = val;
+      this.ThemeScss = this.loadThemingScss();
+  }
 
-    this.PaletteList = [];
-   }
+  public get MaterialTheme(): string {
+    return this._materialTheme;
+  }
 
    /**
     * Set Palette colors
@@ -71,7 +72,6 @@ export class ThemeBuilderService {
 
       this.palette = palette;
       this.palettePickerService.PalettePickerChange(palette);
-
       this.UpdateTheme(this.getTheme());
     }
 
@@ -80,30 +80,45 @@ export class ThemeBuilderService {
     }
 
     public set ThemeMode(light: boolean) {
+
       this.themeMode = !light;
       this.UpdateTheme(this.getTheme());
     }
 
     public get ThemeMode() {
+
       return this.themeMode;
     }
 
     public Themes: Array<ThemePickerModel>;
 
+    constructor(
+      protected http: HttpClient, 
+      protected paletteTemplateService: PaletteTemplateService,
+      protected localStorageService: LocalStorageService,
+      protected palettePickerService: PalettePickerService,
+      protected zone: NgZone,
+      protected variantColorService: VariantColorService) {
+
+      this.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
+      this.themeMode = true;
+      this.Theme = new Subject<ThemeModel>();
+      this.PaletteColors = new Subject<Partial<PaletteModel>>();
+
+      // this.ThemeScss = this.loadThemingScss();
+
+      this.PaletteList = [];
+     }
+
    /**
     * load intial theme
+    * 
+    * Pulls _theming.scss from Angular Material and then overwrites it with 
+    * our theme color changes
     */
    protected loadThemingScss(): Promise<void> {
-
-     // this is generated in angular.json, pulls from node_modules/@angular/material
-    // return this.http.get('/assets/_theming.scss', { responseType: 'text' })
-    // Sass.writeFile('testfile.scss', '@import "./node_modules/@angular/material/theming";\n.testfile { content: "loaded"; }',(result: boolean) => {
-    //   debugger;
-    // })
-    // Sass.compile('@import "testfile";', ((result: any) => {
-    //   debugger;
-    // }))
-    return this.http.get('/assets/_theming.scss', { responseType: 'text' })
+    // return this.http.get('https://www.iot-ensemble.com/assets/theming/theming.scss', { responseType: 'text' })
+    return this.http.get(this.MaterialTheme, { responseType: 'text' })
       .pipe(
         map((x: string) => {
           return x
@@ -121,7 +136,8 @@ export class ThemeBuilderService {
             .filter((l: string) => !!l)
             .join('\n');
         }),
-        map((txt: string) =>
+        map(
+          (txt: string) =>
           // writeFile allows this file to be accessed from styles.scss
           Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
            // console.log('Sass.writeFile', result);
@@ -258,6 +274,10 @@ export class ThemeBuilderService {
     initial.warn.main = this.Themes[0].Warn;
 
     this.Palette = initial;
-   
+
+    this.variantColorService.UpdatePrimaryVariants(this.Themes[0].Primary);
+    this.variantColorService.UpdateAccentVariants(this.Themes[0].Accent);
+    this.variantColorService.UpdateWarnVariants(this.Themes[0].Warn);
+
   }
 }
