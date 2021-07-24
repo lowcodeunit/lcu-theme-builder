@@ -186,13 +186,14 @@ ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY = {
 };
 ThemeBuilderConstants.document = window.getComputedStyle(document.documentElement);
 ThemeBuilderConstants.InitialValues = {
-    primary: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), lighter: null, darker: null },
-    accent: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), lighter: null, darker: null },
-    warn: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), lighter: null, darker: null },
-    lightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
-    lightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
-    darkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),
-    darkBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-background')
+    Primary: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), Lighter: null, Darker: null },
+    Accent: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), Lighter: null, Darker: null },
+    Warn: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), Lighter: null, Darker: null },
+    DarkMode: null,
+    LightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
+    LightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
+    DarkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),
+    DarkBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-background')
 };
 
 const tinyColor$3 = tinycolor;
@@ -211,7 +212,7 @@ class PaletteTemplateService {
       // Foreground Elements
 
       // Light Theme Text
-      $dark-text: ${theme.palette.lightText};
+      $dark-text: ${theme.Palette.LightText};
       $dark-primary-text: rgba($dark-text, 0.87);
       $dark-accent-text: rgba($dark-primary-text, 0.54);
       $dark-disabled-text: rgba($dark-primary-text, 0.38);
@@ -238,7 +239,7 @@ class PaletteTemplateService {
       );
 
       // Dark Theme text
-      $light-text: ${theme.palette.darkText};
+      $light-text: ${theme.Palette.DarkText};
       $light-primary-text: $light-text;
       $light-accent-text: rgba($light-primary-text, 0.7);
       $light-disabled-text: rgba($light-primary-text, 0.5);
@@ -266,14 +267,14 @@ class PaletteTemplateService {
 
       // Background config
       // Light bg
-      $light-background:    ${theme.palette.lightBackground};
+      $light-background:    ${theme.Palette.LightBackground};
       $light-bg-darker-5:   darken($light-background, 5%);
       $light-bg-darker-10:  darken($light-background, 10%);
       $light-bg-darker-20:  darken($light-background, 20%);
       $light-bg-darker-30:  darken($light-background, 30%);
       $light-bg-lighter-5:  lighten($light-background, 5%);
-      $dark-bg-alpha-4:     rgba(${theme.palette.darkBackground}, 0.04);
-      $dark-bg-alpha-12:    rgba(${theme.palette.darkBackground}, 0.12);
+      $dark-bg-alpha-4:     rgba(${theme.Palette.DarkBackground}, 0.04);
+      $dark-bg-alpha-12:    rgba(${theme.Palette.DarkBackground}, 0.12);
 
       $mat-light-theme-background: (
         background:               $light-background,
@@ -293,13 +294,13 @@ class PaletteTemplateService {
       );
 
       // Dark bg
-      $dark-background:     ${theme.palette.darkBackground};
+      $dark-background:     ${theme.Palette.DarkBackground};
       $dark-bg-lighter-5:   lighten($dark-background, 5%);
       $dark-bg-lighter-10:  lighten($dark-background, 10%);
       $dark-bg-lighter-20:  lighten($dark-background, 20%);
       $dark-bg-lighter-30:  lighten($dark-background, 30%);
-      $light-bg-alpha-4:    rgba(${theme.palette.lightBackground}, 0.04);
-      $light-bg-alpha-12:   rgba(${theme.palette.lightBackground}, 0.12);
+      $light-bg-alpha-4:    rgba(${theme.Palette.LightBackground}, 0.04);
+      $light-bg-alpha-12:   rgba(${theme.Palette.LightBackground}, 0.12);
 
       // Background palette for dark themes.
       $mat-dark-theme-background: (
@@ -320,10 +321,11 @@ class PaletteTemplateService {
       );
 
       // Theme Config
-      ${['primary', 'accent', 'warn'].map(x => this.getScssPalette(x, theme.palette[x])).join('\n')};
 
-      $theme: ${!theme.lightness ? 'mat-dark-theme' : 'mat-light-theme'}($theme-primary, $theme-accent, $theme-warn);
-      $altTheme: ${!theme.lightness ? 'mat-light-theme' : 'mat-dark-theme'}($theme-primary, $theme-accent, $theme-warn);
+      ${['Primary', 'Accent', 'Warn'].map(x => this.getScssPalette(x, theme.Palette[x])).join('\n')};
+
+      $theme: ${!theme.Lightness ? 'mat-dark-theme' : 'mat-light-theme'}($theme-Primary, $theme-Accent, $theme-Warn);
+      $altTheme: ${!theme.Lightness ? 'mat-light-theme' : 'mat-dark-theme'}($theme-Primary, $theme-Accent, $theme-Warn);
 
       // Theme Init
       @include angular-material-theme($theme);
@@ -361,23 +363,23 @@ class PaletteTemplateService {
     getScssPalette(name, subPalette) {
         return `
       body {
-        --${name}-color: ${subPalette.main};
-        --${name}-lighter-color: ${subPalette.lighter};
-        --${name}-darker-color: ${subPalette.darker};
-        --text-${name}-color: #{${this.getTextColor(subPalette.main)}};
-        --text-${name}-lighter-color: #{${this.getTextColor(subPalette.lighter)}};
-        --text-${name}-darker-color: #{${this.getTextColor(subPalette.darker)}};
+        --${name}-color: ${subPalette.Main};
+        --${name}-lighter-color: ${subPalette.Lighter};
+        --${name}-darker-color: ${subPalette.Darker};
+        --text-${name}-color: #{${this.getTextColor(subPalette.Main)}};
+        --text-${name}-lighter-color: #{${this.getTextColor(subPalette.Lighter)}};
+        --text-${name}-darker-color: #{${this.getTextColor(subPalette.Darker)}};
       }
 
     $mat-${name}: (
-      main: ${subPalette.main},
-      lighter: ${subPalette.lighter},
-      darker: ${subPalette.darker},
-      200: ${subPalette.main}, // For slide toggle,
+      main: ${subPalette.Main},
+      lighter: ${subPalette.Lighter},
+      darker: ${subPalette.Darker},
+      200: ${subPalette.Main}, // For slide toggle,
       contrast : (
-        main: ${this.getTextColor(subPalette.main)},
-        lighter: ${this.getTextColor(subPalette.lighter)},
-        darker: ${this.getTextColor(subPalette.darker)},
+        main: ${this.getTextColor(subPalette.Main)},
+        lighter: ${this.getTextColor(subPalette.Lighter)},
+        darker: ${this.getTextColor(subPalette.Darker)},
       )
     );
     $theme-${name}: mat-palette($mat-${name}, main, lighter, darker);`;
@@ -428,14 +430,14 @@ class ThemeBuilderService {
     set Palette(palette) {
         this.palette = palette;
         this.palettePickerService.PalettePickerChange(palette);
-        this.UpdateTheme(this.getTheme());
+        this.UpdateTheme(this.GetTheme());
     }
     get Palette() {
         return this.palette;
     }
     set ThemeMode(light) {
         this.themeMode = !light;
-        this.UpdateTheme(this.getTheme());
+        this.UpdateTheme(this.GetTheme());
     }
     get ThemeMode() {
         return this.themeMode;
@@ -526,15 +528,15 @@ class ThemeBuilderService {
      * emit event with theme
      */
     emit() {
-        this.Theme.next(this.getTheme());
+        this.Theme.next(this.GetTheme());
     }
     /**
      * Return a new theme model
      */
-    getTheme() {
+    GetTheme() {
         return {
-            palette: this.Palette,
-            lightness: this.ThemeMode,
+            Palette: this.Palette,
+            Lightness: this.ThemeMode,
         };
     }
     multiply(rgb1, rgb2) {
@@ -571,10 +573,15 @@ class ThemeBuilderService {
         this.Themes = themes;
         let initial = new PaletteModel();
         initial = Object.assign(Object.assign({}, ThemeBuilderConstants.InitialValues), initial);
-        initial.primary.main = this.Themes[0].Primary;
-        initial.accent.main = this.Themes[0].Accent;
-        initial.warn.main = this.Themes[0].Warn;
+        initial.Primary.Main = this.Themes[0].Primary;
+        initial.Accent.Main = this.Themes[0].Accent;
+        initial.Warn.Main = this.Themes[0].Warn;
+        initial.DarkMode = this.Themes[0].DarkMode || null;
         this.Palette = initial;
+        this.ThemeMode = initial.DarkMode;
+        /**
+         * Setup variant colors (50 - A900) based of the theme base colors
+         */
         this.variantColorService.UpdatePrimaryVariants(this.Themes[0].Primary);
         this.variantColorService.UpdateAccentVariants(this.Themes[0].Accent);
         this.variantColorService.UpdateWarnVariants(this.Themes[0].Warn);
@@ -735,9 +742,9 @@ class PalettePickerComponent {
         // the color picker itself
         this.palettePickerService.ColorPickerChanged
             .subscribe((val) => {
-            this.PrimaryColor = val.primary.main;
-            this.AccentColor = val.accent.main;
-            this.WarnColor = val.warn.main;
+            this.PrimaryColor = val.Primary.Main;
+            this.AccentColor = val.Accent.Main;
+            this.WarnColor = val.Warn.Main;
             // this.Primary.setValue(val.primary.main);
             // this.Accent.setValue(val.accent.main);
             // this.Warn.setValue(val.warn.main);
@@ -764,9 +771,9 @@ class PalettePickerComponent {
     updatePalette() {
         let palette = new PaletteModel();
         palette = Object.assign(Object.assign({}, this.palettePickerService.CurrentPalette), palette);
-        palette.primary.main = this.Primary.value.main;
-        palette.accent.main = this.Accent.value.main;
-        palette.warn.main = this.Warn.value.main;
+        palette.Primary.Main = this.Primary.value.main;
+        palette.Accent.Main = this.Accent.value.main;
+        palette.Warn.Main = this.Warn.value.main;
         this.themeBuilderService.Palette = palette;
     }
     ngOnInit() {
@@ -1022,12 +1029,12 @@ class VariantColorsComponent {
         this.setupForm();
         this.paletteChangedSubscription = this.PalettePickerService.ColorPickerChanged
             .subscribe((palette) => {
-            if (!palette || !palette.primary) {
+            if (!palette || !palette.Primary) {
                 return;
             }
-            this.variantColorService.UpdatePrimaryVariants(palette.primary.main);
-            this.variantColorService.UpdateAccentVariants(palette.accent.main);
-            this.variantColorService.UpdateWarnVariants(palette.warn.main);
+            this.variantColorService.UpdatePrimaryVariants(palette.Primary.Main);
+            this.variantColorService.UpdateAccentVariants(palette.Accent.Main);
+            this.variantColorService.UpdateWarnVariants(palette.Warn.Main);
             // this.updateAccentColor(palette.accent.main);
             // this.updatePrimaryColor(palette.primary.main);
             // this.updateWarnColor(palette.warn.main);
@@ -1155,9 +1162,11 @@ class ThemePickerComponent {
         let palette = new PaletteModel();
         palette = Object.assign(Object.assign({}, this.palettePickerService.CurrentPalette), palette);
         const colors = [theme.Primary, theme.Accent, theme.Warn];
-        palette.primary.main = theme.Primary;
-        palette.accent.main = theme.Accent;
-        palette.warn.main = theme.Warn;
+        palette.Primary.Main = theme.Primary;
+        palette.Accent.Main = theme.Accent;
+        palette.Warn.Main = theme.Warn;
+        //  palette.DarkMode = theme.DarkMode;
+        debugger;
         this.variantColorService.UpdatePrimaryVariants(theme.Primary);
         this.variantColorService.UpdateAccentVariants(theme.Accent);
         this.variantColorService.UpdateWarnVariants(theme.Warn);

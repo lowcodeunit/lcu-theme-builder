@@ -72,7 +72,7 @@ export class ThemeBuilderService {
 
       this.palette = palette;
       this.palettePickerService.PalettePickerChange(palette);
-      this.UpdateTheme(this.getTheme());
+      this.UpdateTheme(this.GetTheme());
     }
 
     public get Palette() {
@@ -82,7 +82,7 @@ export class ThemeBuilderService {
     public set ThemeMode(light: boolean) {
 
       this.themeMode = !light;
-      this.UpdateTheme(this.getTheme());
+      this.UpdateTheme(this.GetTheme());
     }
 
     public get ThemeMode() {
@@ -208,17 +208,17 @@ export class ThemeBuilderService {
     * emit event with theme
     */
    protected emit(): void {
-     this.Theme.next(this.getTheme());
+     this.Theme.next(this.GetTheme());
    }
 
    /**
     * Return a new theme model
     */
-   public getTheme(): ThemeModel {
+   public GetTheme(): ThemeModel {
 
     return {
-      palette: this.Palette,
-      lightness: this.ThemeMode,
+      Palette: this.Palette,
+      Lightness: this.ThemeMode,
     };
    }
 
@@ -269,12 +269,17 @@ export class ThemeBuilderService {
 
     let initial: PaletteModel = new PaletteModel();
     initial = { ...ThemeBuilderConstants.InitialValues, ...initial };
-    initial.primary.main = this.Themes[0].Primary;
-    initial.accent.main = this.Themes[0].Accent;
-    initial.warn.main = this.Themes[0].Warn;
+    initial.Primary.Main = this.Themes[0].Primary;
+    initial.Accent.Main = this.Themes[0].Accent;
+    initial.Warn.Main = this.Themes[0].Warn;
+    initial.DarkMode = this.Themes[0].DarkMode || null;
 
     this.Palette = initial;
+    this.ThemeMode = initial.DarkMode;
 
+    /**
+     * Setup variant colors (50 - A900) based of the theme base colors
+     */
     this.variantColorService.UpdatePrimaryVariants(this.Themes[0].Primary);
     this.variantColorService.UpdateAccentVariants(this.Themes[0].Accent);
     this.variantColorService.UpdateWarnVariants(this.Themes[0].Warn);

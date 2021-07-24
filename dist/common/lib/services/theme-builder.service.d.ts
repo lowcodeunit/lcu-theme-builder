@@ -83,7 +83,7 @@ export declare class ThemeBuilderService {
     /**
      * Return a new theme model
      */
-    getTheme(): ThemeModel;
+    GetTheme(): ThemeModel;
     multiply(rgb1: RGBA, rgb2: RGBA): any;
     UpdateTheme(theme: ThemeModel): void;
     SetThemes(themes: Array<ThemePickerModel>): void;

@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PaletteModel } from '../../models/palette.model';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { debug } from 'console';
 
 @Component({
   selector: 'lcu-theme-picker',
@@ -112,10 +113,11 @@ public test: boolean;
 
     const colors: Array<string> = [theme.Primary, theme.Accent, theme.Warn];
 
-    palette.primary.main = theme.Primary;
-    palette.accent.main = theme.Accent;
-    palette.warn.main = theme.Warn;
-
+    palette.Primary.Main = theme.Primary;
+    palette.Accent.Main = theme.Accent;
+    palette.Warn.Main = theme.Warn;
+    //  palette.DarkMode = theme.DarkMode;
+debugger;
     this.variantColorService.UpdatePrimaryVariants(theme.Primary);
     this.variantColorService.UpdateAccentVariants(theme.Accent);
     this.variantColorService.UpdateWarnVariants(theme.Warn);
@@ -147,7 +149,9 @@ public test: boolean;
   protected setupForm(): void {
 
     this.ManualForm = new FormGroup({
-      manualThemeName: new FormControl('', {validators: Validators.required}),
+      manualThemeName: new FormControl(
+        '', 
+        {validators: Validators.required}),
       manualPrimary: new FormControl(
         '',
         {validators: Validators.required}),

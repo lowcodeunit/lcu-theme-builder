@@ -29,13 +29,14 @@ export class ThemeBuilderConstants {
       public static document = window.getComputedStyle(document.documentElement);
 
       public static InitialValues: PaletteModel = {
-        primary: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), lighter: null, darker: null },
-        accent: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), lighter: null, darker: null },
-        warn: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), lighter: null, darker: null },
-        lightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
-        lightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
-        darkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),
-        darkBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-background')
+        Primary: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), Lighter: null, Darker: null },
+        Accent: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), Lighter: null, Darker: null },
+        Warn: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), Lighter: null, Darker: null },
+        DarkMode: null,
+        LightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
+        LightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
+        DarkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),
+        DarkBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-background')
       };
 
   }

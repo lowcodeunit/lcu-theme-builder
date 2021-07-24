@@ -27,7 +27,7 @@ export class PaletteTemplateService {
       // Foreground Elements
 
       // Light Theme Text
-      $dark-text: ${theme.palette.lightText};
+      $dark-text: ${theme.Palette.LightText};
       $dark-primary-text: rgba($dark-text, 0.87);
       $dark-accent-text: rgba($dark-primary-text, 0.54);
       $dark-disabled-text: rgba($dark-primary-text, 0.38);
@@ -54,7 +54,7 @@ export class PaletteTemplateService {
       );
 
       // Dark Theme text
-      $light-text: ${theme.palette.darkText};
+      $light-text: ${theme.Palette.DarkText};
       $light-primary-text: $light-text;
       $light-accent-text: rgba($light-primary-text, 0.7);
       $light-disabled-text: rgba($light-primary-text, 0.5);
@@ -82,14 +82,14 @@ export class PaletteTemplateService {
 
       // Background config
       // Light bg
-      $light-background:    ${theme.palette.lightBackground};
+      $light-background:    ${theme.Palette.LightBackground};
       $light-bg-darker-5:   darken($light-background, 5%);
       $light-bg-darker-10:  darken($light-background, 10%);
       $light-bg-darker-20:  darken($light-background, 20%);
       $light-bg-darker-30:  darken($light-background, 30%);
       $light-bg-lighter-5:  lighten($light-background, 5%);
-      $dark-bg-alpha-4:     rgba(${theme.palette.darkBackground}, 0.04);
-      $dark-bg-alpha-12:    rgba(${theme.palette.darkBackground}, 0.12);
+      $dark-bg-alpha-4:     rgba(${theme.Palette.DarkBackground}, 0.04);
+      $dark-bg-alpha-12:    rgba(${theme.Palette.DarkBackground}, 0.12);
 
       $mat-light-theme-background: (
         background:               $light-background,
@@ -109,13 +109,13 @@ export class PaletteTemplateService {
       );
 
       // Dark bg
-      $dark-background:     ${theme.palette.darkBackground};
+      $dark-background:     ${theme.Palette.DarkBackground};
       $dark-bg-lighter-5:   lighten($dark-background, 5%);
       $dark-bg-lighter-10:  lighten($dark-background, 10%);
       $dark-bg-lighter-20:  lighten($dark-background, 20%);
       $dark-bg-lighter-30:  lighten($dark-background, 30%);
-      $light-bg-alpha-4:    rgba(${theme.palette.lightBackground}, 0.04);
-      $light-bg-alpha-12:   rgba(${theme.palette.lightBackground}, 0.12);
+      $light-bg-alpha-4:    rgba(${theme.Palette.LightBackground}, 0.04);
+      $light-bg-alpha-12:   rgba(${theme.Palette.LightBackground}, 0.12);
 
       // Background palette for dark themes.
       $mat-dark-theme-background: (
@@ -136,10 +136,11 @@ export class PaletteTemplateService {
       );
 
       // Theme Config
-      ${['primary', 'accent', 'warn'].map(x => this.getScssPalette(x, theme.palette[x])).join('\n')};
 
-      $theme: ${!theme.lightness ? 'mat-dark-theme' : 'mat-light-theme'}($theme-primary, $theme-accent, $theme-warn);
-      $altTheme: ${!theme.lightness ? 'mat-light-theme' : 'mat-dark-theme'}($theme-primary, $theme-accent, $theme-warn);
+      ${['Primary', 'Accent', 'Warn'].map(x => this.getScssPalette(x, theme.Palette[x])).join('\n')};
+
+      $theme: ${!theme.Lightness ? 'mat-dark-theme' : 'mat-light-theme'}($theme-Primary, $theme-Accent, $theme-Warn);
+      $altTheme: ${!theme.Lightness ? 'mat-light-theme' : 'mat-dark-theme'}($theme-Primary, $theme-Accent, $theme-Warn);
 
       // Theme Init
       @include angular-material-theme($theme);
@@ -177,25 +178,26 @@ export class PaletteTemplateService {
      * @param subPalette SubPaletteModel
      */
     protected getScssPalette(name: string, subPalette: SubPaletteModel): string {
+
       return `
       body {
-        --${name}-color: ${subPalette.main};
-        --${name}-lighter-color: ${subPalette.lighter};
-        --${name}-darker-color: ${subPalette.darker};
-        --text-${name}-color: #{${this.getTextColor(subPalette.main)}};
-        --text-${name}-lighter-color: #{${this.getTextColor(subPalette.lighter)}};
-        --text-${name}-darker-color: #{${this.getTextColor(subPalette.darker)}};
+        --${name}-color: ${subPalette.Main};
+        --${name}-lighter-color: ${subPalette.Lighter};
+        --${name}-darker-color: ${subPalette.Darker};
+        --text-${name}-color: #{${this.getTextColor(subPalette.Main)}};
+        --text-${name}-lighter-color: #{${this.getTextColor(subPalette.Lighter)}};
+        --text-${name}-darker-color: #{${this.getTextColor(subPalette.Darker)}};
       }
 
     $mat-${name}: (
-      main: ${subPalette.main},
-      lighter: ${subPalette.lighter},
-      darker: ${subPalette.darker},
-      200: ${subPalette.main}, // For slide toggle,
+      main: ${subPalette.Main},
+      lighter: ${subPalette.Lighter},
+      darker: ${subPalette.Darker},
+      200: ${subPalette.Main}, // For slide toggle,
       contrast : (
-        main: ${this.getTextColor(subPalette.main)},
-        lighter: ${this.getTextColor(subPalette.lighter)},
-        darker: ${this.getTextColor(subPalette.darker)},
+        main: ${this.getTextColor(subPalette.Main)},
+        lighter: ${this.getTextColor(subPalette.Lighter)},
+        darker: ${this.getTextColor(subPalette.Darker)},
       )
     );
     $theme-${name}: mat-palette($mat-${name}, main, lighter, darker);`;

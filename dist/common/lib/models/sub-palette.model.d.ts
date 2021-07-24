@@ -1,5 +1,5 @@
 export declare class SubPaletteModel {
-    darker: string;
-    lighter: string;
-    main: string;
+    Darker: string;
+    Lighter: string;
+    Main: string;
 }

@@ -62,7 +62,12 @@ export class VariantColorService {
     protected computeColors(color: string): Array<ColorModel> {
 
         const baseLightColor = tinyColor('#ffffff');
-        const baseDarkColor = this.themeBuilderService.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
+        let baseDarkColor: any = tinyColor('#222222');
+
+        if (this.themeBuilderService.multiply) {
+            baseDarkColor = this.themeBuilderService.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
+        }
+
         const [, , , baseTetrad] = tinyColor(color).tetrad();
 
         return [

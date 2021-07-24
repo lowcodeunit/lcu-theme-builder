@@ -105,13 +105,13 @@ protected paletteChangedSubscription: Subscription;
     this.paletteChangedSubscription = this.PalettePickerService.ColorPickerChanged
     .subscribe((palette: PaletteModel) => {
 
-      if (!palette || !palette.primary) {
+      if (!palette || !palette.Primary) {
         return;
       }
 
-      this.variantColorService.UpdatePrimaryVariants(palette.primary.main);
-      this.variantColorService.UpdateAccentVariants(palette.accent.main);
-      this.variantColorService.UpdateWarnVariants(palette.warn.main);
+      this.variantColorService.UpdatePrimaryVariants(palette.Primary.Main);
+      this.variantColorService.UpdateAccentVariants(palette.Accent.Main);
+      this.variantColorService.UpdateWarnVariants(palette.Warn.Main);
       // this.updateAccentColor(palette.accent.main);
       // this.updatePrimaryColor(palette.primary.main);
       // this.updateWarnColor(palette.warn.main);
