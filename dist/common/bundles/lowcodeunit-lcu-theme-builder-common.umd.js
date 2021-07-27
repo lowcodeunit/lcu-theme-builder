@@ -457,7 +457,10 @@
         };
         VariantColorService.prototype.computeColors = function (color) {
             var baseLightColor = tinyColor$4('#ffffff');
-            var baseDarkColor = this.themeBuilderService.multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
+            var baseDarkColor = tinyColor$4('#222222');
+            if (this.themeBuilderService.multiply) {
+                baseDarkColor = this.themeBuilderService.multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
+            }
             var _a = __read(tinyColor$4(color).tetrad(), 4), baseTetrad = _a[3];
             return [
                 this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 12), '50'),
@@ -752,7 +755,7 @@
                 return [k, tinyColor$2.mix(baseDark, baseTriad, amount)
                         .saturate(sat).lighten(light)];
             });
-            return __spread(primary, accent).reduce(function (acc, _a) {
+            return __spreadArray(__spreadArray([], __read(primary)), __read(accent)).reduce(function (acc, _a) {
                 var _b = __read(_a, 2), k = _b[0], c = _b[1];
                 acc[k] = c.toHexString();
                 return acc;
@@ -1094,7 +1097,7 @@
             this.themeBuilderService = themeBuilderService;
             this.palettePickerService = palettePickerService;
             this.Unlocked = new forms.FormControl(false);
-            this.materialKeys = __spread(Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY), Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY));
+            this.materialKeys = __spreadArray(__spreadArray([], __read(Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY))), __read(Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY)));
         }
         Object.defineProperty(SubPalettePickerComponent.prototype, "ColorPickerColor", {
             set: function (val) {

@@ -85,7 +85,10 @@ class VariantColorService {
     }
     computeColors(color) {
         const baseLightColor = tinyColor$4('#ffffff');
-        const baseDarkColor = this.themeBuilderService.multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
+        let baseDarkColor = tinyColor$4('#222222');
+        if (this.themeBuilderService.multiply) {
+            baseDarkColor = this.themeBuilderService.multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
+        }
         const [, , , baseTetrad] = tinyColor$4(color).tetrad();
         return [
             this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 12), '50'),
