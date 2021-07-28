@@ -34,7 +34,11 @@ import { PalettePickerService } from './services/palette-picker.service';
     MaterialModule,
     ColorPickerModule
   ],
-  exports: [ThemeBuilderComponent, ThemeBuilderDirective, ThemePickerComponent],
+  exports: [
+    ThemeBuilderComponent,
+    ThemeBuilderDirective,
+    ThemePickerComponent
+  ],
   entryComponents: [
     ThemePickerComponent
   ]
@@ -43,7 +47,10 @@ export class ThemeBuilderModule {
   static forRoot(): ModuleWithProviders<ThemeBuilderModule> {
     return {
       ngModule: ThemeBuilderModule,
-      providers: [ThemeBuilderService, PalettePickerService]
+      providers: [
+        ThemeBuilderService,
+        PalettePickerService
+      ]
     };
   }
 }

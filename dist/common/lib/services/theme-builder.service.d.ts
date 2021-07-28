@@ -1,9 +1,9 @@
+import { UtilsService } from './utils.service';
 import { VariantColorService } from './variant-color.service';
 import { PalettePickerService } from './palette-picker.service';
 import { LocalStorageService } from './local-storage.service';
 import { MaterialPaletteModel } from './../models/material-palette.model';
 import { NgZone } from '@angular/core';
-import * as tinycolor from 'tinycolor2';
 import { PaletteModel } from '../models/palette.model';
 import { Subject } from 'rxjs';
 import { ThemeModel } from '../models/theme.model';
@@ -11,13 +11,14 @@ import { HttpClient } from '@angular/common/http';
 import { PaletteListModel } from '../models/palette-list.model';
 import { PaletteTemplateService } from './palette-template.service';
 import { ThemePickerModel } from '../models/theme-picker.model';
-declare type RGBA = tinycolor.ColorFormats.RGBA;
+import * as ɵngcc0 from '@angular/core';
 export declare class ThemeBuilderService {
     protected http: HttpClient;
     protected paletteTemplateService: PaletteTemplateService;
     protected localStorageService: LocalStorageService;
     protected palettePickerService: PalettePickerService;
     protected zone: NgZone;
+    protected utilsService: UtilsService;
     protected variantColorService: VariantColorService;
     /**
      * Is it lightness
@@ -49,7 +50,7 @@ export declare class ThemeBuilderService {
     set ThemeMode(light: boolean);
     get ThemeMode(): boolean;
     Themes: Array<ThemePickerModel>;
-    constructor(http: HttpClient, paletteTemplateService: PaletteTemplateService, localStorageService: LocalStorageService, palettePickerService: PalettePickerService, zone: NgZone, variantColorService: VariantColorService);
+    constructor(http: HttpClient, paletteTemplateService: PaletteTemplateService, localStorageService: LocalStorageService, palettePickerService: PalettePickerService, zone: NgZone, utilsService: UtilsService, variantColorService: VariantColorService);
     /**
      * load intial theme
      *
@@ -84,8 +85,9 @@ export declare class ThemeBuilderService {
      * Return a new theme model
      */
     getTheme(): ThemeModel;
-    multiply(rgb1: RGBA, rgb2: RGBA): any;
     UpdateTheme(theme: ThemeModel): void;
     SetThemes(themes: Array<ThemePickerModel>): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDeclaration<ThemeBuilderService, never>;
 }
-export {};
+
+//# sourceMappingURL=theme-builder.service.d.ts.map

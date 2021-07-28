@@ -1,9 +1,9 @@
+import { UtilsService } from './utils.service';
 
 import { Injectable } from '@angular/core';
 import { ColorModel } from '../models/color.model';
 import * as tinycolor from 'tinycolor2';
 import { PalettePickerService } from './palette-picker.service';
-import { ThemeBuilderService } from './theme-builder.service';
 
 const tinyColor = tinycolor;
 
@@ -15,7 +15,7 @@ export class VariantColorService {
 
     constructor(
         protected palettePickerService: PalettePickerService,
-        protected themeBuilderService: ThemeBuilderService
+        protected utilsService: UtilsService
     ) { }
 
     public UpdatePrimaryVariants(color: string): void {
@@ -62,7 +62,12 @@ export class VariantColorService {
     protected computeColors(color: string): Array<ColorModel> {
 
         const baseLightColor = tinyColor('#ffffff');
-        const baseDarkColor = this.themeBuilderService.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
+        let baseDarkColor: any = tinyColor('#222222');
+
+        if (this.utilsService.Multiply) {
+            baseDarkColor = this.utilsService.Multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
+        }
+
         const [, , , baseTetrad] = tinyColor(color).tetrad();
 
         return [
