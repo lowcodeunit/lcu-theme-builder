@@ -4,7 +4,7 @@ import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { PaletteModel } from '../../models/palette.model';
 import { Subscription } from 'rxjs';
 import { PalettePickerService } from '../../services/palette-picker.service';
-import * as i0 from "@angular/core";
+import * as ɵngcc0 from '@angular/core';
 export declare class PalettePickerComponent implements OnInit, OnDestroy {
     protected themeBuilderService: ThemeBuilderService;
     protected palettePickerService: PalettePickerService;
@@ -36,6 +36,8 @@ export declare class PalettePickerComponent implements OnInit, OnDestroy {
      * Setup the form
      */
     protected setupForm(): void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<PalettePickerComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PalettePickerComponent, "lcu-palette-picker", never, {}, {}, never, never>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDeclaration<PalettePickerComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDeclaration<PalettePickerComponent, "lcu-palette-picker", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=palette-picker.component.d.ts.map
