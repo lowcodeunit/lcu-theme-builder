@@ -5,7 +5,6 @@ import {
   ThemeBuilderConstants, 
   ThemePickerModel } from '@lowcodeunit/lcu-theme-builder-common';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'lcu-root',
@@ -27,7 +26,6 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-
       this.setupThemes();
   }
 

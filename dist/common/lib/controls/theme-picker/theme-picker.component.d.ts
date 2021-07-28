@@ -4,6 +4,7 @@ import { ThemePickerModel } from './../../models/theme-picker.model';
 import { OnInit } from '@angular/core';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { AbstractControl, FormGroup } from '@angular/forms';
+import * as i0 from "@angular/core";
 export declare class ThemePickerComponent implements OnInit {
     protected palettePickerService: PalettePickerService;
     protected themeBuilderService: ThemeBuilderService;
@@ -59,4 +60,6 @@ export declare class ThemePickerComponent implements OnInit {
      * Create themes for theme picker
      */
     protected themes(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ThemePickerComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ThemePickerComponent, "lcu-theme-picker", never, { "DarkMode": "dark-mode"; "ToggleManualControls": "toggle-manual-controls"; "MaterialTheming": "material-theming"; }, {}, never, never>;
 }

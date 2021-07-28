@@ -3,8 +3,5 @@
   "dest": "../../dist/common",
   "lib": {
     "entryFile": "src/lcu.api.ts"
-  },
-  "assets": [
-    "assets"
-  ]
+  }
 }

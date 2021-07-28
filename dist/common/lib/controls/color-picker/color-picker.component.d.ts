@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PalettePickerService } from '../../services/palette-picker.service';
+import * as i0 from "@angular/core";
 export declare class ColorPickerComponent implements OnInit {
     protected palettePickerService: PalettePickerService;
     /**
@@ -44,4 +45,6 @@ export declare class ColorPickerComponent implements OnInit {
     GetTextColor(col: string): any;
     ColorPickerClosed(evt: string): void;
     ColorPickerChange(evt: string): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ColorPickerComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ColorPickerComponent, "lcu-color-picker", never, { "Control": "control"; "Disabled": "disabled"; "Variants": "variants"; "Color": "color"; }, {}, never, never>;
 }

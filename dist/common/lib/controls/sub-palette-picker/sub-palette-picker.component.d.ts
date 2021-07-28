@@ -3,6 +3,7 @@ import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
 import { Subscription } from 'rxjs';
 import { PalettePickerService } from '../../services/palette-picker.service';
+import * as i0 from "@angular/core";
 export declare class SubPalettePickerComponent implements OnInit, OnDestroy {
     protected themeBuilderService: ThemeBuilderService;
     protected palettePickerService: PalettePickerService;
@@ -47,4 +48,6 @@ export declare class SubPalettePickerComponent implements OnInit, OnDestroy {
      * @param color selected base color, chosen from color pickers
      */
     protected onMainChange(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SubPalettePickerComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SubPalettePickerComponent, "lcu-sub-palette-picker", never, { "Form": "form"; "ColorPickerColor": "color-picker-color"; }, {}, never, never>;
 }
