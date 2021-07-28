@@ -1,6 +1,7 @@
 import { PaletteModel } from '../models/palette.model';
 import { ColorModel } from '../models/color.model';
 import { Subject } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class PalettePickerService {
     /**
      *
@@ -37,4 +38,7 @@ export declare class PalettePickerService {
      * @param params Selected color from color picker
      */
     CloseColorPicker(params: string): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDeclaration<PalettePickerService, never>;
 }
+
+//# sourceMappingURL=palette-picker.service.d.ts.map

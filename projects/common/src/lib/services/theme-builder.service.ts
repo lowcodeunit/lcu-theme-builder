@@ -1,3 +1,4 @@
+import { UtilsService } from './utils.service';
 import { VariantColorService } from './variant-color.service';
 import { PalettePickerService } from './palette-picker.service';
 import { ColorMapModel } from './../models/color-map.model';
@@ -17,8 +18,6 @@ import { ThemePickerModel } from '../models/theme-picker.model';
 
 const tinyColor = tinycolor;
 const fallbackURL: string = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
-
-type RGBA = tinycolor.ColorFormats.RGBA;
 
 // tell typescript that Sass exists
 // loads the synchronous Sass.js
@@ -98,6 +97,7 @@ export class ThemeBuilderService {
       protected localStorageService: LocalStorageService,
       protected palettePickerService: PalettePickerService,
       protected zone: NgZone,
+      protected utilsService: UtilsService,
       protected variantColorService: VariantColorService) {
 
       this.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
@@ -181,7 +181,7 @@ export class ThemeBuilderService {
     */
    public GetPalette(color: string): MaterialPaletteModel {
     const baseLight = tinyColor('#ffffff');
-    const baseDark = this.multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
+    const baseDark = this.utilsService.Multiply(tinyColor(color).toRgb(), tinyColor(color).toRgb());
     const [, , , baseTriad] = tinyColor(color).tetrad();
 
     const primary = Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY)
@@ -220,14 +220,6 @@ export class ThemeBuilderService {
       palette: this.Palette,
       lightness: this.ThemeMode,
     };
-   }
-
-   public multiply(rgb1: RGBA, rgb2: RGBA): any {
-    rgb1.b = Math.floor(rgb1.b * rgb2.b / 255);
-    rgb1.g = Math.floor(rgb1.g * rgb2.g / 255);
-    rgb1.r = Math.floor(rgb1.r * rgb2.r / 255);
-
-    return tinyColor('rgb ' + rgb1.r + ' ' + rgb1.g + ' ' + rgb1.b);
    }
 
    public UpdateTheme(theme: ThemeModel): void {

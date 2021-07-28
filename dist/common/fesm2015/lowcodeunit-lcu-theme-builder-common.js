@@ -11,6 +11,22 @@ import { map, distinctUntilChanged } from 'rxjs/operators';
 import * as i1 from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 
+const tinyColor$5 = tinycolor;
+class UtilsService {
+    Multiply(rgb1, rgb2) {
+        rgb1.b = Math.floor(rgb1.b * rgb2.b / 255);
+        rgb1.g = Math.floor(rgb1.g * rgb2.g / 255);
+        rgb1.r = Math.floor(rgb1.r * rgb2.r / 255);
+        return tinyColor$5('rgb ' + rgb1.r + ' ' + rgb1.g + ' ' + rgb1.b);
+    }
+}
+UtilsService.ɵprov = i0.ɵɵdefineInjectable({ factory: function UtilsService_Factory() { return new UtilsService(); }, token: UtilsService, providedIn: "root" });
+UtilsService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+
 class PaletteModel {
 }
 
@@ -45,9 +61,9 @@ PalettePickerService.ctorParameters = () => [];
 
 const tinyColor$4 = tinycolor;
 class VariantColorService {
-    constructor(palettePickerService, themeBuilderService) {
+    constructor(palettePickerService, utilsService) {
         this.palettePickerService = palettePickerService;
-        this.themeBuilderService = themeBuilderService;
+        this.utilsService = utilsService;
     }
     UpdatePrimaryVariants(color) {
         this.palettePickerService.PrimaryColorPalette = this.computeColors(color);
@@ -85,7 +101,10 @@ class VariantColorService {
     }
     computeColors(color) {
         const baseLightColor = tinyColor$4('#ffffff');
-        const baseDarkColor = this.themeBuilderService.multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
+        let baseDarkColor = tinyColor$4('#222222');
+        if (this.utilsService.Multiply) {
+            baseDarkColor = this.utilsService.Multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
+        }
         const [, , , baseTetrad] = tinyColor$4(color).tetrad();
         return [
             this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 12), '50'),
@@ -114,7 +133,7 @@ class VariantColorService {
         };
     }
 }
-VariantColorService.ɵprov = i0.ɵɵdefineInjectable({ factory: function VariantColorService_Factory() { return new VariantColorService(i0.ɵɵinject(PalettePickerService), i0.ɵɵinject(ThemeBuilderService)); }, token: VariantColorService, providedIn: "root" });
+VariantColorService.ɵprov = i0.ɵɵdefineInjectable({ factory: function VariantColorService_Factory() { return new VariantColorService(i0.ɵɵinject(PalettePickerService), i0.ɵɵinject(UtilsService)); }, token: VariantColorService, providedIn: "root" });
 VariantColorService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
@@ -122,7 +141,7 @@ VariantColorService.decorators = [
 ];
 VariantColorService.ctorParameters = () => [
     { type: PalettePickerService },
-    { type: ThemeBuilderService }
+    { type: UtilsService }
 ];
 
 class LocalStorageService {
@@ -401,12 +420,13 @@ PaletteTemplateService.decorators = [
 const tinyColor$2 = tinycolor;
 const fallbackURL = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
 class ThemeBuilderService {
-    constructor(http, paletteTemplateService, localStorageService, palettePickerService, zone, variantColorService) {
+    constructor(http, paletteTemplateService, localStorageService, palettePickerService, zone, utilsService, variantColorService) {
         this.http = http;
         this.paletteTemplateService = paletteTemplateService;
         this.localStorageService = localStorageService;
         this.palettePickerService = palettePickerService;
         this.zone = zone;
+        this.utilsService = utilsService;
         this.variantColorService = variantColorService;
         this.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
         this.themeMode = true;
@@ -504,7 +524,7 @@ class ThemeBuilderService {
      */
     GetPalette(color) {
         const baseLight = tinyColor$2('#ffffff');
-        const baseDark = this.multiply(tinyColor$2(color).toRgb(), tinyColor$2(color).toRgb());
+        const baseDark = this.utilsService.Multiply(tinyColor$2(color).toRgb(), tinyColor$2(color).toRgb());
         const [, , , baseTriad] = tinyColor$2(color).tetrad();
         const primary = Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY)
             .map(k => {
@@ -536,12 +556,6 @@ class ThemeBuilderService {
             palette: this.Palette,
             lightness: this.ThemeMode,
         };
-    }
-    multiply(rgb1, rgb2) {
-        rgb1.b = Math.floor(rgb1.b * rgb2.b / 255);
-        rgb1.g = Math.floor(rgb1.g * rgb2.g / 255);
-        rgb1.r = Math.floor(rgb1.r * rgb2.r / 255);
-        return tinyColor$2('rgb ' + rgb1.r + ' ' + rgb1.g + ' ' + rgb1.b);
     }
     UpdateTheme(theme) {
         // SASS stylesheet
@@ -580,7 +594,7 @@ class ThemeBuilderService {
         this.variantColorService.UpdateWarnVariants(this.Themes[0].Warn);
     }
 }
-ThemeBuilderService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ThemeBuilderService_Factory() { return new ThemeBuilderService(i0.ɵɵinject(i1.HttpClient), i0.ɵɵinject(PaletteTemplateService), i0.ɵɵinject(LocalStorageService), i0.ɵɵinject(PalettePickerService), i0.ɵɵinject(i0.NgZone), i0.ɵɵinject(VariantColorService)); }, token: ThemeBuilderService, providedIn: "root" });
+ThemeBuilderService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ThemeBuilderService_Factory() { return new ThemeBuilderService(i0.ɵɵinject(i1.HttpClient), i0.ɵɵinject(PaletteTemplateService), i0.ɵɵinject(LocalStorageService), i0.ɵɵinject(PalettePickerService), i0.ɵɵinject(i0.NgZone), i0.ɵɵinject(UtilsService), i0.ɵɵinject(VariantColorService)); }, token: ThemeBuilderService, providedIn: "root" });
 ThemeBuilderService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
@@ -592,6 +606,7 @@ ThemeBuilderService.ctorParameters = () => [
     { type: LocalStorageService },
     { type: PalettePickerService },
     { type: NgZone },
+    { type: UtilsService },
     { type: VariantColorService }
 ];
 
@@ -1221,7 +1236,10 @@ class ThemeBuilderModule {
     static forRoot() {
         return {
             ngModule: ThemeBuilderModule,
-            providers: [ThemeBuilderService, PalettePickerService]
+            providers: [
+                ThemeBuilderService,
+                PalettePickerService
+            ]
         };
     }
 }
@@ -1245,7 +1263,11 @@ ThemeBuilderModule.decorators = [
                     MaterialModule,
                     ColorPickerModule
                 ],
-                exports: [ThemeBuilderComponent, ThemeBuilderDirective, ThemePickerComponent],
+                exports: [
+                    ThemeBuilderComponent,
+                    ThemeBuilderDirective,
+                    ThemePickerComponent
+                ],
                 entryComponents: [
                     ThemePickerComponent
                 ]
@@ -1268,5 +1290,5 @@ class ColorModel {
  * Generated bundle index. Do not edit.
  */
 
-export { ColorModel, ColorPickerComponent, LightnessPickerComponent, PaletteModel, PalettePickerService, SubPaletteModel, ThemeBuilderComponent, ThemeBuilderConstants, ThemeBuilderDirective, ThemeBuilderModel, ThemeBuilderModule, ThemeBuilderService, ThemeModel, ThemePickerModel, VariantColorService, PalettePickerComponent as ɵa, PaletteTemplateService as ɵb, LocalStorageService as ɵc, SubPalettePickerComponent as ɵd, VariantColorsComponent as ɵe, ThemePickerComponent as ɵf };
+export { ColorModel, ColorPickerComponent, LightnessPickerComponent, PaletteModel, PalettePickerService, SubPaletteModel, ThemeBuilderComponent, ThemeBuilderConstants, ThemeBuilderDirective, ThemeBuilderModel, ThemeBuilderModule, ThemeBuilderService, ThemeModel, ThemePickerComponent, ThemePickerModel, VariantColorService, PalettePickerComponent as ɵa, PaletteTemplateService as ɵb, LocalStorageService as ɵc, UtilsService as ɵd, SubPalettePickerComponent as ɵe, VariantColorsComponent as ɵf };
 //# sourceMappingURL=lowcodeunit-lcu-theme-builder-common.js.map

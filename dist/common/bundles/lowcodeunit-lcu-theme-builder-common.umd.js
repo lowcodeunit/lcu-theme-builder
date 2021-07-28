@@ -346,6 +346,25 @@
         return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
     }
 
+    var tinyColor$5 = tinycolor__namespace;
+    var UtilsService = /** @class */ (function () {
+        function UtilsService() {
+        }
+        UtilsService.prototype.Multiply = function (rgb1, rgb2) {
+            rgb1.b = Math.floor(rgb1.b * rgb2.b / 255);
+            rgb1.g = Math.floor(rgb1.g * rgb2.g / 255);
+            rgb1.r = Math.floor(rgb1.r * rgb2.r / 255);
+            return tinyColor$5('rgb ' + rgb1.r + ' ' + rgb1.g + ' ' + rgb1.b);
+        };
+        return UtilsService;
+    }());
+    UtilsService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function UtilsService_Factory() { return new UtilsService(); }, token: UtilsService, providedIn: "root" });
+    UtilsService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+
     var PaletteModel = /** @class */ (function () {
         function PaletteModel() {
         }
@@ -384,9 +403,9 @@
 
     var tinyColor$4 = tinycolor__namespace;
     var VariantColorService = /** @class */ (function () {
-        function VariantColorService(palettePickerService, themeBuilderService) {
+        function VariantColorService(palettePickerService, utilsService) {
             this.palettePickerService = palettePickerService;
-            this.themeBuilderService = themeBuilderService;
+            this.utilsService = utilsService;
         }
         VariantColorService.prototype.UpdatePrimaryVariants = function (color) {
             var e_1, _a;
@@ -457,7 +476,10 @@
         };
         VariantColorService.prototype.computeColors = function (color) {
             var baseLightColor = tinyColor$4('#ffffff');
-            var baseDarkColor = this.themeBuilderService.multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
+            var baseDarkColor = tinyColor$4('#222222');
+            if (this.utilsService.Multiply) {
+                baseDarkColor = this.utilsService.Multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
+            }
             var _a = __read(tinyColor$4(color).tetrad(), 4), baseTetrad = _a[3];
             return [
                 this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 12), '50'),
@@ -487,7 +509,7 @@
         };
         return VariantColorService;
     }());
-    VariantColorService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function VariantColorService_Factory() { return new VariantColorService(i0__namespace.ɵɵinject(PalettePickerService), i0__namespace.ɵɵinject(ThemeBuilderService)); }, token: VariantColorService, providedIn: "root" });
+    VariantColorService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function VariantColorService_Factory() { return new VariantColorService(i0__namespace.ɵɵinject(PalettePickerService), i0__namespace.ɵɵinject(UtilsService)); }, token: VariantColorService, providedIn: "root" });
     VariantColorService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root'
@@ -495,7 +517,7 @@
     ];
     VariantColorService.ctorParameters = function () { return [
         { type: PalettePickerService },
-        { type: ThemeBuilderService }
+        { type: UtilsService }
     ]; };
 
     var LocalStorageService = /** @class */ (function () {
@@ -617,12 +639,13 @@
     var tinyColor$2 = tinycolor__namespace;
     var fallbackURL = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
     var ThemeBuilderService = /** @class */ (function () {
-        function ThemeBuilderService(http, paletteTemplateService, localStorageService, palettePickerService, zone, variantColorService) {
+        function ThemeBuilderService(http, paletteTemplateService, localStorageService, palettePickerService, zone, utilsService, variantColorService) {
             this.http = http;
             this.paletteTemplateService = paletteTemplateService;
             this.localStorageService = localStorageService;
             this.palettePickerService = palettePickerService;
             this.zone = zone;
+            this.utilsService = utilsService;
             this.variantColorService = variantColorService;
             this.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
             this.themeMode = true;
@@ -739,7 +762,7 @@
          */
         ThemeBuilderService.prototype.GetPalette = function (color) {
             var baseLight = tinyColor$2('#ffffff');
-            var baseDark = this.multiply(tinyColor$2(color).toRgb(), tinyColor$2(color).toRgb());
+            var baseDark = this.utilsService.Multiply(tinyColor$2(color).toRgb(), tinyColor$2(color).toRgb());
             var _a = __read(tinyColor$2(color).tetrad(), 4), baseTriad = _a[3];
             var primary = Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY)
                 .map(function (k) {
@@ -752,7 +775,7 @@
                 return [k, tinyColor$2.mix(baseDark, baseTriad, amount)
                         .saturate(sat).lighten(light)];
             });
-            return __spread(primary, accent).reduce(function (acc, _a) {
+            return __spreadArray(__spreadArray([], __read(primary)), __read(accent)).reduce(function (acc, _a) {
                 var _b = __read(_a, 2), k = _b[0], c = _b[1];
                 acc[k] = c.toHexString();
                 return acc;
@@ -772,12 +795,6 @@
                 palette: this.Palette,
                 lightness: this.ThemeMode,
             };
-        };
-        ThemeBuilderService.prototype.multiply = function (rgb1, rgb2) {
-            rgb1.b = Math.floor(rgb1.b * rgb2.b / 255);
-            rgb1.g = Math.floor(rgb1.g * rgb2.g / 255);
-            rgb1.r = Math.floor(rgb1.r * rgb2.r / 255);
-            return tinyColor$2('rgb ' + rgb1.r + ' ' + rgb1.g + ' ' + rgb1.b);
         };
         ThemeBuilderService.prototype.UpdateTheme = function (theme) {
             var _this = this;
@@ -818,7 +835,7 @@
         };
         return ThemeBuilderService;
     }());
-    ThemeBuilderService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function ThemeBuilderService_Factory() { return new ThemeBuilderService(i0__namespace.ɵɵinject(i1__namespace.HttpClient), i0__namespace.ɵɵinject(PaletteTemplateService), i0__namespace.ɵɵinject(LocalStorageService), i0__namespace.ɵɵinject(PalettePickerService), i0__namespace.ɵɵinject(i0__namespace.NgZone), i0__namespace.ɵɵinject(VariantColorService)); }, token: ThemeBuilderService, providedIn: "root" });
+    ThemeBuilderService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function ThemeBuilderService_Factory() { return new ThemeBuilderService(i0__namespace.ɵɵinject(i1__namespace.HttpClient), i0__namespace.ɵɵinject(PaletteTemplateService), i0__namespace.ɵɵinject(LocalStorageService), i0__namespace.ɵɵinject(PalettePickerService), i0__namespace.ɵɵinject(i0__namespace.NgZone), i0__namespace.ɵɵinject(UtilsService), i0__namespace.ɵɵinject(VariantColorService)); }, token: ThemeBuilderService, providedIn: "root" });
     ThemeBuilderService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root'
@@ -830,6 +847,7 @@
         { type: LocalStorageService },
         { type: PalettePickerService },
         { type: i0.NgZone },
+        { type: UtilsService },
         { type: VariantColorService }
     ]; };
 
@@ -1094,7 +1112,7 @@
             this.themeBuilderService = themeBuilderService;
             this.palettePickerService = palettePickerService;
             this.Unlocked = new forms.FormControl(false);
-            this.materialKeys = __spread(Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY), Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY));
+            this.materialKeys = __spreadArray(__spreadArray([], __read(Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY))), __read(Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY)));
         }
         Object.defineProperty(SubPalettePickerComponent.prototype, "ColorPickerColor", {
             set: function (val) {
@@ -1563,7 +1581,10 @@
         ThemeBuilderModule.forRoot = function () {
             return {
                 ngModule: ThemeBuilderModule,
-                providers: [ThemeBuilderService, PalettePickerService]
+                providers: [
+                    ThemeBuilderService,
+                    PalettePickerService
+                ]
             };
         };
         return ThemeBuilderModule;
@@ -1588,7 +1609,11 @@
                         common.MaterialModule,
                         ngxColorPicker.ColorPickerModule
                     ],
-                    exports: [ThemeBuilderComponent, ThemeBuilderDirective, ThemePickerComponent],
+                    exports: [
+                        ThemeBuilderComponent,
+                        ThemeBuilderDirective,
+                        ThemePickerComponent
+                    ],
                     entryComponents: [
                         ThemePickerComponent
                     ]
@@ -1636,14 +1661,15 @@
     exports.ThemeBuilderModule = ThemeBuilderModule;
     exports.ThemeBuilderService = ThemeBuilderService;
     exports.ThemeModel = ThemeModel;
+    exports.ThemePickerComponent = ThemePickerComponent;
     exports.ThemePickerModel = ThemePickerModel;
     exports.VariantColorService = VariantColorService;
     exports.ɵa = PalettePickerComponent;
     exports.ɵb = PaletteTemplateService;
     exports.ɵc = LocalStorageService;
-    exports.ɵd = SubPalettePickerComponent;
-    exports.ɵe = VariantColorsComponent;
-    exports.ɵf = ThemePickerComponent;
+    exports.ɵd = UtilsService;
+    exports.ɵe = SubPalettePickerComponent;
+    exports.ɵf = VariantColorsComponent;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
