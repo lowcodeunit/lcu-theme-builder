@@ -134,7 +134,8 @@ public test: boolean;
         ID: this.ManualThemeName.value,
         Primary: this.ManualPrimary.value,
         Accent: this.ManualAccent.value,
-        Warn: this.ManualWarn.value
+        Warn: this.ManualWarn.value,
+        DarkMode: true
       }
     )
     this.themeBuilderService.Themes.unshift(manualPalette);

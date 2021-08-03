@@ -39,7 +39,8 @@ export class AppComponent implements OnInit {
           ID: 'Fathym Brand',
           Primary: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'),
           Accent: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'),
-          Warn: ThemeBuilderConstants.document.getPropertyValue('--initial-warn')
+          Warn: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'),
+          DarkMode: false
         }
       ),
       new ThemePickerModel(
@@ -47,7 +48,8 @@ export class AppComponent implements OnInit {
           ID: 'Yellow',
           Primary: '#ffcc11',
           Accent: '#06a5ff',
-          Warn: '#990000'
+          Warn: '#990000',
+          DarkMode: true
         }
       ),
       new ThemePickerModel(
@@ -55,7 +57,8 @@ export class AppComponent implements OnInit {
           ID: 'Pink',
           Primary: '#a83271',
           Accent: '#6103ff',
-          Warn: '#b9f013'
+          Warn: '#b9f013',
+          DarkMode: true
         }
       )
     ]

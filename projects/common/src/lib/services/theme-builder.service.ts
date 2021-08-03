@@ -71,6 +71,7 @@ export class ThemeBuilderService {
 
       this.palette = palette;
       this.palettePickerService.PalettePickerChange(palette);
+      this.ThemeMode = !palette.DarkMode;
       this.UpdateTheme(this.getTheme());
     }
 
@@ -215,7 +216,7 @@ export class ThemeBuilderService {
     * Return a new theme model
     */
    public getTheme(): ThemeModel {
-
+    debugger;
     return {
       palette: this.Palette,
       lightness: this.ThemeMode,
@@ -264,6 +265,7 @@ export class ThemeBuilderService {
     initial.primary.main = this.Themes[0].Primary;
     initial.accent.main = this.Themes[0].Accent;
     initial.warn.main = this.Themes[0].Warn;
+    initial.DarkMode = this.Themes[0].DarkMode;
 
     this.Palette = initial;
 

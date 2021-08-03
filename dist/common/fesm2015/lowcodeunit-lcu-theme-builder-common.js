@@ -100,7 +100,7 @@ class VariantColorService {
         }
     }
     computeColors(color) {
-        const baseLightColor = tinyColor$4('#ffffff');
+        const baseLightColor = tinyColor$4('#f9f9f9');
         let baseDarkColor = tinyColor$4('#222222');
         if (this.utilsService.Multiply) {
             baseDarkColor = this.utilsService.Multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
@@ -208,6 +208,7 @@ ThemeBuilderConstants.InitialValues = {
     primary: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), lighter: null, darker: null },
     accent: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), lighter: null, darker: null },
     warn: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), lighter: null, darker: null },
+    DarkMode: false,
     lightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
     lightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
     darkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),
@@ -222,6 +223,7 @@ class PaletteTemplateService {
      * @param theme current theme
      */
     GetTemplate(theme) {
+        debugger;
         const template = `
       @import '~@angular/material/theming';
       // Include the common styles for Angular Material. We include this here so that you only
@@ -378,6 +380,7 @@ class PaletteTemplateService {
      * @param subPalette SubPaletteModel
      */
     getScssPalette(name, subPalette) {
+        debugger;
         return `
       body {
         --${name}-color: ${subPalette.main};
@@ -448,6 +451,7 @@ class ThemeBuilderService {
     set Palette(palette) {
         this.palette = palette;
         this.palettePickerService.PalettePickerChange(palette);
+        this.ThemeMode = !palette.DarkMode;
         this.UpdateTheme(this.getTheme());
     }
     get Palette() {
@@ -552,6 +556,7 @@ class ThemeBuilderService {
      * Return a new theme model
      */
     getTheme() {
+        debugger;
         return {
             palette: this.Palette,
             lightness: this.ThemeMode,
@@ -588,6 +593,7 @@ class ThemeBuilderService {
         initial.primary.main = this.Themes[0].Primary;
         initial.accent.main = this.Themes[0].Accent;
         initial.warn.main = this.Themes[0].Warn;
+        initial.DarkMode = this.Themes[0].DarkMode;
         this.Palette = initial;
         this.variantColorService.UpdatePrimaryVariants(this.Themes[0].Primary);
         this.variantColorService.UpdateAccentVariants(this.Themes[0].Accent);
@@ -1188,7 +1194,8 @@ class ThemePickerComponent {
             ID: this.ManualThemeName.value,
             Primary: this.ManualPrimary.value,
             Accent: this.ManualAccent.value,
-            Warn: this.ManualWarn.value
+            Warn: this.ManualWarn.value,
+            DarkMode: true
         });
         this.themeBuilderService.Themes.unshift(manualPalette);
         this.SetActiveTheme(manualPalette);

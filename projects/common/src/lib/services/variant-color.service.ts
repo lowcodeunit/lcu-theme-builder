@@ -61,7 +61,7 @@ export class VariantColorService {
 
     protected computeColors(color: string): Array<ColorModel> {
 
-        const baseLightColor = tinyColor('#ffffff');
+        const baseLightColor = tinyColor('#f9f9f9');
         let baseDarkColor: any = tinyColor('#222222');
 
         if (this.utilsService.Multiply) {

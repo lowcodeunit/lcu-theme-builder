@@ -4,6 +4,7 @@ export declare class PaletteModel {
     accent: SubPaletteModel;
     primary: SubPaletteModel;
     warn: SubPaletteModel;
+    DarkMode: boolean;
     AccentColorPalette?: MaterialPaletteModel;
     PrimaryColorPalette?: MaterialPaletteModel;
     WarnColorPalette?: MaterialPaletteModel;

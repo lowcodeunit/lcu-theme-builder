@@ -32,6 +32,7 @@ export class ThemeBuilderConstants {
         primary: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), lighter: null, darker: null },
         accent: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), lighter: null, darker: null },
         warn: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), lighter: null, darker: null },
+        DarkMode: false,
         lightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
         lightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
         darkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),

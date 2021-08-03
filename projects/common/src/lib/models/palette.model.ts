@@ -5,6 +5,7 @@ export class PaletteModel {
     public accent: SubPaletteModel;
     public primary: SubPaletteModel;
     public warn: SubPaletteModel;
+    public DarkMode: boolean;
     public AccentColorPalette?: MaterialPaletteModel;
     public PrimaryColorPalette?: MaterialPaletteModel;
     public WarnColorPalette?: MaterialPaletteModel;

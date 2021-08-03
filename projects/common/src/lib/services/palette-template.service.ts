@@ -18,7 +18,7 @@ export class PaletteTemplateService {
    * @param theme current theme
    */
     public GetTemplate(theme: ThemeModel): string {
-
+      debugger;
       const template = `
       @import '~@angular/material/theming';
       // Include the common styles for Angular Material. We include this here so that you only
@@ -177,6 +177,7 @@ export class PaletteTemplateService {
      * @param subPalette SubPaletteModel
      */
     protected getScssPalette(name: string, subPalette: SubPaletteModel): string {
+      debugger;
       return `
       body {
         --${name}-color: ${subPalette.main};
