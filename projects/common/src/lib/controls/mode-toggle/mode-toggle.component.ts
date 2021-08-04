@@ -68,7 +68,7 @@ export class LightnessPickerComponent implements OnInit {
     }
 
     protected toggleMode(val: boolean): string {
-      return val ? 'Light Mode' : 'Dark Mode';
+      return val ? 'Dark Mode' : 'Light Mode';
     }
 
     protected setThemeMode(val: boolean): void {

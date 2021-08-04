@@ -23,7 +23,7 @@
                         <div class="theme-accent" [ngStyle]="{'background-color':theme.Accent}"></div>
                         <div class="theme-warn" [ngStyle]="{'background-color':theme.Warn}"></div>
                         <div class="theme-dark-mode" 
-                             [ngClass]="{'dark-mode' : !theme.DarkMode, 'light-mode': theme.DarkMode}"></div>
+                             [ngClass]="{'dark-mode' : theme.DarkMode, 'light-mode': !theme.DarkMode}"></div>
                         <!-- <mat-icon *ngIf="activeTheme===theme" class="center theme-check">check</mat-icon> -->
                     </div>
                     <span 

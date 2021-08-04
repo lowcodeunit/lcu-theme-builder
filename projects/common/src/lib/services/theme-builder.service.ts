@@ -79,9 +79,9 @@ export class ThemeBuilderService {
       return this.palette;
     }
 
-    public set ThemeMode(light: boolean) {
+    public set ThemeMode(val: boolean) {
 
-      this.themeMode = !light;
+      this.themeMode = val;
       this.UpdateTheme(this.getTheme());
     }
 

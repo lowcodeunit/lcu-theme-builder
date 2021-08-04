@@ -46,7 +46,7 @@ export declare class ThemeBuilderService {
      */
     set Palette(palette: PaletteModel);
     get Palette(): PaletteModel;
-    set ThemeMode(light: boolean);
+    set ThemeMode(val: boolean);
     get ThemeMode(): boolean;
     Themes: Array<ThemePickerModel>;
     constructor(http: HttpClient, paletteTemplateService: PaletteTemplateService, localStorageService: LocalStorageService, palettePickerService: PalettePickerService, zone: NgZone, utilsService: UtilsService, variantColorService: VariantColorService);
