@@ -83,6 +83,7 @@ function VariantColorsComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", color_r5.hex, " ");
 } }
 const _c0 = function (a0) { return { "background-color": a0 }; };
+const _c1 = function (a0, a1) { return { "dark-mode": a0, "light-mode": a1 }; };
 function ThemePickerComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     const _r5 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -92,9 +93,10 @@ function ThemePickerComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(3, "div", 10);
     ɵngcc0.ɵɵelement(4, "div", 11);
     ɵngcc0.ɵɵelement(5, "div", 12);
+    ɵngcc0.ɵɵelement(6, "div", 13);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(6, "span", 13);
-    ɵngcc0.ɵɵtext(7);
+    ɵngcc0.ɵɵelementStart(7, "span", 14);
+    ɵngcc0.ɵɵtext(8);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -102,21 +104,23 @@ function ThemePickerComponent_div_7_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const theme_r3 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngStyle", ɵngcc0.ɵɵpureFunction1(4, _c0, theme_r3.Primary));
+    ɵngcc0.ɵɵproperty("ngStyle", ɵngcc0.ɵɵpureFunction1(6, _c0, theme_r3.Primary));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngStyle", ɵngcc0.ɵɵpureFunction1(6, _c0, theme_r3.Accent));
+    ɵngcc0.ɵɵproperty("ngStyle", ɵngcc0.ɵɵpureFunction1(8, _c0, theme_r3.Accent));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngStyle", ɵngcc0.ɵɵpureFunction1(8, _c0, theme_r3.Warn));
+    ɵngcc0.ɵɵproperty("ngStyle", ɵngcc0.ɵɵpureFunction1(10, _c0, theme_r3.Warn));
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction2(12, _c1, !theme_r3.DarkMode, theme_r3.DarkMode));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", theme_r3.ID, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", theme_r3.ID, " ", theme_r3.DarkMode, " ");
 } }
 function ThemePickerComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     const _r8 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 14);
+    ɵngcc0.ɵɵelementStart(0, "div", 15);
     ɵngcc0.ɵɵelementStart(1, "mat-card");
     ɵngcc0.ɵɵelementStart(2, "mat-card-header");
-    ɵngcc0.ɵɵelementStart(3, "div", 15);
-    ɵngcc0.ɵɵelementStart(4, "mat-icon", 16);
+    ɵngcc0.ɵɵelementStart(3, "div", 16);
+    ɵngcc0.ɵɵelementStart(4, "mat-icon", 17);
     ɵngcc0.ɵɵtext(5, "palette");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -125,28 +129,28 @@ function ThemePickerComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(8, "mat-card-content");
-    ɵngcc0.ɵɵelementStart(9, "form", 17);
+    ɵngcc0.ɵɵelementStart(9, "form", 18);
     ɵngcc0.ɵɵlistener("click", function ThemePickerComponent_div_8_Template_form_click_9_listener($event) { return $event.stopPropagation(); });
     ɵngcc0.ɵɵelementStart(10, "mat-form-field");
-    ɵngcc0.ɵɵelement(11, "input", 18);
+    ɵngcc0.ɵɵelement(11, "input", 19);
     ɵngcc0.ɵɵelementStart(12, "mat-hint");
     ɵngcc0.ɵɵtext(13, "Theme Name");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(14, "mat-form-field");
-    ɵngcc0.ɵɵelement(15, "input", 19);
+    ɵngcc0.ɵɵelement(15, "input", 20);
     ɵngcc0.ɵɵelementStart(16, "mat-hint");
     ɵngcc0.ɵɵtext(17, "Primary Color");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(18, "mat-form-field");
-    ɵngcc0.ɵɵelement(19, "input", 20);
+    ɵngcc0.ɵɵelement(19, "input", 21);
     ɵngcc0.ɵɵelementStart(20, "mat-hint");
     ɵngcc0.ɵɵtext(21, "Accent Color");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(22, "mat-form-field");
-    ɵngcc0.ɵɵelement(23, "input", 21);
+    ɵngcc0.ɵɵelement(23, "input", 22);
     ɵngcc0.ɵɵelementStart(24, "mat-hint");
     ɵngcc0.ɵɵtext(25, "Warn Color");
     ɵngcc0.ɵɵelementEnd();
@@ -154,7 +158,7 @@ function ThemePickerComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(26, "mat-card-actions");
-    ɵngcc0.ɵɵelementStart(27, "button", 22);
+    ɵngcc0.ɵɵelementStart(27, "button", 23);
     ɵngcc0.ɵɵlistener("click", function ThemePickerComponent_div_8_Template_button_click_27_listener() { ɵngcc0.ɵɵrestoreView(_r8); const ctx_r7 = ɵngcc0.ɵɵnextContext(); return ctx_r7.SetManualTheme(); });
     ɵngcc0.ɵɵtext(28, " Set Theme ");
     ɵngcc0.ɵɵelementEnd();
@@ -374,10 +378,10 @@ ThemeBuilderConstants.InitialValues = {
     accent: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), Lighter: null, Darker: null },
     warn: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), Lighter: null, Darker: null },
     DarkMode: false,
-    lightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
-    lightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
-    darkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),
-    darkBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-background')
+    LightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
+    LightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
+    DarkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),
+    DarkBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-background')
 };
 
 const tinyColor$3 = tinycolor;
@@ -388,7 +392,6 @@ class PaletteTemplateService {
      * @param theme current theme
      */
     GetTemplate(theme) {
-        debugger;
         const template = `
       @import '~@angular/material/theming';
       // Include the common styles for Angular Material. We include this here so that you only
@@ -397,7 +400,7 @@ class PaletteTemplateService {
       // Foreground Elements
 
       // Light Theme Text
-      $dark-text: ${theme.palette.lightText};
+      $dark-text: ${theme.Palette.LightText};
       $dark-primary-text: rgba($dark-text, 0.87);
       $dark-accent-text: rgba($dark-primary-text, 0.54);
       $dark-disabled-text: rgba($dark-primary-text, 0.38);
@@ -424,7 +427,7 @@ class PaletteTemplateService {
       );
 
       // Dark Theme text
-      $light-text: ${theme.palette.darkText};
+      $light-text: ${theme.Palette.DarkText};
       $light-primary-text: $light-text;
       $light-accent-text: rgba($light-primary-text, 0.7);
       $light-disabled-text: rgba($light-primary-text, 0.5);
@@ -452,14 +455,14 @@ class PaletteTemplateService {
 
       // Background config
       // Light bg
-      $light-background:    ${theme.palette.lightBackground};
+      $light-background:    ${theme.Palette.LightBackground};
       $light-bg-darker-5:   darken($light-background, 5%);
       $light-bg-darker-10:  darken($light-background, 10%);
       $light-bg-darker-20:  darken($light-background, 20%);
       $light-bg-darker-30:  darken($light-background, 30%);
       $light-bg-lighter-5:  lighten($light-background, 5%);
-      $dark-bg-alpha-4:     rgba(${theme.palette.darkBackground}, 0.04);
-      $dark-bg-alpha-12:    rgba(${theme.palette.darkBackground}, 0.12);
+      $dark-bg-alpha-4:     rgba(${theme.Palette.DarkBackground}, 0.04);
+      $dark-bg-alpha-12:    rgba(${theme.Palette.DarkBackground}, 0.12);
 
       $mat-light-theme-background: (
         background:               $light-background,
@@ -479,13 +482,13 @@ class PaletteTemplateService {
       );
 
       // Dark bg
-      $dark-background:     ${theme.palette.darkBackground};
+      $dark-background:     ${theme.Palette.DarkBackground};
       $dark-bg-lighter-5:   lighten($dark-background, 5%);
       $dark-bg-lighter-10:  lighten($dark-background, 10%);
       $dark-bg-lighter-20:  lighten($dark-background, 20%);
       $dark-bg-lighter-30:  lighten($dark-background, 30%);
-      $light-bg-alpha-4:    rgba(${theme.palette.lightBackground}, 0.04);
-      $light-bg-alpha-12:   rgba(${theme.palette.lightBackground}, 0.12);
+      $light-bg-alpha-4:    rgba(${theme.Palette.LightBackground}, 0.04);
+      $light-bg-alpha-12:   rgba(${theme.Palette.LightBackground}, 0.12);
 
       // Background palette for dark themes.
       $mat-dark-theme-background: (
@@ -506,10 +509,10 @@ class PaletteTemplateService {
       );
 
       // Theme Config
-      ${['primary', 'accent', 'warn'].map(x => this.getScssPalette(x, theme.palette[x])).join('\n')};
+      ${['primary', 'accent', 'warn'].map(x => this.getScssPalette(x, theme.Palette[x])).join('\n')};
 
-      $theme: ${!theme.lightness ? 'mat-dark-theme' : 'mat-light-theme'}($theme-primary, $theme-accent, $theme-warn);
-      $altTheme: ${!theme.lightness ? 'mat-light-theme' : 'mat-dark-theme'}($theme-primary, $theme-accent, $theme-warn);
+      $theme: ${!theme.Lightness ? 'mat-dark-theme' : 'mat-light-theme'}($theme-primary, $theme-accent, $theme-warn);
+      $altTheme: ${!theme.Lightness ? 'mat-light-theme' : 'mat-dark-theme'}($theme-primary, $theme-accent, $theme-warn);
 
       // Theme Init
       @include angular-material-theme($theme);
@@ -517,9 +520,6 @@ class PaletteTemplateService {
       .theme-alternate {
         @include angular-material-theme($altTheme);
       }
-
-      
-
 
       // Specific component overrides, pieces that are not in line with the general theming
 
@@ -545,7 +545,6 @@ class PaletteTemplateService {
      * @param subPalette SubPaletteModel
      */
     getScssPalette(name, subPalette) {
-        debugger;
         return `
       body {
         --${name}-color: ${subPalette.Main};
@@ -723,10 +722,9 @@ class ThemeBuilderService {
      * Return a new theme model
      */
     getTheme() {
-        debugger;
         return {
-            palette: this.Palette,
-            lightness: this.ThemeMode,
+            Palette: this.Palette,
+            Lightness: this.ThemeMode,
         };
     }
     UpdateTheme(theme) {
@@ -1213,7 +1211,8 @@ class LightnessPickerComponent {
             return;
         }
         this._darkMode = val;
-        this.setThemeMode(val);
+        this.Toggle.setValue(val);
+        // this.setThemeMode(val);
     }
     get DarkMode() {
         return this._darkMode;
@@ -1496,6 +1495,11 @@ class ThemePickerComponent {
     ngOnInit() {
         this.themes();
     }
+    /**
+     * When selecting a theme from the list
+     *
+     * @param theme selected theme
+     */
     SetActiveTheme(theme) {
         let palette = new PaletteModel();
         palette = Object.assign(Object.assign({}, this.palettePickerService.CurrentPalette), palette);
@@ -1503,6 +1507,8 @@ class ThemePickerComponent {
         palette.primary.Main = theme.Primary;
         palette.accent.Main = theme.Accent;
         palette.warn.Main = theme.Warn;
+        palette.DarkMode = theme.DarkMode;
+        this.DarkMode = palette.DarkMode;
         this.variantColorService.UpdatePrimaryVariants(theme.Primary);
         this.variantColorService.UpdateAccentVariants(theme.Accent);
         this.variantColorService.UpdateWarnVariants(theme.Warn);
@@ -1543,7 +1549,7 @@ class ThemePickerComponent {
     }
 }
 ThemePickerComponent.ɵfac = function ThemePickerComponent_Factory(t) { return new (t || ThemePickerComponent)(ɵngcc0.ɵɵdirectiveInject(PalettePickerService), ɵngcc0.ɵɵdirectiveInject(ThemeBuilderService), ɵngcc0.ɵɵdirectiveInject(VariantColorService)); };
-ThemePickerComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: ThemePickerComponent, selectors: [["lcu-theme-picker"]], inputs: { DarkMode: ["dark-mode", "DarkMode"], MaterialTheming: ["material-theming", "MaterialTheming"], ToggleManualControls: ["toggle-manual-controls", "ToggleManualControls"] }, decls: 9, vars: 4, consts: [["mat-icon-button", "", "id", "theme-selector", "tabindex", "-1", 3, "mat-menu-trigger-for"], [1, "auto-flip"], ["themeMenu", "matMenu"], [1, "margin-2", 3, "dark-mode"], ["tabindex", "-1", 1, "theme-selector-container", 3, "click", "keydown.tab", "keydown.shift.tab"], ["fxLayout", "column", 4, "ngFor", "ngForOf"], ["class", "margin-2 \n            margin-top-5", 4, "ngIf"], ["fxLayout", "column"], ["mat-button", "", 1, "theme-selector", 3, "click"], ["fxLayout", "row", "fxLayout", "start center", 1, "margin-1"], [1, "theme-primary", 3, "ngStyle"], [1, "theme-accent", 3, "ngStyle"], [1, "theme-warn", 3, "ngStyle"], [1, "margin-left-2", "mat-card-subtitle"], [1, "margin-2", "margin-top-5"], ["mat-card-avatar", "", 1, "lcu-card-avatar"], ["color", "accent"], ["fxLayout", "column", "fxLayoutGap", "10px", "novalidate", "", 3, "formGroup", "click"], ["type", "text", "matInput", "", "formControlName", "manualThemeName"], ["type", "text", "matInput", "", "formControlName", "manualPrimary"], ["type", "text", "matInput", "", "formControlName", "manualAccent"], ["type", "text", "matInput", "", "formControlName", "manualWarn"], ["mat-raised-button", "", "color", "primary", 1, "margin-top-3", 3, "disabled", "click"]], template: function ThemePickerComponent_Template(rf, ctx) { if (rf & 1) {
+ThemePickerComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: ThemePickerComponent, selectors: [["lcu-theme-picker"]], inputs: { DarkMode: ["dark-mode", "DarkMode"], MaterialTheming: ["material-theming", "MaterialTheming"], ToggleManualControls: ["toggle-manual-controls", "ToggleManualControls"] }, decls: 9, vars: 4, consts: [["mat-icon-button", "", "id", "theme-selector", "tabindex", "-1", 3, "mat-menu-trigger-for"], [1, "auto-flip"], ["themeMenu", "matMenu"], [1, "margin-2", 3, "dark-mode"], ["tabindex", "-1", 1, "theme-selector-container", 3, "click", "keydown.tab", "keydown.shift.tab"], ["fxLayout", "column", 4, "ngFor", "ngForOf"], ["class", "margin-2 \n            margin-top-5", 4, "ngIf"], ["fxLayout", "column"], ["mat-button", "", 1, "theme-selector", 3, "click"], ["fxLayout", "row", "fxLayout", "start center", 1, "margin-1"], [1, "theme-primary", 3, "ngStyle"], [1, "theme-accent", 3, "ngStyle"], [1, "theme-warn", 3, "ngStyle"], [1, "theme-dark-mode", 3, "ngClass"], [1, "margin-left-2", "mat-card-subtitle"], [1, "margin-2", "margin-top-5"], ["mat-card-avatar", "", 1, "lcu-card-avatar"], ["color", "accent"], ["fxLayout", "column", "fxLayoutGap", "10px", "novalidate", "", 3, "formGroup", "click"], ["type", "text", "matInput", "", "formControlName", "manualThemeName"], ["type", "text", "matInput", "", "formControlName", "manualPrimary"], ["type", "text", "matInput", "", "formControlName", "manualAccent"], ["type", "text", "matInput", "", "formControlName", "manualWarn"], ["mat-raised-button", "", "color", "primary", 1, "margin-top-3", 3, "disabled", "click"]], template: function ThemePickerComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "button", 0);
         ɵngcc0.ɵɵelementStart(1, "mat-icon", 1);
         ɵngcc0.ɵɵtext(2, "format_color_fill");
@@ -1553,7 +1559,7 @@ ThemePickerComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: T
         ɵngcc0.ɵɵelement(5, "lcu-mode-toggle", 3);
         ɵngcc0.ɵɵelementStart(6, "div", 4);
         ɵngcc0.ɵɵlistener("click", function ThemePickerComponent_Template_div_click_6_listener($event) { return $event.stopPropagation(); })("keydown.tab", function ThemePickerComponent_Template_div_keydown_tab_6_listener($event) { return $event.stopPropagation(); })("keydown.tab", function ThemePickerComponent_Template_div_keydown_tab_6_listener($event) { return $event.stopPropagation(); })("keydown.shift.tab", function ThemePickerComponent_Template_div_keydown_shift_tab_6_listener($event) { return $event.stopPropagation(); });
-        ɵngcc0.ɵɵtemplate(7, ThemePickerComponent_div_7_Template, 8, 10, "div", 5);
+        ɵngcc0.ɵɵtemplate(7, ThemePickerComponent_div_7_Template, 9, 15, "div", 5);
         ɵngcc0.ɵɵtemplate(8, ThemePickerComponent_div_8_Template, 29, 2, "div", 6);
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
@@ -1566,7 +1572,7 @@ ThemePickerComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: T
         ɵngcc0.ɵɵproperty("ngForOf", ctx.Themes);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.ToggleManualControls);
-    } }, directives: [ɵngcc9.MatButton, ɵngcc10.MatMenuTrigger, ɵngcc11.MatIcon, ɵngcc10.MatMenu, LightnessPickerComponent, ɵngcc5.NgForOf, ɵngcc5.NgIf, ɵngcc2.DefaultLayoutDirective, ɵngcc5.NgStyle, ɵngcc12.DefaultStyleDirective, ɵngcc13.MatCard, ɵngcc13.MatCardHeader, ɵngcc13.MatCardAvatar, ɵngcc13.MatCardTitle, ɵngcc13.MatCardContent, ɵngcc7.ɵNgNoValidate, ɵngcc7.NgControlStatusGroup, ɵngcc2.DefaultLayoutGapDirective, ɵngcc7.FormGroupDirective, ɵngcc14.MatFormField, ɵngcc15.MatInput, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc14.MatHint, ɵngcc13.MatCardActions], styles: [".toolbar-spacer[_ngcontent-%COMP%]{flex:1 1 auto}.theme-selectors-container[_ngcontent-%COMP%]{width:390px;margin:0 8px}div.theme-primary[_ngcontent-%COMP%]{width:50px;height:50px}div.theme-accent[_ngcontent-%COMP%]{width:25px;height:25px;position:absolute;bottom:15px;left:17px}div.theme-warn[_ngcontent-%COMP%]{width:15px;height:15px;position:absolute;bottom:15px;left:30px}"] });
+    } }, directives: [ɵngcc9.MatButton, ɵngcc10.MatMenuTrigger, ɵngcc11.MatIcon, ɵngcc10.MatMenu, LightnessPickerComponent, ɵngcc5.NgForOf, ɵngcc5.NgIf, ɵngcc2.DefaultLayoutDirective, ɵngcc5.NgStyle, ɵngcc12.DefaultStyleDirective, ɵngcc5.NgClass, ɵngcc12.DefaultClassDirective, ɵngcc13.MatCard, ɵngcc13.MatCardHeader, ɵngcc13.MatCardAvatar, ɵngcc13.MatCardTitle, ɵngcc13.MatCardContent, ɵngcc7.ɵNgNoValidate, ɵngcc7.NgControlStatusGroup, ɵngcc2.DefaultLayoutGapDirective, ɵngcc7.FormGroupDirective, ɵngcc14.MatFormField, ɵngcc15.MatInput, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc14.MatHint, ɵngcc13.MatCardActions], styles: [".toolbar-spacer[_ngcontent-%COMP%]{flex:1 1 auto}.theme-selectors-container[_ngcontent-%COMP%]{width:390px;margin:0 8px}div.theme-primary[_ngcontent-%COMP%]{width:50px;height:50px}div.theme-accent[_ngcontent-%COMP%]{width:25px;height:25px;position:absolute;bottom:15px;left:17px}div.theme-warn[_ngcontent-%COMP%]{width:15px;height:15px;position:absolute;bottom:15px;left:30px}div.theme-dark-mode[_ngcontent-%COMP%]{width:10px;height:10px;position:absolute;bottom:15px;left:55px}.dark-mode[_ngcontent-%COMP%]{background-color:#222}.light-mode[_ngcontent-%COMP%]{background-color:#f9f9f9}"] });
 ThemePickerComponent.ctorParameters = () => [
     { type: PalettePickerService },
     { type: ThemeBuilderService },
@@ -1581,8 +1587,8 @@ ThemePickerComponent.propDecorators = {
         type: Component,
         args: [{
                 selector: 'lcu-theme-picker',
-                template: "<button mat-icon-button id=\"theme-selector\" [mat-menu-trigger-for]=\"themeMenu\" tabindex=\"-1\">\r\n    <mat-icon class=\"auto-flip\">format_color_fill</mat-icon>\r\n</button>\r\n\r\n\r\n<mat-menu #themeMenu=\"matMenu\">\r\n    <lcu-mode-toggle [dark-mode]=\"DarkMode\" class=\"margin-2\"></lcu-mode-toggle>\r\n    <div class=\"theme-selector-container\"\r\n        tabindex=\"-1\"\r\n        (click)=\"$event.stopPropagation();\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.shift.tab)=\"$event.stopPropagation()\">\r\n        <div *ngFor=\"let theme of Themes\" fxLayout=\"column\">\r\n            <button mat-button class=\"theme-selector\" (click)=\"SetActiveTheme(theme)\">\r\n                <div \r\n                    fxLayout=\"row\"\r\n                    fxLayout=\"start center\"\r\n                    class=\"margin-1\">\r\n                    <div class=\"theme-primary\" [ngStyle]=\"{'background-color':theme.Primary}\">\r\n                        <div class=\"theme-accent\" [ngStyle]=\"{'background-color':theme.Accent}\"></div>\r\n                        <div class=\"theme-warn\" [ngStyle]=\"{'background-color':theme.Warn}\"></div>\r\n                        <!-- <mat-icon *ngIf=\"activeTheme===theme\" class=\"center theme-check\">check</mat-icon> -->\r\n                    </div>\r\n                    <span \r\n                    class=\"margin-left-2 mat-card-subtitle\">\r\n                        {{ theme.ID }}\r\n                    </span>\r\n                </div>\r\n            </button>\r\n        </div>\r\n        <!-- Manual Form Controls -->\r\n        <div\r\n            *ngIf=\"ToggleManualControls\" \r\n            class=\"margin-2 \r\n            margin-top-5\">\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <div mat-card-avatar class=\"lcu-card-avatar\">\r\n                        <mat-icon color=\"accent\">palette</mat-icon>\r\n                    </div>\r\n                    <mat-card-title>\r\n                        Manual Theme\r\n                    </mat-card-title>\r\n                </mat-card-header>\r\n                <mat-card-content>\r\n                    <form\r\n                    fxLayout=\"column\"\r\n                    fxLayoutGap=\"10px\"\r\n                    [formGroup]=\"ManualForm\"\r\n                    novalidate\r\n                    (click)=\"$event.stopPropagation()\">\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualThemeName\"\r\n                        />\r\n                        <mat-hint>Theme Name</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualPrimary\"\r\n                        />\r\n                        <mat-hint>Primary Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualAccent\"\r\n                        />\r\n                        <mat-hint>Accent Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualWarn\"\r\n                        />\r\n                        <mat-hint>Warn Color</mat-hint>\r\n                    </mat-form-field>\r\n                </form>\r\n                </mat-card-content>\r\n                <mat-card-actions>\r\n                    <button\r\n                    mat-raised-button\r\n                    color=\"primary\"\r\n                    class=\"margin-top-3\"\r\n                    [disabled]=\"!ManualForm.valid\"\r\n                    (click)=\"SetManualTheme()\"\r\n                        >\r\n                        Set Theme\r\n                    </button>\r\n                </mat-card-actions>\r\n            </mat-card>\r\n        </div>\r\n    </div>\r\n</mat-menu>",
-                styles: [".toolbar-spacer{flex:1 1 auto}.theme-selectors-container{width:390px;margin:0 8px}div.theme-primary{width:50px;height:50px}div.theme-accent{width:25px;height:25px;position:absolute;bottom:15px;left:17px}div.theme-warn{width:15px;height:15px;position:absolute;bottom:15px;left:30px}"]
+                template: "<button mat-icon-button id=\"theme-selector\" [mat-menu-trigger-for]=\"themeMenu\" tabindex=\"-1\">\r\n    <mat-icon class=\"auto-flip\">format_color_fill</mat-icon>\r\n</button>\r\n\r\n\r\n<mat-menu #themeMenu=\"matMenu\">\r\n    <lcu-mode-toggle [dark-mode]=\"DarkMode\" class=\"margin-2\"></lcu-mode-toggle>\r\n    <div class=\"theme-selector-container\"\r\n        tabindex=\"-1\"\r\n        (click)=\"$event.stopPropagation();\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.tab)=\"$event.stopPropagation()\"\r\n        (keydown.shift.tab)=\"$event.stopPropagation()\">\r\n        <div *ngFor=\"let theme of Themes\" fxLayout=\"column\">\r\n            <button \r\n                mat-button class=\"theme-selector\" \r\n                (click)=\"SetActiveTheme(theme)\">\r\n                <div \r\n                    fxLayout=\"row\"\r\n                    fxLayout=\"start center\"\r\n                    class=\"margin-1\">\r\n                    <div class=\"theme-primary\" [ngStyle]=\"{'background-color':theme.Primary}\">\r\n                        <div class=\"theme-accent\" [ngStyle]=\"{'background-color':theme.Accent}\"></div>\r\n                        <div class=\"theme-warn\" [ngStyle]=\"{'background-color':theme.Warn}\"></div>\r\n                        <div class=\"theme-dark-mode\" \r\n                             [ngClass]=\"{'dark-mode' : !theme.DarkMode, 'light-mode': theme.DarkMode}\"></div>\r\n                        <!-- <mat-icon *ngIf=\"activeTheme===theme\" class=\"center theme-check\">check</mat-icon> -->\r\n                    </div>\r\n                    <span \r\n                    class=\"margin-left-2 mat-card-subtitle\">\r\n                        {{ theme.ID }} {{ theme.DarkMode }}\r\n                    </span>\r\n                </div>\r\n            </button>\r\n        </div>\r\n        <!-- Manual Form Controls -->\r\n        <div\r\n            *ngIf=\"ToggleManualControls\" \r\n            class=\"margin-2 \r\n            margin-top-5\">\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <div mat-card-avatar class=\"lcu-card-avatar\">\r\n                        <mat-icon color=\"accent\">palette</mat-icon>\r\n                    </div>\r\n                    <mat-card-title>\r\n                        Manual Theme\r\n                    </mat-card-title>\r\n                </mat-card-header>\r\n                <mat-card-content>\r\n                    <form\r\n                    fxLayout=\"column\"\r\n                    fxLayoutGap=\"10px\"\r\n                    [formGroup]=\"ManualForm\"\r\n                    novalidate\r\n                    (click)=\"$event.stopPropagation()\">\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualThemeName\"\r\n                        />\r\n                        <mat-hint>Theme Name</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualPrimary\"\r\n                        />\r\n                        <mat-hint>Primary Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualAccent\"\r\n                        />\r\n                        <mat-hint>Accent Color</mat-hint>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input\r\n                        type=\"text\"\r\n                        matInput\r\n                        formControlName=\"manualWarn\"\r\n                        />\r\n                        <mat-hint>Warn Color</mat-hint>\r\n                    </mat-form-field>\r\n                </form>\r\n                </mat-card-content>\r\n                <mat-card-actions>\r\n                    <button\r\n                    mat-raised-button\r\n                    color=\"primary\"\r\n                    class=\"margin-top-3\"\r\n                    [disabled]=\"!ManualForm.valid\"\r\n                    (click)=\"SetManualTheme()\"\r\n                        >\r\n                        Set Theme\r\n                    </button>\r\n                </mat-card-actions>\r\n            </mat-card>\r\n        </div>\r\n    </div>\r\n</mat-menu>",
+                styles: [".toolbar-spacer{flex:1 1 auto}.theme-selectors-container{width:390px;margin:0 8px}div.theme-primary{width:50px;height:50px}div.theme-accent{width:25px;height:25px;position:absolute;bottom:15px;left:17px}div.theme-warn{width:15px;height:15px;position:absolute;bottom:15px;left:30px}div.theme-dark-mode{width:10px;height:10px;position:absolute;bottom:15px;left:55px}.dark-mode{background-color:#222}.light-mode{background-color:#f9f9f9}"]
             }]
     }], function () { return [{ type: PalettePickerService }, { type: ThemeBuilderService }, { type: VariantColorService }]; }, { DarkMode: [{
             type: Input,

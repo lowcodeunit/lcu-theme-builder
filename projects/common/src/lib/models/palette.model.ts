@@ -10,8 +10,8 @@ export class PaletteModel {
     public PrimaryColorPalette?: MaterialPaletteModel;
     public WarnColorPalette?: MaterialPaletteModel;
     public ColorMap?: Map<string, object>;
-    public darkBackground: string;
-    public darkText: string;
-    public lightBackground: string;
-    public lightText: string;
+    public DarkBackground: string;
+    public DarkText: string;
+    public LightBackground: string;
+    public LightText: string;
 }

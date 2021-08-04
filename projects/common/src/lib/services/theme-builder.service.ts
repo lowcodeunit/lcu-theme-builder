@@ -216,10 +216,10 @@ export class ThemeBuilderService {
     * Return a new theme model
     */
    public getTheme(): ThemeModel {
-    debugger;
+
     return {
-      palette: this.Palette,
-      lightness: this.ThemeMode,
+      Palette: this.Palette,
+      Lightness: this.ThemeMode,
     };
    }
 

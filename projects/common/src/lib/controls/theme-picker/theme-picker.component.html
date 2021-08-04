@@ -12,7 +12,9 @@
         (keydown.tab)="$event.stopPropagation()"
         (keydown.shift.tab)="$event.stopPropagation()">
         <div *ngFor="let theme of Themes" fxLayout="column">
-            <button mat-button class="theme-selector" (click)="SetActiveTheme(theme)">
+            <button 
+                mat-button class="theme-selector" 
+                (click)="SetActiveTheme(theme)">
                 <div 
                     fxLayout="row"
                     fxLayout="start center"
@@ -20,11 +22,13 @@
                     <div class="theme-primary" [ngStyle]="{'background-color':theme.Primary}">
                         <div class="theme-accent" [ngStyle]="{'background-color':theme.Accent}"></div>
                         <div class="theme-warn" [ngStyle]="{'background-color':theme.Warn}"></div>
+                        <div class="theme-dark-mode" 
+                             [ngClass]="{'dark-mode' : !theme.DarkMode, 'light-mode': theme.DarkMode}"></div>
                         <!-- <mat-icon *ngIf="activeTheme===theme" class="center theme-check">check</mat-icon> -->
                     </div>
                     <span 
                     class="margin-left-2 mat-card-subtitle">
-                        {{ theme.ID }}
+                        {{ theme.ID }} {{ theme.DarkMode }}
                     </span>
                 </div>
             </button>

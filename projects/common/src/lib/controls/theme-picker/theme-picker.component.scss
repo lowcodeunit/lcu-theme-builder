@@ -35,6 +35,21 @@
     left: 30px;
     // transform: rotate(45deg);
   }
+
+  div.theme-dark-mode {
+    @include size(10px);
+    position: absolute;
+    bottom: 10px;
+    left: 55px;
+  }
+
+  .dark-mode {
+    background-color: #222222;
+  }
+
+  .light-mode {
+    background-color: #f9f9f9;
+  }
   
   // .theme-check {
   //   color: white;

@@ -18,7 +18,7 @@ export class PaletteTemplateService {
    * @param theme current theme
    */
     public GetTemplate(theme: ThemeModel): string {
-      debugger;
+
       const template = `
       @import '~@angular/material/theming';
       // Include the common styles for Angular Material. We include this here so that you only
@@ -27,7 +27,7 @@ export class PaletteTemplateService {
       // Foreground Elements
 
       // Light Theme Text
-      $dark-text: ${theme.palette.lightText};
+      $dark-text: ${theme.Palette.LightText};
       $dark-primary-text: rgba($dark-text, 0.87);
       $dark-accent-text: rgba($dark-primary-text, 0.54);
       $dark-disabled-text: rgba($dark-primary-text, 0.38);
@@ -54,7 +54,7 @@ export class PaletteTemplateService {
       );
 
       // Dark Theme text
-      $light-text: ${theme.palette.darkText};
+      $light-text: ${theme.Palette.DarkText};
       $light-primary-text: $light-text;
       $light-accent-text: rgba($light-primary-text, 0.7);
       $light-disabled-text: rgba($light-primary-text, 0.5);
@@ -82,14 +82,14 @@ export class PaletteTemplateService {
 
       // Background config
       // Light bg
-      $light-background:    ${theme.palette.lightBackground};
+      $light-background:    ${theme.Palette.LightBackground};
       $light-bg-darker-5:   darken($light-background, 5%);
       $light-bg-darker-10:  darken($light-background, 10%);
       $light-bg-darker-20:  darken($light-background, 20%);
       $light-bg-darker-30:  darken($light-background, 30%);
       $light-bg-lighter-5:  lighten($light-background, 5%);
-      $dark-bg-alpha-4:     rgba(${theme.palette.darkBackground}, 0.04);
-      $dark-bg-alpha-12:    rgba(${theme.palette.darkBackground}, 0.12);
+      $dark-bg-alpha-4:     rgba(${theme.Palette.DarkBackground}, 0.04);
+      $dark-bg-alpha-12:    rgba(${theme.Palette.DarkBackground}, 0.12);
 
       $mat-light-theme-background: (
         background:               $light-background,
@@ -109,13 +109,13 @@ export class PaletteTemplateService {
       );
 
       // Dark bg
-      $dark-background:     ${theme.palette.darkBackground};
+      $dark-background:     ${theme.Palette.DarkBackground};
       $dark-bg-lighter-5:   lighten($dark-background, 5%);
       $dark-bg-lighter-10:  lighten($dark-background, 10%);
       $dark-bg-lighter-20:  lighten($dark-background, 20%);
       $dark-bg-lighter-30:  lighten($dark-background, 30%);
-      $light-bg-alpha-4:    rgba(${theme.palette.lightBackground}, 0.04);
-      $light-bg-alpha-12:   rgba(${theme.palette.lightBackground}, 0.12);
+      $light-bg-alpha-4:    rgba(${theme.Palette.LightBackground}, 0.04);
+      $light-bg-alpha-12:   rgba(${theme.Palette.LightBackground}, 0.12);
 
       // Background palette for dark themes.
       $mat-dark-theme-background: (
@@ -136,10 +136,10 @@ export class PaletteTemplateService {
       );
 
       // Theme Config
-      ${['primary', 'accent', 'warn'].map(x => this.getScssPalette(x, theme.palette[x])).join('\n')};
+      ${['primary', 'accent', 'warn'].map(x => this.getScssPalette(x, theme.Palette[x])).join('\n')};
 
-      $theme: ${!theme.lightness ? 'mat-dark-theme' : 'mat-light-theme'}($theme-primary, $theme-accent, $theme-warn);
-      $altTheme: ${!theme.lightness ? 'mat-light-theme' : 'mat-dark-theme'}($theme-primary, $theme-accent, $theme-warn);
+      $theme: ${!theme.Lightness ? 'mat-dark-theme' : 'mat-light-theme'}($theme-primary, $theme-accent, $theme-warn);
+      $altTheme: ${!theme.Lightness ? 'mat-light-theme' : 'mat-dark-theme'}($theme-primary, $theme-accent, $theme-warn);
 
       // Theme Init
       @include angular-material-theme($theme);
@@ -147,9 +147,6 @@ export class PaletteTemplateService {
       .theme-alternate {
         @include angular-material-theme($altTheme);
       }
-
-      
-
 
       // Specific component overrides, pieces that are not in line with the general theming
 
@@ -177,7 +174,7 @@ export class PaletteTemplateService {
      * @param subPalette SubPaletteModel
      */
     protected getScssPalette(name: string, subPalette: SubPaletteModel): string {
-      debugger;
+
       return `
       body {
         --${name}-color: ${subPalette.Main};

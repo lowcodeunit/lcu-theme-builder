@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
           Primary: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'),
           Accent: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'),
           Warn: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'),
-          DarkMode: false
+          DarkMode: true
         }
       ),
       new ThemePickerModel(
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
           Primary: '#ffcc11',
           Accent: '#06a5ff',
           Warn: '#990000',
-          DarkMode: true
+          DarkMode: false
         }
       ),
       new ThemePickerModel(

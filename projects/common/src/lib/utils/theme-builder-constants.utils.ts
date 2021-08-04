@@ -33,10 +33,10 @@ export class ThemeBuilderConstants {
         accent: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), Lighter: null, Darker: null },
         warn: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), Lighter: null, Darker: null },
         DarkMode: false,
-        lightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
-        lightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
-        darkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),
-        darkBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-background')
+        LightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
+        LightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
+        DarkText: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-text'),
+        DarkBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-background')
       };
 
   }

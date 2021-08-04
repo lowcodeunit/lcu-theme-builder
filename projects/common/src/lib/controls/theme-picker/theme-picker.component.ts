@@ -106,6 +106,11 @@ public test: boolean;
     this.themes();
   }
 
+  /**
+   * When selecting a theme from the list
+   * 
+   * @param theme selected theme
+   */
   public SetActiveTheme(theme: ThemePickerModel): void {
     let palette: PaletteModel = new PaletteModel();
     palette = { ...this.palettePickerService.CurrentPalette, ...palette };
@@ -115,7 +120,9 @@ public test: boolean;
     palette.primary.Main = theme.Primary;
     palette.accent.Main = theme.Accent;
     palette.warn.Main = theme.Warn;
+    palette.DarkMode = theme.DarkMode;
 
+    this.DarkMode = palette.DarkMode;
     this.variantColorService.UpdatePrimaryVariants(theme.Primary);
     this.variantColorService.UpdateAccentVariants(theme.Accent);
     this.variantColorService.UpdateWarnVariants(theme.Warn);

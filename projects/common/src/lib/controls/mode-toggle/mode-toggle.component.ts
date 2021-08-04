@@ -17,11 +17,12 @@ export class LightnessPickerComponent implements OnInit {
   private _darkMode: boolean;
   @Input('dark-mode')
   public set DarkMode(val: boolean) {
-    
+
     if (!val ) { return; }
 
     this._darkMode = val;
-    this.setThemeMode(val);
+    this.Toggle.setValue(val);
+    // this.setThemeMode(val);
   }
 
   public get DarkMode(): boolean {

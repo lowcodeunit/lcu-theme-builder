@@ -9,8 +9,8 @@ export declare class PaletteModel {
     PrimaryColorPalette?: MaterialPaletteModel;
     WarnColorPalette?: MaterialPaletteModel;
     ColorMap?: Map<string, object>;
-    darkBackground: string;
-    darkText: string;
-    lightBackground: string;
-    lightText: string;
+    DarkBackground: string;
+    DarkText: string;
+    LightBackground: string;
+    LightText: string;
 }

@@ -47,6 +47,11 @@ export declare class ThemePickerComponent implements OnInit {
     get ManualWarn(): AbstractControl;
     constructor(palettePickerService: PalettePickerService, themeBuilderService: ThemeBuilderService, variantColorService: VariantColorService);
     ngOnInit(): void;
+    /**
+     * When selecting a theme from the list
+     *
+     * @param theme selected theme
+     */
     SetActiveTheme(theme: ThemePickerModel): void;
     /**
      * Manually create theme, by using inputs
