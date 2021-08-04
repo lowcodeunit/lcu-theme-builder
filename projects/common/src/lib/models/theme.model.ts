@@ -1,6 +1,6 @@
 import { PaletteModel } from './palette.model';
 
 export class ThemeModel {
-    public Lightness: boolean;
+    public ThemeDarkMode: boolean;
     public Palette: PaletteModel;
 }

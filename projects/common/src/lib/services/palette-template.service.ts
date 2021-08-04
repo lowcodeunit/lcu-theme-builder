@@ -138,8 +138,8 @@ export class PaletteTemplateService {
       // Theme Config
       ${['primary', 'accent', 'warn'].map(x => this.getScssPalette(x, theme.Palette[x])).join('\n')};
 
-      $theme: ${!theme.Lightness ? 'mat-dark-theme' : 'mat-light-theme'}($theme-primary, $theme-accent, $theme-warn);
-      $altTheme: ${!theme.Lightness ? 'mat-light-theme' : 'mat-dark-theme'}($theme-primary, $theme-accent, $theme-warn);
+      $theme: ${!theme.ThemeDarkMode ? 'mat-dark-theme' : 'mat-light-theme'}($theme-primary, $theme-accent, $theme-warn);
+      $altTheme: ${!theme.ThemeDarkMode ? 'mat-light-theme' : 'mat-dark-theme'}($theme-primary, $theme-accent, $theme-warn);
 
       // Theme Init
       @include angular-material-theme($theme);

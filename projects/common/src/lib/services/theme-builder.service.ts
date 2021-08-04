@@ -219,7 +219,7 @@ export class ThemeBuilderService {
 
     return {
       Palette: this.Palette,
-      Lightness: this.ThemeMode,
+      ThemeDarkMode: this.ThemeMode,
     };
    }
 

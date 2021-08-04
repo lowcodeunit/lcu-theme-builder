@@ -1,6 +1,6 @@
 {
   "name": "@lowcodeunit/lcu-theme-builder-common",
-  "version": "0.0.0-watch+1628047420208",
+  "version": "0.0.0-watch+1628087564877",
   "peerDependencies": {
     "@angular/common": "^11.2.13",
     "@angular/core": "^11.2.13"
