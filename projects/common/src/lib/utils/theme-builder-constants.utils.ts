@@ -29,9 +29,9 @@ export class ThemeBuilderConstants {
       public static document = window.getComputedStyle(document.documentElement);
 
       public static InitialValues: PaletteModel = {
-        primary: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), lighter: null, darker: null },
-        accent: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), lighter: null, darker: null },
-        warn: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), lighter: null, darker: null },
+        primary: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), Lighter: null, Darker: null },
+        accent: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), Lighter: null, Darker: null },
+        warn: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), Lighter: null, Darker: null },
         DarkMode: false,
         lightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
         lightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),

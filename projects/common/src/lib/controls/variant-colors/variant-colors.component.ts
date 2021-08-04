@@ -109,9 +109,9 @@ protected paletteChangedSubscription: Subscription;
         return;
       }
 
-      this.variantColorService.UpdatePrimaryVariants(palette.primary.main);
-      this.variantColorService.UpdateAccentVariants(palette.accent.main);
-      this.variantColorService.UpdateWarnVariants(palette.warn.main);
+      this.variantColorService.UpdatePrimaryVariants(palette.primary.Main);
+      this.variantColorService.UpdateAccentVariants(palette.accent.Main);
+      this.variantColorService.UpdateWarnVariants(palette.warn.Main);
       // this.updateAccentColor(palette.accent.main);
       // this.updatePrimaryColor(palette.primary.main);
       // this.updateWarnColor(palette.warn.main);

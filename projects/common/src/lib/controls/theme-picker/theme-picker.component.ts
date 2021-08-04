@@ -112,9 +112,9 @@ public test: boolean;
 
     const colors: Array<string> = [theme.Primary, theme.Accent, theme.Warn];
 
-    palette.primary.main = theme.Primary;
-    palette.accent.main = theme.Accent;
-    palette.warn.main = theme.Warn;
+    palette.primary.Main = theme.Primary;
+    palette.accent.Main = theme.Accent;
+    palette.warn.Main = theme.Warn;
 
     this.variantColorService.UpdatePrimaryVariants(theme.Primary);
     this.variantColorService.UpdateAccentVariants(theme.Accent);

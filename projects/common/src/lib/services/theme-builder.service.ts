@@ -262,9 +262,9 @@ export class ThemeBuilderService {
 
     let initial: PaletteModel = new PaletteModel();
     initial = { ...ThemeBuilderConstants.InitialValues, ...initial };
-    initial.primary.main = this.Themes[0].Primary;
-    initial.accent.main = this.Themes[0].Accent;
-    initial.warn.main = this.Themes[0].Warn;
+    initial.primary.Main = this.Themes[0].Primary;
+    initial.accent.Main = this.Themes[0].Accent;
+    initial.warn.Main = this.Themes[0].Warn;
     initial.DarkMode = this.Themes[0].DarkMode;
 
     this.Palette = initial;

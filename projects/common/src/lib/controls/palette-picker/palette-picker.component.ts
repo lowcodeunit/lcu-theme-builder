@@ -63,9 +63,9 @@ export class PalettePickerComponent implements OnInit, OnDestroy {
     this.palettePickerService.ColorPickerChanged
     .subscribe((val: PaletteModel) => {
 
-      this.PrimaryColor = val.primary.main;
-      this.AccentColor = val.accent.main;
-      this.WarnColor = val.warn.main;
+      this.PrimaryColor = val.primary.Main;
+      this.AccentColor = val.accent.Main;
+      this.WarnColor = val.warn.Main;
       // this.Primary.setValue(val.primary.main);
       // this.Accent.setValue(val.accent.main);
       // this.Warn.setValue(val.warn.main);
@@ -76,9 +76,9 @@ export class PalettePickerComponent implements OnInit, OnDestroy {
 
     let palette: PaletteModel = new PaletteModel();
     palette = { ...this.palettePickerService.CurrentPalette, ...palette };
-    palette.primary.main = this.Primary.value.main;
-    palette.accent.main = this.Accent.value.main;
-    palette.warn.main = this.Warn.value.main;
+    palette.primary.Main = this.Primary.value.main;
+    palette.accent.Main = this.Accent.value.main;
+    palette.warn.Main = this.Warn.value.main;
 
     this.themeBuilderService.Palette = palette;
   }

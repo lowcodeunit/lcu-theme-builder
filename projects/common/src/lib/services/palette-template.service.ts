@@ -180,23 +180,23 @@ export class PaletteTemplateService {
       debugger;
       return `
       body {
-        --${name}-color: ${subPalette.main};
-        --${name}-lighter-color: ${subPalette.lighter};
-        --${name}-darker-color: ${subPalette.darker};
-        --text-${name}-color: #{${this.getTextColor(subPalette.main)}};
-        --text-${name}-lighter-color: #{${this.getTextColor(subPalette.lighter)}};
-        --text-${name}-darker-color: #{${this.getTextColor(subPalette.darker)}};
+        --${name}-color: ${subPalette.Main};
+        --${name}-lighter-color: ${subPalette.Lighter};
+        --${name}-darker-color: ${subPalette.Darker};
+        --text-${name}-color: #{${this.getTextColor(subPalette.Main)}};
+        --text-${name}-lighter-color: #{${this.getTextColor(subPalette.Lighter)}};
+        --text-${name}-darker-color: #{${this.getTextColor(subPalette.Darker)}};
       }
 
     $mat-${name}: (
-      main: ${subPalette.main},
-      lighter: ${subPalette.lighter},
-      darker: ${subPalette.darker},
-      200: ${subPalette.main}, // For slide toggle,
+      main: ${subPalette.Main},
+      lighter: ${subPalette.Lighter},
+      darker: ${subPalette.Darker},
+      200: ${subPalette.Main}, // For slide toggle,
       contrast : (
-        main: ${this.getTextColor(subPalette.main)},
-        lighter: ${this.getTextColor(subPalette.lighter)},
-        darker: ${this.getTextColor(subPalette.darker)},
+        main: ${this.getTextColor(subPalette.Main)},
+        lighter: ${this.getTextColor(subPalette.Lighter)},
+        darker: ${this.getTextColor(subPalette.Darker)},
       )
     );
     $theme-${name}: mat-palette($mat-${name}, main, lighter, darker);`;

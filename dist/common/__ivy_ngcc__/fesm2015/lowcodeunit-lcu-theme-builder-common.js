@@ -370,9 +370,9 @@ ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY = {
 };
 ThemeBuilderConstants.document = window.getComputedStyle(document.documentElement);
 ThemeBuilderConstants.InitialValues = {
-    primary: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), lighter: null, darker: null },
-    accent: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), lighter: null, darker: null },
-    warn: { main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), lighter: null, darker: null },
+    primary: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-primary'), Lighter: null, Darker: null },
+    accent: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-accent'), Lighter: null, Darker: null },
+    warn: { Main: ThemeBuilderConstants.document.getPropertyValue('--initial-warn'), Lighter: null, Darker: null },
     DarkMode: false,
     lightText: ThemeBuilderConstants.document.getPropertyValue('--initial-light-text'),
     lightBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-light-background'),
@@ -548,23 +548,23 @@ class PaletteTemplateService {
         debugger;
         return `
       body {
-        --${name}-color: ${subPalette.main};
-        --${name}-lighter-color: ${subPalette.lighter};
-        --${name}-darker-color: ${subPalette.darker};
-        --text-${name}-color: #{${this.getTextColor(subPalette.main)}};
-        --text-${name}-lighter-color: #{${this.getTextColor(subPalette.lighter)}};
-        --text-${name}-darker-color: #{${this.getTextColor(subPalette.darker)}};
+        --${name}-color: ${subPalette.Main};
+        --${name}-lighter-color: ${subPalette.Lighter};
+        --${name}-darker-color: ${subPalette.Darker};
+        --text-${name}-color: #{${this.getTextColor(subPalette.Main)}};
+        --text-${name}-lighter-color: #{${this.getTextColor(subPalette.Lighter)}};
+        --text-${name}-darker-color: #{${this.getTextColor(subPalette.Darker)}};
       }
 
     $mat-${name}: (
-      main: ${subPalette.main},
-      lighter: ${subPalette.lighter},
-      darker: ${subPalette.darker},
-      200: ${subPalette.main}, // For slide toggle,
+      main: ${subPalette.Main},
+      lighter: ${subPalette.Lighter},
+      darker: ${subPalette.Darker},
+      200: ${subPalette.Main}, // For slide toggle,
       contrast : (
-        main: ${this.getTextColor(subPalette.main)},
-        lighter: ${this.getTextColor(subPalette.lighter)},
-        darker: ${this.getTextColor(subPalette.darker)},
+        main: ${this.getTextColor(subPalette.Main)},
+        lighter: ${this.getTextColor(subPalette.Lighter)},
+        darker: ${this.getTextColor(subPalette.Darker)},
       )
     );
     $theme-${name}: mat-palette($mat-${name}, main, lighter, darker);`;
@@ -757,9 +757,9 @@ class ThemeBuilderService {
         this.Themes = themes;
         let initial = new PaletteModel();
         initial = Object.assign(Object.assign({}, ThemeBuilderConstants.InitialValues), initial);
-        initial.primary.main = this.Themes[0].Primary;
-        initial.accent.main = this.Themes[0].Accent;
-        initial.warn.main = this.Themes[0].Warn;
+        initial.primary.Main = this.Themes[0].Primary;
+        initial.accent.Main = this.Themes[0].Accent;
+        initial.warn.Main = this.Themes[0].Warn;
         initial.DarkMode = this.Themes[0].DarkMode;
         this.Palette = initial;
         this.variantColorService.UpdatePrimaryVariants(this.Themes[0].Primary);
@@ -984,9 +984,9 @@ class PalettePickerComponent {
         // the color picker itself
         this.palettePickerService.ColorPickerChanged
             .subscribe((val) => {
-            this.PrimaryColor = val.primary.main;
-            this.AccentColor = val.accent.main;
-            this.WarnColor = val.warn.main;
+            this.PrimaryColor = val.primary.Main;
+            this.AccentColor = val.accent.Main;
+            this.WarnColor = val.warn.Main;
             // this.Primary.setValue(val.primary.main);
             // this.Accent.setValue(val.accent.main);
             // this.Warn.setValue(val.warn.main);
@@ -1013,9 +1013,9 @@ class PalettePickerComponent {
     updatePalette() {
         let palette = new PaletteModel();
         palette = Object.assign(Object.assign({}, this.palettePickerService.CurrentPalette), palette);
-        palette.primary.main = this.Primary.value.main;
-        palette.accent.main = this.Accent.value.main;
-        palette.warn.main = this.Warn.value.main;
+        palette.primary.Main = this.Primary.value.main;
+        palette.accent.Main = this.Accent.value.main;
+        palette.warn.Main = this.Warn.value.main;
         this.themeBuilderService.Palette = palette;
     }
     ngOnInit() {
@@ -1336,9 +1336,9 @@ class VariantColorsComponent {
             if (!palette || !palette.primary) {
                 return;
             }
-            this.variantColorService.UpdatePrimaryVariants(palette.primary.main);
-            this.variantColorService.UpdateAccentVariants(palette.accent.main);
-            this.variantColorService.UpdateWarnVariants(palette.warn.main);
+            this.variantColorService.UpdatePrimaryVariants(palette.primary.Main);
+            this.variantColorService.UpdateAccentVariants(palette.accent.Main);
+            this.variantColorService.UpdateWarnVariants(palette.warn.Main);
             // this.updateAccentColor(palette.accent.main);
             // this.updatePrimaryColor(palette.primary.main);
             // this.updateWarnColor(palette.warn.main);
@@ -1500,9 +1500,9 @@ class ThemePickerComponent {
         let palette = new PaletteModel();
         palette = Object.assign(Object.assign({}, this.palettePickerService.CurrentPalette), palette);
         const colors = [theme.Primary, theme.Accent, theme.Warn];
-        palette.primary.main = theme.Primary;
-        palette.accent.main = theme.Accent;
-        palette.warn.main = theme.Warn;
+        palette.primary.Main = theme.Primary;
+        palette.accent.Main = theme.Accent;
+        palette.warn.Main = theme.Warn;
         this.variantColorService.UpdatePrimaryVariants(theme.Primary);
         this.variantColorService.UpdateAccentVariants(theme.Accent);
         this.variantColorService.UpdateWarnVariants(theme.Warn);
