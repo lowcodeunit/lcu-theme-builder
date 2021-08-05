@@ -22,6 +22,10 @@ export class AppComponent implements OnInit {
     protected palettePickerService: PalettePickerService,
     protected http: HttpClient,) {
 
+    // set where Angular Material _theming.scss is coming from, this is needed in setting up
+    // our own dynamic theme - essentially, our theme overwrites this one
+    this.themeBuilderService.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
+
     this.Title = 'Theme Builder';
   }
 
@@ -62,10 +66,6 @@ export class AppComponent implements OnInit {
         }
       )
     ]
-
-    // set where Angular Material _theming.scss is coming from, this is needed in setting up
-    // our own dynamic theme - essentially, our theme overwrites this one
-    this.themeBuilderService.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
 
     this.themeBuilderService.SetThemes(themes);
   }

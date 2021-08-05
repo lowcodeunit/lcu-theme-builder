@@ -426,11 +426,9 @@ class ThemeBuilderService {
         this.zone = zone;
         this.utilsService = utilsService;
         this.variantColorService = variantColorService;
-        this.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
         this.themeMode = true;
         this.Theme = new Subject();
         this.PaletteColors = new Subject();
-        // this.ThemeScss = this.loadThemingScss();
         this.PaletteList = [];
     }
     set MaterialTheme(val) {

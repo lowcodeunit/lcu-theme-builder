@@ -101,13 +101,9 @@ export class ThemeBuilderService {
       protected utilsService: UtilsService,
       protected variantColorService: VariantColorService) {
 
-      this.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
       this.themeMode = true;
       this.Theme = new Subject<ThemeModel>();
       this.PaletteColors = new Subject<Partial<PaletteModel>>();
-
-      // this.ThemeScss = this.loadThemingScss();
-
       this.PaletteList = [];
      }
 
@@ -161,7 +157,7 @@ export class ThemeBuilderService {
    * @param theme SASS stylesheet
    * @returns compiled CSS
    */
-   public async CompileScssTheme(theme: string) {
+   public async CompileScssTheme(theme: string): Promise<string> {
     await this.ThemeScss;
     return new Promise<string>((res, rej) => {
       Sass.compile(theme.replace('@include angular-material-theme($altTheme);', ''), (v: any) => {
