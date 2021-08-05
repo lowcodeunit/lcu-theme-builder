@@ -636,6 +636,7 @@ class ThemeBuilderService {
      */
     loadThemingScss() {
         // return this.http.get('https://www.iot-ensemble.com/assets/theming/theming.scss', { responseType: 'text' })
+        // return new Promise((res, rej) => {
         return this.http.get(this.MaterialTheme, { responseType: 'text' })
             .pipe(map((x) => {
             return x
@@ -655,6 +656,7 @@ class ThemeBuilderService {
         Sass.writeFile('~@angular/material/theming', txt, (result) => {
             // console.log('Sass.writeFile', result);
         }))).toPromise();
+        // })
     }
     /**
      * Get theme template and update it
@@ -672,8 +674,10 @@ class ThemeBuilderService {
      */
     CompileScssTheme(theme) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('START COMPILE THEME');
             yield this.ThemeScss;
             return new Promise((res, rej) => {
+                console.log('THEMESCSS IS READY');
                 Sass.compile(theme.replace('@include angular-material-theme($altTheme);', ''), (v) => {
                     if (v.status === 0) {
                         res(v.text);
@@ -731,7 +735,11 @@ class ThemeBuilderService {
         // Running functions outside of Angular's zone and do work that
         // doesn't trigger Angular change-detection.
         this.zone.runOutsideAngular(() => {
-            this.CompileScssTheme(source).then((text) => {
+            this.CompileScssTheme(source)
+                .finally(() => {
+                console.log('SCSS IS COMPILED');
+            })
+                .then((text) => {
                 // SASS compiled to CSS
                 const compiledDynamicCSS = text;
                 const dynamicStyleSheet = document.getElementById('theme-builder-stylesheet');
@@ -749,6 +757,10 @@ class ThemeBuilderService {
             });
         });
     }
+    /**
+     *
+     * @param themes Array of themes to be set
+     */
     SetThemes(themes) {
         this.Themes = themes;
         let initial = new PaletteModel();

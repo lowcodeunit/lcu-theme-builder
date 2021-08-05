@@ -114,8 +114,10 @@ export class ThemeBuilderService {
     * our theme color changes
     */
    protected loadThemingScss(): Promise<void> {
+     
     // return this.http.get('https://www.iot-ensemble.com/assets/theming/theming.scss', { responseType: 'text' })
-    return this.http.get(this.MaterialTheme, { responseType: 'text' })
+    // return new Promise((res, rej) => {
+     return this.http.get(this.MaterialTheme, { responseType: 'text' })
       .pipe(
         map((x: string) => {
           return x
@@ -139,7 +141,8 @@ export class ThemeBuilderService {
           Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
            // console.log('Sass.writeFile', result);
           }))
-      ).toPromise();
+      ).toPromise()
+    // })
    }
 
   /**
@@ -228,11 +231,14 @@ export class ThemeBuilderService {
     // doesn't trigger Angular change-detection.
    this.zone.runOutsideAngular(() => {
 
-     this.CompileScssTheme(source).then( (text: string) => {
+     this.CompileScssTheme(source)
+     .finally(() => {
+       console.log('SCSS IS COMPILED');
+     })
+     .then( (text: string) => {
 
         // SASS compiled to CSS
         const compiledDynamicCSS: string = text;
-
         const dynamicStyleSheet: HTMLElement = document.getElementById('theme-builder-stylesheet');
 
         // check if dynamic stylesheet exists, then remove it
@@ -253,6 +259,10 @@ export class ThemeBuilderService {
    });
   }
 
+  /**
+   *
+   * @param themes Array of themes to be set
+   */
   public SetThemes(themes: Array<ThemePickerModel>): void {
     this.Themes = themes;
 

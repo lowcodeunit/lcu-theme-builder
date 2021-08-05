@@ -8,5 +8,3 @@ export { VariantColorsComponent as ɵf } from './lib/controls/variant-colors/var
 export { LocalStorageService as ɵc } from './lib/services/local-storage.service';
 export { PaletteTemplateService as ɵb } from './lib/services/palette-template.service';
 export { UtilsService as ɵd } from './lib/services/utils.service';
-
-//# sourceMappingURL=lowcodeunit-lcu-theme-builder-common.d.ts.map

@@ -85,5 +85,9 @@ export declare class ThemeBuilderService {
      */
     getTheme(): ThemeModel;
     UpdateTheme(theme: ThemeModel): void;
+    /**
+     *
+     * @param themes Array of themes to be set
+     */
     SetThemes(themes: Array<ThemePickerModel>): void;
 }

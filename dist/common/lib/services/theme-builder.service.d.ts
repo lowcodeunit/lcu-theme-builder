@@ -11,7 +11,6 @@ import { HttpClient } from '@angular/common/http';
 import { PaletteListModel } from '../models/palette-list.model';
 import { PaletteTemplateService } from './palette-template.service';
 import { ThemePickerModel } from '../models/theme-picker.model';
-import * as ɵngcc0 from '@angular/core';
 export declare class ThemeBuilderService {
     protected http: HttpClient;
     protected paletteTemplateService: PaletteTemplateService;
@@ -86,8 +85,9 @@ export declare class ThemeBuilderService {
      */
     getTheme(): ThemeModel;
     UpdateTheme(theme: ThemeModel): void;
+    /**
+     *
+     * @param themes Array of themes to be set
+     */
     SetThemes(themes: Array<ThemePickerModel>): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDeclaration<ThemeBuilderService, never>;
 }
-
-//# sourceMappingURL=theme-builder.service.d.ts.map
