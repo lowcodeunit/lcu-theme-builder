@@ -1,0 +1,16 @@
+{
+	"templates": {
+		"repository": "lowcodeunit-devkit/lcu-cli-templates-core",
+		"scope": "@lowcodeunit",
+		"workspace": "theme-builder"
+	},
+	"config": {
+		"wc": [
+			"wc/theme-builder.lcu.js"
+		],
+		"solutions": {},
+		"elements": {},
+		"data-flow": {},
+		"dependencies": {}
+	}
+}

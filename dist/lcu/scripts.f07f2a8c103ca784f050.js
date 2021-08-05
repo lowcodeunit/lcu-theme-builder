@@ -1,0 +1,1 @@
+"use strict";!function(){if(void 0===window.Reflect||void 0===window.customElements||window.customElements.polyfillWrapFlushCallback)return;const t=HTMLElement,e=function(){return Reflect.construct(t,[],this.constructor)};window.HTMLElement=e,HTMLElement.prototype=t.prototype,HTMLElement.prototype.constructor=HTMLElement,Object.setPrototypeOf(HTMLElement,t)}();
