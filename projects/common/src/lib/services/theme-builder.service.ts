@@ -124,13 +124,26 @@ export class ThemeBuilderService {
         map((x: string) => {
           console.log('PIPE MAP');
           return x
+            .replace(/\n/gm, '??')
+            .replace(/\$mat-([^:?]+)\s*:\s*\([? ]*50:[^()]*contrast\s*:\s*\([^)]+\)[ ?]*\);\s*?/g,
+              (all: string, name: string) => name === 'grey' ? all : '')
+            .replace(/\/\*.*?\*\//g, '')
+            .split(/[?][?]/g)
+            .map((l: string) => l
+              .replace(/^\s*(\/\/.*)?$/g, '')
+              .replace(/^\$mat-blue-gray\s*:\s*\$mat-blue-grey\s*;\s*/g, '')
+              .replace(/^\s*|\s*$/g, '')
+              .replace(/:\s\s+/g, ': ')
+            )
+            .filter((l: string) => !!l)
+            .join('\n');
         }),
         map(
           (txt: string) => {
                 // console.log('SASS.WRITEFILE');
                 // writeFile allows this file to be accessed from styles.scss
                 Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
-              })
+                })
             }
           )
         ).toPromise();
