@@ -24,7 +24,8 @@ export class AppComponent implements OnInit {
 
     // set where Angular Material _theming.scss is coming from, this is needed in setting up
     // our own dynamic theme - essentially, our theme overwrites this one
-    this.themeBuilderService.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
+    // this.themeBuilderService.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
+    this.themeBuilderService.MaterialTheme = '../assets/material_theming.scss';
 
     this.Title = 'Theme Builder';
   }

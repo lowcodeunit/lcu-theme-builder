@@ -207,10 +207,10 @@
 				  "output": "/"
 				},
 				{
-								  "glob": "**/*",
-								  "input": "node_modules/sass.js/dist",
-								  "output": "/assets"
-							  },
+					"glob": "**/*",
+					"input": "node_modules/sass.js/dist",
+					"output": "/assets"
+				},
 				"projects/demo/src/docs"
 			  ],
 			  "styles": [
@@ -219,7 +219,7 @@
 			  "scripts": 
 			  [
 				"./node_modules/sass.js/dist/sass.js",
-							  "./node_modules/sass.js/dist/sass.worker.js"
+				"./node_modules/sass.js/dist/sass.worker.js"
 			  ]
 			},
 			"configurations": {

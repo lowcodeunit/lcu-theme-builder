@@ -8,7 +8,7 @@ import { MaterialPaletteModel } from './../models/material-palette.model';
 import { Injectable, NgZone } from '@angular/core';
 import * as tinycolor from 'tinycolor2';
 import { PaletteModel } from '../models/palette.model';
-import { ReplaySubject, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ThemeModel } from '../models/theme.model';
 import { HttpClient } from '@angular/common/http';
@@ -57,6 +57,7 @@ export class ThemeBuilderService {
   public set MaterialTheme(val: string) {
 
      this._materialTheme = val;
+     console.log('SET MATERIAL THEME');
       this.ThemeScss = this.loadThemingScss();
   }
 
@@ -72,7 +73,8 @@ export class ThemeBuilderService {
       this.palette = palette;
       this.palettePickerService.PalettePickerChange(palette);
       this.ThemeMode = !palette.DarkMode;
-      this.UpdateTheme(this.getTheme());
+      console.log('SET PALETTE');
+      this.updateTheme(this.getTheme());
     }
 
     public get Palette() {
@@ -82,7 +84,8 @@ export class ThemeBuilderService {
     public set ThemeMode(val: boolean) {
 
       this.themeMode = val;
-      this.UpdateTheme(this.getTheme());
+      console.log('THEME MODE CHANGED');
+      this.updateTheme(this.getTheme());
     }
 
     public get ThemeMode() {
@@ -114,34 +117,23 @@ export class ThemeBuilderService {
     * our theme color changes
     */
    protected loadThemingScss(): Promise<void> {
-     
-    // return this.http.get('https://www.iot-ensemble.com/assets/theming/theming.scss', { responseType: 'text' })
+    console.log('LOAD THEMING SCSS');
     // return new Promise((res, rej) => {
      return this.http.get(this.MaterialTheme, { responseType: 'text' })
       .pipe(
         map((x: string) => {
+          console.log('PIPE MAP');
           return x
-            .replace(/\n/gm, '??')
-            .replace(/\$mat-([^:?]+)\s*:\s*\([? ]*50:[^()]*contrast\s*:\s*\([^)]+\)[ ?]*\);\s*?/g,
-              (all: string, name: string) => name === 'grey' ? all : '')
-            .replace(/\/\*.*?\*\//g, '')
-            .split(/[?][?]/g)
-            .map((l: string) => l
-              .replace(/^\s*(\/\/.*)?$/g, '')
-              .replace(/^\$mat-blue-gray\s*:\s*\$mat-blue-grey\s*;\s*/g, '')
-              .replace(/^\s*|\s*$/g, '')
-              .replace(/:\s\s+/g, ': ')
-            )
-            .filter((l: string) => !!l)
-            .join('\n');
         }),
         map(
-          (txt: string) =>
-          // writeFile allows this file to be accessed from styles.scss
-          Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
-           // console.log('Sass.writeFile', result);
-          }))
-      ).toPromise()
+          (txt: string) => {
+                // console.log('SASS.WRITEFILE');
+                // writeFile allows this file to be accessed from styles.scss
+                Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
+                })
+            }
+          )
+        ).toPromise();
     // })
    }
 
@@ -161,10 +153,14 @@ export class ThemeBuilderService {
    * @returns compiled CSS
    */
    public async CompileScssTheme(theme: string): Promise<string> {
+    console.log('COMPILE SCSS THEME');
+    // hold here until this.ThemeScss resolves, then run the next promise 
     await this.ThemeScss;
+    console.log('AWAIT HAS FINISHED');
     return new Promise<string>((res, rej) => {
       Sass.compile(theme.replace('@include angular-material-theme($altTheme);', ''), (v: any) => {
         if (v.status === 0) {
+          console.log('RETURN COMPILED STRING');
           res(v.text);
         } else {
           rej(v);
@@ -222,11 +218,11 @@ export class ThemeBuilderService {
     };
    }
 
-   public UpdateTheme(theme: ThemeModel): void {
+   protected updateTheme(theme: ThemeModel): void {
 
     // SASS stylesheet
     const source: string = this.GetTemplate(theme);
-
+    console.log('UPDATE THEME');
     // Running functions outside of Angular's zone and do work that
     // doesn't trigger Angular change-detection.
    this.zone.runOutsideAngular(() => {
@@ -236,7 +232,7 @@ export class ThemeBuilderService {
        console.log('SCSS IS COMPILED');
      })
      .then( (text: string) => {
-
+      console.log('PROMISE THEN HAPPENING');
         // SASS compiled to CSS
         const compiledDynamicCSS: string = text;
         const dynamicStyleSheet: HTMLElement = document.getElementById('theme-builder-stylesheet');
@@ -254,7 +250,7 @@ export class ThemeBuilderService {
         document.getElementsByTagName('body')[0].appendChild(style);
 
       }).catch((err: Error) => {
-        console.error(err);
+        console.error('Compile Scss Error', err);
       });
    });
   }

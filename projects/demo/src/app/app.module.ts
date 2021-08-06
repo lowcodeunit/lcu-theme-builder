@@ -26,6 +26,6 @@ import { BuilderComponent } from './controls/builder/builder.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [ThemeBuilderModule]
+  exports: []
 })
 export class AppModule { }
