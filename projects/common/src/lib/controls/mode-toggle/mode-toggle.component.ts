@@ -14,7 +14,6 @@ type ModeType = 'dark' | 'light';
 })
 export class ModeToggleComponent implements OnInit {
 
-  
   private _darkMode: boolean;
   @Input('dark-mode')
   public set DarkMode(val: boolean) {

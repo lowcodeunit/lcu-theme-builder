@@ -38,8 +38,7 @@ import { PalettePickerService } from './services/palette-picker.service';
   exports: [
     ThemeBuilderComponent,
     ThemeBuilderDirective,
-    ThemePickerComponent,
-    ModeToggleComponent
+    ThemePickerComponent
   ],
   entryComponents: [
     ThemePickerComponent
