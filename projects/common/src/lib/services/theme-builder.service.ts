@@ -130,7 +130,7 @@ export class ThemeBuilderService {
                 // console.log('SASS.WRITEFILE');
                 // writeFile allows this file to be accessed from styles.scss
                 Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
-                })
+              })
             }
           )
         ).toPromise();
