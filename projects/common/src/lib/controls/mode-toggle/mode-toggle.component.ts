@@ -21,6 +21,9 @@ export class ModeToggleComponent implements OnInit {
     if (!val ) { return; }
 
     this._darkMode = val;
+
+    if (!this.ToggleForm) { return ;}
+
     this.Toggle.setValue(val);
     // this.setThemeMode(val);
   }
@@ -33,8 +36,6 @@ export class ModeToggleComponent implements OnInit {
    * Access Toggle field within the form group
    */
    public get Toggle(): AbstractControl {
-
-    if (!this.ToggleForm) { return null ;}
 
     return this.ToggleForm.get('toggle');
   }
