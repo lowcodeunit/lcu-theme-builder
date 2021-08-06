@@ -140,8 +140,9 @@ export class ThemeBuilderService {
         }),
         map(
           (txt: string) => {
-                // console.log('SASS.WRITEFILE');
-                // writeFile allows this file to be accessed from styles.scss
+                /**
+                 * writeFile allows this file to be accessed from styles.scss
+                 */
                 Sass.writeFile('~@angular/material/theming', txt, (result: boolean) => {
                 })
             }
