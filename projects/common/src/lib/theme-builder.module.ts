@@ -38,7 +38,8 @@ import { PalettePickerService } from './services/palette-picker.service';
   exports: [
     ThemeBuilderComponent,
     ThemeBuilderDirective,
-    ThemePickerComponent
+    ThemePickerComponent,
+    LightnessPickerComponent
   ],
   entryComponents: [
     ThemePickerComponent
