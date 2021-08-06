@@ -12,7 +12,7 @@ type ModeType = 'dark' | 'light';
   templateUrl: './mode-toggle.component.html',
   styleUrls: ['./mode-toggle.component.scss']
 })
-export class LightnessPickerComponent implements OnInit {
+export class ModeToggleComponent implements OnInit {
 
   private _darkMode: boolean;
   @Input('dark-mode')
@@ -33,7 +33,9 @@ export class LightnessPickerComponent implements OnInit {
    * Access Toggle field within the form group
    */
    public get Toggle(): AbstractControl {
-  
+
+    if (!this.ToggleForm) { return null ;}
+
     return this.ToggleForm.get('toggle');
   }
 

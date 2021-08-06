@@ -1,35 +1,86 @@
 import * as i0 from '@angular/core';
-import { Injectable, Component, Input, NgZone, Directive, ElementRef, Renderer2, HostListener, NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { Injectable, NgZone, Component, Directive, ElementRef, Renderer2, HostListener, Input, NgModule } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ThemeColorPickerService, FathymSharedModule, MaterialModule } from '@lcu/common';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { __awaiter } from 'tslib';
 import * as tinycolor from 'tinycolor2';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { __awaiter } from 'tslib';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 import * as i1 from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 
 import * as ɵngcc0 from '@angular/core';
-import * as ɵngcc1 from '@angular/common';
-import * as ɵngcc2 from 'ngx-color-picker';
-import * as ɵngcc3 from '@angular/common/http';
-import * as ɵngcc4 from '@angular/forms';
-import * as ɵngcc5 from '@angular/flex-layout/flex';
-import * as ɵngcc6 from '@angular/material/slide-toggle';
-import * as ɵngcc7 from '@angular/material/toolbar';
-import * as ɵngcc8 from '@angular/material/button';
-import * as ɵngcc9 from '@angular/material/menu';
-import * as ɵngcc10 from '@angular/material/icon';
-import * as ɵngcc11 from '@angular/flex-layout/extended';
-import * as ɵngcc12 from '@angular/material/card';
-import * as ɵngcc13 from '@angular/material/form-field';
-import * as ɵngcc14 from '@angular/material/input';
-import * as ɵngcc15 from '@lcu/common';
+import * as ɵngcc1 from '@angular/common/http';
+import * as ɵngcc2 from '@angular/flex-layout/flex';
+import * as ɵngcc3 from '@angular/material/toolbar';
+import * as ɵngcc4 from '@lcu/common';
+import * as ɵngcc5 from '@angular/common';
+import * as ɵngcc6 from 'ngx-color-picker';
+import * as ɵngcc7 from '@angular/forms';
+import * as ɵngcc8 from '@angular/material/slide-toggle';
+import * as ɵngcc9 from '@angular/material/button';
+import * as ɵngcc10 from '@angular/material/menu';
+import * as ɵngcc11 from '@angular/material/icon';
+import * as ɵngcc12 from '@angular/flex-layout/extended';
+import * as ɵngcc13 from '@angular/material/card';
+import * as ɵngcc14 from '@angular/material/form-field';
+import * as ɵngcc15 from '@angular/material/input';
 
 function ColorPickerComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "div", 2);
+} }
+function VariantColorsComponent_div_3_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 4);
+    ɵngcc0.ɵɵelementStart(1, "div");
+    ɵngcc0.ɵɵtext(2);
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(3, "div");
+    ɵngcc0.ɵɵtext(4);
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const color_r3 = ctx.$implicit;
+    ɵngcc0.ɵɵstyleProp("background-color", color_r3.hex)("color", color_r3.darkContrast ? "black" : "white");
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate1(" ", color_r3.name, " ");
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate1(" ", color_r3.hex, " ");
+} }
+function VariantColorsComponent_div_5_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 4);
+    ɵngcc0.ɵɵelementStart(1, "div");
+    ɵngcc0.ɵɵtext(2);
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(3, "div");
+    ɵngcc0.ɵɵtext(4);
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const color_r4 = ctx.$implicit;
+    ɵngcc0.ɵɵstyleProp("background-color", color_r4.hex)("color", color_r4.darkContrast ? "black" : "white");
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate1(" ", color_r4.name, " ");
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate1(" ", color_r4.hex, " ");
+} }
+function VariantColorsComponent_div_7_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 4);
+    ɵngcc0.ɵɵelementStart(1, "div");
+    ɵngcc0.ɵɵtext(2);
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(3, "div");
+    ɵngcc0.ɵɵtext(4);
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const color_r5 = ctx.$implicit;
+    ɵngcc0.ɵɵstyleProp("background-color", color_r5.hex)("color", color_r5.darkContrast ? "black" : "white");
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate1(" ", color_r5.name, " ");
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate1(" ", color_r5.hex, " ");
 } }
 const _c0 = function (a0) { return { "background-color": a0 }; };
 const _c1 = function (a0, a1) { return { "dark-mode": a0, "light-mode": a1 }; };
@@ -121,57 +172,24 @@ function ThemePickerComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(18);
     ɵngcc0.ɵɵproperty("disabled", !ctx_r2.ManualForm.valid);
 } }
-function VariantColorsComponent_div_3_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 4);
-    ɵngcc0.ɵɵelementStart(1, "div");
-    ɵngcc0.ɵɵtext(2);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(3, "div");
-    ɵngcc0.ɵɵtext(4);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const color_r3 = ctx.$implicit;
-    ɵngcc0.ɵɵstyleProp("background-color", color_r3.hex)("color", color_r3.darkContrast ? "black" : "white");
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", color_r3.name, " ");
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", color_r3.hex, " ");
-} }
-function VariantColorsComponent_div_5_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 4);
-    ɵngcc0.ɵɵelementStart(1, "div");
-    ɵngcc0.ɵɵtext(2);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(3, "div");
-    ɵngcc0.ɵɵtext(4);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const color_r4 = ctx.$implicit;
-    ɵngcc0.ɵɵstyleProp("background-color", color_r4.hex)("color", color_r4.darkContrast ? "black" : "white");
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", color_r4.name, " ");
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", color_r4.hex, " ");
-} }
-function VariantColorsComponent_div_7_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 4);
-    ɵngcc0.ɵɵelementStart(1, "div");
-    ɵngcc0.ɵɵtext(2);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(3, "div");
-    ɵngcc0.ɵɵtext(4);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const color_r5 = ctx.$implicit;
-    ɵngcc0.ɵɵstyleProp("background-color", color_r5.hex)("color", color_r5.darkContrast ? "black" : "white");
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", color_r5.name, " ");
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", color_r5.hex, " ");
-} }
+const tinyColor$5 = tinycolor;
+class UtilsService {
+    Multiply(rgb1, rgb2) {
+        rgb1.b = Math.floor(rgb1.b * rgb2.b / 255);
+        rgb1.g = Math.floor(rgb1.g * rgb2.g / 255);
+        rgb1.r = Math.floor(rgb1.r * rgb2.r / 255);
+        return tinyColor$5('rgb ' + rgb1.r + ' ' + rgb1.g + ' ' + rgb1.b);
+    }
+}
+UtilsService.ɵfac = function UtilsService_Factory(t) { return new (t || UtilsService)(); };
+UtilsService.ɵprov = i0.ɵɵdefineInjectable({ factory: function UtilsService_Factory() { return new UtilsService(); }, token: UtilsService, providedIn: "root" });
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(UtilsService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], null, null); })();
+
 class PaletteModel {
 }
 
@@ -206,112 +224,7 @@ PalettePickerService.ctorParameters = () => [];
             }]
     }], function () { return []; }, null); })();
 
-// import * as EventEmitter from 'events';
-const tinyColor$5 = tinycolor;
-class ColorPickerComponent {
-    constructor(palettePickerService) {
-        this.palettePickerService = palettePickerService;
-        this.ShowBackdrop = false;
-    }
-    /**
-     * Set the selected color
-     */
-    set Color(col) {
-        this.Control.setValue(col);
-    }
-    /**
-     * Get the selected color
-     *
-     */
-    get Color() {
-        return this.Control.value;
-    }
-    ngOnInit() {
-    }
-    /**
-     * Turn backdrop on
-     *
-     * @param on toggle
-     */
-    SetBackdrop(on) {
-        this.ShowBackdrop = on;
-    }
-    /**
-     * Set font color to contrast background color of display
-     *
-     * @param col color
-     */
-    GetTextColor(col) {
-        return tinyColor$5(col).isLight() ? '#000' : '#fff';
-    }
-    ColorPickerClosed(evt) {
-        this.palettePickerService.CloseColorPicker(evt);
-    }
-    ColorPickerChange(evt) {
-        this.Color = evt;
-    }
-}
-ColorPickerComponent.ɵfac = function ColorPickerComponent_Factory(t) { return new (t || ColorPickerComponent)(ɵngcc0.ɵɵdirectiveInject(PalettePickerService)); };
-ColorPickerComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: ColorPickerComponent, selectors: [["lcu-color-picker"]], inputs: { Color: ["color", "Color"], Control: ["control", "Control"], Disabled: ["disabled", "Disabled"], Variants: ["variants", "Variants"] }, decls: 2, vars: 12, consts: [["class", "backdrop", 4, "ngIf"], ["type", "text", 3, "disabled", "colorPicker", "cpPresetColors", "cpPosition", "cpOutputFormat", "cpAlphaChannel", "value", "colorPickerOpen", "colorPickerClose", "colorPickerChange"], [1, "backdrop"]], template: function ColorPickerComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, ColorPickerComponent_div_0_Template, 1, 0, "div", 0);
-        ɵngcc0.ɵɵelementStart(1, "input", 1);
-        ɵngcc0.ɵɵlistener("colorPickerOpen", function ColorPickerComponent_Template_input_colorPickerOpen_1_listener() { return ctx.SetBackdrop(true); })("colorPickerClose", function ColorPickerComponent_Template_input_colorPickerClose_1_listener($event) { ctx.SetBackdrop(false); return ctx.ColorPickerClosed($event); })("colorPickerChange", function ColorPickerComponent_Template_input_colorPickerChange_1_listener($event) { return ctx.ColorPickerChange($event); });
-        ɵngcc0.ɵɵelementEnd();
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("ngIf", ctx.ShowBackdrop);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵstyleProp("background", ctx.Color)("color", ctx.GetTextColor(ctx.Color));
-        ɵngcc0.ɵɵproperty("disabled", ctx.Disabled)("colorPicker", ctx.Color)("cpPresetColors", ctx.Variants)("cpPosition", "bottom-left")("cpOutputFormat", "hex")("cpAlphaChannel", "disabled")("value", ctx.Color);
-    } }, directives: [ɵngcc1.NgIf, ɵngcc2.ColorPickerDirective], styles: [".backdrop[_ngcontent-%COMP%]{position:absolute;width:100vw;height:100vh;top:0;left:0;background:rgba(0,0,0,.5)}[_nghost-%COMP%], input[_ngcontent-%COMP%]{display:block;width:100%;box-sizing:border-box;height:100%;border:0}input[_ngcontent-%COMP%]{text-align:center;cursor:pointer}[_nghost-%COMP%]{display:block}"] });
-ColorPickerComponent.ctorParameters = () => [
-    { type: PalettePickerService }
-];
-ColorPickerComponent.propDecorators = {
-    Control: [{ type: Input, args: ['control',] }],
-    Disabled: [{ type: Input, args: ['disabled',] }],
-    Variants: [{ type: Input, args: ['variants',] }],
-    Color: [{ type: Input, args: ['color',] }]
-};
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(ColorPickerComponent, [{
-        type: Component,
-        args: [{
-                selector: 'lcu-color-picker',
-                template: "<div class=\"backdrop\" *ngIf=\"ShowBackdrop\"></div>\r\n\r\n<input \r\n  type=\"text\" \r\n  [disabled]=\"Disabled\" \r\n  [colorPicker]=\"Color\" \r\n  (colorPickerOpen)=\"SetBackdrop(true)\"\r\n  [cpPresetColors]=\"Variants\" \r\n  [cpPosition]=\"'bottom-left'\"\r\n  (colorPickerClose)=\"SetBackdrop(false); ColorPickerClosed($event)\" \r\n  [cpOutputFormat]=\"'hex'\"\r\n  [cpAlphaChannel]=\"'disabled'\" \r\n  (colorPickerChange)=\"ColorPickerChange($event)\" \r\n  [value]=\"Color\"\r\n  [style.background]=\"Color\" \r\n  [style.color]=\"GetTextColor(Color)\"\r\n>\r\n",
-                styles: [".backdrop{position:absolute;width:100vw;height:100vh;top:0;left:0;background:rgba(0,0,0,.5)}:host,input{display:block;width:100%;box-sizing:border-box;height:100%;border:0}input{text-align:center;cursor:pointer}:host{display:block}"]
-            }]
-    }], function () { return [{ type: PalettePickerService }]; }, { Color: [{
-            type: Input,
-            args: ['color']
-        }], Control: [{
-            type: Input,
-            args: ['control']
-        }], Disabled: [{
-            type: Input,
-            args: ['disabled']
-        }], Variants: [{
-            type: Input,
-            args: ['variants']
-        }] }); })();
-
 const tinyColor$4 = tinycolor;
-class UtilsService {
-    Multiply(rgb1, rgb2) {
-        rgb1.b = Math.floor(rgb1.b * rgb2.b / 255);
-        rgb1.g = Math.floor(rgb1.g * rgb2.g / 255);
-        rgb1.r = Math.floor(rgb1.r * rgb2.r / 255);
-        return tinyColor$4('rgb ' + rgb1.r + ' ' + rgb1.g + ' ' + rgb1.b);
-    }
-}
-UtilsService.ɵfac = function UtilsService_Factory(t) { return new (t || UtilsService)(); };
-UtilsService.ɵprov = i0.ɵɵdefineInjectable({ factory: function UtilsService_Factory() { return new UtilsService(); }, token: UtilsService, providedIn: "root" });
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(UtilsService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], null, null); })();
-
-const tinyColor$3 = tinycolor;
 class VariantColorService {
     constructor(palettePickerService, utilsService) {
         this.palettePickerService = palettePickerService;
@@ -352,32 +265,32 @@ class VariantColorService {
         }
     }
     computeColors(color) {
-        const baseLightColor = tinyColor$3('#f9f9f9');
-        let baseDarkColor = tinyColor$3('#222222');
+        const baseLightColor = tinyColor$4('#f9f9f9');
+        let baseDarkColor = tinyColor$4('#222222');
         if (this.utilsService.Multiply) {
-            baseDarkColor = this.utilsService.Multiply(tinyColor$3(color).toRgb(), tinyColor$3(color).toRgb());
+            baseDarkColor = this.utilsService.Multiply(tinyColor$4(color).toRgb(), tinyColor$4(color).toRgb());
         }
-        const [, , , baseTetrad] = tinyColor$3(color).tetrad();
+        const [, , , baseTetrad] = tinyColor$4(color).tetrad();
         return [
-            this.getColorObject(tinyColor$3.mix(baseLightColor, tinyColor$3(color), 12), '50'),
-            this.getColorObject(tinyColor$3.mix(baseLightColor, tinyColor$3(color), 30), '100'),
-            this.getColorObject(tinyColor$3.mix(baseLightColor, tinyColor$3(color), 50), '200'),
-            this.getColorObject(tinyColor$3.mix(baseLightColor, tinyColor$3(color), 70), '300'),
-            this.getColorObject(tinyColor$3.mix(baseLightColor, tinyColor$3(color), 85), '400'),
-            this.getColorObject(tinyColor$3(color), '500'),
-            this.getColorObject(tinyColor$3.mix(baseDarkColor, tinyColor$3(color), 87), '600'),
-            this.getColorObject(tinyColor$3.mix(baseDarkColor, tinyColor$3(color), 70), '700'),
-            this.getColorObject(tinyColor$3.mix(baseDarkColor, tinyColor$3(color), 54), '800'),
-            this.getColorObject(tinyColor$3.mix(baseDarkColor, tinyColor$3(color), 25), '900'),
-            this.getColorObject(tinyColor$3.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(65), 'A100'),
-            this.getColorObject(tinyColor$3.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(55), 'A200'),
-            this.getColorObject(tinyColor$3.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(45), 'A400'),
-            this.getColorObject(tinyColor$3.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(40), 'A700')
+            this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 12), '50'),
+            this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 30), '100'),
+            this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 50), '200'),
+            this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 70), '300'),
+            this.getColorObject(tinyColor$4.mix(baseLightColor, tinyColor$4(color), 85), '400'),
+            this.getColorObject(tinyColor$4(color), '500'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, tinyColor$4(color), 87), '600'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, tinyColor$4(color), 70), '700'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, tinyColor$4(color), 54), '800'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, tinyColor$4(color), 25), '900'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(65), 'A100'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, baseTetrad, 15).saturate(80).lighten(55), 'A200'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(45), 'A400'),
+            this.getColorObject(tinyColor$4.mix(baseDarkColor, baseTetrad, 15).saturate(100).lighten(40), 'A700')
         ];
     }
     // force change
     getColorObject(value, name) {
-        const c = tinyColor$3(value);
+        const c = tinyColor$4(value);
         return {
             name,
             hex: c.toHexString(),
@@ -471,7 +384,7 @@ ThemeBuilderConstants.InitialValues = {
     DarkBackground: ThemeBuilderConstants.document.getPropertyValue('--initial-dark-background')
 };
 
-const tinyColor$2 = tinycolor;
+const tinyColor$3 = tinycolor;
 class PaletteTemplateService {
     /**
      * Return template for scss
@@ -661,7 +574,7 @@ class PaletteTemplateService {
      * @param col color
      */
     getTextColor(col) {
-        return `$${tinyColor$2(col).isLight() ? 'dark' : 'light'}-primary-text`;
+        return `$${tinyColor$3(col).isLight() ? 'dark' : 'light'}-primary-text`;
     }
 }
 PaletteTemplateService.ɵfac = function PaletteTemplateService_Factory(t) { return new (t || PaletteTemplateService)(); };
@@ -673,7 +586,7 @@ PaletteTemplateService.ɵprov = i0.ɵɵdefineInjectable({ factory: function Pale
             }]
     }], null, null); })();
 
-const tinyColor$1 = tinycolor;
+const tinyColor$2 = tinycolor;
 const fallbackURL = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
 class ThemeBuilderService {
     constructor(http, paletteTemplateService, localStorageService, palettePickerService, zone, utilsService, variantColorService) {
@@ -778,18 +691,18 @@ class ThemeBuilderService {
      * @param color color
      */
     GetPalette(color) {
-        const baseLight = tinyColor$1('#ffffff');
-        const baseDark = this.utilsService.Multiply(tinyColor$1(color).toRgb(), tinyColor$1(color).toRgb());
-        const [, , , baseTriad] = tinyColor$1(color).tetrad();
+        const baseLight = tinyColor$2('#ffffff');
+        const baseDark = this.utilsService.Multiply(tinyColor$2(color).toRgb(), tinyColor$2(color).toRgb());
+        const [, , , baseTriad] = tinyColor$2(color).tetrad();
         const primary = Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY)
             .map(k => {
             const [light, amount] = ThemeBuilderConstants.MIX_AMOUNTS_PRIMARY[k];
-            return [k, tinyColor$1.mix(light ? baseLight : baseDark, tinyColor$1(color), amount)];
+            return [k, tinyColor$2.mix(light ? baseLight : baseDark, tinyColor$2(color), amount)];
         });
         const accent = Object.keys(ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY)
             .map(k => {
             const [amount, sat, light] = ThemeBuilderConstants.MIX_AMOUNTS_SECONDARY[k];
-            return [k, tinyColor$1.mix(baseDark, baseTriad, amount)
+            return [k, tinyColor$2.mix(baseDark, baseTriad, amount)
                     .saturate(sat).lighten(light)];
         });
         return [...primary, ...accent].reduce((acc, [k, c]) => {
@@ -860,7 +773,7 @@ class ThemeBuilderService {
         this.variantColorService.UpdateWarnVariants(this.Themes[0].Warn);
     }
 }
-ThemeBuilderService.ɵfac = function ThemeBuilderService_Factory(t) { return new (t || ThemeBuilderService)(ɵngcc0.ɵɵinject(ɵngcc3.HttpClient), ɵngcc0.ɵɵinject(PaletteTemplateService), ɵngcc0.ɵɵinject(LocalStorageService), ɵngcc0.ɵɵinject(PalettePickerService), ɵngcc0.ɵɵinject(ɵngcc0.NgZone), ɵngcc0.ɵɵinject(UtilsService), ɵngcc0.ɵɵinject(VariantColorService)); };
+ThemeBuilderService.ɵfac = function ThemeBuilderService_Factory(t) { return new (t || ThemeBuilderService)(ɵngcc0.ɵɵinject(ɵngcc1.HttpClient), ɵngcc0.ɵɵinject(PaletteTemplateService), ɵngcc0.ɵɵinject(LocalStorageService), ɵngcc0.ɵɵinject(PalettePickerService), ɵngcc0.ɵɵinject(ɵngcc0.NgZone), ɵngcc0.ɵɵinject(UtilsService), ɵngcc0.ɵɵinject(VariantColorService)); };
 ThemeBuilderService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ThemeBuilderService_Factory() { return new ThemeBuilderService(i0.ɵɵinject(i1.HttpClient), i0.ɵɵinject(PaletteTemplateService), i0.ɵɵinject(LocalStorageService), i0.ɵɵinject(PalettePickerService), i0.ɵɵinject(i0.NgZone), i0.ɵɵinject(UtilsService), i0.ɵɵinject(VariantColorService)); }, token: ThemeBuilderService, providedIn: "root" });
 ThemeBuilderService.ctorParameters = () => [
     { type: HttpClient },
@@ -876,84 +789,191 @@ ThemeBuilderService.ctorParameters = () => [
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc3.HttpClient }, { type: PaletteTemplateService }, { type: LocalStorageService }, { type: PalettePickerService }, { type: ɵngcc0.NgZone }, { type: UtilsService }, { type: VariantColorService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.HttpClient }, { type: PaletteTemplateService }, { type: LocalStorageService }, { type: PalettePickerService }, { type: ɵngcc0.NgZone }, { type: UtilsService }, { type: VariantColorService }]; }, null); })();
 
-class LightnessPickerComponent {
-    constructor(themeBuilderService) {
-        this.themeBuilderService = themeBuilderService;
-        this.ToggleMode = 'Dark Mode';
-    }
-    set DarkMode(val) {
-        if (!val) {
-            return;
-        }
-        this._darkMode = val;
-        this.Toggle.setValue(val);
-        // this.setThemeMode(val);
-    }
-    get DarkMode() {
-        return this._darkMode;
-    }
-    /**
-     * Access Toggle field within the form group
-     */
-    get Toggle() {
-        return this.ToggleForm.get('toggle');
+class ThemeBuilderComponent {
+    constructor() {
     }
     ngOnInit() {
-        this.formSetup();
-    }
-    formSetup() {
-        this.ToggleForm = new FormGroup({
-            toggle: new FormControl(this.DarkMode)
-        });
-        this.onChanges();
-    }
-    onChanges() {
-        this.Toggle.valueChanges
-            .subscribe((val) => {
-            this.setThemeMode(val);
-        });
-    }
-    toggleMode(val) {
-        return val ? 'Dark Mode' : 'Light Mode';
-    }
-    setThemeMode(val) {
-        this.ToggleMode = this.toggleMode(val);
-        this.themeBuilderService.ThemeMode = val;
     }
 }
-LightnessPickerComponent.ɵfac = function LightnessPickerComponent_Factory(t) { return new (t || LightnessPickerComponent)(ɵngcc0.ɵɵdirectiveInject(ThemeBuilderService)); };
-LightnessPickerComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: LightnessPickerComponent, selectors: [["lcu-mode-toggle"]], inputs: { DarkMode: ["dark-mode", "DarkMode"] }, decls: 4, vars: 2, consts: [["fxLayout", "row", "fxLayoutAlign", "start center", 3, "formGroup"], ["formControlName", "toggle", "labelPosition", "before", "color", "primary", 3, "click"], [1, "margin-left-1", "mat-card-subtitle"]], template: function LightnessPickerComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵelementStart(1, "mat-slide-toggle", 1);
-        ɵngcc0.ɵɵlistener("click", function LightnessPickerComponent_Template_mat_slide_toggle_click_1_listener($event) { return $event.stopPropagation(); });
+ThemeBuilderComponent.ɵfac = function ThemeBuilderComponent_Factory(t) { return new (t || ThemeBuilderComponent)(); };
+ThemeBuilderComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: ThemeBuilderComponent, selectors: [["lcu-theme-builder"]], decls: 11, vars: 0, consts: [["fxLayout", "column", "fxLayoutGap", "10px"], ["fxLayout", "row", "fxLayoutGap", "10px"], ["color", "primary"], [1, "primary-color"], ["color", "accent"], [1, "accent-color"], ["color", "warn"], [1, "warn-color"]], template: function ThemeBuilderComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵelementStart(0, "div", 0);
+        ɵngcc0.ɵɵelementStart(1, "div", 1);
+        ɵngcc0.ɵɵelementStart(2, "mat-toolbar", 2);
+        ɵngcc0.ɵɵelementStart(3, "span", 3);
+        ɵngcc0.ɵɵtext(4, "Primary Colors");
         ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(2, "span", 2);
-        ɵngcc0.ɵɵtext(3);
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementStart(5, "mat-toolbar", 4);
+        ɵngcc0.ɵɵelementStart(6, "span", 5);
+        ɵngcc0.ɵɵtext(7, "Accent Colors");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("formGroup", ctx.ToggleForm);
-        ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ctx.ToggleMode, " ");
-    } }, directives: [ɵngcc4.ɵNgNoValidate, ɵngcc4.NgControlStatusGroup, ɵngcc5.DefaultLayoutDirective, ɵngcc5.DefaultLayoutAlignDirective, ɵngcc4.FormGroupDirective, ɵngcc6.MatSlideToggle, ɵngcc4.NgControlStatus, ɵngcc4.FormControlName], styles: [""] });
-LightnessPickerComponent.ctorParameters = () => [
-    { type: ThemeBuilderService }
-];
-LightnessPickerComponent.propDecorators = {
-    DarkMode: [{ type: Input, args: ['dark-mode',] }]
-};
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(LightnessPickerComponent, [{
+        ɵngcc0.ɵɵelementStart(8, "mat-toolbar", 6);
+        ɵngcc0.ɵɵelementStart(9, "span", 7);
+        ɵngcc0.ɵɵtext(10, "Warn Colors");
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementEnd();
+    } }, directives: [ɵngcc2.DefaultLayoutDirective, ɵngcc2.DefaultLayoutGapDirective, ɵngcc3.MatToolbar], styles: [".primary-color[_ngcontent-%COMP%]{color:var(--theme-primary-A700)}.accent-color[_ngcontent-%COMP%]{color:var(--theme-accent-A700)}.warn-color[_ngcontent-%COMP%]{color:var(--theme-warn-A700)}"] });
+ThemeBuilderComponent.ctorParameters = () => [];
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(ThemeBuilderComponent, [{
         type: Component,
         args: [{
-                selector: 'lcu-mode-toggle',
-                template: "<form \r\n    [formGroup]=\"ToggleForm\" \r\n    fxLayout=\"row\" \r\n    fxLayoutAlign=\"start center\">\r\n    <mat-slide-toggle\r\n        (click)=\"$event.stopPropagation()\" \r\n        formControlName=\"toggle\"\r\n        labelPosition=\"before\" \r\n        color=\"primary\">\r\n    </mat-slide-toggle>\r\n    <span \r\n        class=\"margin-left-1 mat-card-subtitle\">\r\n        {{ ToggleMode }}\r\n    </span>\r\n</form>\r\n\r\n\r\n",
-                styles: [""]
+                selector: 'lcu-theme-builder',
+                template: "\r\n<div fxLayout=\"column\" fxLayoutGap=\"10px\">\r\n  <!-- <lcu-mode-toggle></lcu-mode-toggle> -->\r\n  <div fxLayout=\"row\" fxLayoutGap=\"10px\">\r\n      <mat-toolbar color=\"primary\">\r\n        <span class=\"primary-color\">Primary Colors</span>\r\n      </mat-toolbar>\r\n      <mat-toolbar color=\"accent\">\r\n        <span class=\"accent-color\">Accent Colors</span>\r\n      </mat-toolbar>\r\n      <mat-toolbar color=\"warn\">\r\n        <span class=\"warn-color\">Warn Colors</span>\r\n      </mat-toolbar>\r\n  </div>\r\n  <!-- <lcu-palette-picker></lcu-palette-picker> -->\r\n</div>\r\n",
+                styles: [".primary-color{color:var(--theme-primary-A700)}.accent-color{color:var(--theme-accent-A700)}.warn-color{color:var(--theme-warn-A700)}"]
             }]
-    }], function () { return [{ type: ThemeBuilderService }]; }, { DarkMode: [{
+    }], function () { return []; }, null); })();
+
+class ThemeBuilderDirective {
+    constructor(elRef, renderer, themeService) {
+        this.elRef = elRef;
+        this.renderer = renderer;
+        this.themeService = themeService;
+    }
+    onMouseEnter() {
+        this.hoverEffect(this.getThemeColor(), 'underline');
+    }
+    onMouseLeave() {
+        this.hoverEffect('', 'initial');
+    }
+    ngOnInit() {
+        this.currentColor = this.getThemeColor();
+    }
+    getThemeColor() {
+        const theme = this.themeService.GetColorClass().value;
+        return 'color-swatch-' + theme.substring(theme.indexOf('-') + 1, theme.lastIndexOf('-'));
+    }
+    hoverEffect(color, decoration) {
+        const title = this.elRef.nativeElement.querySelector('.mat-card-title');
+        this.renderer.setStyle(title, 'text-decoration', decoration);
+        if (!color && this.currentColor) {
+            this.renderer.removeClass(title, this.currentColor);
+        }
+        else if (color !== this.currentColor) {
+            this.renderer.removeClass(title, this.currentColor);
+        }
+        if (color) {
+            this.renderer.addClass(title, color);
+            this.currentColor = color;
+        }
+    }
+}
+ThemeBuilderDirective.ɵfac = function ThemeBuilderDirective_Factory(t) { return new (t || ThemeBuilderDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc4.ThemeColorPickerService)); };
+ThemeBuilderDirective.ɵdir = /*@__PURE__*/ ɵngcc0.ɵɵdefineDirective({ type: ThemeBuilderDirective, selectors: [["", "theme-builder", ""]], hostBindings: function ThemeBuilderDirective_HostBindings(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵlistener("mouseenter", function ThemeBuilderDirective_mouseenter_HostBindingHandler() { return ctx.onMouseEnter(); })("mouseleave", function ThemeBuilderDirective_mouseleave_HostBindingHandler() { return ctx.onMouseLeave(); });
+    } } });
+ThemeBuilderDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: ThemeColorPickerService }
+];
+ThemeBuilderDirective.propDecorators = {
+    onMouseEnter: [{ type: HostListener, args: ['mouseenter',] }],
+    onMouseLeave: [{ type: HostListener, args: ['mouseleave',] }]
+};
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(ThemeBuilderDirective, [{
+        type: Directive,
+        args: [{
+                selector: '[theme-builder]'
+            }]
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc4.ThemeColorPickerService }]; }, { onMouseEnter: [{
+            type: HostListener,
+            args: ['mouseenter']
+        }], onMouseLeave: [{
+            type: HostListener,
+            args: ['mouseleave']
+        }] }); })();
+
+// import * as EventEmitter from 'events';
+const tinyColor$1 = tinycolor;
+class ColorPickerComponent {
+    constructor(palettePickerService) {
+        this.palettePickerService = palettePickerService;
+        this.ShowBackdrop = false;
+    }
+    /**
+     * Set the selected color
+     */
+    set Color(col) {
+        this.Control.setValue(col);
+    }
+    /**
+     * Get the selected color
+     *
+     */
+    get Color() {
+        return this.Control.value;
+    }
+    ngOnInit() {
+    }
+    /**
+     * Turn backdrop on
+     *
+     * @param on toggle
+     */
+    SetBackdrop(on) {
+        this.ShowBackdrop = on;
+    }
+    /**
+     * Set font color to contrast background color of display
+     *
+     * @param col color
+     */
+    GetTextColor(col) {
+        return tinyColor$1(col).isLight() ? '#000' : '#fff';
+    }
+    ColorPickerClosed(evt) {
+        this.palettePickerService.CloseColorPicker(evt);
+    }
+    ColorPickerChange(evt) {
+        this.Color = evt;
+    }
+}
+ColorPickerComponent.ɵfac = function ColorPickerComponent_Factory(t) { return new (t || ColorPickerComponent)(ɵngcc0.ɵɵdirectiveInject(PalettePickerService)); };
+ColorPickerComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: ColorPickerComponent, selectors: [["lcu-color-picker"]], inputs: { Color: ["color", "Color"], Control: ["control", "Control"], Disabled: ["disabled", "Disabled"], Variants: ["variants", "Variants"] }, decls: 2, vars: 12, consts: [["class", "backdrop", 4, "ngIf"], ["type", "text", 3, "disabled", "colorPicker", "cpPresetColors", "cpPosition", "cpOutputFormat", "cpAlphaChannel", "value", "colorPickerOpen", "colorPickerClose", "colorPickerChange"], [1, "backdrop"]], template: function ColorPickerComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, ColorPickerComponent_div_0_Template, 1, 0, "div", 0);
+        ɵngcc0.ɵɵelementStart(1, "input", 1);
+        ɵngcc0.ɵɵlistener("colorPickerOpen", function ColorPickerComponent_Template_input_colorPickerOpen_1_listener() { return ctx.SetBackdrop(true); })("colorPickerClose", function ColorPickerComponent_Template_input_colorPickerClose_1_listener($event) { ctx.SetBackdrop(false); return ctx.ColorPickerClosed($event); })("colorPickerChange", function ColorPickerComponent_Template_input_colorPickerChange_1_listener($event) { return ctx.ColorPickerChange($event); });
+        ɵngcc0.ɵɵelementEnd();
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("ngIf", ctx.ShowBackdrop);
+        ɵngcc0.ɵɵadvance(1);
+        ɵngcc0.ɵɵstyleProp("background", ctx.Color)("color", ctx.GetTextColor(ctx.Color));
+        ɵngcc0.ɵɵproperty("disabled", ctx.Disabled)("colorPicker", ctx.Color)("cpPresetColors", ctx.Variants)("cpPosition", "bottom-left")("cpOutputFormat", "hex")("cpAlphaChannel", "disabled")("value", ctx.Color);
+    } }, directives: [ɵngcc5.NgIf, ɵngcc6.ColorPickerDirective], styles: [".backdrop[_ngcontent-%COMP%]{position:absolute;width:100vw;height:100vh;top:0;left:0;background:rgba(0,0,0,.5)}[_nghost-%COMP%], input[_ngcontent-%COMP%]{display:block;width:100%;box-sizing:border-box;height:100%;border:0}input[_ngcontent-%COMP%]{text-align:center;cursor:pointer}[_nghost-%COMP%]{display:block}"] });
+ColorPickerComponent.ctorParameters = () => [
+    { type: PalettePickerService }
+];
+ColorPickerComponent.propDecorators = {
+    Control: [{ type: Input, args: ['control',] }],
+    Disabled: [{ type: Input, args: ['disabled',] }],
+    Variants: [{ type: Input, args: ['variants',] }],
+    Color: [{ type: Input, args: ['color',] }]
+};
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(ColorPickerComponent, [{
+        type: Component,
+        args: [{
+                selector: 'lcu-color-picker',
+                template: "<div class=\"backdrop\" *ngIf=\"ShowBackdrop\"></div>\r\n\r\n<input \r\n  type=\"text\" \r\n  [disabled]=\"Disabled\" \r\n  [colorPicker]=\"Color\" \r\n  (colorPickerOpen)=\"SetBackdrop(true)\"\r\n  [cpPresetColors]=\"Variants\" \r\n  [cpPosition]=\"'bottom-left'\"\r\n  (colorPickerClose)=\"SetBackdrop(false); ColorPickerClosed($event)\" \r\n  [cpOutputFormat]=\"'hex'\"\r\n  [cpAlphaChannel]=\"'disabled'\" \r\n  (colorPickerChange)=\"ColorPickerChange($event)\" \r\n  [value]=\"Color\"\r\n  [style.background]=\"Color\" \r\n  [style.color]=\"GetTextColor(Color)\"\r\n>\r\n",
+                styles: [".backdrop{position:absolute;width:100vw;height:100vh;top:0;left:0;background:rgba(0,0,0,.5)}:host,input{display:block;width:100%;box-sizing:border-box;height:100%;border:0}input{text-align:center;cursor:pointer}:host{display:block}"]
+            }]
+    }], function () { return [{ type: PalettePickerService }]; }, { Color: [{
             type: Input,
-            args: ['dark-mode']
+            args: ['color']
+        }], Control: [{
+            type: Input,
+            args: ['control']
+        }], Disabled: [{
+            type: Input,
+            args: ['disabled']
+        }], Variants: [{
+            type: Input,
+            args: ['variants']
         }] }); })();
 
 class PalettePickerComponent {
@@ -1069,7 +1089,7 @@ PalettePickerComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type:
         ɵngcc0.ɵɵproperty("color-picker-color", ctx.AccentColor)("form", ctx.Accent);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("color-picker-color", ctx.WarnColor)("form", ctx.Warn);
-    } }, directives: function () { return [ɵngcc5.DefaultLayoutDirective, ɵngcc5.DefaultLayoutGapDirective, SubPalettePickerComponent, VariantColorsComponent]; }, styles: [""] });
+    } }, directives: function () { return [ɵngcc2.DefaultLayoutDirective, ɵngcc2.DefaultLayoutGapDirective, SubPalettePickerComponent, VariantColorsComponent]; }, styles: [""] });
 PalettePickerComponent.ctorParameters = () => [
     { type: ThemeBuilderService },
     { type: PalettePickerService }
@@ -1165,7 +1185,7 @@ SubPalettePickerComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ ty
         ɵngcc0.ɵɵproperty("disabled", !ctx.Unlocked.value)("control", ctx.Lighter)("variants", ctx.Variants);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("disabled", !ctx.Unlocked.value)("control", ctx.Darker)("variants", ctx.Variants);
-    } }, directives: [ɵngcc5.DefaultLayoutDirective, ColorPickerComponent], styles: [".darker[_ngcontent-%COMP%], .lighter[_ngcontent-%COMP%], .main[_ngcontent-%COMP%]{border:.5px solid #ddd}.darker[_ngcontent-%COMP%], .lighter[_ngcontent-%COMP%]{height:40px}.main[_ngcontent-%COMP%]{height:60px}"] });
+    } }, directives: [ɵngcc2.DefaultLayoutDirective, ColorPickerComponent], styles: [".darker[_ngcontent-%COMP%], .lighter[_ngcontent-%COMP%], .main[_ngcontent-%COMP%]{border:.5px solid #ddd}.darker[_ngcontent-%COMP%], .lighter[_ngcontent-%COMP%]{height:40px}.main[_ngcontent-%COMP%]{height:60px}"] });
 SubPalettePickerComponent.ctorParameters = () => [
     { type: ThemeBuilderService },
     { type: PalettePickerService }
@@ -1189,43 +1209,246 @@ SubPalettePickerComponent.propDecorators = {
             args: ['form']
         }] }); })();
 
-class ThemeBuilderComponent {
-    constructor() {
+class ModeToggleComponent {
+    constructor(themeBuilderService) {
+        this.themeBuilderService = themeBuilderService;
+        this.ToggleMode = 'Dark Mode';
+    }
+    set DarkMode(val) {
+        if (!val) {
+            return;
+        }
+        this._darkMode = val;
+        this.Toggle.setValue(val);
+        // this.setThemeMode(val);
+    }
+    get DarkMode() {
+        return this._darkMode;
+    }
+    /**
+     * Access Toggle field within the form group
+     */
+    get Toggle() {
+        if (!this.ToggleForm) {
+            return null;
+        }
+        return this.ToggleForm.get('toggle');
     }
     ngOnInit() {
+        this.formSetup();
+    }
+    formSetup() {
+        this.ToggleForm = new FormGroup({
+            toggle: new FormControl(this.DarkMode)
+        });
+        this.onChanges();
+    }
+    onChanges() {
+        this.Toggle.valueChanges
+            .subscribe((val) => {
+            this.setThemeMode(val);
+        });
+    }
+    toggleMode(val) {
+        return val ? 'Dark Mode' : 'Light Mode';
+    }
+    setThemeMode(val) {
+        this.ToggleMode = this.toggleMode(val);
+        this.themeBuilderService.ThemeMode = val;
     }
 }
-ThemeBuilderComponent.ɵfac = function ThemeBuilderComponent_Factory(t) { return new (t || ThemeBuilderComponent)(); };
-ThemeBuilderComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: ThemeBuilderComponent, selectors: [["lcu-theme-builder"]], decls: 11, vars: 0, consts: [["fxLayout", "column", "fxLayoutGap", "10px"], ["fxLayout", "row", "fxLayoutGap", "10px"], ["color", "primary"], [1, "primary-color"], ["color", "accent"], [1, "accent-color"], ["color", "warn"], [1, "warn-color"]], template: function ThemeBuilderComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵelementStart(0, "div", 0);
-        ɵngcc0.ɵɵelementStart(1, "div", 1);
-        ɵngcc0.ɵɵelementStart(2, "mat-toolbar", 2);
-        ɵngcc0.ɵɵelementStart(3, "span", 3);
-        ɵngcc0.ɵɵtext(4, "Primary Colors");
+ModeToggleComponent.ɵfac = function ModeToggleComponent_Factory(t) { return new (t || ModeToggleComponent)(ɵngcc0.ɵɵdirectiveInject(ThemeBuilderService)); };
+ModeToggleComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: ModeToggleComponent, selectors: [["lcu-mode-toggle"]], inputs: { DarkMode: ["dark-mode", "DarkMode"] }, decls: 4, vars: 2, consts: [["fxLayout", "row", "fxLayoutAlign", "start center", 3, "formGroup"], ["formControlName", "toggle", "labelPosition", "before", "color", "primary", 3, "click"], [1, "margin-left-1", "mat-card-subtitle"]], template: function ModeToggleComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵelementStart(0, "form", 0);
+        ɵngcc0.ɵɵelementStart(1, "mat-slide-toggle", 1);
+        ɵngcc0.ɵɵlistener("click", function ModeToggleComponent_Template_mat_slide_toggle_click_1_listener($event) { return $event.stopPropagation(); });
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementStart(2, "span", 2);
+        ɵngcc0.ɵɵtext(3);
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(5, "mat-toolbar", 4);
-        ɵngcc0.ɵɵelementStart(6, "span", 5);
-        ɵngcc0.ɵɵtext(7, "Accent Colors");
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(8, "mat-toolbar", 6);
-        ɵngcc0.ɵɵelementStart(9, "span", 7);
-        ɵngcc0.ɵɵtext(10, "Warn Colors");
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementEnd();
-    } }, directives: [ɵngcc5.DefaultLayoutDirective, ɵngcc5.DefaultLayoutGapDirective, ɵngcc7.MatToolbar], styles: [".primary-color[_ngcontent-%COMP%]{color:var(--theme-primary-A700)}.accent-color[_ngcontent-%COMP%]{color:var(--theme-accent-A700)}.warn-color[_ngcontent-%COMP%]{color:var(--theme-warn-A700)}"] });
-ThemeBuilderComponent.ctorParameters = () => [];
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(ThemeBuilderComponent, [{
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("formGroup", ctx.ToggleForm);
+        ɵngcc0.ɵɵadvance(3);
+        ɵngcc0.ɵɵtextInterpolate1(" ", ctx.ToggleMode, " ");
+    } }, directives: [ɵngcc7.ɵNgNoValidate, ɵngcc7.NgControlStatusGroup, ɵngcc2.DefaultLayoutDirective, ɵngcc2.DefaultLayoutAlignDirective, ɵngcc7.FormGroupDirective, ɵngcc8.MatSlideToggle, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName], styles: [""] });
+ModeToggleComponent.ctorParameters = () => [
+    { type: ThemeBuilderService }
+];
+ModeToggleComponent.propDecorators = {
+    DarkMode: [{ type: Input, args: ['dark-mode',] }]
+};
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(ModeToggleComponent, [{
         type: Component,
         args: [{
-                selector: 'lcu-theme-builder',
-                template: "\r\n<div fxLayout=\"column\" fxLayoutGap=\"10px\">\r\n  <!-- <lcu-mode-toggle></lcu-mode-toggle> -->\r\n  <div fxLayout=\"row\" fxLayoutGap=\"10px\">\r\n      <mat-toolbar color=\"primary\">\r\n        <span class=\"primary-color\">Primary Colors</span>\r\n      </mat-toolbar>\r\n      <mat-toolbar color=\"accent\">\r\n        <span class=\"accent-color\">Accent Colors</span>\r\n      </mat-toolbar>\r\n      <mat-toolbar color=\"warn\">\r\n        <span class=\"warn-color\">Warn Colors</span>\r\n      </mat-toolbar>\r\n  </div>\r\n  <!-- <lcu-palette-picker></lcu-palette-picker> -->\r\n</div>\r\n",
-                styles: [".primary-color{color:var(--theme-primary-A700)}.accent-color{color:var(--theme-accent-A700)}.warn-color{color:var(--theme-warn-A700)}"]
+                selector: 'lcu-mode-toggle',
+                template: "<form \r\n    [formGroup]=\"ToggleForm\" \r\n    fxLayout=\"row\" \r\n    fxLayoutAlign=\"start center\">\r\n    <mat-slide-toggle\r\n        (click)=\"$event.stopPropagation()\" \r\n        formControlName=\"toggle\"\r\n        labelPosition=\"before\" \r\n        color=\"primary\">\r\n    </mat-slide-toggle>\r\n    <span \r\n        class=\"margin-left-1 mat-card-subtitle\">\r\n        {{ ToggleMode }}\r\n    </span>\r\n</form>\r\n\r\n\r\n",
+                styles: [""]
             }]
-    }], function () { return []; }, null); })();
+    }], function () { return [{ type: ThemeBuilderService }]; }, { DarkMode: [{
+            type: Input,
+            args: ['dark-mode']
+        }] }); })();
+
+const tinyColor = tinycolor;
+class VariantColorsComponent {
+    constructor(PalettePickerService, themeBuilderService, variantColorService) {
+        this.PalettePickerService = PalettePickerService;
+        this.themeBuilderService = themeBuilderService;
+        this.variantColorService = variantColorService;
+        this.PalettePickerService.PrimaryColorPalette = [];
+        this.PalettePickerService.AccentColorPalette = [];
+        this.PalettePickerService.WarnColorPalette = [];
+    }
+    // tslint:disable-next-line:no-input-rename
+    set AccentColor(val) {
+        this._accentColor = val;
+        // this.updateAccentColor(val);
+        this.variantColorService.UpdateAccentVariants(val);
+    }
+    get AccentColor() {
+        return this._accentColor;
+    }
+    // tslint:disable-next-line:no-input-rename
+    set PrimaryColor(val) {
+        this._primaryColor = val;
+        // this.updatePrimaryColor(val);
+        this.variantColorService.UpdatePrimaryVariants(val);
+    }
+    get PrimaryColor() {
+        return this.PrimaryColor;
+    }
+    // tslint:disable-next-line:no-input-rename
+    set WarnColor(val) {
+        this._warnColor = val;
+        // this.updateWarnColor(val);
+        this.variantColorService.UpdateWarnVariants(val);
+    }
+    get WarnColor() {
+        return this.WarnColor;
+    }
+    /**
+     * Access primary color field
+     */
+    get PrimaryColorControl() {
+        return this.Form.get('primaryColorControl');
+    }
+    /**
+     * Access accent color field
+     */
+    get AccentColorControl() {
+        return this.Form.get('accentColorControl');
+    }
+    ngOnInit() {
+        this.setupForm();
+        this.paletteChangedSubscription = this.PalettePickerService.ColorPickerChanged
+            .subscribe((palette) => {
+            if (!palette || !palette.primary) {
+                return;
+            }
+            this.variantColorService.UpdatePrimaryVariants(palette.primary.Main);
+            this.variantColorService.UpdateAccentVariants(palette.accent.Main);
+            this.variantColorService.UpdateWarnVariants(palette.warn.Main);
+            // this.updateAccentColor(palette.accent.main);
+            // this.updatePrimaryColor(palette.primary.main);
+            // this.updateWarnColor(palette.warn.main);
+        });
+    }
+    ngOnDestroy() {
+        this.paletteChangedSubscription.unsubscribe();
+    }
+    //   protected updatePrimaryColor(color: string): void {
+    //     this.PalettePickerService.PrimaryColorPalette = this.computeColors(color ? color : this.PrimaryColorControl.value);
+    //     for (const c of this.PalettePickerService.PrimaryColorPalette) {
+    //       const key = `--theme-primary-${c.name}`;
+    //       const value = c.hex;
+    //       const key2 = `--theme-primary-contrast-${c.name}`;
+    //       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+    //       // set or update CSS variable values
+    //       document.documentElement.style.setProperty(key, value);
+    //       document.documentElement.style.setProperty(key2, value2);
+    //     }
+    //   }
+    //   protected updateAccentColor(color: string): void {
+    //     this.PalettePickerService.AccentColorPalette = this.computeColors(color ? color : this.AccentColorControl.value);
+    //     for (const c of this.PalettePickerService.AccentColorPalette) {
+    //       const key = `--theme-accent-${c.name}`;
+    //       const value = c.hex;
+    //       const key2 = `--theme-primary-contrast-${c.name}`;
+    //       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+    //       document.documentElement.style.setProperty(key, value);
+    //       document.documentElement.style.setProperty(key2, value2);
+    //     }
+    //   }
+    //   protected updateWarnColor(color: string): void {
+    //     this.PalettePickerService.WarnColorPalette = this.computeColors(color);
+    //     for (const c of this.PalettePickerService.WarnColorPalette) {
+    //       const key = `--theme-warn-${c.name}`;
+    //       const value = c.hex;
+    //       const key2 = `--theme-primary-contrast-${c.name}`;
+    //       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
+    //       document.documentElement.style.setProperty(key, value);
+    //       document.documentElement.style.setProperty(key2, value2);
+    //     }
+    //   }
+    setupForm() {
+        this.Form = new FormGroup({
+            primaryColorControl: new FormControl('#ffcc11'),
+            accentColorControl: new FormControl('#0000aa')
+        });
+    }
+}
+VariantColorsComponent.ɵfac = function VariantColorsComponent_Factory(t) { return new (t || VariantColorsComponent)(ɵngcc0.ɵɵdirectiveInject(PalettePickerService), ɵngcc0.ɵɵdirectiveInject(ThemeBuilderService), ɵngcc0.ɵɵdirectiveInject(VariantColorService)); };
+VariantColorsComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: VariantColorsComponent, selectors: [["lcu-variant-colors"]], inputs: { AccentColor: ["accent-color", "AccentColor"], PrimaryColor: ["primary-color", "PrimaryColor"], WarnColor: ["warn-color", "WarnColor"] }, decls: 8, vars: 4, consts: [["fxLayout", "column", "fxLayoutGap", "10px", "novalidate", "", 3, "formGroup"], ["fxLayout", "row", "fxLayoutGap", "10px"], ["fxFlex", "33", "fxLayout", "column"], ["fxLayout", "row", "fxLayoutGap", "10px", "fxLayoutAlign", "space-between center", "class", "padding-left-2 padding-right-2", 3, "background-color", "color", 4, "ngFor", "ngForOf"], ["fxLayout", "row", "fxLayoutGap", "10px", "fxLayoutAlign", "space-between center", 1, "padding-left-2", "padding-right-2"]], template: function VariantColorsComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵelementStart(0, "form", 0);
+        ɵngcc0.ɵɵelementStart(1, "div", 1);
+        ɵngcc0.ɵɵelementStart(2, "div", 2);
+        ɵngcc0.ɵɵtemplate(3, VariantColorsComponent_div_3_Template, 5, 6, "div", 3);
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementStart(4, "div", 2);
+        ɵngcc0.ɵɵtemplate(5, VariantColorsComponent_div_5_Template, 5, 6, "div", 3);
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementStart(6, "div", 2);
+        ɵngcc0.ɵɵtemplate(7, VariantColorsComponent_div_7_Template, 5, 6, "div", 3);
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementEnd();
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("formGroup", ctx.Form);
+        ɵngcc0.ɵɵadvance(3);
+        ɵngcc0.ɵɵproperty("ngForOf", ctx.PalettePickerService.PrimaryColorPalette);
+        ɵngcc0.ɵɵadvance(2);
+        ɵngcc0.ɵɵproperty("ngForOf", ctx.PalettePickerService.AccentColorPalette);
+        ɵngcc0.ɵɵadvance(2);
+        ɵngcc0.ɵɵproperty("ngForOf", ctx.PalettePickerService.WarnColorPalette);
+    } }, directives: [ɵngcc7.ɵNgNoValidate, ɵngcc7.NgControlStatusGroup, ɵngcc2.DefaultLayoutDirective, ɵngcc2.DefaultLayoutGapDirective, ɵngcc7.FormGroupDirective, ɵngcc2.DefaultFlexDirective, ɵngcc5.NgForOf, ɵngcc2.DefaultLayoutAlignDirective], styles: [""] });
+VariantColorsComponent.ctorParameters = () => [
+    { type: PalettePickerService },
+    { type: ThemeBuilderService },
+    { type: VariantColorService }
+];
+VariantColorsComponent.propDecorators = {
+    AccentColor: [{ type: Input, args: ['accent-color',] }],
+    PrimaryColor: [{ type: Input, args: ['primary-color',] }],
+    WarnColor: [{ type: Input, args: ['warn-color',] }]
+};
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(VariantColorsComponent, [{
+        type: Component,
+        args: [{
+                selector: 'lcu-variant-colors',
+                template: "<form\r\n    fxLayout=\"column\"\r\n    fxLayoutGap=\"10px\"\r\n    [formGroup]=\"Form\"\r\n    novalidate>\r\n    <div fxLayout=\"row\" fxLayoutGap=\"10px\">\r\n        <div fxFlex=\"33\" fxLayout=\"column\">\r\n            <div fxLayout=\"row\" fxLayoutGap=\"10px\" \r\n            fxLayoutAlign=\"space-between center\"\r\n            class=\"padding-left-2 padding-right-2\" \r\n            *ngFor=\"let color of PalettePickerService.PrimaryColorPalette\" \r\n            [style.background-color]=\"color.hex\" \r\n            [style.color]=\"color.darkContrast ? 'black' : 'white'\">\r\n            <div>\r\n                {{color.name}}\r\n            </div>\r\n            <div>\r\n                {{color.hex}}\r\n            </div>\r\n        </div>\r\n        </div>\r\n        <div fxFlex=\"33\" fxLayout=\"column\">\r\n            <div fxLayout=\"row\" fxLayoutGap=\"10px\" \r\n                fxLayoutAlign=\"space-between center\"\r\n                class=\"padding-left-2 padding-right-2\"\r\n                *ngFor=\"let color of PalettePickerService.AccentColorPalette\" \r\n                [style.background-color]=\"color.hex\" \r\n                [style.color]=\"color.darkContrast ? 'black' : 'white'\">\r\n                <div>\r\n                    {{color.name}}\r\n                </div>\r\n                <div>\r\n                    {{color.hex}}\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div fxFlex=\"33\" fxLayout=\"column\">\r\n            <div fxLayout=\"row\" fxLayoutGap=\"10px\" \r\n            fxLayoutAlign=\"space-between center\"\r\n            class=\"padding-left-2 padding-right-2\"\r\n            *ngFor=\"let color of PalettePickerService.WarnColorPalette\" \r\n                [style.background-color]=\"color.hex\" \r\n                [style.color]=\"color.darkContrast ? 'black' : 'white'\">\r\n                <div>\r\n                    {{color.name}}\r\n                </div>\r\n                <div>\r\n                    {{color.hex}}\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>\r\n\r\n\r\n",
+                styles: [""]
+            }]
+    }], function () { return [{ type: PalettePickerService }, { type: ThemeBuilderService }, { type: VariantColorService }]; }, { AccentColor: [{
+            type: Input,
+            args: ['accent-color']
+        }], PrimaryColor: [{
+            type: Input,
+            args: ['primary-color']
+        }], WarnColor: [{
+            type: Input,
+            args: ['warn-color']
+        }] }); })();
 
 class ThemePickerModel {
     constructor(opts) {
@@ -1360,7 +1583,7 @@ ThemePickerComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: T
         ɵngcc0.ɵɵproperty("ngForOf", ctx.Themes);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.ToggleManualControls);
-    } }, directives: [ɵngcc8.MatButton, ɵngcc9.MatMenuTrigger, ɵngcc10.MatIcon, ɵngcc9.MatMenu, LightnessPickerComponent, ɵngcc1.NgForOf, ɵngcc1.NgIf, ɵngcc5.DefaultLayoutDirective, ɵngcc1.NgStyle, ɵngcc11.DefaultStyleDirective, ɵngcc1.NgClass, ɵngcc11.DefaultClassDirective, ɵngcc12.MatCard, ɵngcc12.MatCardHeader, ɵngcc12.MatCardAvatar, ɵngcc12.MatCardTitle, ɵngcc12.MatCardContent, ɵngcc4.ɵNgNoValidate, ɵngcc4.NgControlStatusGroup, ɵngcc5.DefaultLayoutGapDirective, ɵngcc4.FormGroupDirective, ɵngcc13.MatFormField, ɵngcc14.MatInput, ɵngcc4.DefaultValueAccessor, ɵngcc4.NgControlStatus, ɵngcc4.FormControlName, ɵngcc13.MatHint, ɵngcc12.MatCardActions], styles: [".toolbar-spacer[_ngcontent-%COMP%]{flex:1 1 auto}.theme-selectors-container[_ngcontent-%COMP%]{width:390px;margin:0 8px}div.theme-primary[_ngcontent-%COMP%]{width:50px;height:50px}div.theme-accent[_ngcontent-%COMP%]{width:25px;height:25px;position:absolute;bottom:15px;left:17px}div.theme-warn[_ngcontent-%COMP%]{width:15px;height:15px;position:absolute;bottom:15px;left:30px}div.theme-dark-mode[_ngcontent-%COMP%]{width:10px;height:10px;position:absolute;bottom:10px;left:55px}.dark-mode[_ngcontent-%COMP%]{background-color:#222}.light-mode[_ngcontent-%COMP%]{background-color:#f9f9f9}"] });
+    } }, directives: [ɵngcc9.MatButton, ɵngcc10.MatMenuTrigger, ɵngcc11.MatIcon, ɵngcc10.MatMenu, ModeToggleComponent, ɵngcc5.NgForOf, ɵngcc5.NgIf, ɵngcc2.DefaultLayoutDirective, ɵngcc5.NgStyle, ɵngcc12.DefaultStyleDirective, ɵngcc5.NgClass, ɵngcc12.DefaultClassDirective, ɵngcc13.MatCard, ɵngcc13.MatCardHeader, ɵngcc13.MatCardAvatar, ɵngcc13.MatCardTitle, ɵngcc13.MatCardContent, ɵngcc7.ɵNgNoValidate, ɵngcc7.NgControlStatusGroup, ɵngcc2.DefaultLayoutGapDirective, ɵngcc7.FormGroupDirective, ɵngcc14.MatFormField, ɵngcc15.MatInput, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc14.MatHint, ɵngcc13.MatCardActions], styles: [".toolbar-spacer[_ngcontent-%COMP%]{flex:1 1 auto}.theme-selectors-container[_ngcontent-%COMP%]{width:390px;margin:0 8px}div.theme-primary[_ngcontent-%COMP%]{width:50px;height:50px}div.theme-accent[_ngcontent-%COMP%]{width:25px;height:25px;position:absolute;bottom:15px;left:17px}div.theme-warn[_ngcontent-%COMP%]{width:15px;height:15px;position:absolute;bottom:15px;left:30px}div.theme-dark-mode[_ngcontent-%COMP%]{width:10px;height:10px;position:absolute;bottom:10px;left:55px}.dark-mode[_ngcontent-%COMP%]{background-color:#222}.light-mode[_ngcontent-%COMP%]{background-color:#f9f9f9}"] });
 ThemePickerComponent.ctorParameters = () => [
     { type: PalettePickerService },
     { type: ThemeBuilderService },
@@ -1392,226 +1615,6 @@ ThemePickerComponent.propDecorators = {
 //   throw new Error('Function not implemented.');
 // }
 
-const tinyColor = tinycolor;
-class VariantColorsComponent {
-    constructor(PalettePickerService, themeBuilderService, variantColorService) {
-        this.PalettePickerService = PalettePickerService;
-        this.themeBuilderService = themeBuilderService;
-        this.variantColorService = variantColorService;
-        this.PalettePickerService.PrimaryColorPalette = [];
-        this.PalettePickerService.AccentColorPalette = [];
-        this.PalettePickerService.WarnColorPalette = [];
-    }
-    // tslint:disable-next-line:no-input-rename
-    set AccentColor(val) {
-        this._accentColor = val;
-        // this.updateAccentColor(val);
-        this.variantColorService.UpdateAccentVariants(val);
-    }
-    get AccentColor() {
-        return this._accentColor;
-    }
-    // tslint:disable-next-line:no-input-rename
-    set PrimaryColor(val) {
-        this._primaryColor = val;
-        // this.updatePrimaryColor(val);
-        this.variantColorService.UpdatePrimaryVariants(val);
-    }
-    get PrimaryColor() {
-        return this.PrimaryColor;
-    }
-    // tslint:disable-next-line:no-input-rename
-    set WarnColor(val) {
-        this._warnColor = val;
-        // this.updateWarnColor(val);
-        this.variantColorService.UpdateWarnVariants(val);
-    }
-    get WarnColor() {
-        return this.WarnColor;
-    }
-    /**
-     * Access primary color field
-     */
-    get PrimaryColorControl() {
-        return this.Form.get('primaryColorControl');
-    }
-    /**
-     * Access accent color field
-     */
-    get AccentColorControl() {
-        return this.Form.get('accentColorControl');
-    }
-    ngOnInit() {
-        this.setupForm();
-        this.paletteChangedSubscription = this.PalettePickerService.ColorPickerChanged
-            .subscribe((palette) => {
-            if (!palette || !palette.primary) {
-                return;
-            }
-            this.variantColorService.UpdatePrimaryVariants(palette.primary.Main);
-            this.variantColorService.UpdateAccentVariants(palette.accent.Main);
-            this.variantColorService.UpdateWarnVariants(palette.warn.Main);
-            // this.updateAccentColor(palette.accent.main);
-            // this.updatePrimaryColor(palette.primary.main);
-            // this.updateWarnColor(palette.warn.main);
-        });
-    }
-    ngOnDestroy() {
-        this.paletteChangedSubscription.unsubscribe();
-    }
-    //   protected updatePrimaryColor(color: string): void {
-    //     this.PalettePickerService.PrimaryColorPalette = this.computeColors(color ? color : this.PrimaryColorControl.value);
-    //     for (const c of this.PalettePickerService.PrimaryColorPalette) {
-    //       const key = `--theme-primary-${c.name}`;
-    //       const value = c.hex;
-    //       const key2 = `--theme-primary-contrast-${c.name}`;
-    //       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
-    //       // set or update CSS variable values
-    //       document.documentElement.style.setProperty(key, value);
-    //       document.documentElement.style.setProperty(key2, value2);
-    //     }
-    //   }
-    //   protected updateAccentColor(color: string): void {
-    //     this.PalettePickerService.AccentColorPalette = this.computeColors(color ? color : this.AccentColorControl.value);
-    //     for (const c of this.PalettePickerService.AccentColorPalette) {
-    //       const key = `--theme-accent-${c.name}`;
-    //       const value = c.hex;
-    //       const key2 = `--theme-primary-contrast-${c.name}`;
-    //       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
-    //       document.documentElement.style.setProperty(key, value);
-    //       document.documentElement.style.setProperty(key2, value2);
-    //     }
-    //   }
-    //   protected updateWarnColor(color: string): void {
-    //     this.PalettePickerService.WarnColorPalette = this.computeColors(color);
-    //     for (const c of this.PalettePickerService.WarnColorPalette) {
-    //       const key = `--theme-warn-${c.name}`;
-    //       const value = c.hex;
-    //       const key2 = `--theme-primary-contrast-${c.name}`;
-    //       const value2 = c.darkContrast ? 'rgba(black, 0.87)' : 'white';
-    //       document.documentElement.style.setProperty(key, value);
-    //       document.documentElement.style.setProperty(key2, value2);
-    //     }
-    //   }
-    setupForm() {
-        this.Form = new FormGroup({
-            primaryColorControl: new FormControl('#ffcc11'),
-            accentColorControl: new FormControl('#0000aa')
-        });
-    }
-}
-VariantColorsComponent.ɵfac = function VariantColorsComponent_Factory(t) { return new (t || VariantColorsComponent)(ɵngcc0.ɵɵdirectiveInject(PalettePickerService), ɵngcc0.ɵɵdirectiveInject(ThemeBuilderService), ɵngcc0.ɵɵdirectiveInject(VariantColorService)); };
-VariantColorsComponent.ɵcmp = /*@__PURE__*/ ɵngcc0.ɵɵdefineComponent({ type: VariantColorsComponent, selectors: [["lcu-variant-colors"]], inputs: { AccentColor: ["accent-color", "AccentColor"], PrimaryColor: ["primary-color", "PrimaryColor"], WarnColor: ["warn-color", "WarnColor"] }, decls: 8, vars: 4, consts: [["fxLayout", "column", "fxLayoutGap", "10px", "novalidate", "", 3, "formGroup"], ["fxLayout", "row", "fxLayoutGap", "10px"], ["fxFlex", "33", "fxLayout", "column"], ["fxLayout", "row", "fxLayoutGap", "10px", "fxLayoutAlign", "space-between center", "class", "padding-left-2 padding-right-2", 3, "background-color", "color", 4, "ngFor", "ngForOf"], ["fxLayout", "row", "fxLayoutGap", "10px", "fxLayoutAlign", "space-between center", 1, "padding-left-2", "padding-right-2"]], template: function VariantColorsComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵelementStart(1, "div", 1);
-        ɵngcc0.ɵɵelementStart(2, "div", 2);
-        ɵngcc0.ɵɵtemplate(3, VariantColorsComponent_div_3_Template, 5, 6, "div", 3);
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(4, "div", 2);
-        ɵngcc0.ɵɵtemplate(5, VariantColorsComponent_div_5_Template, 5, 6, "div", 3);
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(6, "div", 2);
-        ɵngcc0.ɵɵtemplate(7, VariantColorsComponent_div_7_Template, 5, 6, "div", 3);
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementEnd();
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("formGroup", ctx.Form);
-        ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("ngForOf", ctx.PalettePickerService.PrimaryColorPalette);
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngForOf", ctx.PalettePickerService.AccentColorPalette);
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngForOf", ctx.PalettePickerService.WarnColorPalette);
-    } }, directives: [ɵngcc4.ɵNgNoValidate, ɵngcc4.NgControlStatusGroup, ɵngcc5.DefaultLayoutDirective, ɵngcc5.DefaultLayoutGapDirective, ɵngcc4.FormGroupDirective, ɵngcc5.DefaultFlexDirective, ɵngcc1.NgForOf, ɵngcc5.DefaultLayoutAlignDirective], styles: [""] });
-VariantColorsComponent.ctorParameters = () => [
-    { type: PalettePickerService },
-    { type: ThemeBuilderService },
-    { type: VariantColorService }
-];
-VariantColorsComponent.propDecorators = {
-    AccentColor: [{ type: Input, args: ['accent-color',] }],
-    PrimaryColor: [{ type: Input, args: ['primary-color',] }],
-    WarnColor: [{ type: Input, args: ['warn-color',] }]
-};
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(VariantColorsComponent, [{
-        type: Component,
-        args: [{
-                selector: 'lcu-variant-colors',
-                template: "<form\r\n    fxLayout=\"column\"\r\n    fxLayoutGap=\"10px\"\r\n    [formGroup]=\"Form\"\r\n    novalidate>\r\n    <div fxLayout=\"row\" fxLayoutGap=\"10px\">\r\n        <div fxFlex=\"33\" fxLayout=\"column\">\r\n            <div fxLayout=\"row\" fxLayoutGap=\"10px\" \r\n            fxLayoutAlign=\"space-between center\"\r\n            class=\"padding-left-2 padding-right-2\" \r\n            *ngFor=\"let color of PalettePickerService.PrimaryColorPalette\" \r\n            [style.background-color]=\"color.hex\" \r\n            [style.color]=\"color.darkContrast ? 'black' : 'white'\">\r\n            <div>\r\n                {{color.name}}\r\n            </div>\r\n            <div>\r\n                {{color.hex}}\r\n            </div>\r\n        </div>\r\n        </div>\r\n        <div fxFlex=\"33\" fxLayout=\"column\">\r\n            <div fxLayout=\"row\" fxLayoutGap=\"10px\" \r\n                fxLayoutAlign=\"space-between center\"\r\n                class=\"padding-left-2 padding-right-2\"\r\n                *ngFor=\"let color of PalettePickerService.AccentColorPalette\" \r\n                [style.background-color]=\"color.hex\" \r\n                [style.color]=\"color.darkContrast ? 'black' : 'white'\">\r\n                <div>\r\n                    {{color.name}}\r\n                </div>\r\n                <div>\r\n                    {{color.hex}}\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div fxFlex=\"33\" fxLayout=\"column\">\r\n            <div fxLayout=\"row\" fxLayoutGap=\"10px\" \r\n            fxLayoutAlign=\"space-between center\"\r\n            class=\"padding-left-2 padding-right-2\"\r\n            *ngFor=\"let color of PalettePickerService.WarnColorPalette\" \r\n                [style.background-color]=\"color.hex\" \r\n                [style.color]=\"color.darkContrast ? 'black' : 'white'\">\r\n                <div>\r\n                    {{color.name}}\r\n                </div>\r\n                <div>\r\n                    {{color.hex}}\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>\r\n\r\n\r\n",
-                styles: [""]
-            }]
-    }], function () { return [{ type: PalettePickerService }, { type: ThemeBuilderService }, { type: VariantColorService }]; }, { AccentColor: [{
-            type: Input,
-            args: ['accent-color']
-        }], PrimaryColor: [{
-            type: Input,
-            args: ['primary-color']
-        }], WarnColor: [{
-            type: Input,
-            args: ['warn-color']
-        }] }); })();
-
-class ThemeBuilderDirective {
-    constructor(elRef, renderer, themeService) {
-        this.elRef = elRef;
-        this.renderer = renderer;
-        this.themeService = themeService;
-    }
-    onMouseEnter() {
-        this.hoverEffect(this.getThemeColor(), 'underline');
-    }
-    onMouseLeave() {
-        this.hoverEffect('', 'initial');
-    }
-    ngOnInit() {
-        this.currentColor = this.getThemeColor();
-    }
-    getThemeColor() {
-        const theme = this.themeService.GetColorClass().value;
-        return 'color-swatch-' + theme.substring(theme.indexOf('-') + 1, theme.lastIndexOf('-'));
-    }
-    hoverEffect(color, decoration) {
-        const title = this.elRef.nativeElement.querySelector('.mat-card-title');
-        this.renderer.setStyle(title, 'text-decoration', decoration);
-        if (!color && this.currentColor) {
-            this.renderer.removeClass(title, this.currentColor);
-        }
-        else if (color !== this.currentColor) {
-            this.renderer.removeClass(title, this.currentColor);
-        }
-        if (color) {
-            this.renderer.addClass(title, color);
-            this.currentColor = color;
-        }
-    }
-}
-ThemeBuilderDirective.ɵfac = function ThemeBuilderDirective_Factory(t) { return new (t || ThemeBuilderDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc15.ThemeColorPickerService)); };
-ThemeBuilderDirective.ɵdir = /*@__PURE__*/ ɵngcc0.ɵɵdefineDirective({ type: ThemeBuilderDirective, selectors: [["", "theme-builder", ""]], hostBindings: function ThemeBuilderDirective_HostBindings(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵlistener("mouseenter", function ThemeBuilderDirective_mouseenter_HostBindingHandler() { return ctx.onMouseEnter(); })("mouseleave", function ThemeBuilderDirective_mouseleave_HostBindingHandler() { return ctx.onMouseLeave(); });
-    } } });
-ThemeBuilderDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 },
-    { type: ThemeColorPickerService }
-];
-ThemeBuilderDirective.propDecorators = {
-    onMouseEnter: [{ type: HostListener, args: ['mouseenter',] }],
-    onMouseLeave: [{ type: HostListener, args: ['mouseleave',] }]
-};
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(ThemeBuilderDirective, [{
-        type: Directive,
-        args: [{
-                selector: '[theme-builder]'
-            }]
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc15.ThemeColorPickerService }]; }, { onMouseEnter: [{
-            type: HostListener,
-            args: ['mouseenter']
-        }], onMouseLeave: [{
-            type: HostListener,
-            args: ['mouseleave']
-        }] }); })();
-
 class ThemeBuilderModule {
     static forRoot() {
         return {
@@ -1642,7 +1645,7 @@ ThemeBuilderModule.ɵinj = /*@__PURE__*/ ɵngcc0.ɵɵdefineInjector({ imports: [
                     ColorPickerComponent,
                     PalettePickerComponent,
                     SubPalettePickerComponent,
-                    LightnessPickerComponent,
+                    ModeToggleComponent,
                     VariantColorsComponent,
                     ThemePickerComponent
                 ],
@@ -1657,20 +1660,20 @@ ThemeBuilderModule.ɵinj = /*@__PURE__*/ ɵngcc0.ɵɵdefineInjector({ imports: [
                 exports: [
                     ThemeBuilderComponent,
                     ThemeBuilderDirective,
-                    ThemePickerComponent
+                    ThemePickerComponent,
+                    ModeToggleComponent
                 ],
                 entryComponents: [
-                    ThemePickerComponent,
-                    ThemeBuilderComponent,
+                    ThemePickerComponent
                 ]
             }]
     }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ThemeBuilderModule, { declarations: function () { return [ThemeBuilderComponent, ThemeBuilderDirective, ColorPickerComponent, PalettePickerComponent, SubPalettePickerComponent, LightnessPickerComponent, VariantColorsComponent, ThemePickerComponent]; }, imports: function () { return [FathymSharedModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ThemeBuilderModule, { declarations: function () { return [ThemeBuilderComponent, ThemeBuilderDirective, ColorPickerComponent, PalettePickerComponent, SubPalettePickerComponent, ModeToggleComponent, VariantColorsComponent, ThemePickerComponent]; }, imports: function () { return [FathymSharedModule,
         FormsModule,
         ReactiveFormsModule,
         FlexLayoutModule,
         MaterialModule,
-        ColorPickerModule]; }, exports: function () { return [ThemeBuilderComponent, ThemeBuilderDirective, ThemePickerComponent]; } }); })();
+        ColorPickerModule]; }, exports: function () { return [ThemeBuilderComponent, ThemeBuilderDirective, ThemePickerComponent, ModeToggleComponent]; } }); })();
 
 class ThemeBuilderModel {
 }
@@ -1688,6 +1691,6 @@ class ColorModel {
  * Generated bundle index. Do not edit.
  */
 
-export { ColorModel, ColorPickerComponent, LightnessPickerComponent, PaletteModel, PalettePickerService, SubPaletteModel, ThemeBuilderComponent, ThemeBuilderConstants, ThemeBuilderDirective, ThemeBuilderModel, ThemeBuilderModule, ThemeBuilderService, ThemeModel, ThemePickerComponent, ThemePickerModel, VariantColorService, PalettePickerComponent as ɵa, PaletteTemplateService as ɵb, LocalStorageService as ɵc, UtilsService as ɵd, SubPalettePickerComponent as ɵe, VariantColorsComponent as ɵf };
+export { ColorModel, ColorPickerComponent, ModeToggleComponent, PaletteModel, PalettePickerService, SubPaletteModel, ThemeBuilderComponent, ThemeBuilderConstants, ThemeBuilderDirective, ThemeBuilderModel, ThemeBuilderModule, ThemeBuilderService, ThemeModel, ThemePickerComponent, ThemePickerModel, VariantColorService, PalettePickerComponent as ɵa, PaletteTemplateService as ɵb, LocalStorageService as ɵc, UtilsService as ɵd, SubPalettePickerComponent as ɵe, VariantColorsComponent as ɵf };
 
 //# sourceMappingURL=lowcodeunit-lcu-theme-builder-common.js.map

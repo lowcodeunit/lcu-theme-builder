@@ -11,7 +11,7 @@ import { ThemeBuilderDirective } from './directives/theme-builder.directive';
 import { ColorPickerComponent } from './controls/color-picker/color-picker.component';
 import { PalettePickerComponent } from './controls/palette-picker/palette-picker.component';
 import { SubPalettePickerComponent } from './controls/sub-palette-picker/sub-palette-picker.component';
-import { LightnessPickerComponent } from './controls/mode-toggle/mode-toggle.component';
+import { ModeToggleComponent } from './controls/mode-toggle/mode-toggle.component';
 import { VariantColorsComponent } from './controls/variant-colors/variant-colors.component';
 import { ThemePickerComponent } from './controls/theme-picker/theme-picker.component';
 import { PalettePickerService } from './services/palette-picker.service';
@@ -23,7 +23,7 @@ import { PalettePickerService } from './services/palette-picker.service';
     ColorPickerComponent,
     PalettePickerComponent,
     SubPalettePickerComponent,
-    LightnessPickerComponent,
+    ModeToggleComponent,
     VariantColorsComponent,
     ThemePickerComponent
   ],
@@ -39,7 +39,7 @@ import { PalettePickerService } from './services/palette-picker.service';
     ThemeBuilderComponent,
     ThemeBuilderDirective,
     ThemePickerComponent,
-    LightnessPickerComponent
+    ModeToggleComponent
   ],
   entryComponents: [
     ThemePickerComponent

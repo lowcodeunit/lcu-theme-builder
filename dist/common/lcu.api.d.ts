@@ -14,3 +14,4 @@ export * from './lib/controls/mode-toggle/mode-toggle.component';
 export * from './lib/utils/theme-builder-constants.utils';
 export * from './lib/services/variant-color.service';
 export * from './lib/controls/theme-picker/theme-picker.component';
+export * from './lib/controls/mode-toggle/mode-toggle.component';

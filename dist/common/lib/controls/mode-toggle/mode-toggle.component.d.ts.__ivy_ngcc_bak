@@ -1,7 +1,7 @@
 import { OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { ThemeBuilderService } from '../../services/theme-builder.service';
-export declare class LightnessPickerComponent implements OnInit {
+export declare class ModeToggleComponent implements OnInit {
     protected themeBuilderService: ThemeBuilderService;
     private _darkMode;
     set DarkMode(val: boolean);
