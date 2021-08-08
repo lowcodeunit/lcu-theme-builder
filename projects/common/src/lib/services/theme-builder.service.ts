@@ -118,6 +118,7 @@ export class ThemeBuilderService {
     */
    protected loadThemingScss(): Promise<void> {
     console.log('LOAD THEMING SCSS');
+    
     // return new Promise((res, rej) => {
      return this.http.get(this.MaterialTheme, { responseType: 'text' })
       .pipe(
