@@ -3,8 +3,8 @@
 	"version": "0.0.2",
 	"scripts": {
 		"build:common": "ng build common",
-		"build:demo": "ng build demo --prod",
-		"build:lcu": "ng build lcu --prod --single-bundle && npm run pack",
+		"build:demo": "ng build demo --configuration production",
+		"build:lcu": "ng build lcu --configuration production --single-bundle && npm run pack",
 		"demo": "npm run build:common && npm run start:demo",
 		"demo:lcu": "npm run build:common && npm run build:lcu && npm run start:demo",
 		"deploy": "npm version patch && npm run deploy:all",
