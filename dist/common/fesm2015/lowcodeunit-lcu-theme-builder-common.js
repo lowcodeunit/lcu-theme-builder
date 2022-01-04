@@ -472,10 +472,22 @@ class ThemeBuilderService {
         return this.http.get(this.MaterialTheme, { responseType: 'text' })
             .pipe(map((x) => {
             console.log('PIPE MAP');
-            return x;
+            return x
+                .replace(/\n/gm, '??')
+                .replace(/\$mat-([^:?]+)\s*:\s*\([? ]*50:[^()]*contrast\s*:\s*\([^)]+\)[ ?]*\);\s*?/g, (all, name) => name === 'grey' ? all : '')
+                .replace(/\/\*.*?\*\//g, '')
+                .split(/[?][?]/g)
+                .map((l) => l
+                .replace(/^\s*(\/\/.*)?$/g, '')
+                .replace(/^\$mat-blue-gray\s*:\s*\$mat-blue-grey\s*;\s*/g, '')
+                .replace(/^\s*|\s*$/g, '')
+                .replace(/:\s\s+/g, ': '))
+                .filter((l) => !!l)
+                .join('\n');
         }), map((txt) => {
-            // console.log('SASS.WRITEFILE');
-            // writeFile allows this file to be accessed from styles.scss
+            /**
+             * writeFile allows this file to be accessed from styles.scss
+             */
             Sass.writeFile('~@angular/material/theming', txt, (result) => {
             });
         })).toPromise();
@@ -944,6 +956,9 @@ class ModeToggleComponent {
             return;
         }
         this._darkMode = val;
+        if (!this.ToggleForm) {
+            return;
+        }
         this.Toggle.setValue(val);
         // this.setThemeMode(val);
     }
@@ -954,9 +969,6 @@ class ModeToggleComponent {
      * Access Toggle field within the form group
      */
     get Toggle() {
-        if (!this.ToggleForm) {
-            return null;
-        }
         return this.ToggleForm.get('toggle');
     }
     ngOnInit() {
@@ -1286,8 +1298,7 @@ ThemeBuilderModule.decorators = [
                 exports: [
                     ThemeBuilderComponent,
                     ThemeBuilderDirective,
-                    ThemePickerComponent,
-                    ModeToggleComponent
+                    ThemePickerComponent
                 ],
                 entryComponents: [
                     ThemePickerComponent

@@ -15,7 +15,7 @@ import * as ɵngcc12 from 'ngx-color-picker';
 export declare class ThemeBuilderModule {
     static forRoot(): ModuleWithProviders<ThemeBuilderModule>;
     static ɵfac: ɵngcc0.ɵɵFactoryDeclaration<ThemeBuilderModule, never>;
-    static ɵmod: ɵngcc0.ɵɵNgModuleDeclaration<ThemeBuilderModule, [typeof ɵngcc1.ThemeBuilderComponent, typeof ɵngcc2.ThemeBuilderDirective, typeof ɵngcc3.ColorPickerComponent, typeof ɵngcc4.PalettePickerComponent, typeof ɵngcc5.SubPalettePickerComponent, typeof ɵngcc6.ModeToggleComponent, typeof ɵngcc7.VariantColorsComponent, typeof ɵngcc8.ThemePickerComponent], [typeof ɵngcc9.FathymSharedModule, typeof ɵngcc10.FormsModule, typeof ɵngcc10.ReactiveFormsModule, typeof ɵngcc11.FlexLayoutModule, typeof ɵngcc9.MaterialModule, typeof ɵngcc12.ColorPickerModule], [typeof ɵngcc1.ThemeBuilderComponent, typeof ɵngcc2.ThemeBuilderDirective, typeof ɵngcc8.ThemePickerComponent, typeof ɵngcc6.ModeToggleComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDeclaration<ThemeBuilderModule, [typeof ɵngcc1.ThemeBuilderComponent, typeof ɵngcc2.ThemeBuilderDirective, typeof ɵngcc3.ColorPickerComponent, typeof ɵngcc4.PalettePickerComponent, typeof ɵngcc5.SubPalettePickerComponent, typeof ɵngcc6.ModeToggleComponent, typeof ɵngcc7.VariantColorsComponent, typeof ɵngcc8.ThemePickerComponent], [typeof ɵngcc9.FathymSharedModule, typeof ɵngcc10.FormsModule, typeof ɵngcc10.ReactiveFormsModule, typeof ɵngcc11.FlexLayoutModule, typeof ɵngcc9.MaterialModule, typeof ɵngcc12.ColorPickerModule], [typeof ɵngcc1.ThemeBuilderComponent, typeof ɵngcc2.ThemeBuilderDirective, typeof ɵngcc8.ThemePickerComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDeclaration<ThemeBuilderModule>;
 }
 
