@@ -3,7 +3,7 @@ import { VariantColorService } from './../../services/variant-color.service';
 import { PalettePickerService } from '../../services/palette-picker.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl, Validators } from '@angular/forms';
-import * as tinycolor from 'tinycolor2';
+import tinycolor from 'tinycolor2';
 import { PaletteTemplateService } from '../../services/palette-template.service';
 import { Subscription } from 'rxjs';
 import { PaletteModel } from '../../models/palette.model';

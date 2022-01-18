@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as tinycolor from 'tinycolor2';
+import tinycolor from 'tinycolor2';
 
 type RGBA = tinycolor.ColorFormats.RGBA;
 const tinyColor = tinycolor;

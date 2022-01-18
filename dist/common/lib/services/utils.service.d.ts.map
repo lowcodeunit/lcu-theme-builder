@@ -1,1 +1,0 @@
-{"version":3,"file":"utils.service.d.ts","sources":["utils.service.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;AACA;;AACA;AACA","sourcesContent":["import * as tinycolor from 'tinycolor2';\r\ndeclare type RGBA = tinycolor.ColorFormats.RGBA;\r\nexport declare class UtilsService {\r\n    Multiply(rgb1: RGBA, rgb2: RGBA): any;\r\n}\r\nexport {};\r\n"]}

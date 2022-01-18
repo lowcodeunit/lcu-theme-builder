@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import * as tinycolor from 'tinycolor2';
+import tinycolor from 'tinycolor2';
 import { FormControl } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { PalettePickerService } from '../../services/palette-picker.service';

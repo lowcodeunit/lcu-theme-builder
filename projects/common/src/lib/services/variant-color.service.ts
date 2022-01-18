@@ -2,7 +2,7 @@ import { UtilsService } from './utils.service';
 
 import { Injectable } from '@angular/core';
 import { ColorModel } from '../models/color.model';
-import * as tinycolor from 'tinycolor2';
+import tinycolor from 'tinycolor2';
 import { PalettePickerService } from './palette-picker.service';
 
 const tinyColor = tinycolor;

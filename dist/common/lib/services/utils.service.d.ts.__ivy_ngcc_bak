@@ -1,6 +1,0 @@
-import * as tinycolor from 'tinycolor2';
-declare type RGBA = tinycolor.ColorFormats.RGBA;
-export declare class UtilsService {
-    Multiply(rgb1: RGBA, rgb2: RGBA): any;
-}
-export {};

@@ -6,7 +6,7 @@ import { LocalStorageService } from './local-storage.service';
 import { ThemeBuilderConstants } from '../utils/theme-builder-constants.utils';
 import { MaterialPaletteModel } from './../models/material-palette.model';
 import { Injectable, NgZone } from '@angular/core';
-import * as tinycolor from 'tinycolor2';
+import tinycolor from 'tinycolor2';
 import { PaletteModel } from '../models/palette.model';
 import { ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';

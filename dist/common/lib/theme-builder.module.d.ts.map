@@ -1,1 +1,0 @@
-{"version":3,"file":"theme-builder.module.d.ts","sources":["theme-builder.module.d.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;;AACA;AACA;;;;AACA","sourcesContent":["import { ModuleWithProviders } from '@angular/core';\r\nexport declare class ThemeBuilderModule {\r\n    static forRoot(): ModuleWithProviders<ThemeBuilderModule>;\r\n}\r\n"]}

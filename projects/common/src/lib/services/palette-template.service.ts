@@ -1,9 +1,10 @@
 import { ThemeModel } from './../models/theme.model';
 import { SubPaletteModel } from './../models/sub-palette.model';
 import { Injectable } from '@angular/core';
-import * as tinycolor from 'tinycolor2';
+import tinycolor from 'tinycolor2';
 
 const tinyColor = tinycolor;
+
 type RGBA = tinycolor.ColorFormats.RGBA;
 
 @Injectable({
@@ -207,6 +208,6 @@ export class PaletteTemplateService {
      * @param col color
      */
     protected getTextColor(col: string): string {
-      return `$${tinyColor(col).isLight() ? 'dark' : 'light'}-primary-text`;
+        return `$${tinycolor(col).isLight() ? 'dark' : 'light'}-primary-text`;
     }
 }
