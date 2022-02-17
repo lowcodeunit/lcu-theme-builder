@@ -17,7 +17,9 @@ import { PaletteTemplateService } from './palette-template.service';
 import { ThemePickerModel } from '../models/theme-picker.model';
 
 const tinyColor = tinycolor;
-const fallbackURL: string = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
+// const fallbackURL: string = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
+const fallbackURL: string = '../../../assets/local-material-theme.scss';
+
 
 // tell typescript that Sass exists
 // loads the synchronous Sass.js
