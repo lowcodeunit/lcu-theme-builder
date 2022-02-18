@@ -102,7 +102,7 @@ export class ThemeBuilderService {
       protected utilsService: UtilsService,
       protected variantColorService: VariantColorService) {
 
-      this.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
+      // this.MaterialTheme = 'https://www.iot-ensemble.com/assets/theming/theming.scss';
       this.themeMode = true;
       this.Theme = new Subject<ThemeModel>();
       this.PaletteColors = new Subject<Partial<PaletteModel>>();
